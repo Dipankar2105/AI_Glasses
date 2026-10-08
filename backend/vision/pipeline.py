@@ -67,6 +67,56 @@ class VisionPipeline:
             preprocessing_metadata=meta
         )
 
+    def resize_frame(self, vframe: VisionFrame, target_w: int, target_h: int) -> VisionFrame:
+        if target_w <= 0 or target_h <= 0:
+            raise VisionPipelineError("Target width and height must be > 0")
+        if getattr(vframe, 'data', None) is None or vframe.data.size == 0:
+            raise VisionPipelineError("VisionFrame data is empty or missing")
+            
+        if len(vframe.data.shape) not in (2, 3):
+            raise VisionPipelineError("Unsupported dimensionality for resize")
+        if vframe.channels not in (1, 3):
+            raise VisionPipelineError("Invalid channel count for resize")
+        if vframe.data.shape[0] != vframe.height or vframe.data.shape[1] != vframe.width:
+            raise VisionPipelineError("Malformed ndarray dimensions mismatch")
+            
+        if target_w == vframe.width and target_h == vframe.height:
+            # Identity resize
+            return vframe
+            
+        h, w = vframe.height, vframe.width
+        
+        # Nearest-Neighbor interpolation
+        row_indices = np.floor(np.arange(target_h) * (h / target_h)).astype(int)
+        col_indices = np.floor(np.arange(target_w) * (w / target_w)).astype(int)
+        
+        resized_data = vframe.data[row_indices[:, None], col_indices]
+            
+        new_meta = dict(vframe.preprocessing_metadata)
+        
+        # Copy the operations list to avoid mutating the original
+        operations = list(new_meta.get("operations", []))
+        operations.append("resize")
+        new_meta["operations"] = operations
+        
+        new_meta["resize"] = {
+            "original_size": (w, h),
+            "output_size": (target_w, target_h),
+            "interpolation": "nearest_neighbor"
+        }
+        
+        return VisionFrame(
+            data=resized_data,
+            width=target_w,
+            height=target_h,
+            channels=vframe.channels,
+            pixel_format=vframe.pixel_format,
+            numerical_range=vframe.numerical_range,
+            timestamp=vframe.timestamp,
+            seq_num=vframe.seq_num,
+            preprocessing_metadata=new_meta
+        )
+
     def create_ocr_input(self, vframe: VisionFrame, roi=None) -> OCRInput:
         return OCRInput(vframe.data, vframe.width, vframe.height, vframe.channels, vframe.numerical_range, vframe.timestamp, vframe.seq_num, roi)
 
