@@ -1,0 +1,18 @@
+{
+    "phase": 5,
+    "status": "COMPLETE",
+    "test_total": 28,
+    "passed": 28,
+    "failed": 0,
+    "skipped": 0,
+    "phase2_total": 10,
+    "phase2_passed": 10,
+    "phase2_failed": 0,
+    "phase3_total": 8,
+    "phase3_passed": 8,
+    "phase3_failed": 0,
+    "e2e_status": "PASS",
+    "deterministic": true,
+    "physical_hardware": "NOT VALIDATED",
+    "esp_idf_status": "NOT VERIFIED"
+}
