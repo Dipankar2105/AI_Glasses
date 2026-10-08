@@ -1,0 +1,52 @@
+{
+    "phase": "2B-2",
+    "component": "VAD",
+    "audio_contract": {
+        "sample_rate": 16000,
+        "channels": 1,
+        "format": "int16"
+    },
+    "tests": {
+        "A_SILENCE": {
+            "total_frames": 100,
+            "active_frames": 0,
+            "raw_active_frames": 0,
+            "pass": true
+        },
+        "B_LOW_NOISE": {
+            "total_frames": 100,
+            "active_frames": 0,
+            "raw_active_frames": 0,
+            "pass": true
+        },
+        "C_SPEECH_LIKE": {
+            "total_frames": 100,
+            "active_frames": 84,
+            "raw_active_frames": 46,
+            "pass": true
+        },
+        "D_LOUD_NOISE_FALSE_POS": {
+            "total_frames": 100,
+            "active_frames": 100,
+            "raw_active_frames": 100,
+            "pass": true
+        },
+        "E_PAUSE_SMOOTHING": {
+            "transitions_with_hangover": 1,
+            "transitions_without_hangover": 4,
+            "pass": true
+        },
+        "AGC_INTERACTION": {
+            "vad_active_no_agc": 0,
+            "vad_active_with_agc": 93
+        }
+    },
+    "acceptance_criteria": {
+        "silence_detected": true,
+        "low_noise_ignored": true,
+        "speech_detected": true,
+        "hangover_improves_fragmentation": true,
+        "agc_interaction_recorded": true
+    },
+    "overall_status": "PASS"
+}

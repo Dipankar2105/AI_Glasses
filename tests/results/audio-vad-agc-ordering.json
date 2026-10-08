@@ -1,0 +1,124 @@
+{
+    "experiment": "2B-2R",
+    "tests": {
+        "TEST_1_SILENCE": {
+            "name": "Silence",
+            "total_frames": 100,
+            "Arch_A": {
+                "active_frames": 0,
+                "false_positive_rate": 0.0,
+                "detection_rate": 0.0,
+                "output_rms": 0.0
+            },
+            "Arch_B": {
+                "active_frames": 0,
+                "false_positive_rate": 0.0,
+                "detection_rate": 0.0,
+                "output_rms": 0.0
+            }
+        },
+        "TEST_2_NOISE": {
+            "name": "Low-Level Noise",
+            "total_frames": 100,
+            "Arch_A": {
+                "active_frames": 96,
+                "false_positive_rate": 0.96,
+                "detection_rate": 0.0,
+                "output_rms": 2078.1511463138922
+            },
+            "Arch_B": {
+                "active_frames": 0,
+                "false_positive_rate": 0.0,
+                "detection_rate": 0.0,
+                "output_rms": 2078.1511463138922
+            }
+        },
+        "TEST_3_SPEECH": {
+            "name": "Clear Speech",
+            "total_frames": 100,
+            "Arch_A": {
+                "active_frames": 75,
+                "false_positive_rate": 0.0,
+                "detection_rate": 0.75,
+                "output_rms": 4238.3967817864095
+            },
+            "Arch_B": {
+                "active_frames": 74,
+                "false_positive_rate": 0.0,
+                "detection_rate": 0.74,
+                "output_rms": 4238.3967817864095
+            }
+        },
+        "TEST_4_NOISY_SPEECH": {
+            "name": "Speech + Noise",
+            "total_frames": 100,
+            "Arch_A": {
+                "active_frames": 99,
+                "false_positive_rate": 0.0,
+                "detection_rate": 0.99,
+                "output_rms": 4204.045881470347
+            },
+            "Arch_B": {
+                "active_frames": 74,
+                "false_positive_rate": 0.0,
+                "detection_rate": 0.74,
+                "output_rms": 4204.045881470347
+            }
+        },
+        "TEST_5_PAUSES": {
+            "name": "Speech with Pauses",
+            "total_frames": 60,
+            "Arch_A": {
+                "active_frames": 59,
+                "false_positive_rate": 0.0,
+                "detection_rate": 0.9833333333333333,
+                "output_rms": 5105.877455622753
+            },
+            "Arch_B": {
+                "active_frames": 59,
+                "false_positive_rate": 0.0,
+                "detection_rate": 0.9833333333333333,
+                "output_rms": 5105.877455622753
+            }
+        },
+        "TEST_6_LOW_SPEECH": {
+            "name": "Low-Level Speech",
+            "total_frames": 100,
+            "Arch_A": {
+                "active_frames": 65,
+                "false_positive_rate": 0.0,
+                "detection_rate": 0.65,
+                "output_rms": 1512.2288708798535
+            },
+            "Arch_B": {
+                "active_frames": 0,
+                "false_positive_rate": 0.0,
+                "detection_rate": 0.0,
+                "output_rms": 1512.2288708798535
+            }
+        },
+        "TEST_7_LOUD_NOISE": {
+            "name": "Loud Noise",
+            "total_frames": 100,
+            "Arch_A": {
+                "active_frames": 100,
+                "false_positive_rate": 1.0,
+                "detection_rate": 0.0,
+                "output_rms": 4833.987879530492
+            },
+            "Arch_B": {
+                "active_frames": 100,
+                "false_positive_rate": 1.0,
+                "detection_rate": 0.0,
+                "output_rms": 4833.987879530492
+            }
+        }
+    },
+    "decision": {
+        "Architecture_A": "REJECT (Severe false positives on background noise)",
+        "Architecture_B": "REJECT (Fails to detect quiet speech before AGC amplification)",
+        "Conclusion": "NEITHER architecture works flawlessly in isolation. Architecture B is safer against noise but loses sensitivity. A dynamically linked VAD threshold, or VAD processing an AGC-sidechain might be required.",
+        "Recommended_Ordering": "B is strictly safer than A for false-positives, but causes false-negatives."
+    },
+    "physical_validation": false
+}
