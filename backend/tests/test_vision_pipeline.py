@@ -435,3 +435,129 @@ def test_contrast_nan_inf_safety_and_monotonicity():
     # Check monotonicity
     assert data[0, 0] < data[0, 1] < data[0, 2] < data[0, 3]
 
+
+def test_quality_grayscale_brightness():
+    pipeline = VisionPipeline()
+    img = np.full((10, 10), 128, dtype=np.uint8)
+    from backend.vision.frame import VisionFrame
+    vframe = VisionFrame(img, 10, 10, 1, "GRAYSCALE", (0, 255), 100, 1)
+    
+    res = pipeline.analyze_quality(vframe)
+    assert np.isclose(res.brightness, 128/255.0)
+    assert np.isclose(res.contrast, 0.0) # Constant image
+
+def test_quality_rgb_luminance_brightness():
+    pipeline = VisionPipeline()
+    img = np.zeros((10, 10, 3), dtype=np.uint8)
+    img[:, :, 0] = 255 # Only red
+    from backend.vision.frame import VisionFrame
+    vframe = VisionFrame(img, 10, 10, 3, "RGB", (0, 255), 100, 1)
+    
+    res = pipeline.analyze_quality(vframe)
+    # R=255 -> lum = 0.299 * 255 = 76.245 -> 76.245 / 255 = 0.299
+    assert np.isclose(res.brightness, 0.299)
+
+def test_quality_dynamic_range():
+    pipeline = VisionPipeline()
+    img = np.zeros((10, 10), dtype=np.uint8)
+    img[0, 0] = 50
+    img[9, 9] = 200
+    from backend.vision.frame import VisionFrame
+    vframe = VisionFrame(img, 10, 10, 1, "GRAYSCALE", (0, 255), 100, 1)
+    
+    res = pipeline.analyze_quality(vframe)
+    assert np.isclose(res.dynamic_range, 200/255.0)
+
+def test_quality_sharp_vs_blurred():
+    pipeline = VisionPipeline()
+    from backend.vision.frame import VisionFrame
+    
+    sharp_img = np.zeros((10, 10), dtype=np.float32)
+    sharp_img[2:8, 2:8] = 1.0
+    vframe_sharp = VisionFrame(sharp_img, 10, 10, 1, "GRAYSCALE", (0.0, 1.0), 100, 1)
+    
+    blurred_img = sharp_img.copy()
+    blurred_img[1:9, 1:9] = 0.5
+    blurred_img[3:7, 3:7] = 1.0
+    vframe_blurred = VisionFrame(blurred_img, 10, 10, 1, "GRAYSCALE", (0.0, 1.0), 100, 1)
+    
+    res_sharp = pipeline.analyze_quality(vframe_sharp)
+    res_blurred = pipeline.analyze_quality(vframe_blurred)
+    
+    assert res_sharp.sharpness > res_blurred.sharpness
+
+def test_quality_clean_vs_noisy():
+    pipeline = VisionPipeline()
+    from backend.vision.frame import VisionFrame
+    
+    clean_img = np.full((10, 10), 128, dtype=np.uint8)
+    vframe_clean = VisionFrame(clean_img, 10, 10, 1, "GRAYSCALE", (0, 255), 100, 1)
+    
+    noisy_img = clean_img.copy()
+    np.random.seed(42)
+    noisy_img[1:9, 1:9] = np.random.randint(100, 156, (8, 8), dtype=np.uint8)
+    vframe_noisy = VisionFrame(noisy_img, 10, 10, 1, "GRAYSCALE", (0, 255), 100, 1)
+    
+    res_clean = pipeline.analyze_quality(vframe_clean)
+    res_noisy = pipeline.analyze_quality(vframe_noisy)
+    
+    assert res_noisy.noise_estimate > res_clean.noise_estimate
+
+def test_quality_checkerboard_sharpness():
+    pipeline = VisionPipeline()
+    from backend.vision.frame import VisionFrame
+    
+    checkerboard = np.indices((10, 10)).sum(axis=0) % 2
+    checkerboard = (checkerboard * 255).astype(np.uint8)
+    vframe = VisionFrame(checkerboard, 10, 10, 1, "GRAYSCALE", (0, 255), 100, 1)
+    
+    res = pipeline.analyze_quality(vframe)
+    assert res.sharpness > 0.1 # Very high sharpness
+
+def test_quality_metadata_propagation():
+    pipeline = VisionPipeline()
+    img = np.zeros((10, 10), dtype=np.uint8)
+    from backend.vision.frame import VisionFrame
+    vframe = VisionFrame(img, 10, 10, 1, "GRAYSCALE", (0, 255), 12345, 99)
+    
+    res = pipeline.analyze_quality(vframe)
+    assert res.timestamp == 12345
+    assert res.seq_num == 99
+    assert res.width == 10
+    assert res.height == 10
+    assert res.channels == 1
+
+def test_quality_invalid_input():
+    pipeline = VisionPipeline()
+    from backend.vision.frame import VisionFrame
+    
+    vframe1 = VisionFrame(None, 4, 4, 1, "GRAYSCALE", (0, 255), 100, 1)
+    with pytest.raises(VisionPipelineError):
+        pipeline.analyze_quality(vframe1)
+
+def test_quality_read_only_behavior():
+    pipeline = VisionPipeline()
+    img = np.random.randint(0, 256, (10, 10), dtype=np.uint8)
+    original_img = img.copy()
+    
+    from backend.vision.frame import VisionFrame
+    vframe = VisionFrame(img, 10, 10, 1, "GRAYSCALE", (0, 255), 100, 1)
+    
+    pipeline.analyze_quality(vframe)
+    assert np.array_equal(vframe.data, original_img) # original not mutated
+
+def test_quality_deterministic_repeated():
+    pipeline = VisionPipeline()
+    img = np.random.randint(0, 256, (10, 10), dtype=np.uint8)
+    
+    from backend.vision.frame import VisionFrame
+    vframe = VisionFrame(img, 10, 10, 1, "GRAYSCALE", (0, 255), 100, 1)
+    
+    res1 = pipeline.analyze_quality(vframe)
+    res2 = pipeline.analyze_quality(vframe)
+    
+    assert res1.brightness == res2.brightness
+    assert res1.contrast == res2.contrast
+    assert res1.sharpness == res2.sharpness
+    assert res1.noise_estimate == res2.noise_estimate
+

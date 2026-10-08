@@ -47,3 +47,17 @@ class SceneAnalysisInput:
         self.seq_num = seq_num
         self.roi = roi
         self.preprocessing_metadata = preprocessing_metadata or {}
+
+class ImageQualityResult:
+    def __init__(self, brightness: float, contrast: float, sharpness: float, noise_estimate: float, dynamic_range: float, width: int, height: int, channels: int, timestamp: int, seq_num: int, quality_score: float):
+        self.brightness = brightness
+        self.contrast = contrast
+        self.sharpness = sharpness
+        self.noise_estimate = noise_estimate
+        self.dynamic_range = dynamic_range
+        self.width = width
+        self.height = height
+        self.channels = channels
+        self.timestamp = timestamp
+        self.seq_num = seq_num
+        self.quality_score = quality_score

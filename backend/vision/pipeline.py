@@ -1,5 +1,5 @@
 import numpy as np
-from backend.vision.frame import ValidationStatus, VisionFrame, OCRInput, DetectionInput, SceneAnalysisInput
+from backend.vision.frame import ValidationStatus, VisionFrame, OCRInput, DetectionInput, SceneAnalysisInput, ImageQualityResult
 import sys
 import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../firmware')))
@@ -273,6 +273,89 @@ class VisionPipeline:
             timestamp=vframe.timestamp,
             seq_num=vframe.seq_num,
             preprocessing_metadata=new_meta
+        )
+
+    def analyze_quality(self, vframe: VisionFrame) -> ImageQualityResult:
+        if getattr(vframe, 'data', None) is None or vframe.data.size == 0:
+            raise VisionPipelineError("VisionFrame data is empty or missing")
+        if len(vframe.data.shape) not in (2, 3):
+            raise VisionPipelineError("Unsupported dimensionality for quality analysis")
+        if vframe.channels not in (1, 3):
+            raise VisionPipelineError("Invalid channel count for quality analysis")
+            
+        is_uint8 = vframe.data.dtype == np.uint8
+        is_float32 = vframe.data.dtype == np.float32
+        
+        if not (is_uint8 or is_float32):
+            raise VisionPipelineError(f"Quality analysis requires uint8 or float32 data, got {vframe.data.dtype}")
+            
+        if is_uint8 and vframe.numerical_range != (0, 255):
+            raise VisionPipelineError("uint8 data must have numerical range (0, 255)")
+        if is_float32 and vframe.numerical_range != (0.0, 1.0):
+            raise VisionPipelineError("float32 data must have numerical range (0.0, 1.0)")
+            
+        # Copy to ensure read-only behavior on original
+        original_data = vframe.data
+        data = original_data.astype(np.float32)
+        
+        # Convert to luminance if RGB
+        if vframe.channels == 3:
+            # Y = 0.299R + 0.587G + 0.114B
+            r = data[..., 0]
+            g = data[..., 1]
+            b = data[..., 2]
+            lum = 0.299 * r + 0.587 * g + 0.114 * b
+        else:
+            lum = data
+            
+        # A. Brightness (normalized [0, 1])
+        mean_val = np.mean(lum)
+        brightness = mean_val / 255.0 if is_uint8 else float(mean_val)
+        
+        # B. Contrast (normalized stddev)
+        std_val = np.std(lum)
+        contrast = std_val / 255.0 if is_uint8 else float(std_val)
+        
+        # C. Sharpness (Variance of Laplacian)
+        # D. Noise estimate (Mean absolute deviation of Laplacian)
+        # Fast 2D Laplacian using slicing
+        lap = np.zeros_like(lum, dtype=np.float32)
+        if lum.shape[0] >= 3 and lum.shape[1] >= 3:
+            lap[1:-1, 1:-1] = (
+                lum[:-2, 1:-1] + lum[2:, 1:-1] +
+                lum[1:-1, :-2] + lum[1:-1, 2:] -
+                4.0 * lum[1:-1, 1:-1]
+            )
+        
+        sharpness = float(np.var(lap))
+        if is_uint8:
+            sharpness /= (255.0 * 255.0)
+            
+        noise_estimate = float(np.std(lap))
+        if is_uint8:
+            noise_estimate /= 255.0
+            
+        # E. Dynamic range
+        max_val = np.max(lum)
+        min_val = np.min(lum)
+        dr = float(max_val - min_val)
+        dynamic_range = dr / 255.0 if is_uint8 else dr
+        
+        # Heuristic Quality Score
+        quality_score = float(np.clip(contrast * 2.0 + sharpness * 10.0 - noise_estimate, 0.0, 1.0))
+        
+        return ImageQualityResult(
+            brightness=brightness,
+            contrast=contrast,
+            sharpness=sharpness,
+            noise_estimate=noise_estimate,
+            dynamic_range=dynamic_range,
+            width=vframe.width,
+            height=vframe.height,
+            channels=vframe.channels,
+            timestamp=vframe.timestamp,
+            seq_num=vframe.seq_num,
+            quality_score=quality_score
         )
 
     def create_ocr_input(self, vframe: VisionFrame, roi=None) -> OCRInput:
