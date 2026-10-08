@@ -1,0 +1,80 @@
+{
+    "phase": "2B-1",
+    "component": "AGC",
+    "audio_contract": {
+        "sample_rate": 16000,
+        "channels": 1,
+        "format": "int16"
+    },
+    "tests": {
+        "A_LOW_LEVEL": {
+            "name": "A_LOW_LEVEL",
+            "rms_in": 353.5533905932737,
+            "rms_out": 3113.937872314016,
+            "peak_in": 500.0,
+            "peak_out": 5000.0,
+            "effective_gain": 8.807546342827402,
+            "clipping_pct": 0.0
+        },
+        "B_NORMAL_LEVEL": {
+            "name": "B_NORMAL_LEVEL",
+            "rms_in": 3535.5339059327375,
+            "rms_out": 5036.6146926572665,
+            "peak_in": 5000.0,
+            "peak_out": 32767.0,
+            "effective_gain": 1.424569761360701,
+            "clipping_pct": 0.41875
+        },
+        "C_HIGH_LEVEL": {
+            "name": "C_HIGH_LEVEL",
+            "rms_in": 17677.66952966369,
+            "rms_out": 5221.641959756869,
+            "peak_in": 25000.0,
+            "peak_out": 32767.0,
+            "effective_gain": 0.29538067509378363,
+            "clipping_pct": 0.6312500000000001
+        },
+        "D_VERY_LOW_LEVEL": {
+            "name": "D_VERY_LOW_LEVEL",
+            "rms_in": 35.35533905932738,
+            "rms_out": 35.35533905932738,
+            "peak_in": 50.0,
+            "peak_out": 50.0,
+            "effective_gain": 1.0,
+            "clipping_pct": 0.0
+        },
+        "E_SILENCE": {
+            "name": "E_SILENCE",
+            "rms_in": 0.0,
+            "rms_out": 0.0,
+            "peak_in": 0.0,
+            "peak_out": 0.0,
+            "effective_gain": 1.0,
+            "clipping_pct": 0.0
+        },
+        "F_TRANSITION": {
+            "name": "F_TRANSITION",
+            "rms_in": 10003.124511871278,
+            "rms_out": 5071.507427142913,
+            "peak_in": 20000.0,
+            "peak_out": 32767.0,
+            "effective_gain": 0.5069923323581813,
+            "clipping_pct": 0.51875
+        }
+    },
+    "baseline_comparison": {
+        "no_agc_rms": 10003.124511871278,
+        "agc_rms": 5071.507427142913,
+        "no_agc_peak": 20000.0,
+        "agc_peak": 32767.0
+    },
+    "acceptance_criteria": {
+        "no_nan": true,
+        "in_int16_range": true,
+        "silence_controlled": true,
+        "low_amplified": true,
+        "high_attenuated": true,
+        "no_excessive_clipping": true
+    },
+    "overall_status": "PASS"
+}
