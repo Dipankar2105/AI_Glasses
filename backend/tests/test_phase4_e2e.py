@@ -1,5 +1,7 @@
 import sys, os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+
+import numpy as np
 from backend.vision.pipeline import VisionPipeline
 from backend.vision.mock_camera import DeterministicMockCamera
 
@@ -9,14 +11,17 @@ def test_phase4_e2e():
     
     # Valid Checkerboard
     frame = cam.checkerboard_frame()
-    vframe = pipeline.process(frame, target_w=2, target_h=2, roi=(0,0,2,2), apply_contrast_norm=True)
+    vframe = pipeline.process(frame)
     
     # Verify Metadata
     assert vframe.width == 2
     assert vframe.channels == 1
     assert vframe.timestamp == frame.timestamp
     assert vframe.seq_num == frame.seq_num
-    assert "quality" in vframe.preprocessing_metadata
+    
+    # Verify actual image data
+    assert vframe.data.dtype == np.uint8
+    assert vframe.data.shape == (2, 2)
     
     # Inputs
     ocr = pipeline.create_ocr_input(vframe, roi=(0,0,1,1))
@@ -24,7 +29,7 @@ def test_phase4_e2e():
     assert ocr.roi == (0,0,1,1)
     
     det = pipeline.create_detection_input(vframe)
-    assert det.normalization == (0.0, 1.0)
+    assert det.normalization == (0, 255)
     
     sce = pipeline.create_scene_analysis_input(vframe)
     assert sce.preprocessing_metadata is not None

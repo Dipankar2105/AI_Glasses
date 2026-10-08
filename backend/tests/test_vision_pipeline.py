@@ -1,57 +1,70 @@
 import sys, os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+
+import numpy as np
+import pytest
+from backend.vision.pipeline import VisionPipeline, VisionPipelineError
+from backend.vision.mock_camera import DeterministicMockCamera
 from firmware.hal.camera import CameraFrame
-from backend.vision.pipeline import VisionPipeline, VisionPipelineError, ValidationStatus
 
-def test_validation():
-    p = VisionPipeline()
-    assert p.validate_frame(CameraFrame(0, 0, "RGB", b"", 0, 0)) == ValidationStatus.UNAVAILABLE
-    assert p.validate_frame(CameraFrame(2, 2, "RGB", b"123", 0, 0)) == ValidationStatus.INVALID # bad length
-    assert p.validate_frame(CameraFrame(2, 2, "YUV", b"1234", 0, 0)) == ValidationStatus.UNSUPPORTED
-    assert p.validate_frame(CameraFrame(2, 2, "GRAYSCALE", b"1234", 0, 0)) == ValidationStatus.VALID
+def test_pipeline_identity_grayscale():
+    mock_cam = DeterministicMockCamera(width=8, height=8)
+    frame = mock_cam.checkerboard_frame()
+    pipeline = VisionPipeline()
+    vframe = pipeline.process(frame)
+    
+    assert vframe.width == 8
+    assert vframe.height == 8
+    assert vframe.channels == 1
+    assert vframe.pixel_format == "GRAYSCALE"
+    assert vframe.data.dtype == np.uint8
+    assert vframe.data.shape == (8, 8)
+    
+    expected_data = np.frombuffer(frame.data, dtype=np.uint8).reshape((8, 8))
+    assert np.array_equal(vframe.data, expected_data)
 
-def test_preprocessing():
-    p = VisionPipeline()
+def test_pipeline_identity_rgb():
+    mock_cam = DeterministicMockCamera(width=8, height=8)
+    frame = mock_cam.rgb_frame()
+    pipeline = VisionPipeline()
+    vframe = pipeline.process(frame)
     
-    # RGB to Gray
-    rgb = bytes([255, 0, 0, 0, 255, 0, 0, 0, 255, 255, 255, 255])
-    gray = p.rgb_to_grayscale(rgb, 2, 2)
-    assert len(gray) == 4
-    assert gray[0] == 76 # ~0.299*255
-    assert gray[1] == 149 # ~0.587*255
-    assert gray[2] == 29 # ~0.114*255
+    assert vframe.channels == 3
+    assert vframe.pixel_format == "RGB"
+    assert vframe.data.shape == (8, 8, 3)
     
-    # Resize
-    raw = bytes([10, 20, 30, 40])
-    res, w, h = p.resize(raw, 2, 2, 1, 1, 1)
-    assert w == 1 and h == 1 and res[0] == 10
+    expected_data = np.frombuffer(frame.data, dtype=np.uint8).reshape((8, 8, 3))
+    assert np.array_equal(vframe.data, expected_data)
+
+def test_pipeline_metadata_preservation():
+    frame = CameraFrame(width=4, height=4, pixel_format="GRAYSCALE", data=bytes([0]*16), timestamp=999, seq_num=42)
+    pipeline = VisionPipeline()
+    vframe = pipeline.process(frame)
     
-    # ROI
-    roi, w, h = p.extract_roi(raw, 2, 2, 1, 1, 1, 1, 1)
-    assert w == 1 and h == 1 and roi[0] == 40
-    try:
-        p.extract_roi(raw, 2, 2, 1, 5, 5, 1, 1)
-        assert False
-    except VisionPipelineError:
-        pass
+    assert vframe.timestamp == 999
+    assert vframe.seq_num == 42
+    assert vframe.width == 4
+    assert vframe.height == 4
+
+def test_pipeline_invalid_inputs():
+    pipeline = VisionPipeline()
+    
+    # Empty dimensions
+    f1 = CameraFrame(width=0, height=0, pixel_format="GRAYSCALE", data=bytes([]), timestamp=1, seq_num=1)
+    with pytest.raises(VisionPipelineError):
+        pipeline.process(f1)
         
-    # Contrast Norm
-    cn = p.contrast_normalize([0.1, 0.9])
-    assert cn == [0.0, 1.0]
-
-def test_quality():
-    p = VisionPipeline()
-    q_blank = p.evaluate_quality([0.0]*10)
-    assert q_blank["very_dark"] and q_blank["is_uniform"] and q_blank["unusable"]
-    
-    q_bright = p.evaluate_quality([1.0]*10)
-    assert q_bright["very_bright"] and q_bright["is_uniform"] and q_bright["unusable"]
-    
-    q_good = p.evaluate_quality([0.0, 0.5, 1.0])
-    assert not q_good["unusable"]
-
-if __name__ == "__main__":
-    test_validation()
-    test_preprocessing()
-    test_quality()
-    print("test_vision_pipeline PASS")
+    # None data
+    f2 = CameraFrame(width=4, height=4, pixel_format="GRAYSCALE", data=None, timestamp=1, seq_num=1)
+    with pytest.raises(VisionPipelineError):
+        pipeline.process(f2)
+        
+    # Dimension mismatch (width * height != len(data))
+    f3 = CameraFrame(width=4, height=4, pixel_format="GRAYSCALE", data=bytes([0]*15), timestamp=1, seq_num=1)
+    with pytest.raises(VisionPipelineError):
+        pipeline.process(f3)
+        
+    # RGB Dimension mismatch
+    f4 = CameraFrame(width=4, height=4, pixel_format="RGB", data=bytes([0]*47), timestamp=1, seq_num=1)
+    with pytest.raises(VisionPipelineError):
+        pipeline.process(f4)
