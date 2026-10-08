@@ -205,6 +205,76 @@ class VisionPipeline:
             preprocessing_metadata=new_meta
         )
 
+    def contrast_normalize(self, vframe: VisionFrame, per_channel: bool = True) -> VisionFrame:
+        if getattr(vframe, 'data', None) is None or vframe.data.size == 0:
+            raise VisionPipelineError("VisionFrame data is empty or missing")
+            
+        is_uint8 = vframe.data.dtype == np.uint8
+        is_float32 = vframe.data.dtype == np.float32
+        
+        if not (is_uint8 or is_float32):
+            raise VisionPipelineError(f"Contrast normalization requires uint8 or float32 data, got {vframe.data.dtype}")
+            
+        if is_uint8 and vframe.numerical_range != (0, 255):
+            raise VisionPipelineError("uint8 data must have numerical range (0, 255)")
+        if is_float32 and vframe.numerical_range != (0.0, 1.0):
+            raise VisionPipelineError("float32 data must have numerical range (0.0, 1.0)")
+            
+        # Perform computation in float32 for precision
+        data_float = vframe.data.astype(np.float32)
+        
+        if vframe.channels == 3 and per_channel:
+            # Per-channel contrast stretch
+            for c in range(3):
+                c_min = np.min(data_float[..., c])
+                c_max = np.max(data_float[..., c])
+                if c_max > c_min:
+                    data_float[..., c] = (data_float[..., c] - c_min) / (c_max - c_min)
+                else:
+                    if is_uint8:
+                        data_float[..., c] = data_float[..., c] / 255.0
+        else:
+            # Global contrast stretch
+            c_min = np.min(data_float)
+            c_max = np.max(data_float)
+            if c_max > c_min:
+                data_float = (data_float - c_min) / (c_max - c_min)
+            else:
+                if is_uint8:
+                    data_float = data_float / 255.0
+                    
+        # Numerical safety explicitly clipping to range
+        data_float = np.clip(data_float, 0.0, 1.0)
+        if not np.all(np.isfinite(data_float)):
+            raise VisionPipelineError("Contrast normalization produced non-finite values")
+            
+        # Map back to original dtype
+        if is_uint8:
+            final_data = np.round(data_float * 255.0).astype(np.uint8)
+        else:
+            final_data = data_float
+            
+        new_meta = dict(vframe.preprocessing_metadata)
+        operations = list(new_meta.get("operations", []))
+        operations.append("contrast_normalize")
+        new_meta["operations"] = operations
+        new_meta["contrast"] = {
+            "method": "min_max",
+            "per_channel": per_channel and vframe.channels == 3
+        }
+        
+        return VisionFrame(
+            data=final_data,
+            width=vframe.width,
+            height=vframe.height,
+            channels=vframe.channels,
+            pixel_format=vframe.pixel_format,
+            numerical_range=vframe.numerical_range,
+            timestamp=vframe.timestamp,
+            seq_num=vframe.seq_num,
+            preprocessing_metadata=new_meta
+        )
+
     def create_ocr_input(self, vframe: VisionFrame, roi=None) -> OCRInput:
         return OCRInput(vframe.data, vframe.width, vframe.height, vframe.channels, vframe.numerical_range, vframe.timestamp, vframe.seq_num, roi)
 

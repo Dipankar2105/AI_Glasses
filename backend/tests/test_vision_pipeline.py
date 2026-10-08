@@ -310,3 +310,128 @@ def test_normalize_invalid_input():
     with pytest.raises(VisionPipelineError):
         pipeline.normalize_frame(vframe2)
 
+
+def test_contrast_grayscale_uint8():
+    pipeline = VisionPipeline()
+    img = np.array([[50, 100], [150, 200]], dtype=np.uint8)
+    from backend.vision.frame import VisionFrame
+    vframe = VisionFrame(img, 2, 2, 1, "GRAYSCALE", (0, 255), 100, 1)
+    
+    stretched = pipeline.contrast_normalize(vframe)
+    assert stretched.data.dtype == np.uint8
+    assert stretched.numerical_range == (0, 255)
+    
+    # 50->0, 200->255. Span=150.
+    # 100 -> (100-50)/150 = 1/3 -> 255/3 = 85
+    # 150 -> (150-50)/150 = 2/3 -> 170
+    expected = np.array([[0, 85], [170, 255]], dtype=np.uint8)
+    assert np.array_equal(stretched.data, expected)
+
+def test_contrast_rgb_uint8_per_channel():
+    pipeline = VisionPipeline()
+    img = np.zeros((2, 2, 3), dtype=np.uint8)
+    img[:, :, 0] = [[50, 60], [90, 100]] # R: 50..100
+    img[:, :, 1] = [[100, 120], [180, 200]] # G: 100..200
+    img[:, :, 2] = [[25, 35], [65, 75]] # B: 25..75
+    
+    from backend.vision.frame import VisionFrame
+    vframe = VisionFrame(img, 2, 2, 3, "RGB", (0, 255), 100, 1)
+    
+    stretched = pipeline.contrast_normalize(vframe, per_channel=True)
+    assert stretched.data.dtype == np.uint8
+    
+    # R: 50->0, 100->255
+    # G: 100->0, 200->255
+    # B: 25->0, 75->255
+    assert np.min(stretched.data[:, :, 0]) == 0 and np.max(stretched.data[:, :, 0]) == 255
+    assert np.min(stretched.data[:, :, 1]) == 0 and np.max(stretched.data[:, :, 1]) == 255
+    assert np.min(stretched.data[:, :, 2]) == 0 and np.max(stretched.data[:, :, 2]) == 255
+
+def test_contrast_grayscale_float32():
+    pipeline = VisionPipeline()
+    img = np.array([[0.2, 0.4], [0.6, 0.8]], dtype=np.float32)
+    from backend.vision.frame import VisionFrame
+    vframe = VisionFrame(img, 2, 2, 1, "FLOAT32_GRAYSCALE", (0.0, 1.0), 100, 1)
+    
+    stretched = pipeline.contrast_normalize(vframe)
+    assert stretched.data.dtype == np.float32
+    assert stretched.numerical_range == (0.0, 1.0)
+    
+    # 0.2->0.0, 0.8->1.0. 
+    # 0.4 -> (0.4-0.2)/0.6 = 1/3
+    expected = np.array([[0.0, 1/3], [2/3, 1.0]], dtype=np.float32)
+    assert np.allclose(stretched.data, expected)
+
+def test_contrast_rgb_float32():
+    pipeline = VisionPipeline()
+    img = np.zeros((2, 2, 3), dtype=np.float32)
+    img[:, :, 0] = [[0.1, 0.2], [0.3, 0.4]]
+    img[:, :, 1] = [[0.5, 0.6], [0.7, 0.8]]
+    img[:, :, 2] = [[0.2, 0.3], [0.4, 0.5]]
+    from backend.vision.frame import VisionFrame
+    vframe = VisionFrame(img, 2, 2, 3, "FLOAT32_RGB", (0.0, 1.0), 100, 1)
+    
+    stretched = pipeline.contrast_normalize(vframe, per_channel=True)
+    assert stretched.data.dtype == np.float32
+    assert np.allclose(np.min(stretched.data[:, :, 0]), 0.0)
+    assert np.allclose(np.max(stretched.data[:, :, 0]), 1.0)
+    assert np.allclose(np.min(stretched.data[:, :, 1]), 0.0)
+    assert np.allclose(np.max(stretched.data[:, :, 1]), 1.0)
+
+def test_contrast_constant_image():
+    pipeline = VisionPipeline()
+    img = np.full((2, 2), 128, dtype=np.uint8)
+    from backend.vision.frame import VisionFrame
+    vframe = VisionFrame(img, 2, 2, 1, "GRAYSCALE", (0, 255), 100, 1)
+    
+    stretched = pipeline.contrast_normalize(vframe)
+    assert np.array_equal(stretched.data, img) # Preserved exactly without division by zero NaN
+    assert stretched.data.dtype == np.uint8
+
+def test_contrast_metadata_preservation():
+    pipeline = VisionPipeline()
+    img = np.array([[50, 200]], dtype=np.uint8)
+    from backend.vision.frame import VisionFrame
+    vframe = VisionFrame(img, 2, 1, 1, "GRAYSCALE", (0, 255), 12345, 99, {"operations": ["resize"]})
+    
+    stretched = pipeline.contrast_normalize(vframe)
+    assert stretched.timestamp == 12345
+    assert stretched.seq_num == 99
+    assert "contrast_normalize" in stretched.preprocessing_metadata["operations"]
+    assert "resize" in stretched.preprocessing_metadata["operations"]
+    assert stretched.preprocessing_metadata["contrast"]["method"] == "min_max"
+
+def test_contrast_invalid_input():
+    pipeline = VisionPipeline()
+    from backend.vision.frame import VisionFrame
+    
+    # Missing data
+    vframe1 = VisionFrame(None, 4, 4, 1, "GRAYSCALE", (0, 255), 100, 1)
+    with pytest.raises(VisionPipelineError):
+        pipeline.contrast_normalize(vframe1)
+        
+    # Invalid dtype
+    img_int16 = np.zeros((4, 4), dtype=np.int16)
+    vframe2 = VisionFrame(img_int16, 4, 4, 1, "GRAYSCALE", (0, 255), 100, 1)
+    with pytest.raises(VisionPipelineError):
+        pipeline.contrast_normalize(vframe2)
+        
+    # Invalid range for float32
+    img_float_bad = np.zeros((4, 4), dtype=np.float32)
+    vframe3 = VisionFrame(img_float_bad, 4, 4, 1, "GRAYSCALE", (0.0, 255.0), 100, 1)
+    with pytest.raises(VisionPipelineError):
+        pipeline.contrast_normalize(vframe3)
+
+def test_contrast_nan_inf_safety_and_monotonicity():
+    pipeline = VisionPipeline()
+    img = np.array([[50, 100, 150, 200]], dtype=np.uint8)
+    from backend.vision.frame import VisionFrame
+    vframe = VisionFrame(img, 4, 1, 1, "GRAYSCALE", (0, 255), 100, 1)
+    
+    stretched = pipeline.contrast_normalize(vframe)
+    data = stretched.data
+    
+    assert np.all(np.isfinite(data))
+    # Check monotonicity
+    assert data[0, 0] < data[0, 1] < data[0, 2] < data[0, 3]
+
