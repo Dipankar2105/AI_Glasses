@@ -117,6 +117,69 @@ class VisionPipeline:
             preprocessing_metadata=new_meta
         )
 
+    def convert_format(self, vframe: VisionFrame, target_format: str) -> VisionFrame:
+        if target_format not in ("RGB", "GRAYSCALE"):
+            raise VisionPipelineError(f"Unsupported target format: {target_format}")
+            
+        if getattr(vframe, 'data', None) is None or vframe.data.size == 0:
+            raise VisionPipelineError("VisionFrame data is empty or missing")
+        if len(vframe.data.shape) not in (2, 3):
+            raise VisionPipelineError("Unsupported dimensionality for format conversion")
+        if vframe.channels not in (1, 3):
+            raise VisionPipelineError("Invalid channel count for format conversion")
+        if vframe.channels == 3 and vframe.data.shape[-1] != 3:
+            raise VisionPipelineError("RGB arrays must have exactly 3 channels in last dimension")
+
+        if vframe.pixel_format == target_format:
+            # Identity conversion
+            return vframe
+            
+        new_meta = dict(vframe.preprocessing_metadata)
+        operations = list(new_meta.get("operations", []))
+        operations.append("convert_format")
+        new_meta["operations"] = operations
+        new_meta["conversion"] = {
+            "input_format": vframe.pixel_format,
+            "output_format": target_format
+        }
+
+        if target_format == "GRAYSCALE":
+            # RGB -> Grayscale
+            # Y = 0.299R + 0.587G + 0.114B
+            # Using standard rounding before casting to uint8
+            r = vframe.data[:, :, 0].astype(np.float32)
+            g = vframe.data[:, :, 1].astype(np.float32)
+            b = vframe.data[:, :, 2].astype(np.float32)
+            gray = np.round(0.299 * r + 0.587 * g + 0.114 * b).astype(np.uint8)
+            
+            return VisionFrame(
+                data=gray,
+                width=vframe.width,
+                height=vframe.height,
+                channels=1,
+                pixel_format="GRAYSCALE",
+                numerical_range=vframe.numerical_range,
+                timestamp=vframe.timestamp,
+                seq_num=vframe.seq_num,
+                preprocessing_metadata=new_meta
+            )
+            
+        elif target_format == "RGB":
+            # Grayscale -> RGB
+            rgb = np.stack((vframe.data,)*3, axis=-1)
+            
+            return VisionFrame(
+                data=rgb,
+                width=vframe.width,
+                height=vframe.height,
+                channels=3,
+                pixel_format="RGB",
+                numerical_range=vframe.numerical_range,
+                timestamp=vframe.timestamp,
+                seq_num=vframe.seq_num,
+                preprocessing_metadata=new_meta
+            )
+
     def create_ocr_input(self, vframe: VisionFrame, roi=None) -> OCRInput:
         return OCRInput(vframe.data, vframe.width, vframe.height, vframe.channels, vframe.numerical_range, vframe.timestamp, vframe.seq_num, roi)
 

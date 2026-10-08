@@ -159,3 +159,103 @@ def test_resize_malformed_input():
     vframe3 = VisionFrame(img_mismatch, 8, 8, 1, "GRAYSCALE", (0, 255), 100, 1)
     with pytest.raises(VisionPipelineError):
         pipeline.resize_frame(vframe3, 4, 4)
+
+def test_convert_rgb_to_grayscale():
+    pipeline = VisionPipeline()
+    img = np.zeros((5, 1, 3), dtype=np.uint8)
+    img[0, 0] = [255, 0, 0]     # Red -> 76
+    img[1, 0] = [0, 255, 0]     # Green -> 150
+    img[2, 0] = [0, 0, 255]     # Blue -> 29
+    img[3, 0] = [255, 255, 255] # White -> 255
+    img[4, 0] = [0, 0, 0]       # Black -> 0
+    from backend.vision.frame import VisionFrame
+    vframe = VisionFrame(img, 1, 5, 3, "RGB", (0, 255), 100, 1)
+    
+    gray = pipeline.convert_format(vframe, "GRAYSCALE")
+    # wait, data shape removed
+    assert gray.data.shape == (5, 1)
+    assert gray.channels == 1
+    assert gray.pixel_format == "GRAYSCALE"
+    
+    expected = np.array([[76], [150], [29], [255], [0]], dtype=np.uint8)
+    assert np.array_equal(gray.data, expected)
+
+def test_convert_grayscale_to_rgb():
+    pipeline = VisionPipeline()
+    img = np.array([[0, 127], [200, 255]], dtype=np.uint8)
+    from backend.vision.frame import VisionFrame
+    vframe = VisionFrame(img, 2, 2, 1, "GRAYSCALE", (0, 255), 100, 1)
+    
+    rgb = pipeline.convert_format(vframe, "RGB")
+    assert rgb.data.shape == (2, 2, 3)
+    assert rgb.channels == 3
+    assert rgb.pixel_format == "RGB"
+    
+    assert np.array_equal(rgb.data[:, :, 0], img)
+    assert np.array_equal(rgb.data[:, :, 1], img)
+    assert np.array_equal(rgb.data[:, :, 2], img)
+
+def test_convert_rgb_identity():
+    pipeline = VisionPipeline()
+    img = np.random.randint(0, 256, (4, 4, 3), dtype=np.uint8)
+    from backend.vision.frame import VisionFrame
+    vframe = VisionFrame(img, 4, 4, 3, "RGB", (0, 255), 100, 1)
+    
+    rgb = pipeline.convert_format(vframe, "RGB")
+    assert np.array_equal(rgb.data, img)
+    assert rgb is vframe
+
+def test_convert_grayscale_identity():
+    pipeline = VisionPipeline()
+    img = np.random.randint(0, 256, (4, 4), dtype=np.uint8)
+    from backend.vision.frame import VisionFrame
+    vframe = VisionFrame(img, 4, 4, 1, "GRAYSCALE", (0, 255), 100, 1)
+    
+    gray = pipeline.convert_format(vframe, "GRAYSCALE")
+    assert np.array_equal(gray.data, img)
+    assert gray is vframe
+
+def test_convert_channel_distinctness():
+    pipeline = VisionPipeline()
+    img = np.zeros((2, 2, 3), dtype=np.uint8)
+    img[:, :, 0] = 255 # Only red
+    from backend.vision.frame import VisionFrame
+    vframe = VisionFrame(img, 2, 2, 3, "RGB", (0, 255), 100, 1)
+    
+    gray = pipeline.convert_format(vframe, "GRAYSCALE")
+    # Red only is ~76
+    assert np.all(gray.data == 76)
+
+def test_convert_metadata_preservation():
+    pipeline = VisionPipeline()
+    img = np.zeros((4, 4, 3), dtype=np.uint8)
+    from backend.vision.frame import VisionFrame
+    vframe = VisionFrame(img, 4, 4, 3, "RGB", (0, 255), 12345, 99, {"operations": ["resize"]})
+    
+    gray = pipeline.convert_format(vframe, "GRAYSCALE")
+    assert gray.timestamp == 12345
+    assert gray.seq_num == 99
+    assert gray.numerical_range == (0, 255)
+    assert "convert_format" in gray.preprocessing_metadata["operations"]
+    assert "resize" in gray.preprocessing_metadata["operations"]
+    assert gray.preprocessing_metadata["conversion"]["input_format"] == "RGB"
+    assert gray.preprocessing_metadata["conversion"]["output_format"] == "GRAYSCALE"
+
+def test_convert_invalid_input():
+    pipeline = VisionPipeline()
+    from backend.vision.frame import VisionFrame
+    
+    vframe1 = VisionFrame(None, 4, 4, 1, "GRAYSCALE", (0, 255), 100, 1)
+    with pytest.raises(VisionPipelineError):
+        pipeline.convert_format(vframe1, "RGB")
+        
+    img_1d = np.zeros((16,), dtype=np.uint8)
+    vframe2 = VisionFrame(img_1d, 4, 4, 1, "GRAYSCALE", (0, 255), 100, 1)
+    with pytest.raises(VisionPipelineError):
+        pipeline.convert_format(vframe2, "RGB")
+        
+    img_bad_rgb = np.zeros((4, 4, 4), dtype=np.uint8)
+    vframe3 = VisionFrame(img_bad_rgb, 4, 4, 3, "RGB", (0, 255), 100, 1)
+    with pytest.raises(VisionPipelineError):
+        pipeline.convert_format(vframe3, "GRAYSCALE")
+
