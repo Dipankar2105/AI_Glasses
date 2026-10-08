@@ -1,0 +1,12 @@
+{
+    "phase": 4,
+    "status": "COMPLETE",
+    "test totals": 21,
+    "passed": 21,
+    "failed": 0,
+    "skipped": 0,
+    "phase2_regression": true,
+    "phase3_regression": true,
+    "hardware_validation": "NOT VALIDATED",
+    "deterministic": true
+}
