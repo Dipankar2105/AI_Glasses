@@ -1,0 +1,17 @@
+{
+    "test": "Pipeline E2E",
+    "sample_rate": 16000,
+    "metrics_before": {
+        "rms": 13693.06393762916,
+        "peak": 29969.173337331304,
+        "dc_offset": 5000.000000000003,
+        "clipping_pct": 0.0
+    },
+    "metrics_after": {
+        "rms": 20374.25333858592,
+        "peak": 32731.257601323312,
+        "dc_offset": -4.764353835560377,
+        "clipping_pct": 0.0
+    },
+    "status": "PASS"
+}
