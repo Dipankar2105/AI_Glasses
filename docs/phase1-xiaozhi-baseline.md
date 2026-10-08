@@ -36,3 +36,6 @@
 
 ## 5. Known Limitations
 - Hardware tests are entirely pending until the XIAO ESP32-S3 Sense is physically connected to the host machine.
+
+## 6. Hardware Validation Workflow
+Hardware validation is deferred until the physical XIAO ESP32-S3 Sense is available. The validation workflow is centralized in `scripts/hardware_validation.ps1`.
