@@ -15,7 +15,7 @@ class VisionOrchestrator:
         result = UnifiedVisionResult()
         
         # Input Validation
-        if not vframe or vframe.width <= 0 or vframe.height <= 0 or not vframe.data:
+        if not vframe or vframe.width <= 0 or vframe.height <= 0 or vframe.data is None or len(vframe.data) == 0:
             result.errors.append({"stage": "orchestrator", "error": "INVALID_INPUT", "msg": "Invalid VisionFrame input"})
             return result
             
