@@ -1,0 +1,64 @@
+{
+    "phase": "2B-3",
+    "component": "Noise Suppression",
+    "method": "Spectral Subtraction (Pure Python Cooley-Tukey FFT)",
+    "tests": {
+        "A_CLEAN_SPEECH": {
+            "name": "A_CLEAN_SPEECH",
+            "input_snr": 999.0,
+            "output_snr": 47.23576472855732,
+            "snr_improvement": -951.7642352714427,
+            "nmse": 1.8898334300806687e-05,
+            "clipping": false
+        },
+        "B_LOW_NOISE": {
+            "name": "B_LOW_NOISE",
+            "input_snr": 23.979500168620277,
+            "output_snr": 31.430176086169404,
+            "snr_improvement": 7.450675917549127,
+            "nmse": 0.0007194198082924353,
+            "clipping": false
+        },
+        "C_MEDIUM_NOISE": {
+            "name": "C_MEDIUM_NOISE",
+            "input_snr": 11.938300342061028,
+            "output_snr": 22.231056056014964,
+            "snr_improvement": 10.292755713953936,
+            "nmse": 0.005982660994664648,
+            "clipping": false
+        },
+        "D_STRONG_NOISE": {
+            "name": "D_STRONG_NOISE",
+            "input_snr": 0.45767498750665125,
+            "output_snr": 12.881894909694633,
+            "snr_improvement": 12.424219922187982,
+            "nmse": 0.05150038895287927,
+            "clipping": false
+        },
+        "E_PURE_NOISE": {
+            "name": "E_PURE_NOISE",
+            "input_snr": -999.0,
+            "output_snr": -999.0,
+            "snr_improvement": 0.0,
+            "nmse": 0.0,
+            "clipping": false
+        }
+    },
+    "computational_cost": {
+        "avg_frame_processing_time_sec": 0.0011052872481704737,
+        "max_frame_processing_time_sec": 0.001542500001960434,
+        "frame_duration_sec": 0.016,
+        "real_time_factor": 0.0690804530106546
+    },
+    "latency": {
+        "algorithmic_latency_frames": 1,
+        "algorithmic_latency_ms": 16.0
+    },
+    "acceptance_criteria": {
+        "no_clipping": true,
+        "pure_noise_attenuated": false,
+        "speech_noise_improved": true,
+        "clean_speech_preserved": true
+    },
+    "overall_status": "CONDITIONAL ACCEPT"
+}

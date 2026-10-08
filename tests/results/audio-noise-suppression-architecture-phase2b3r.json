@@ -1,0 +1,210 @@
+{
+    "experiment": "2B-3R",
+    "tests": {
+        "TEST_1_SILENCE": {
+            "name": "Silence",
+            "total_frames": 120,
+            "Arch_A": {
+                "active_frames": 0,
+                "false_positive_rate": 0.0,
+                "detection_rate": 0.0,
+                "missed_speech_frames": 0,
+                "output_rms": 0.0
+            },
+            "Arch_B": {
+                "active_frames": 0,
+                "false_positive_rate": 0.0,
+                "detection_rate": 0.0,
+                "missed_speech_frames": 0,
+                "output_rms": 0.0
+            },
+            "Arch_C": {
+                "active_frames": 0,
+                "false_positive_rate": 0.0,
+                "detection_rate": 0.0,
+                "missed_speech_frames": 0,
+                "output_rms": 0.0
+            }
+        },
+        "TEST_2_300_NOISE": {
+            "name": "300 RMS Noise",
+            "total_frames": 120,
+            "Arch_A": {
+                "active_frames": 0,
+                "false_positive_rate": 0.0,
+                "detection_rate": 0.0,
+                "missed_speech_frames": 0,
+                "output_rms": 2085.3369599614716
+            },
+            "Arch_B": {
+                "active_frames": 0,
+                "false_positive_rate": 0.0,
+                "detection_rate": 0.0,
+                "missed_speech_frames": 0,
+                "output_rms": 959.7446094044136
+            },
+            "Arch_C": {
+                "active_frames": 0,
+                "false_positive_rate": 0.0,
+                "detection_rate": 0.0,
+                "missed_speech_frames": 0,
+                "output_rms": 959.7446094044136
+            }
+        },
+        "TEST_3_CLEAR_SPEECH": {
+            "name": "Clear Speech",
+            "total_frames": 120,
+            "Arch_A": {
+                "active_frames": 74,
+                "false_positive_rate": 0.0,
+                "detection_rate": 0.6166666666666667,
+                "missed_speech_frames": 46,
+                "output_rms": 3869.109208402863
+            },
+            "Arch_B": {
+                "active_frames": 74,
+                "false_positive_rate": 0.0,
+                "detection_rate": 0.6166666666666667,
+                "missed_speech_frames": 46,
+                "output_rms": 3866.5814469735456
+            },
+            "Arch_C": {
+                "active_frames": 74,
+                "false_positive_rate": 0.0,
+                "detection_rate": 0.6166666666666667,
+                "missed_speech_frames": 46,
+                "output_rms": 3866.5814469735456
+            }
+        },
+        "TEST_4_LOW_SPEECH": {
+            "name": "Low Speech",
+            "total_frames": 120,
+            "Arch_A": {
+                "active_frames": 0,
+                "false_positive_rate": 0.0,
+                "detection_rate": 0.0,
+                "missed_speech_frames": 120,
+                "output_rms": 1380.4697744857715
+            },
+            "Arch_B": {
+                "active_frames": 0,
+                "false_positive_rate": 0.0,
+                "detection_rate": 0.0,
+                "missed_speech_frames": 120,
+                "output_rms": 1374.5200936392678
+            },
+            "Arch_C": {
+                "active_frames": 0,
+                "false_positive_rate": 0.0,
+                "detection_rate": 0.0,
+                "missed_speech_frames": 120,
+                "output_rms": 1374.5200936392678
+            }
+        },
+        "TEST_5_LOW_SPEECH_NOISE": {
+            "name": "Low Speech + Noise",
+            "total_frames": 120,
+            "Arch_A": {
+                "active_frames": 0,
+                "false_positive_rate": 0.0,
+                "detection_rate": 0.0,
+                "missed_speech_frames": 120,
+                "output_rms": 2536.0700609303226
+            },
+            "Arch_B": {
+                "active_frames": 0,
+                "false_positive_rate": 0.0,
+                "detection_rate": 0.0,
+                "missed_speech_frames": 120,
+                "output_rms": 1607.0825220125093
+            },
+            "Arch_C": {
+                "active_frames": 0,
+                "false_positive_rate": 0.0,
+                "detection_rate": 0.0,
+                "missed_speech_frames": 120,
+                "output_rms": 1607.0825220125093
+            }
+        },
+        "TEST_6_MED_SPEECH_NOISE": {
+            "name": "Medium Speech + Noise",
+            "total_frames": 120,
+            "Arch_A": {
+                "active_frames": 120,
+                "false_positive_rate": 0.0,
+                "detection_rate": 1.0,
+                "missed_speech_frames": 0,
+                "output_rms": 3805.7971771516345
+            },
+            "Arch_B": {
+                "active_frames": 89,
+                "false_positive_rate": 0.0,
+                "detection_rate": 0.7416666666666667,
+                "missed_speech_frames": 31,
+                "output_rms": 3810.412727638331
+            },
+            "Arch_C": {
+                "active_frames": 120,
+                "false_positive_rate": 0.0,
+                "detection_rate": 1.0,
+                "missed_speech_frames": 0,
+                "output_rms": 3810.412727638331
+            }
+        },
+        "TEST_7_PAUSES_NOISE": {
+            "name": "Pauses + Noise",
+            "total_frames": 80,
+            "Arch_A": {
+                "active_frames": 59,
+                "false_positive_rate": 0.0,
+                "detection_rate": 0.7375,
+                "missed_speech_frames": 21,
+                "output_rms": 4339.717219185505
+            },
+            "Arch_B": {
+                "active_frames": 59,
+                "false_positive_rate": 0.0,
+                "detection_rate": 0.7375,
+                "missed_speech_frames": 21,
+                "output_rms": 4430.59860437541
+            },
+            "Arch_C": {
+                "active_frames": 59,
+                "false_positive_rate": 0.0,
+                "detection_rate": 0.7375,
+                "missed_speech_frames": 21,
+                "output_rms": 4430.59860437541
+            }
+        },
+        "TEST_8_LOUD_NOISE": {
+            "name": "Loud Noise",
+            "total_frames": 120,
+            "Arch_A": {
+                "active_frames": 120,
+                "false_positive_rate": 1.0,
+                "detection_rate": 0.0,
+                "missed_speech_frames": 0,
+                "output_rms": 4628.910014635813
+            },
+            "Arch_B": {
+                "active_frames": 23,
+                "false_positive_rate": 0.19166666666666668,
+                "detection_rate": 0.0,
+                "missed_speech_frames": 0,
+                "output_rms": 3572.2879310506555
+            },
+            "Arch_C": {
+                "active_frames": 120,
+                "false_positive_rate": 1.0,
+                "detection_rate": 0.0,
+                "missed_speech_frames": 0,
+                "output_rms": 3572.2879310506555
+            }
+        }
+    },
+    "decision": {
+        "Answer": "PARTIALLY. NS-before-VAD (Arch B) mathematically attenuates the 300 RMS noise, making VAD even more resilient to false positives. However, because NS also slightly attenuates the low-level speech energy (or the speech was already below threshold), Arch B DOES NOT rescue low-level speech below the 500 VAD threshold.",
+        "Recommended_Ordering": "B (MIC -> NS -> VAD -> AGC)"
+    },
+    "physical_validation": false
+}
