@@ -1,0 +1,88 @@
+{
+    "phase": "2B-4",
+    "component": "AEC",
+    "method": "NLMS",
+    "tests": {
+        "A_NO_ECHO": {
+            "name": "No Echo",
+            "echo_reduction_db": 0.0,
+            "near_end_nmse": 0.01416433877160165,
+            "stable": true,
+            "clipping": false,
+            "rms_out": 509.5107020272973
+        },
+        "B_PURE_ECHO": {
+            "name": "Pure Echo",
+            "echo_reduction_db": 57.98537743507504,
+            "near_end_nmse": 0.0,
+            "stable": true,
+            "clipping": false,
+            "rms_out": 1.307309401247426
+        },
+        "C_NEAR_END_ECHO": {
+            "name": "Near-End + Echo",
+            "echo_reduction_db": 0.0,
+            "near_end_nmse": 0.014101555104383157,
+            "stable": true,
+            "clipping": false,
+            "rms_out": 509.49049683990563
+        },
+        "D_NEAR_END_ECHO_NOISE": {
+            "name": "Near-End + Echo + Noise",
+            "echo_reduction_db": 0.0,
+            "near_end_nmse": 0.014119786595136144,
+            "stable": true,
+            "clipping": false,
+            "rms_out": 611.3817668509116
+        },
+        "E_DELAY_SHORT": {
+            "name": "Short Delay",
+            "echo_reduction_db": 61.48919340275663,
+            "near_end_nmse": 0.0,
+            "stable": true,
+            "clipping": false,
+            "rms_out": 1.8987268930632861
+        },
+        "E_DELAY_LONG": {
+            "name": "Long Delay",
+            "echo_reduction_db": 53.67956431891493,
+            "near_end_nmse": 0.0,
+            "stable": true,
+            "clipping": false,
+            "rms_out": 1.5548663984908955
+        },
+        "F_HIGH_GAIN": {
+            "name": "High Gain",
+            "echo_reduction_db": 57.98537743507505,
+            "near_end_nmse": 0.0,
+            "stable": true,
+            "clipping": false,
+            "rms_out": 3.921928203742276
+        },
+        "G_DOUBLE_TALK": {
+            "name": "Double-Talk",
+            "echo_reduction_db": 0.0,
+            "near_end_nmse": 0.9952190602803671,
+            "stable": true,
+            "clipping": false,
+            "rms_out": 16.124153928514094
+        },
+        "H_SILENCE": {
+            "name": "Silence",
+            "echo_reduction_db": 0.0,
+            "near_end_nmse": 0.0,
+            "stable": true,
+            "clipping": false,
+            "rms_out": 0.0
+        }
+    },
+    "acceptance_criteria": {
+        "stable": true,
+        "no_clipping": true,
+        "pure_echo_reduced": true,
+        "near_end_preserved": true,
+        "delays_converged": true
+    },
+    "overall_status": "PASS",
+    "physical_validation": false
+}

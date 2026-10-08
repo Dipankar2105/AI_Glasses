@@ -1,0 +1,140 @@
+{
+    "phase": "2B-4A",
+    "component": "AEC_DTD",
+    "method": "Geigel DTD + NLMS",
+    "tests": {
+        "TEST_1_ECHO_ONLY": {
+            "name": "Echo Only",
+            "baseline": {
+                "er_db": 67.09970133036649,
+                "nmse": 0.0,
+                "rms_out": 1.2756892610167165,
+                "clipping": false,
+                "stable": true
+            },
+            "with_dtd": {
+                "er_db": 16.627101851044365,
+                "nmse": 0.0,
+                "rms_out": 117.17010015763341,
+                "dt_detected_ratio": 0.568,
+                "clipping": false,
+                "stable": true
+            }
+        },
+        "TEST_2_NEAR_ONLY": {
+            "name": "Near-End Only",
+            "baseline": {
+                "er_db": 0.0,
+                "nmse": 0.0,
+                "rms_out": 1581.1388300841907,
+                "clipping": false,
+                "stable": true
+            },
+            "with_dtd": {
+                "er_db": 0.0,
+                "nmse": 0.0,
+                "rms_out": 1581.1388300841907,
+                "dt_detected_ratio": 1.0,
+                "clipping": false,
+                "stable": true
+            }
+        },
+        "TEST_3_DOUBLE_TALK": {
+            "name": "Double-Talk",
+            "baseline": {
+                "er_db": 0.0,
+                "nmse": 1.000334604978956,
+                "rms_out": 23.627265779435657,
+                "clipping": false,
+                "stable": true
+            },
+            "with_dtd": {
+                "er_db": 0.0,
+                "nmse": 0.16305963914743635,
+                "rms_out": 1702.8983499095414,
+                "dt_detected_ratio": 1.0,
+                "clipping": false,
+                "stable": true
+            }
+        },
+        "TEST_4_STRONG_NEAR": {
+            "name": "Strong Near-End DT",
+            "baseline": {
+                "er_db": 0.0,
+                "nmse": 1.0003379700665418,
+                "rms_out": 47.12533862701498,
+                "clipping": false,
+                "stable": true
+            },
+            "with_dtd": {
+                "er_db": 0.0,
+                "nmse": 0.04076490978685909,
+                "rms_out": 3224.818052648154,
+                "dt_detected_ratio": 1.0,
+                "clipping": false,
+                "stable": true
+            }
+        },
+        "TEST_5_WEAK_NEAR": {
+            "name": "Weak Near-End DT",
+            "baseline": {
+                "er_db": 0.0,
+                "nmse": 1.000276751984549,
+                "rms_out": 2.742732938299997,
+                "clipping": false,
+                "stable": true
+            },
+            "with_dtd": {
+                "er_db": 0.0,
+                "nmse": 1.326951694513045,
+                "rms_out": 130.6980129573442,
+                "dt_detected_ratio": 0.572,
+                "clipping": false,
+                "stable": true
+            }
+        },
+        "TEST_6_DT_BEGINS": {
+            "name": "DT Begins",
+            "baseline": {
+                "er_db": 0.0,
+                "nmse": 1.0001395847236874,
+                "rms_out": 4.586535041488929,
+                "clipping": false,
+                "stable": true
+            },
+            "with_dtd": {
+                "er_db": 0.0,
+                "nmse": 0.07349731758272278,
+                "rms_out": 1031.654957212238,
+                "dt_detected_ratio": 0.784,
+                "clipping": false,
+                "stable": true
+            }
+        },
+        "TEST_8_SILENCE": {
+            "name": "Silence",
+            "baseline": {
+                "er_db": 0.0,
+                "nmse": 0.0,
+                "rms_out": 0.0,
+                "clipping": false,
+                "stable": true
+            },
+            "with_dtd": {
+                "er_db": 0.0,
+                "nmse": 0.0,
+                "rms_out": 0.0,
+                "dt_detected_ratio": 1.0,
+                "clipping": false,
+                "stable": true
+            }
+        }
+    },
+    "acceptance_criteria": {
+        "dtd_improves_dt_nmse": true,
+        "echo_only_cancels_normally": true,
+        "dt_detected_properly": true,
+        "silence_stable": true
+    },
+    "overall_status": "CONDITIONAL"
+}
