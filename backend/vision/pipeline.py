@@ -180,6 +180,31 @@ class VisionPipeline:
                 preprocessing_metadata=new_meta
             )
 
+    def normalize_frame(self, vframe: VisionFrame) -> VisionFrame:
+        if getattr(vframe, 'data', None) is None or vframe.data.size == 0:
+            raise VisionPipelineError("VisionFrame data is empty or missing")
+        if vframe.data.dtype != np.uint8:
+            raise VisionPipelineError(f"Normalization requires uint8 data, got {vframe.data.dtype}")
+        
+        normalized_data = (vframe.data.astype(np.float32) / 255.0)
+        
+        new_meta = dict(vframe.preprocessing_metadata)
+        operations = list(new_meta.get("operations", []))
+        operations.append("normalize")
+        new_meta["operations"] = operations
+        
+        return VisionFrame(
+            data=normalized_data,
+            width=vframe.width,
+            height=vframe.height,
+            channels=vframe.channels,
+            pixel_format=vframe.pixel_format,
+            numerical_range=(0.0, 1.0),
+            timestamp=vframe.timestamp,
+            seq_num=vframe.seq_num,
+            preprocessing_metadata=new_meta
+        )
+
     def create_ocr_input(self, vframe: VisionFrame, roi=None) -> OCRInput:
         return OCRInput(vframe.data, vframe.width, vframe.height, vframe.channels, vframe.numerical_range, vframe.timestamp, vframe.seq_num, roi)
 

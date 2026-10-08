@@ -259,3 +259,54 @@ def test_convert_invalid_input():
     with pytest.raises(VisionPipelineError):
         pipeline.convert_format(vframe3, "GRAYSCALE")
 
+
+def test_normalize_grayscale():
+    pipeline = VisionPipeline()
+    img = np.array([[0, 64], [128, 255]], dtype=np.uint8)
+    from backend.vision.frame import VisionFrame
+    vframe = VisionFrame(img, 2, 2, 1, "GRAYSCALE", (0, 255), 100, 1)
+    
+    norm = pipeline.normalize_frame(vframe)
+    assert norm.data.shape == (2, 2)
+    assert norm.data.dtype == np.float32
+    assert norm.channels == 1
+    assert norm.numerical_range == (0.0, 1.0)
+    assert "normalize" in norm.preprocessing_metadata["operations"]
+    
+    expected = np.array([[0.0, 64/255.0], [128/255.0, 1.0]], dtype=np.float32)
+    assert np.allclose(norm.data, expected)
+    assert np.min(norm.data) >= 0.0
+    assert np.max(norm.data) <= 1.0
+
+def test_normalize_rgb():
+    pipeline = VisionPipeline()
+    img = np.zeros((2, 2, 3), dtype=np.uint8)
+    img[0, 0] = [0, 128, 255]
+    from backend.vision.frame import VisionFrame
+    vframe = VisionFrame(img, 2, 2, 3, "RGB", (0, 255), 100, 1)
+    
+    norm = pipeline.normalize_frame(vframe)
+    assert norm.data.shape == (2, 2, 3)
+    assert norm.data.dtype == np.float32
+    assert norm.channels == 3
+    assert norm.numerical_range == (0.0, 1.0)
+    
+    expected = np.zeros((2, 2, 3), dtype=np.float32)
+    expected[0, 0] = [0.0, 128/255.0, 1.0]
+    assert np.allclose(norm.data, expected)
+
+def test_normalize_invalid_input():
+    pipeline = VisionPipeline()
+    from backend.vision.frame import VisionFrame
+    
+    # Missing data
+    vframe1 = VisionFrame(None, 4, 4, 1, "GRAYSCALE", (0, 255), 100, 1)
+    with pytest.raises(VisionPipelineError):
+        pipeline.normalize_frame(vframe1)
+        
+    # Already float (invalid dtype)
+    img_float = np.zeros((4, 4), dtype=np.float32)
+    vframe2 = VisionFrame(img_float, 4, 4, 1, "GRAYSCALE", (0.0, 1.0), 100, 1)
+    with pytest.raises(VisionPipelineError):
+        pipeline.normalize_frame(vframe2)
+
