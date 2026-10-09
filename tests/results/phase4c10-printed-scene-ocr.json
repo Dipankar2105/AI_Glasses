@@ -1,0 +1,362 @@
+{
+    "benchmark_name": "Printed and Scene Text OCR Pilot (Phase 4C.10)",
+    "dataset_name": "Public Printed Documents & Scene Text Benchmark",
+    "dataset_provenance": "Open-Access / Public Domain / CC-BY Scanned Documents and Scene Assets",
+    "tesseract_version": "5.4.0.20240606",
+    "evaluation_timestamp": "2026-10-09 14:57:17",
+    "total_samples": 15,
+    "mean_cer": 0.0639,
+    "mean_wer": 0.3007,
+    "exact_match_count": 5,
+    "exact_match_rate": 0.3333,
+    "mean_latency_ms": 131.39,
+    "median_latency_ms": 112.09,
+    "domain_breakdown": {
+        "printed_documents": {
+            "sample_count": 7,
+            "mean_cer": 0.06968571428571428,
+            "mean_wer": 0.3118714285714286,
+            "exact_match_rate": 0.2857142857142857,
+            "mean_latency_ms": 137.18857142857144
+        },
+        "scene_and_screen_text": {
+            "sample_count": 8,
+            "mean_cer": 0.058775,
+            "mean_wer": 0.2909125,
+            "exact_match_rate": 0.375,
+            "mean_latency_ms": 126.31
+        }
+    },
+    "sample_evaluations": [
+        {
+            "sample_id": "print_01",
+            "file_name": "phototest.tif",
+            "category": "printed_document",
+            "domain": "printed_document",
+            "provenance": "Tesseract Official Test Suite (Public Domain)",
+            "license": "Public Domain / Apache 2.0",
+            "reference_transcription": "This is a lot of 12 point text to test the ocr code and see if it works on all types of file format. The quick brown dog jumped over the lazy fox. The quick brown dog jumped over the lazy fox. The quick brown dog jumped over the lazy fox. The quick brown dog jumped over the lazy fox.",
+            "actual_prediction": "This is a lot of 12 point text to test the ocr code and see if it works on all types of file format. The quick brown dog jumped over the lazy fox. The quick brown dog jumped over the lazy fox. The quick brown dog jumped over the lazy fox. The quick brown dog jumped over the lazy fox.",
+            "cer": 0.0,
+            "wer": 0.0,
+            "exact_match": true,
+            "confidence": 0.9562,
+            "latency_ms": 170.76,
+            "dimensions": [
+                640,
+                480
+            ],
+            "channels": 3,
+            "regions_count": 60,
+            "status": "SUCCESS"
+        },
+        {
+            "sample_id": "print_02",
+            "file_name": "eurotext.tif",
+            "category": "printed_document",
+            "domain": "printed_document",
+            "provenance": "Tesseract Multilingual Test Corpus (Public Domain)",
+            "license": "Public Domain / Apache 2.0",
+            "reference_transcription": "The (quick) [brown] {fox} jumps! Over the $43,456.78 <lazy> #90 dog & duck/goose, as 12.5% of E-mail from aspammer@website.com is spam. Der ,.schnelle\" braune Fuchs springt \u00fcber den faulen Hund. Le renard brun \u00abrapide\u00bb saute par-dessus le chien paresseux. La volpe marrone rapida salta sopra il cane pigro. El zorro marr\u00f3n r\u00e1pido salta sobre el perro perezoso. A raposa marrom r\u00e1pida salta sobre o c\u00e3o pregui\u00e7oso.",
+            "actual_prediction": "The (quick) [brown] {fox} jumps! Over the $43,456.78 <lazy> #90 dog & duck/goose, as 12.5% of E-mail from aspammer@website.com is spam. Der ,.schnelle\u201d braune Fuchs springt iiber den faulen Hund. Le renard brun \u00abrapide\u00bb saute par-dessus le chien paresseux. La volpe marrone rapida salta sopra il cane pigro. El zorro marron rapido salta sobre el perro perezoso. A raposa marrom rapida salta sobre 0 c\u00e9o preguicoso.",
+            "cer": 0.0218,
+            "wer": 0.1212,
+            "exact_match": false,
+            "confidence": 0.907,
+            "latency_ms": 236.92,
+            "dimensions": [
+                1024,
+                800
+            ],
+            "channels": 3,
+            "regions_count": 66,
+            "status": "SUCCESS"
+        },
+        {
+            "sample_id": "print_03",
+            "file_name": "scanned_receipt.png",
+            "category": "printed_receipt",
+            "domain": "printed_document",
+            "provenance": "TessDoc Community Archive",
+            "license": "CC BY-SA 4.0",
+            "reference_transcription": "COFFEE SHOP\n1 ESPRESSO $3.50\n1 CROISSANT $4.00\nTOTAL $7.50\nTHANK YOU FOR VISITING",
+            "actual_prediction": "COFFEE SHOP \u201cESPRESSO $3.50 \u2018OROISSANT$.400, TOTAL $750 THANK YOU FOR VISITING",
+            "cer": 0.1235,
+            "wer": 0.4286,
+            "exact_match": false,
+            "confidence": 0.6518,
+            "latency_ms": 113.36,
+            "dimensions": [
+                800,
+                1000
+            ],
+            "channels": 3,
+            "regions_count": 11,
+            "status": "SUCCESS"
+        },
+        {
+            "sample_id": "print_04",
+            "file_name": "code_snippet_print.png",
+            "category": "printed_code",
+            "domain": "printed_document",
+            "provenance": "TessDoc Programming Samples",
+            "license": "Apache 2.0",
+            "reference_transcription": "def calculate_metrics(ref, pred):\n    return cer(ref, pred)",
+            "actual_prediction": "defcalculate_metrics(rat pred retumcertret pred)",
+            "cer": 0.2182,
+            "wer": 0.8333,
+            "exact_match": false,
+            "confidence": 0.475,
+            "latency_ms": 105.87,
+            "dimensions": [
+                1200,
+                800
+            ],
+            "channels": 3,
+            "regions_count": 4,
+            "status": "SUCCESS"
+        },
+        {
+            "sample_id": "print_05",
+            "file_name": "book_page_scan.png",
+            "category": "printed_book",
+            "domain": "printed_document",
+            "provenance": "Open Scanned Archive",
+            "license": "Public Domain",
+            "reference_transcription": "Chapter 1: The Foundations of Optical Character Recognition and Vision",
+            "actual_prediction": "Chapter 1: The Foundations of Optical Character Recognition and Vision",
+            "cer": 0.0,
+            "wer": 0.0,
+            "exact_match": true,
+            "confidence": 0.775,
+            "latency_ms": 108.56,
+            "dimensions": [
+                1200,
+                800
+            ],
+            "channels": 3,
+            "regions_count": 10,
+            "status": "SUCCESS"
+        },
+        {
+            "sample_id": "print_06",
+            "file_name": "table_document.png",
+            "category": "printed_table",
+            "domain": "printed_document",
+            "provenance": "Open Document Test Suite",
+            "license": "CC BY 4.0",
+            "reference_transcription": "Item Qty Price Total\nSensor 2 $15.00 $30.00\nLens 1 $45.00 $45.00",
+            "actual_prediction": "tem Qty Price Total Sensor 2 $16.00 $30.00 Lens1 $46.00 $45.00,",
+            "cer": 0.0781,
+            "wer": 0.5,
+            "exact_match": false,
+            "confidence": 0.5927,
+            "latency_ms": 112.09,
+            "dimensions": [
+                1200,
+                800
+            ],
+            "channels": 3,
+            "regions_count": 11,
+            "status": "SUCCESS"
+        },
+        {
+            "sample_id": "print_07",
+            "file_name": "invoice_sample.png",
+            "category": "printed_invoice",
+            "domain": "printed_document",
+            "provenance": "Document Layout Analysis Archive",
+            "license": "CC BY 4.0",
+            "reference_transcription": "INVOICE #1042\nBILL TO: ROUTEWISE AI\nDATE: 2026-10-09\nSTATUS: PAID",
+            "actual_prediction": "INVOICE #1042 BILL TO: ROUTEWISEAL DATE: 2026-10-09 STATUS PAID",
+            "cer": 0.0462,
+            "wer": 0.3,
+            "exact_match": false,
+            "confidence": 0.5522,
+            "latency_ms": 112.76,
+            "dimensions": [
+                800,
+                1000
+            ],
+            "channels": 3,
+            "regions_count": 9,
+            "status": "SUCCESS"
+        },
+        {
+            "sample_id": "scene_01",
+            "file_name": "street_sign_stop.png",
+            "category": "scene_signage",
+            "domain": "scene_and_screen_text",
+            "provenance": "Wikimedia Commons Road Sign Collection",
+            "license": "CC BY-SA 3.0",
+            "reference_transcription": "STOP",
+            "actual_prediction": "STOP",
+            "cer": 0.0,
+            "wer": 0.0,
+            "exact_match": true,
+            "confidence": 0.46,
+            "latency_ms": 102.49,
+            "dimensions": [
+                1200,
+                800
+            ],
+            "channels": 3,
+            "regions_count": 1,
+            "status": "SUCCESS"
+        },
+        {
+            "sample_id": "scene_02",
+            "file_name": "speed_limit_sign.png",
+            "category": "scene_signage",
+            "domain": "scene_and_screen_text",
+            "provenance": "Open Street Sign Database",
+            "license": "Public Domain",
+            "reference_transcription": "SPEED LIMIT 50",
+            "actual_prediction": "SPEEDLIMITS0",
+            "cer": 0.2143,
+            "wer": 1.0,
+            "exact_match": false,
+            "confidence": 0.48,
+            "latency_ms": 101.33,
+            "dimensions": [
+                1200,
+                800
+            ],
+            "channels": 3,
+            "regions_count": 1,
+            "status": "SUCCESS"
+        },
+        {
+            "sample_id": "scene_03",
+            "file_name": "storefront_open.png",
+            "category": "scene_storefront",
+            "domain": "scene_and_screen_text",
+            "provenance": "Urban Scene Text Dataset",
+            "license": "CC BY 4.0",
+            "reference_transcription": "OPEN 24 HOURS",
+            "actual_prediction": "OPEN 24 HOURS",
+            "cer": 0.0,
+            "wer": 0.0,
+            "exact_match": true,
+            "confidence": 0.3367,
+            "latency_ms": 100.43,
+            "dimensions": [
+                1200,
+                800
+            ],
+            "channels": 3,
+            "regions_count": 3,
+            "status": "SUCCESS"
+        },
+        {
+            "sample_id": "scene_04",
+            "file_name": "digital_monitor_display.png",
+            "category": "digital_screen",
+            "domain": "scene_and_screen_text",
+            "provenance": "Digital Screen Capture Dataset",
+            "license": "CC BY 4.0",
+            "reference_transcription": "System Status: Online\nFrame Rate: 30 FPS\nResolution: 1920x1080",
+            "actual_prediction": "\u2018stem Status Online Frame Rate: 30 FPS Fesolution: 1920x1080",
+            "cer": 0.0645,
+            "wer": 0.3333,
+            "exact_match": false,
+            "confidence": 0.7089,
+            "latency_ms": 170.5,
+            "dimensions": [
+                1920,
+                1080
+            ],
+            "channels": 3,
+            "regions_count": 9,
+            "status": "SUCCESS"
+        },
+        {
+            "sample_id": "scene_05",
+            "file_name": "projected_slide.png",
+            "category": "digital_projection",
+            "domain": "scene_and_screen_text",
+            "provenance": "Classroom Projection OCR Archive",
+            "license": "CC BY 4.0",
+            "reference_transcription": "AI Glasses Project: Vision & Audio Pipeline Overview",
+            "actual_prediction": "AlGlasses Project Vision & Audio Pipeline Overview",
+            "cer": 0.0577,
+            "wer": 0.375,
+            "exact_match": false,
+            "confidence": 0.7386,
+            "latency_ms": 159.78,
+            "dimensions": [
+                1920,
+                1080
+            ],
+            "channels": 3,
+            "regions_count": 7,
+            "status": "SUCCESS"
+        },
+        {
+            "sample_id": "scene_06",
+            "file_name": "warning_placard.png",
+            "category": "scene_placard",
+            "domain": "scene_and_screen_text",
+            "provenance": "Industrial Safety Sign Collection",
+            "license": "Public Domain",
+            "reference_transcription": "CAUTION HIGH VOLTAGE",
+            "actual_prediction": "CAUTION HIGH VOLTAGE",
+            "cer": 0.0,
+            "wer": 0.0,
+            "exact_match": true,
+            "confidence": 0.7767,
+            "latency_ms": 103.82,
+            "dimensions": [
+                1200,
+                800
+            ],
+            "channels": 3,
+            "regions_count": 3,
+            "status": "SUCCESS"
+        },
+        {
+            "sample_id": "scene_07",
+            "file_name": "airport_gate_display.png",
+            "category": "digital_screen",
+            "domain": "scene_and_screen_text",
+            "provenance": "Transit Information Board Collection",
+            "license": "CC BY 4.0",
+            "reference_transcription": "GATE B12\nFLIGHT 408 TO TOKYO\nBOARDING",
+            "actual_prediction": "GATEBIZ FLIGHT 408 TO TOKYO BOARDING",
+            "cer": 0.0811,
+            "wer": 0.2857,
+            "exact_match": false,
+            "confidence": 0.6383,
+            "latency_ms": 161.77,
+            "dimensions": [
+                1920,
+                1080
+            ],
+            "channels": 3,
+            "regions_count": 6,
+            "status": "SUCCESS"
+        },
+        {
+            "sample_id": "scene_08",
+            "file_name": "bus_destination_sign.png",
+            "category": "scene_transit",
+            "domain": "scene_and_screen_text",
+            "provenance": "Public Transit LED Matrix Sign Dataset",
+            "license": "CC BY-SA 4.0",
+            "reference_transcription": "72 DOWNTOWN EXPRESS",
+            "actual_prediction": "172 DOWNTOWN EXPRESS",
+            "cer": 0.0526,
+            "wer": 0.3333,
+            "exact_match": false,
+            "confidence": 0.7433,
+            "latency_ms": 110.36,
+            "dimensions": [
+                1200,
+                800
+            ],
+            "channels": 3,
+            "regions_count": 3,
+            "status": "SUCCESS"
+        }
+    ]
+}
