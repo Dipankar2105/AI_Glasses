@@ -13,9 +13,10 @@ from backend.vision.frame import OCRInput
 from backend.ai.errors import AIVisionError, AIVisionErrorStatus
 
 class TesseractOCREngine(OCREngine):
-    def __init__(self, cmd: str = None):
+    def __init__(self, cmd: str = None, config: str = ""):
         super().__init__()
         import os, shutil
+        self.config = config
         t_cmd = cmd or os.environ.get('TESSERACT_CMD')
         if not t_cmd:
             t_cmd = shutil.which("tesseract")
@@ -55,7 +56,10 @@ class TesseractOCREngine(OCREngine):
 
         # Invoke Tesseract
         try:
-            ocr_data = pytesseract.image_to_data(img, output_type=pytesseract.Output.DICT)
+            if self.config:
+                ocr_data = pytesseract.image_to_data(img, config=self.config, output_type=pytesseract.Output.DICT)
+            else:
+                ocr_data = pytesseract.image_to_data(img, output_type=pytesseract.Output.DICT)
         except pytesseract.TesseractNotFoundError:
             raise AIVisionError(
                 AIVisionErrorStatus.ENGINE_FAILURE, 

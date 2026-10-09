@@ -1,0 +1,2216 @@
+{
+    "phase": "Phase 4C.7",
+    "dataset": "danielrosehill/Whiteboards",
+    "splits": {
+        "dev_sample_ids": [
+            "01",
+            "02",
+            "03",
+            "04",
+            "05",
+            "07",
+            "08",
+            "09",
+            "10",
+            "11",
+            "17"
+        ],
+        "heldout_sample_ids": [
+            "06",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "18",
+            "19",
+            "20",
+            "21"
+        ]
+    },
+    "dev_matrix_results": [
+        {
+            "config_name": "baseline",
+            "psm_config": "",
+            "sample_count": 11,
+            "mean_cer": 0.6414,
+            "mean_wer": 0.9966,
+            "exact_match_rate": 0.0,
+            "mean_latency_ms": 1474.28,
+            "median_latency_ms": 1522.03,
+            "evaluations": [
+                {
+                    "sample_id": "01",
+                    "category": "prose",
+                    "ref": "WHITEBOARD OCR \u2192 FEW SAMPLE TEST\n\nI have rediscovered whiteboarding!\nBUT!\nIt's mounted at a really awkward height\nAND\nI have barely written by hand in years\nSo\nmy writing is hard to decipher",
+                    "pred": "WHIT EBSALD \u201c2 fe SM ry\u2019 lt we LLL LLL aa Bur! 14's nous tek at a Lolly ouihtoer A Aeigh \u00e9 ALD ( hove beregy wei EC by honk In fens My whi ti\u00a2 13 foad \u20ac\u00b0 fect phere",
+                    "cer": 0.5343915343915344,
+                    "wer": 1.0588235294117647,
+                    "exact_match": false,
+                    "latency_ms": 1238.3556999993743,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "02",
+                    "category": "list",
+                    "ref": "SOME QUESTIONS\n\nCan you train a vision model / multimodal model on\na few reference images w/ manual transcriptions / ground\ntruths?\nWhat about abbreviations like w/ for with?",
+                    "pred": "lone Glu &5 7% 00S Com you Lhair we Wsrot nol / null tot o\u00e9 0 lal on a for repavre \u2018eye </ale decates ie ei pear is oe gbrvtotiens Va of fe wi oo",
+                    "cer": 0.6358381502890174,
+                    "wer": 1.0689655172413792,
+                    "exact_match": false,
+                    "latency_ms": 1051.1451000056695,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "03",
+                    "category": "list",
+                    "ref": "SOME QUESTIONS\n\n\u2022 Can you train a vision model / multimodal model on\n  a few reference images w/ manual transcriptions / ground\n  truths?\n\u2022 What about abbreviations like w/ for with?\n\u2022 Could I get AI to create a custom TTF font & if so\n  how much training data?",
+                    "pred": "So wE Ques 7 cas See 4 Com you Lbaire we wrote mold / rwtAtedleal telah oa a few ne feck (ma teb wf panel PAB\"P Bi GOs previeciens Vila of fae wilh? py) hte bot OC me Lol / get gee",
+                    "cer": 0.6732283464566929,
+                    "wer": 0.9795918367346939,
+                    "exact_match": false,
+                    "latency_ms": 1646.163700002944,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "04",
+                    "category": "list",
+                    "ref": "SOME QUESTIONS\n\n\u2022 Can you train a vision model / multimodal model on\n  a few reference images w/ manual transcriptions / ground\n  truths?\n\u2022 What about abbreviations like w/ for with?\n\u2022 Could I get AI to create a custom TTF font & if so\n  how much training data?",
+                    "pred": "fo we vues 7icas : ow Owe Lhair wa wngroe mole / nit@tedat to lal On 4 for refocrrce lmazes \u201c/ nannel Paeserip lees vA [read bho Bot sgbroietiens Wha Vf fe with? Al bcat \u00a9 stor 77\u00a2 flat a 16 Se fart let yee",
+                    "cer": 0.5826771653543307,
+                    "wer": 0.9795918367346939,
+                    "exact_match": false,
+                    "latency_ms": 1559.4070000079228,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "05",
+                    "category": "list",
+                    "ref": "Why / Applications\n\n\u25cb Whiteboard workflows:\n    \u21b3 Whiteboard \u2192 cleaned up tech diagram\n      (nano banana). needs to be able to parse a\n      \"OCR\" raw text. Objective: \u2191 accuracy &\n      \u2193 pseudotext\n    \u21b3 Whiteboard \u2192 text / todo list / SOL etc.",
+                    "pred": "wy 1A PPA CAILS 0 hj $3 ond wee hflorF - Zi teh t& cork =~ chleateh vp feel MI yahoo [hea ae pawam). ree fe be Sle 72 RAEI. A_ ek RO Feet. COR Sec TIVE _- ae toc ~~ tN psontotext Ly phtedennee > Tat (00 ise / Sor cle",
+                    "cer": 0.6,
+                    "wer": 1.2195121951219512,
+                    "exact_match": false,
+                    "latency_ms": 1455.7346000074176,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "07",
+                    "category": "table",
+                    "ref": "Few Shot Learning - 2\n\nWORLD CAPITALS\n\nCITY          | COUNTRY\n--------------+---------\nDublin        | Ireland\nAmman         | Jordan\nWashington DC | USA",
+                    "pred": "Faw Shot Llearrigy \u2014 a Yon to CAeIMES CITY Dub lw |e harc\u2014 firnor Son han",
+                    "cer": 0.6796875,
+                    "wer": 0.9523809523809523,
+                    "exact_match": false,
+                    "latency_ms": 1522.0296000043163,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "08",
+                    "category": "flowchart",
+                    "ref": "Few Shot Learning - 3\n\n        Zoom Meeting Prep SOP\n\n        Is my hair a mess?\n           /           \\\n          Y             N\n          \u2193             \u2193\n      \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510   \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n      \u2502COMB HAIR\u2502   \u2502CHILL OUT!\u2502\n      \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518   \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
+                    "pred": "RS het Leases \u2014- > Joow Meet 4 frep (of bs ny hear need \u00b0 Y hy",
+                    "cer": 0.7516778523489933,
+                    "wer": 0.9642857142857143,
+                    "exact_match": false,
+                    "latency_ms": 1395.9099000057904,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "09",
+                    "category": "list",
+                    "ref": "Few Shot Learning - 3\n\nWhat about variability in how we write letters?\n  \u21b3 Sometimes I dot i's. Sometimes I don't.\n  \u21b3 Informal / missing punctuation?\n  \u21b3 \"Code switching\" & misspellings?\n  \u21b3 Sometimes I write 'b' like balloon & sometimes\n    balloon (why? IDK!)",
+                    "pred": "Fis Shot Lenny = > ly hat Bol hi by ) a i waite leeces? . a forrisp: mesg pnw tebe Lote suite oF nist pe? 2 L fontins, / we! \u2018L' jhe haloon pene ined Gbecs (uy? 10k!)",
+                    "cer": 0.6265060240963856,
+                    "wer": 0.9534883720930233,
+                    "exact_match": false,
+                    "latency_ms": 1748.7419999961276,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "10",
+                    "category": "list",
+                    "ref": "Few Shot Learning - 3\n\nWhat about txt like speech?\n  \u2193\n\nLLMs R cool         \u2192  LLMs are cool!\n   or incorrect uppercase\nLLMs R cool         \u2192  LLMs are cool",
+                    "pred": "Faw Shot leawigy - > 9 YT ae ( 4 , a Ls we sew ns & FOr pe jaegRnet \u201cae Litts ore cool",
+                    "cer": 0.6106870229007634,
+                    "wer": 0.8928571428571429,
+                    "exact_match": false,
+                    "latency_ms": 1530.8599999989383,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "11",
+                    "category": "diagram",
+                    "ref": "PERSONALISED AI \u2192 BASIC IDEA\n\nUse-case: Human wants to create a task-specific AI agent\n& frontload context\n\nTactic: Create AI agent to \"interview\" you \u2192 transcribe\n        (could be voice \u2192 voice!) \u2192 extract content \u2192 vector DB\n\n[bot] \u2500\u2500> [ What's your fav food? ]\n           [ PIZZA! ]  :)\n  \u2193\nCREATE MEMORY\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502 Daniel's fav  \u2502\n\u2502 food = PIZZA  \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n        \u2193\n      ( VECTOR DB )",
+                    "pred": "PERS 0 A 1 GAS% rr MAUS 2D { A IDEA e- case: Hunan WANTS To ee a Tesh SspecmrBe A/ agent bS etek e TAA A, \u201c| (a) phai (coll Ge porce re) 79 os oe T=T hheat 'S . - eantEDs FAK Tl feod = 22a 4",
+                    "cer": 0.7073170731707317,
+                    "wer": 0.9558823529411765,
+                    "exact_match": false,
+                    "latency_ms": 1660.9895000001416,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "17",
+                    "category": "prose",
+                    "ref": "Other Common Whiteboard Imperfections\n\n  o  Use X or strikethrough\n\n        Here's      cool  ~~ideas~~\n               \u2717           ideas\n           are\n          some",
+                    "pred": "other (ewmon VH/ TeheAtpD npifecti> 0 be x & st ai be tm yar",
+                    "cer": 0.6534653465346535,
+                    "wer": 0.9375,
+                    "exact_match": false,
+                    "latency_ms": 1407.7745999966282,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                }
+            ],
+            "label": "1. Baseline (Full 4K, PSM 3, RGB)"
+        },
+        {
+            "config_name": "psm11",
+            "psm_config": "--psm 11",
+            "sample_count": 11,
+            "mean_cer": 0.7058,
+            "mean_wer": 0.984,
+            "exact_match_rate": 0.0,
+            "mean_latency_ms": 1487.64,
+            "median_latency_ms": 1456.95,
+            "evaluations": [
+                {
+                    "sample_id": "01",
+                    "category": "prose",
+                    "ref": "WHITEBOARD OCR \u2192 FEW SAMPLE TEST\n\nI have rediscovered whiteboarding!\nBUT!\nIt's mounted at a really awkward height\nAND\nI have barely written by hand in years\nSo\nmy writing is hard to decipher",
+                    "pred": "Bur! ally gue & heigh a in Vues ( hove borey wri ECR \u201c honk 13 hoa vo fec'P her ny whi ti\u00a2",
+                    "cer": 0.7407407407407407,
+                    "wer": 0.9705882352941176,
+                    "exact_match": false,
+                    "latency_ms": 1456.948499995633,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "02",
+                    "category": "list",
+                    "ref": "SOME QUESTIONS\n\nCan you train a vision model / multimodal model on\na few reference images w/ manual transcriptions / ground\ntruths?\nWhat about abbreviations like w/ for with?",
+                    "pred": "oO lone Clu &5 7% 00S on, Chain w& Visior model / nut tedel el\u00e9l on Con a for re ocoee Inayes / Ln tes 2 oud\u2019 03 ietrens ihe of fe wi? fhe",
+                    "cer": 0.6184971098265896,
+                    "wer": 1.0344827586206897,
+                    "exact_match": false,
+                    "latency_ms": 1375.8276000007754,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "03",
+                    "category": "list",
+                    "ref": "SOME QUESTIONS\n\n\u2022 Can you train a vision model / multimodal model on\n  a few reference images w/ manual transcriptions / ground\n  truths?\n\u2022 What about abbreviations like w/ for with?\n\u2022 Could I get AI to create a custom TTF font & if so\n  how much training data?",
+                    "pred": "Lr \u2014\u2014\u2014\u2014\u2014_\u2014_ \u2014\u2014\u2014 lowe QQu ES 7 cas va rot mole nell Relal to lel. Ona\u2014 Con you Chasm w a for nefocrce imepes hak et ene nm Enter ? gud agbrelot7ors Sf ifte eHES Wht # ae Stone TTF fot a Seo Lor.l a flow ms \u2014aaa \u2014\u2014\u2014E\u2014\u2014\u2014",
+                    "cer": 0.7204724409448819,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1571.9647999940207,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "04",
+                    "category": "list",
+                    "ref": "SOME QUESTIONS\n\n\u2022 Can you train a vision model / multimodal model on\n  a few reference images w/ manual transcriptions / ground\n  truths?\n\u2022 What about abbreviations like w/ for with?\n\u2022 Could I get AI to create a custom TTF font & if so\n  how much training data?",
+                    "pred": "\u2014 \u2014 fome (Qu ES 71 0as be yee Chain a vid a for refocrre (wept Enter 2? h/ hee oA? Sf Bo woE (ors (ita of fa with? Pk _\u2014* netore 1 fit af Se [orl / get ? Feu frow pr C7",
+                    "cer": 0.7125984251968503,
+                    "wer": 0.9591836734693877,
+                    "exact_match": false,
+                    "latency_ms": 1510.329600001569,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "05",
+                    "category": "list",
+                    "ref": "Why / Applications\n\n\u25cb Whiteboard workflows:\n    \u21b3 Whiteboard \u2192 cleaned up tech diagram\n      (nano banana). needs to be able to parse a\n      \"OCR\" raw text. Objective: \u2191 accuracy &\n      \u2193 pseudotext\n    \u21b3 Whiteboard \u2192 text / todo list / SOL etc.",
+                    "pred": "\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014 a W k \u2014\u2014\u2014 Lh babes o Wa tae L weoekflors - ZA whi ff 0 vaca). eee N- agrtoty- ~~ fot, Obsec tive: fext vy C Soca Ly Whitdeact A edt [R00 bSC / Sar CER.",
+                    "cer": 0.6954545454545454,
+                    "wer": 0.975609756097561,
+                    "exact_match": false,
+                    "latency_ms": 1421.0115000023507,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "07",
+                    "category": "table",
+                    "ref": "Few Shot Learning - 2\n\nWORLD CAPITALS\n\nCITY          | COUNTRY\n--------------+---------\nDublin        | Ireland\nAmman         | Jordan\nWashington DC | USA",
+                    "pred": "h/on to CAOVPLS CITY LOWLTKRZ |e Laorc\u2014 firnor On. lat\\f/ Was hagf te DC USA",
+                    "cer": 0.71875,
+                    "wer": 0.8571428571428571,
+                    "exact_match": false,
+                    "latency_ms": 1379.881300003035,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "08",
+                    "category": "flowchart",
+                    "ref": "Few Shot Learning - 3\n\n        Zoom Meeting Prep SOP\n\n        Is my hair a mess?\n           /           \\\n          Y             N\n          \u2193             \u2193\n      \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510   \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n      \u2502COMB HAIR\u2502   \u2502CHILL OUT!\u2502\n      \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518   \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
+                    "pred": "Ft S hot Lea = = Wien Meet 4 frep (of ? ie hair eed",
+                    "cer": 0.7785234899328859,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1276.8549999891547,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "09",
+                    "category": "list",
+                    "ref": "Few Shot Learning - 3\n\nWhat about variability in how we write letters?\n  \u21b3 Sometimes I dot i's. Sometimes I don't.\n  \u21b3 Informal / missing punctuation?\n  \u21b3 \"Code switching\" & misspellings?\n  \u21b3 Sometimes I write 'b' like balloon & sometimes\n    balloon (why? IDK!)",
+                    "pred": "\u2014\u2014\u2014\u2014\u2014E\u2014\u2014\u2014\u2014 = _\u2014tt\u2014C\u2014S oe \u2014 Faw Shot lLeawity - > ae wale lLeeee3s? het Bout par rehs lif \u2014 Me how / Lend, \u2018 fein ( dof Is | Sorat nes poe Py ee Lote Sh tehioy ot \u2018L' fhe haloon sore 77S 9 [ wai L fontines Lt (yt |",
+                    "cer": 0.7228915662650602,
+                    "wer": 1.1395348837209303,
+                    "exact_match": false,
+                    "latency_ms": 1716.4151000033598,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "10",
+                    "category": "list",
+                    "ref": "Few Shot Learning - 3\n\nWhat about txt like speech?\n  \u2193\n\nLLMs R cool         \u2192  LLMs are cool!\n   or incorrect uppercase\nLLMs R cool         \u2192  LLMs are cool",
+                    "pred": "Soe \u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014 lair like speee sal \u2014 ee oa pt jatgpRen got WA eem \u2014 Lins &",
+                    "cer": 0.7251908396946565,
+                    "wer": 0.9642857142857143,
+                    "exact_match": false,
+                    "latency_ms": 1484.6902999997837,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "11",
+                    "category": "diagram",
+                    "ref": "PERSONALISED AI \u2192 BASIC IDEA\n\nUse-case: Human wants to create a task-specific AI agent\n& frontload context\n\nTactic: Create AI agent to \"interview\" you \u2192 transcribe\n        (could be voice \u2192 voice!) \u2192 extract content \u2192 vector DB\n\n[bot] \u2500\u2500> [ What's your fav food? ]\n           [ PIZZA! ]  :)\n  \u2193\nCREATE MEMORY\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502 Daniel's fav  \u2502\n\u2502 food = PIZZA  \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n        \u2193\n      ( VECTOR DB )",
+                    "pred": "oo a PENS ce fAlls\u00e9ip Al A SASK 105A oS e- (aSt: VYurt ir wants To cee a Trak specr4e Al sport aA ent leo\u20ac etek e nw gel & fateivlea J you? TRANS CMO Fam. ack cotetE\u2014 yeeter 02 cel) \u20147 Lah opel (col Ve yorce > VO {z3 Lena! 3 \u00a9} LacaTvEe VEO? ey eancEs far == 4 T | yecroR DE",
+                    "cer": 0.6775067750677507,
+                    "wer": 0.9852941176470589,
+                    "exact_match": false,
+                    "latency_ms": 1757.0565000060014,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "17",
+                    "category": "prose",
+                    "ref": "Other Common Whiteboard Imperfections\n\n  o  Use X or strikethrough\n\n        Here's      cool  ~~ideas~~\n               \u2717           ideas\n           are\n          some",
+                    "pred": "other (ewmon VH/ TeheAtpD npifecti> pi be thee Has 00a wine) yar",
+                    "cer": 0.6534653465346535,
+                    "wer": 0.9375,
+                    "exact_match": false,
+                    "latency_ms": 1413.1038999912562,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                }
+            ],
+            "label": "2. PSM 11 Sparse Text (Full 4K)"
+        },
+        {
+            "config_name": "psm6",
+            "psm_config": "--psm 6",
+            "sample_count": 11,
+            "mean_cer": 0.6324,
+            "mean_wer": 1.0005,
+            "exact_match_rate": 0.0,
+            "mean_latency_ms": 1448.6,
+            "median_latency_ms": 1436.1,
+            "evaluations": [
+                {
+                    "sample_id": "01",
+                    "category": "prose",
+                    "ref": "WHITEBOARD OCR \u2192 FEW SAMPLE TEST\n\nI have rediscovered whiteboarding!\nBUT!\nIt's mounted at a really awkward height\nAND\nI have barely written by hand in years\nSo\nmy writing is hard to decipher",
+                    "pred": "/ hove Replrcovece L whi ER b conde gy | | Bur! 14's nous tek at a Lolly oushtoer &- Aeigh \u00a2 ArLD ( heve borey waite by hork IN (EMS | ry waitin foad 0 fect p hee",
+                    "cer": 0.5714285714285714,
+                    "wer": 1.0294117647058822,
+                    "exact_match": false,
+                    "latency_ms": 1442.340099994908,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "02",
+                    "category": "list",
+                    "ref": "SOME QUESTIONS\n\nCan you train a vision model / multimodal model on\na few reference images w/ manual transcriptions / ground\ntruths?\nWhat about abbreviations like w/ for with?",
+                    "pred": "ng omE OUEST: o@\u00a7 Conyac team 0 18 roe modal ie nutlitedel Mole cn a for repavre \u2018eye y Asta pomena Acale Prats ? tecrens ln of fe ib! ne\"",
+                    "cer": 0.6242774566473989,
+                    "wer": 1.0344827586206897,
+                    "exact_match": false,
+                    "latency_ms": 1359.549099986907,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "03",
+                    "category": "list",
+                    "ref": "SOME QUESTIONS\n\n\u2022 Can you train a vision model / multimodal model on\n  a few reference images w/ manual transcriptions / ground\n  truths?\n\u2022 What about abbreviations like w/ for with?\n\u2022 Could I get AI to create a custom TTF font & if so\n  how much training data?",
+                    "pred": "Nome Qvasrices my \"A a Chad a visror mold Vk nulnodleal to lel oat Re feck Oe ww / pAwel Saenger peters . Yak Loud Borner fila ff fa with? Carla / get Al bBcek ~ nator 71t fat a1tSe",
+                    "cer": 0.6259842519685039,
+                    "wer": 0.9387755102040817,
+                    "exact_match": false,
+                    "latency_ms": 1436.10130000161,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "04",
+                    "category": "list",
+                    "ref": "SOME QUESTIONS\n\n\u2022 Can you train a vision model / multimodal model on\n  a few reference images w/ manual transcriptions / ground\n  truths?\n\u2022 What about abbreviations like w/ for with?\n\u2022 Could I get AI to create a custom TTF font & if so\n  how much training data?",
+                    "pred": "| Bee ieee? 7\u201c GB \u00abfs ig i . | hep ete ss ) Ene tes 2 iS ely a _ ht # J rane Reser\u2019? wie ; ough agbrelorion \u201c3 / Ge On vie me i ue [ita re a frit siete rei artSe",
+                    "cer": 0.7086614173228346,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1577.795299992431,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "05",
+                    "category": "list",
+                    "ref": "Why / Applications\n\n\u25cb Whiteboard workflows:\n    \u21b3 Whiteboard \u2192 cleaned up tech diagram\n      (nano banana). needs to be able to parse a\n      \"OCR\" raw text. Objective: \u2191 accuracy &\n      \u2193 pseudotext\n    \u21b3 Whiteboard \u2192 text / todo list / SOL etc.",
+                    "pred": "wy 1A fp Pld Cat (XS | 3 br Ait oorek \u2014~ cleaterh +e fee\u2019 Al peor fraae pawam). ree fo be ale 72 PAES\u00ae A_ : ek RO Feet. COR Sec TIVE _- ae toc ~~ | v psoctotext Ly phtedennee > Tat (00 hse / Soe cee",
+                    "cer": 0.5909090909090909,
+                    "wer": 1.146341463414634,
+                    "exact_match": false,
+                    "latency_ms": 1367.1624999988126,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "07",
+                    "category": "table",
+                    "ref": "Few Shot Learning - 2\n\nWORLD CAPITALS\n\nCITY          | COUNTRY\n--------------+---------\nDublin        | Ireland\nAmman         | Jordan\nWashington DC | USA",
+                    "pred": "fiw Shet Le arity \u2014 2 LITY LOWMTEK ZF Dub lies |e Laorc\u2014 finnonr Son han\u2019 Was higgtew DC USA",
+                    "cer": 0.640625,
+                    "wer": 0.9047619047619048,
+                    "exact_match": false,
+                    "latency_ms": 1378.8447999977507,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "08",
+                    "category": "flowchart",
+                    "ref": "Few Shot Learning - 3\n\n        Zoom Meeting Prep SOP\n\n        Is my hair a mess?\n           /           \\\n          Y             N\n          \u2193             \u2193\n      \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510   \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n      \u2502COMB HAIR\u2502   \u2502CHILL OUT!\u2502\n      \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518   \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
+                    "pred": "Zoow Vutiss (rep (oP /s my hair 2 eed ? pe ee",
+                    "cer": 0.8053691275167785,
+                    "wer": 0.9285714285714286,
+                    "exact_match": false,
+                    "latency_ms": 1213.7046999996528,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "09",
+                    "category": "list",
+                    "ref": "Few Shot Learning - 3\n\nWhat about variability in how we write letters?\n  \u21b3 Sometimes I dot i's. Sometimes I don't.\n  \u21b3 Informal / missing punctuation?\n  \u21b3 \"Code switching\" & misspellings?\n  \u21b3 Sometimes I write 'b' like balloon & sometimes\n    balloon (why? IDK!)",
+                    "pred": "\u2014 yhe Aowtl par rehs lif \u2014 Me few We wale LOM OAS en [fot ig Soratines ! CE Infanainy mensigpe pie 0A ne Cy Lote seit A Ka mere \u00a9 L Jonetinee, / waite (L' Ihe Saloon + sore 77rd \u2014_ Cow? 10 e!)",
+                    "cer": 0.6265060240963856,
+                    "wer": 1.0465116279069768,
+                    "exact_match": false,
+                    "latency_ms": 1619.9999000091339,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "10",
+                    "category": "list",
+                    "ref": "Few Shot Learning - 3\n\nWhat about txt like speech?\n  \u2193\n\nLLMs R cool         \u2192  LLMs are cool!\n   or incorrect uppercase\nLLMs R cool         \u2192  LLMs are cool",
+                    "pred": "fw Shot Lea) - > ae Iy be vB0 fot like speech? y ity * geo l Pe (Ls ore cool! ot jacgnnet eee Lins & oe! De oh nal ra",
+                    "cer": 0.5114503816793893,
+                    "wer": 0.9285714285714286,
+                    "exact_match": false,
+                    "latency_ms": 1461.5411999984644,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "11",
+                    "category": "diagram",
+                    "ref": "PERSONALISED AI \u2192 BASIC IDEA\n\nUse-case: Human wants to create a task-specific AI agent\n& frontload context\n\nTactic: Create AI agent to \"interview\" you \u2192 transcribe\n        (could be voice \u2192 voice!) \u2192 extract content \u2192 vector DB\n\n[bot] \u2500\u2500> [ What's your fav food? ]\n           [ PIZZA! ]  :)\n  \u2193\nCREATE MEMORY\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502 Daniel's fav  \u2502\n\u2502 food = PIZZA  \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n        \u2193\n      ( VECTOR DB )",
+                    "pred": "Pease telisen A 1 use (eA bSe- Case: Lurk wants Po chee a Teak space Al agent a front boo\u20ac qatene TRAE Ctlate 40 agent fo \u201clathe (es\" you? TRONS CHO Fam. aa (coll Ge porce re) Ft kx fnock cote t\u2014) yreter 02 a hhet'S Your pa gecaTe NEMERY Uma! 4 @ oan Es FAK Tl | ao. = 2tA",
+                    "cer": 0.5880758807588076,
+                    "wer": 0.9852941176470589,
+                    "exact_match": false,
+                    "latency_ms": 1714.1220000048634,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "17",
+                    "category": "prose",
+                    "ref": "Other Common Whiteboard Imperfections\n\n  o  Use X or strikethrough\n\n        Here's      cool  ~~ideas~~\n               \u2717           ideas\n           are\n          some",
+                    "pred": "Other (2 of/M 0 9 VE a x ow staibe they \u2014_ dh a x oe ute oe wine) some",
+                    "cer": 0.6633663366336634,
+                    "wer": 1.0625,
+                    "exact_match": false,
+                    "latency_ms": 1363.4481000044616,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                }
+            ],
+            "label": "3. PSM 6 Uniform Block (Full 4K)"
+        },
+        {
+            "config_name": "resize_2048",
+            "psm_config": "",
+            "sample_count": 11,
+            "mean_cer": 0.6694,
+            "mean_wer": 1.0152,
+            "exact_match_rate": 0.0,
+            "mean_latency_ms": 639.05,
+            "median_latency_ms": 625.53,
+            "evaluations": [
+                {
+                    "sample_id": "01",
+                    "category": "prose",
+                    "ref": "WHITEBOARD OCR \u2192 FEW SAMPLE TEST\n\nI have rediscovered whiteboarding!\nBUT!\nIt's mounted at a really awkward height\nAND\nI have barely written by hand in years\nSo\nmy writing is hard to decipher",
+                    "pred": "W/ UIT EBSALD CCR fee Sanit. Ter WHIT EBCALD OCR fev Srnec Ter Bur! /\u00e9 is Reus ted ot & heolly gush wer & heigh \u00e9 ALD C heve berey ware by hea in yeas ay, waiting I3 hoak fe fec' phere",
+                    "cer": 0.5185185185185185,
+                    "wer": 1.1470588235294117,
+                    "exact_match": false,
+                    "latency_ms": 676.0807999962708,
+                    "dimensions": [
+                        2048,
+                        1536
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "02",
+                    "category": "list",
+                    "ref": "SOME QUESTIONS\n\nCan you train a vision model / multimodal model on\na few reference images w/ manual transcriptions / ground\ntruths?\nWhat about abbreviations like w/ for with?",
+                    "pred": "lone Qu ES 7 008 Con you Lair w nusroe mola / rill ted of Mo lel cn a fow he pocrre ee 5 aes oO \u201cWhe hot abracietyers Wha of fe Wibe?",
+                    "cer": 0.6011560693641619,
+                    "wer": 1.0689655172413792,
+                    "exact_match": false,
+                    "latency_ms": 617.2105000005104,
+                    "dimensions": [
+                        2048,
+                        1536
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "03",
+                    "category": "list",
+                    "ref": "SOME QUESTIONS\n\n\u2022 Can you train a vision model / multimodal model on\n  a few reference images w/ manual transcriptions / ground\n  truths?\n\u2022 What about abbreviations like w/ for with?\n\u2022 Could I get AI to create a custom TTF font & if so\n  how much training data?",
+                    "pred": "(ome Qu ES 77 00s nyrot molA ruelbitelat to lel ona a ae a fo he feck (wa yeb raced Pacnscuspt Tes / Jo rad i ee pgbrroCrens fila f fa with? fcuk \u00a9 estore T1\u00a2 fat af Se",
+                    "cer": 0.6692913385826772,
+                    "wer": 0.9591836734693877,
+                    "exact_match": false,
+                    "latency_ms": 641.841700009536,
+                    "dimensions": [
+                        2048,
+                        1536
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "04",
+                    "category": "list",
+                    "ref": "SOME QUESTIONS\n\n\u2022 Can you train a vision model / multimodal model on\n  a few reference images w/ manual transcriptions / ground\n  truths?\n\u2022 What about abbreviations like w/ for with?\n\u2022 Could I get AI to create a custom TTF font & if so\n  how much training data?",
+                    "pred": "Some QQu &5 7% 008 nol / rwtApolal\u00e9d tto lal oa , Con you Learn w visror a few od are tee yAlehes pgbrewtoLfens lita of fa with? store 71 flrs % r\u00e9 Se",
+                    "cer": 0.7244094488188977,
+                    "wer": 0.9387755102040817,
+                    "exact_match": false,
+                    "latency_ms": 625.5279000033624,
+                    "dimensions": [
+                        2048,
+                        1536
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "05",
+                    "category": "list",
+                    "ref": "Why / Applications\n\n\u25cb Whiteboard workflows:\n    \u21b3 Whiteboard \u2192 cleaned up tech diagram\n      (nano banana). needs to be able to parse a\n      \"OCR\" raw text. Objective: \u2191 accuracy &\n      \u2193 pseudotext\n    \u21b3 Whiteboard \u2192 text / todo list / SOL etc.",
+                    "pred": "wy i fp Pll Cat (AS SEES _\u2014 Qo php t3 ork wee hkflore - cleaned up fee\u20ac AO peo Zi be hith cork 7 rade pA wale). nee cs fo be Sle 72 PRES. A_ a ane .toey- ~~ ock ROT For. OR Sec tive : v psonpotext",
+                    "cer": 0.7045454545454546,
+                    "wer": 1.146341463414634,
+                    "exact_match": false,
+                    "latency_ms": 639.8294999962673,
+                    "dimensions": [
+                        2048,
+                        1536
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "07",
+                    "category": "table",
+                    "ref": "Few Shot Learning - 2\n\nWORLD CAPITALS\n\nCITY          | COUNTRY\n--------------+---------\nDublin        | Ireland\nAmman         | Jordan\nWashington DC | USA",
+                    "pred": "cee - * h/onto CAOVALS",
+                    "cer": 0.890625,
+                    "wer": 0.9523809523809523,
+                    "exact_match": false,
+                    "latency_ms": 574.8874999990221,
+                    "dimensions": [
+                        2048,
+                        1536
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "08",
+                    "category": "flowchart",
+                    "ref": "Few Shot Learning - 3\n\n        Zoom Meeting Prep SOP\n\n        Is my hair a mess?\n           /           \\\n          Y             N\n          \u2193             \u2193\n      \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510   \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n      \u2502COMB HAIR\u2502   \u2502CHILL OUT!\u2502\n      \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518   \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
+                    "pred": "Faw Shet Leasciay - > Zoow Meet 4 frep [oP ? by x",
+                    "cer": 0.7651006711409396,
+                    "wer": 0.9642857142857143,
+                    "exact_match": false,
+                    "latency_ms": 545.7617999927606,
+                    "dimensions": [
+                        2048,
+                        1536
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "09",
+                    "category": "list",
+                    "ref": "Few Shot Learning - 3\n\nWhat about variability in how we write letters?\n  \u21b3 Sometimes I dot i's. Sometimes I don't.\n  \u21b3 Informal / missing punctuation?\n  \u21b3 \"Code switching\" & misspellings?\n  \u21b3 Sometimes I write 'b' like balloon & sometimes\n    balloon (why? IDK!)",
+                    "pred": "Pow S het Leawigy - > hat Boul vaereh i few we wails | | les a \u201ce a j, . forties | Gxt. sail gonisg mys F\u2014 pure twee! ee Lote soit oa nist pe 7 2 \u20186! jhe haloon % sore TICES Ly font ine, [ wei Glbeor Cur? 10!)",
+                    "cer": 0.642570281124498,
+                    "wer": 1.1627906976744187,
+                    "exact_match": false,
+                    "latency_ms": 751.8840999982785,
+                    "dimensions": [
+                        2048,
+                        1536
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "10",
+                    "category": "list",
+                    "ref": "Few Shot Learning - 3\n\nWhat about txt like speech?\n  \u2193\n\nLLMs R cool         \u2192  LLMs are cool!\n   or incorrect uppercase\nLLMs R cool         \u2192  LLMs are cool",
+                    "pred": "> fw Shot bear) \u2014 phot ret 1OT like speech? / ( 2 ee LLMs ore cool 100 ae",
+                    "cer": 0.6030534351145038,
+                    "wer": 0.8571428571428571,
+                    "exact_match": false,
+                    "latency_ms": 598.6376999935601,
+                    "dimensions": [
+                        2048,
+                        1536
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "11",
+                    "category": "diagram",
+                    "ref": "PERSONALISED AI \u2192 BASIC IDEA\n\nUse-case: Human wants to create a task-specific AI agent\n& frontload context\n\nTactic: Create AI agent to \"interview\" you \u2192 transcribe\n        (could be voice \u2192 voice!) \u2192 extract content \u2192 vector DB\n\n[bot] \u2500\u2500> [ What's your fav food? ]\n           [ PIZZA! ]  :)\n  \u2193\nCREATE MEMORY\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502 Daniel's fav  \u2502\n\u2502 food = PIZZA  \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n        \u2193\n      ( VECTOR DB )",
+                    "pred": "Pease Melisip A A ase (P54 pse-case: Hunan panty Po chee a Task space Al sport aA front look content Lhe ate A m get * o \u201cYataholeas \"fou? TRONS CMe Fam Tae Wa Lena! 3 \u00a9 4 gacaTeEe TENE EL | canes FAK | pa",
+                    "cer": 0.6693766937669376,
+                    "wer": 0.9705882352941176,
+                    "exact_match": false,
+                    "latency_ms": 750.3857999981847,
+                    "dimensions": [
+                        2048,
+                        1536
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "17",
+                    "category": "prose",
+                    "ref": "Other Common Whiteboard Imperfections\n\n  o  Use X or strikethrough\n\n        Here's      cool  ~~ideas~~\n               \u2717           ideas\n           are\n          some",
+                    "pred": "other (owner VH/ ZeheAtD Inpiurfecti5 0 vex & sta be thm LheoM x coo bE Mens Sort",
+                    "cer": 0.5742574257425742,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 607.4936999939382,
+                    "dimensions": [
+                        2048,
+                        1536
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                }
+            ],
+            "label": "4. Bounded Resize (2048 max dim, PSM 3)"
+        },
+        {
+            "config_name": "resize_2048_psm11",
+            "psm_config": "--psm 11",
+            "sample_count": 11,
+            "mean_cer": 0.6976,
+            "mean_wer": 1.0271,
+            "exact_match_rate": 0.0,
+            "mean_latency_ms": 645.98,
+            "median_latency_ms": 650.32,
+            "evaluations": [
+                {
+                    "sample_id": "01",
+                    "category": "prose",
+                    "ref": "WHITEBOARD OCR \u2192 FEW SAMPLE TEST\n\nI have rediscovered whiteboarding!\nBUT!\nIt's mounted at a really awkward height\nAND\nI have barely written by hand in years\nSo\nmy writing is hard to decipher",
+                    "pred": "<== WHIT EBSALD 0 fe Sanpite Te / herve Replacovese \u00a3 whi ER b cond gy | Bur! 4's neousrted at \u00ab Moly gush vert Aegh \u20ac ( heve borey were \u201cby honk WIA 13 head pecccp hee ay, waiting",
+                    "cer": 0.5925925925925926,
+                    "wer": 1.1764705882352942,
+                    "exact_match": false,
+                    "latency_ms": 645.6573999894317,
+                    "dimensions": [
+                        2048,
+                        1536
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "02",
+                    "category": "list",
+                    "ref": "SOME QUESTIONS\n\nCan you train a vision model / multimodal model on\na few reference images w/ manual transcriptions / ground\ntruths?\nWhat about abbreviations like w/ for with?",
+                    "pred": "iene Qu ES 7% 00S Lair w wproe nol / nrutitela\u00e9 tte lal on boo yo a flow he pore i pgbrnsto\u20acrers [ita of fla with? j/ hee Bot",
+                    "cer": 0.6994219653179191,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 577.0625000004657,
+                    "dimensions": [
+                        2048,
+                        1536
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "03",
+                    "category": "list",
+                    "ref": "SOME QUESTIONS\n\n\u2022 Can you train a vision model / multimodal model on\n  a few reference images w/ manual transcriptions / ground\n  truths?\n\u2022 What about abbreviations like w/ for with?\n\u2022 Could I get AI to create a custom TTF font & if so\n  how much training data?",
+                    "pred": "SS a \u2014 \u2014 (ome QQ &5 7% as uyrote nol / nwtltedeat oll ca Con you Chaim a for nepocore imepes ood et akan aT \u2014 tar % & eb! h/hAt fe case, \u00a9 itm TTF pleat a rE Se dea Pine fow we Faun",
+                    "cer": 0.7125984251968503,
+                    "wer": 0.9795918367346939,
+                    "exact_match": false,
+                    "latency_ms": 663.6034999974072,
+                    "dimensions": [
+                        2048,
+                        1536
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "04",
+                    "category": "list",
+                    "ref": "SOME QUESTIONS\n\n\u2022 Can you train a vision model / multimodal model on\n  a few reference images w/ manual transcriptions / ground\n  truths?\n\u2022 What about abbreviations like w/ for with?\n\u2022 Could I get AI to create a custom TTF font & if so\n  how much training data?",
+                    "pred": "lone Qu ES 7% as mold / nitlitedal Mel\u00e9l ona Lo ye 7 we nsroe a few od are tee yet Ent sgorviotiens (ha of fa with? h/ ht hot Al bce stone 71f flat a 16 Se Lol gh Fun flow mu",
+                    "cer": 0.6417322834645669,
+                    "wer": 0.9591836734693877,
+                    "exact_match": false,
+                    "latency_ms": 673.204100006842,
+                    "dimensions": [
+                        2048,
+                        1536
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "05",
+                    "category": "list",
+                    "ref": "Why / Applications\n\n\u25cb Whiteboard workflows:\n    \u21b3 Whiteboard \u2192 cleaned up tech diagram\n      (nano banana). needs to be able to parse a\n      \"OCR\" raw text. Objective: \u2191 accuracy &\n      \u2193 pseudotext\n    \u21b3 Whiteboard \u2192 text / todo list / SOL etc.",
+                    "pred": "ee Why / Ap ALI Cal 9 $3 0 ek wee kflore - cleatrhl ve fee\u2019 ot qe Zi be hith cork 7 needs fo be eSle 72 PRESZ CVA ae ba val). q aertoezy- ~ och Ro tert. OR Sec Hive : fext A; Css 5 fad [R00 bse (Ser CLE, Ly Whtdone",
+                    "cer": 0.7181818181818181,
+                    "wer": 1.2195121951219512,
+                    "exact_match": false,
+                    "latency_ms": 650.3167000046233,
+                    "dimensions": [
+                        2048,
+                        1536
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "07",
+                    "category": "table",
+                    "ref": "Few Shot Learning - 2\n\nWORLD CAPITALS\n\nCITY          | COUNTRY\n--------------+---------\nDublin        | Ireland\nAmman         | Jordan\nWashington DC | USA",
+                    "pred": "bfohto CAOVALS CITY LOWLTRZF Dub lw | Lor Firtror- On. lad USA Was hong towr DC",
+                    "cer": 0.71875,
+                    "wer": 0.9047619047619048,
+                    "exact_match": false,
+                    "latency_ms": 600.485299990396,
+                    "dimensions": [
+                        2048,
+                        1536
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "08",
+                    "category": "flowchart",
+                    "ref": "Few Shot Learning - 3\n\n        Zoom Meeting Prep SOP\n\n        Is my hair a mess?\n           /           \\\n          Y             N\n          \u2193             \u2193\n      \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510   \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n      \u2502COMB HAIR\u2502   \u2502CHILL OUT!\u2502\n      \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518   \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
+                    "pred": ">",
+                    "cer": 1.0,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 500.5934999935562,
+                    "dimensions": [
+                        2048,
+                        1536
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "09",
+                    "category": "list",
+                    "ref": "Few Shot Learning - 3\n\nWhat about variability in how we write letters?\n  \u21b3 Sometimes I dot i's. Sometimes I don't.\n  \u21b3 Informal / missing punctuation?\n  \u21b3 \"Code switching\" & misspellings?\n  \u21b3 Sometimes I write 'b' like balloon & sometimes\n    balloon (why? IDK!)",
+                    "pred": "Jaw Shot Leawiy - > we wale leoces? het Bowl parses ly\u2014 wv few nes | God, b hoo&\u00aef ts . Soret! fet ined Py og pea? f, ae pur ings 2 Lote J tebe\u201d i \u2018L' ihe haloon % sere 778ES [ wei Ly font ine, Glbeor",
+                    "cer": 0.6947791164658634,
+                    "wer": 1.0465116279069768,
+                    "exact_match": false,
+                    "latency_ms": 726.1552999989362,
+                    "dimensions": [
+                        2048,
+                        1536
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "10",
+                    "category": "list",
+                    "ref": "Few Shot Learning - 3\n\nWhat about txt like speech?\n  \u2193\n\nLLMs R cool         \u2192  LLMs are cool!\n   or incorrect uppercase\nLLMs R cool         \u2192  LLMs are cool",
+                    "pred": "> h hat Bert fot like speech? L / cot OES Is & goo f Pp { ek jatgpRn pet were\u2019 ( _ eg A On",
+                    "cer": 0.6259541984732825,
+                    "wer": 0.9642857142857143,
+                    "exact_match": false,
+                    "latency_ms": 606.9342999981018,
+                    "dimensions": [
+                        2048,
+                        1536
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "11",
+                    "category": "diagram",
+                    "ref": "PERSONALISED AI \u2192 BASIC IDEA\n\nUse-case: Human wants to create a task-specific AI agent\n& frontload context\n\nTactic: Create AI agent to \"interview\" you \u2192 transcribe\n        (could be voice \u2192 voice!) \u2192 extract content \u2192 vector DB\n\n[bot] \u2500\u2500> [ What's your fav food? ]\n           [ PIZZA! ]  :)\n  \u2193\nCREATE MEMORY\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502 Daniel's fav  \u2502\n\u2502 food = PIZZA  \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n        \u2193\n      ( VECTOR DB )",
+                    "pred": "PENS e MAUS 2D Al 7A CASE (DEA. bSe-Cese: VYuraw wants Fo check a Tee spectre A/ ager a frent bood ttexce vies\u2019 ' Yow \u2014 TRANS CR Rom ae gent tf \u201cyate \u2018cos yore) 7 xh ack cottrt\u2014> yeeter 02 Ae (cole Ge yor {E3 Lena! 3 \u00a9 LAcaTEe WEOF = canes FAK Rid! 4 ti\"",
+                    "cer": 0.6558265582655827,
+                    "wer": 0.9852941176470589,
+                    "exact_match": false,
+                    "latency_ms": 801.6528000007384,
+                    "dimensions": [
+                        2048,
+                        1536
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "17",
+                    "category": "prose",
+                    "ref": "Other Common Whiteboard Imperfections\n\n  o  Use X or strikethrough\n\n        Here's      cool  ~~ideas~~\n               \u2717           ideas\n           are\n          some",
+                    "pred": "other (owner VH/ ZeheAtD Inpiurfecti5 \u00bb UE kK & sta! be 4 Ane &9\\\u2014 Hens 00g fens Sort",
+                    "cer": 0.6138613861386139,
+                    "wer": 1.0625,
+                    "exact_match": false,
+                    "latency_ms": 660.1407999987714,
+                    "dimensions": [
+                        2048,
+                        1536
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                }
+            ],
+            "label": "5. Bounded Resize + PSM 11"
+        },
+        {
+            "config_name": "gray_contrast_resize_psm11",
+            "psm_config": "--psm 11",
+            "sample_count": 11,
+            "mean_cer": 0.6828,
+            "mean_wer": 1.0745,
+            "exact_match_rate": 0.0,
+            "mean_latency_ms": 340.01,
+            "median_latency_ms": 343.85,
+            "evaluations": [
+                {
+                    "sample_id": "01",
+                    "category": "prose",
+                    "ref": "WHITEBOARD OCR \u2192 FEW SAMPLE TEST\n\nI have rediscovered whiteboarding!\nBUT!\nIt's mounted at a really awkward height\nAND\nI have barely written by hand in years\nSo\nmy writing is hard to decipher",
+                    "pred": "=== WUT EBALD CCR feu Sample Tere / hove Redeacovee L whi ER b con dt gy | bor / [\u00e9s fous tet at a htolly quik toen & Aeigh \u00e9 ( hove borey wate Vy honk in fens Ee my waiting",
+                    "cer": 0.5291005291005291,
+                    "wer": 1.2058823529411764,
+                    "exact_match": false,
+                    "latency_ms": 345.129099994665,
+                    "dimensions": [
+                        2048,
+                        1536
+                    ],
+                    "channels": 1,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "02",
+                    "category": "list",
+                    "ref": "SOME QUESTIONS\n\nCan you train a vision model / multimodal model on\na few reference images w/ manual transcriptions / ground\ntruths?\nWhat about abbreviations like w/ for with?",
+                    "pred": "(CBB Glu &5 7% 00s roe mold { nuttitedeal Melal oa Lair w vw Con you a flow Re foc sae see wf rarnel facrscrrp hes / Feo ved Jnetes 2? & f fe wih ? het 8 * pgbrnstoC lors os",
+                    "cer": 0.7398843930635838,
+                    "wer": 1.3793103448275863,
+                    "exact_match": false,
+                    "latency_ms": 343.8482999918051,
+                    "dimensions": [
+                        2048,
+                        1536
+                    ],
+                    "channels": 1,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "03",
+                    "category": "list",
+                    "ref": "SOME QUESTIONS\n\n\u2022 Can you train a vision model / multimodal model on\n  a few reference images w/ manual transcriptions / ground\n  truths?\n\u2022 What about abbreviations like w/ for with?\n\u2022 Could I get AI to create a custom TTF font & if so\n  how much training data?",
+                    "pred": "Sone Ov a5 7% 20s pn: ee Lair a wprocr mol / riwlftedat to lel. on a for he fect Ina yeb eal Paensceipt 7s / feo ae- ? Jnet\u00e9 agorentoT/ers [rhea Sf fe wih? Wht out Al te cake \u00a9 estore TIF flat a 1f Se Lol Veget Faun os Me",
+                    "cer": 0.5984251968503937,
+                    "wer": 0.9795918367346939,
+                    "exact_match": false,
+                    "latency_ms": 378.4775000094669,
+                    "dimensions": [
+                        2048,
+                        1536
+                    ],
+                    "channels": 1,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "04",
+                    "category": "list",
+                    "ref": "SOME QUESTIONS\n\n\u2022 Can you train a vision model / multimodal model on\n  a few reference images w/ manual transcriptions / ground\n  truths?\n\u2022 What about abbreviations like w/ for with?\n\u2022 Could I get AI to create a custom TTF font & if so\n  how much training data?",
+                    "pred": "fone Olu a5 71 008 iypror molt rulAnedlat to Lal on Cone you Chain % a fow Mood eee ~neths ft egbrasieiers lila of fe wi \u20ac42 h/ hk hot ar fo cue \u00a9 ASsfore 77 \u00a2 flat a 16 Se Lol ph frows mere he teu",
+                    "cer": 0.6850393700787402,
+                    "wer": 0.9795918367346939,
+                    "exact_match": false,
+                    "latency_ms": 356.9993999990402,
+                    "dimensions": [
+                        2048,
+                        1536
+                    ],
+                    "channels": 1,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "05",
+                    "category": "list",
+                    "ref": "Why / Applications\n\n\u25cb Whiteboard workflows:\n    \u21b3 Whiteboard \u2192 cleaned up tech diagram\n      (nano banana). needs to be able to parse a\n      \"OCR\" raw text. Objective: \u2191 accuracy &\n      \u2193 pseudotext\n    \u21b3 Whiteboard \u2192 text / todo list / SOL etc.",
+                    "pred": "Why / fe Old Cal (\u00b0D $3 0 et nee kflore - cleatehl ve feet ot qe Zi be huth cork 7 needs fo be eSle 72 PRESS CVA ae bawAwe). N aertoezy- ~ ck Ro tect. OR Sec Hive + fext Ab Com 5 fad [R00 bse (Ser CLE, Ly Whtdone",
+                    "cer": 0.7090909090909091,
+                    "wer": 1.170731707317073,
+                    "exact_match": false,
+                    "latency_ms": 339.4871000054991,
+                    "dimensions": [
+                        2048,
+                        1536
+                    ],
+                    "channels": 1,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "07",
+                    "category": "table",
+                    "ref": "Few Shot Learning - 2\n\nWORLD CAPITALS\n\nCITY          | COUNTRY\n--------------+---------\nDublin        | Ireland\nAmman         | Jordan\nWashington DC | USA",
+                    "pred": "ee Seceety - 2 bfohto CAOVALS CITY LOWLTRZI Duh lie | Lore Firtror- (2) PIV USA W as hoot tor DC",
+                    "cer": 0.6953125,
+                    "wer": 0.9047619047619048,
+                    "exact_match": false,
+                    "latency_ms": 324.8426000063773,
+                    "dimensions": [
+                        2048,
+                        1536
+                    ],
+                    "channels": 1,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "08",
+                    "category": "flowchart",
+                    "ref": "Few Shot Learning - 3\n\n        Zoom Meeting Prep SOP\n\n        Is my hair a mess?\n           /           \\\n          Y             N\n          \u2193             \u2193\n      \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510   \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n      \u2502COMB HAIR\u2502   \u2502CHILL OUT!\u2502\n      \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518   \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
+                    "pred": "Faw Shot Leauiny\u2014- > 2",
+                    "cer": 0.8926174496644296,
+                    "wer": 0.9642857142857143,
+                    "exact_match": false,
+                    "latency_ms": 260.70030000119004,
+                    "dimensions": [
+                        2048,
+                        1536
+                    ],
+                    "channels": 1,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "09",
+                    "category": "list",
+                    "ref": "Few Shot Learning - 3\n\nWhat about variability in how we write letters?\n  \u21b3 Sometimes I dot i's. Sometimes I don't.\n  \u21b3 Informal / missing punctuation?\n  \u21b3 \"Code switching\" & misspellings?\n  \u21b3 Sometimes I write 'b' like balloon & sometimes\n    balloon (why? IDK!)",
+                    "pred": "we wale loces? het owl yar sehs by\u2014 Vv few mes | God, [ hoof ts. Soret! fet ined ee pen? f, ae purr says 2 Lote J tebe\u201d f \u2018L' fie haloon & sere 778ES [ wei Ly font ine, Glbeor",
+                    "cer": 0.714859437751004,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 365.3353999980027,
+                    "dimensions": [
+                        2048,
+                        1536
+                    ],
+                    "channels": 1,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "10",
+                    "category": "list",
+                    "ref": "Few Shot Learning - 3\n\nWhat about txt like speech?\n  \u2193\n\nLLMs R cool         \u2192  LLMs are cool!\n   or incorrect uppercase\nLLMs R cool         \u2192  LLMs are cool",
+                    "pred": "aaa h hat, Bet fot like speech? L / ety EOES Toxo Is & geo f Pp { a jatgpRen act npr \u201cee ( _ ee \u00a9 On",
+                    "cer": 0.648854961832061,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 313.6140999995405,
+                    "dimensions": [
+                        2048,
+                        1536
+                    ],
+                    "channels": 1,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "11",
+                    "category": "diagram",
+                    "ref": "PERSONALISED AI \u2192 BASIC IDEA\n\nUse-case: Human wants to create a task-specific AI agent\n& frontload context\n\nTactic: Create AI agent to \"interview\" you \u2192 transcribe\n        (could be voice \u2192 voice!) \u2192 extract content \u2192 vector DB\n\n[bot] \u2500\u2500> [ What's your fav food? ]\n           [ PIZZA! ]  :)\n  \u2193\nCREATE MEMORY\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502 Daniel's fav  \u2502\n\u2502 food = PIZZA  \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n        \u2193\n      ( VECTOR DB )",
+                    "pred": "PENS e MAUS 2D Al \u2014 Base (DEA. bSe-CeSe: Hurd waarys Teo CHE Te eae As agent Aatexe v/a\u201d jou? THENS C10 Fm. . ces yore) 7 \u00a3xoR ack cotr\u20ac\u2014> yeeter 02 fe (cole Ge yor {3 Lena 3 & cecare MENC EY canes FAK fii) 4 ia yecroR BS",
+                    "cer": 0.6639566395663956,
+                    "wer": 0.9852941176470589,
+                    "exact_match": false,
+                    "latency_ms": 410.71979999833275,
+                    "dimensions": [
+                        2048,
+                        1536
+                    ],
+                    "channels": 1,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "17",
+                    "category": "prose",
+                    "ref": "Other Common Whiteboard Imperfections\n\n  o  Use X or strikethrough\n\n        Here's      cool  ~~ideas~~\n               \u2717           ideas\n           are\n          some",
+                    "pred": "other (even Wul7ebeAeD fp ta fectt 5 \u00bb Ue Kk & sti b- 4 Ane e9\\\u2014 Has % 00g (fens Sort",
+                    "cer": 0.6336633663366337,
+                    "wer": 1.25,
+                    "exact_match": false,
+                    "latency_ms": 300.97050000040326,
+                    "dimensions": [
+                        2048,
+                        1536
+                    ],
+                    "channels": 1,
+                    "status": "SUCCESS"
+                }
+            ],
+            "label": "6. Grayscale + Contrast Norm + Resize + PSM 11"
+        }
+    ],
+    "selected_candidate": {
+        "config_name": "psm6",
+        "psm_config": "--psm 6",
+        "label": "3. PSM 6 Uniform Block (Full 4K)"
+    },
+    "heldout_results": {
+        "baseline": {
+            "config_name": "baseline",
+            "psm_config": "",
+            "sample_count": 10,
+            "mean_cer": 0.755,
+            "mean_wer": 1.0241,
+            "exact_match_rate": 0.0,
+            "mean_latency_ms": 1486.8,
+            "median_latency_ms": 1565.0,
+            "evaluations": [
+                {
+                    "sample_id": "06",
+                    "category": "diagram",
+                    "ref": "Few Shot Learning - 1\n\n        Apples\n       \u2197\n      /\n( FRUITS ) \u2192 Oranges\n      \\\u2192 Bananas\n       \u2198\n        Lemons\nKiwis \u2190\n     \u2199\nMelons",
+                    "pred": "",
+                    "cer": 1.0,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1150.902399996994,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "12",
+                    "category": "diagram",
+                    "ref": "(could be voice \u2192 voice!) \u2192 Extract content \u2192 V[ector DB]\n\n[bot] \u2500\u2500> [ What's your fav food? ]\n           [ PIZZA! ]  :)\n  \u2193\nCREATE MEMORY\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502 Daniel's fav  \u2502\n\u2502 food = PIZZA  \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n        \u2193\n     ( VECTOR DB )",
+                    "pred": "[cont Ge yore voices) I &afnect lm Lena! oN & LZACATE MENF RY eancEs FAK 4",
+                    "cer": 0.7751196172248804,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1568.7400000024354,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "13",
+                    "category": "diagram",
+                    "ref": "PERSONALISED AI \u2014 WORKFLOW 2\n\n(user) Hey bot! Let's build out my food & drink\n       context store!\n\n(bot)  Sure! Let me see what gaps we have...\n       \u2193\n       READ \u2192 (vector DB) \u2192 (bot) Hmm. nothing about\n                                   beer preferences!\n\n(bot) What beer do you prefer?\n(user) Super bitter IPAs          CREATE \u2192\n                        \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n                  (bot) \u2502 User's fav beer =   \u2502\n                        \u2502 bitter IPA          \u2502\n                        \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
+                    "pred": "\u2014\u2014S>\u2014\u2014 EO \u2014\u2014\u2014\u2014 PENS ce MAUS ED Al \u2014VYoORhe lowe ~~ Mey bet ! Lets bulk OF TY food 3. dniak. oe context stoec! Fly Sone! Let me See whet gan we \u2014\u2014 is ao, ee i: pothigs Sok > = ( Aowe.. Et Wine be HO\" ae = bitten IPAs | fa cea Te Spee oi :",
+                    "cer": 0.6918767507002801,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1847.2123999963515,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "14",
+                    "category": "diagram",
+                    "ref": "PERSONALISED AI \u2014 LATENT VALUE AREAS\n\n            (user)              (bot)\n            USER                LLM'S\n            PROMPTS             OUTPUTS\n              \u2502                   \u2502\n              \u2193                   \u2193\n         PROMPT           \u2192   CONVO (1)\n         HISTORY  (2)         STORE\n              \u2193                 \u2502   \u2198\n              \u2193                 \u2193    WIKI\n         PROMPT              DOWNSTREAM\n         LIB \u2192 USER          OUTPUTS\n               CONTEXT        \u2199   \u2193   \u2198\n                          PODCASTS  CPD  DOCS",
+                    "pred": "eC OEE EAT ET V/A a 2 D Z v7 T \u2014\u2014\u2014 e_ (+R ELS ie ee. De wf Sih (7 Dipl i (K fod CAST: 5 CFP Docs P goteT LB",
+                    "cer": 0.7707317073170732,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1610.6565999943996,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "15",
+                    "category": "diagram",
+                    "ref": "(bot) LLM'S OUTPUTS  \u2192  CONVO (1)\n                         STORE\n                          \u2502   \u2198\n                          \u2193    WIKI\n                      DOWNSTREAM\n                      OUTPUTS\n                       \u2199   \u2193   \u2198\n                  PODCASTS CPD DOCS",
+                    "pred": "3 or LteWws owl O 7 wae ; \u2018 | bits 2 ne A . pensTS \u00a9 : pb I> cs",
+                    "cer": 0.6813186813186813,
+                    "wer": 1.105263157894737,
+                    "exact_match": false,
+                    "latency_ms": 1599.594999992405,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "16",
+                    "category": "diagram",
+                    "ref": "(user)                    (bot)\nUSER                      LLM'S\nPROMPTS                   OUT[PUTS]\n   \u2502\n   \u2193\nPROMPT           \u2500\u2500\u2500\u2500\u2510\nHISTORY  (2)         \u2502\n   \u2502                 \u2193\n   \u2193              USER\nPROMPT LIB        CONTEXT",
+                    "pred": "Peoney LIQ SER.",
+                    "cer": 0.9019607843137255,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1184.3274000129895,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "18",
+                    "category": "table",
+                    "ref": "Task: Whiteboard \u2192 Calendar\n\nMy Week Plan\n\n        SUN    MON    TUES    WEDS    THURS    FRI    SAT\n        \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n                      ACCOUNTANT\n\n0900\n\n1200                                    DAY\n                                        OFF\n1500  DOCTOR\n\n1800\n\n2100\n\n0000",
+                    "pred": "Tish: Will Te fost \u2014 ya Lavewoard py wee PLAY Suar (wr Tuts Weos Hs Lee Cy aa ae go? pe AE (7.09 gee xo, oer xo? a! oJ 79",
+                    "cer": 0.7303370786516854,
+                    "wer": 1.2,
+                    "exact_match": false,
+                    "latency_ms": 1413.4545999986585,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "19",
+                    "category": "mixed",
+                    "ref": "Task: Whiteboard \u2192 Mixed Elements.\n\nWhiteboard \u2192 Handwriting          \u2502   Questions\n    \u21b3 Gather samples              \u2502   \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n    \u21b3 Determine priorities        \u2502   Existing datasets?\n    \u21b3 Send to David               \u2502   Separate fine tunes for\n                                  \u2502   handwriting creation vs.\n                                  \u2502   reading?",
+                    "pred": "VE BY : WHIT t 400th \u2014 m/xEed yA feSccad a Yaarve/ mne- peteem' La fre \u00a9? pe (Ques UNS ee Gastey garesesks sf Jeanaate fe Ther ci fodkui Y Mca 010F ?",
+                    "cer": 0.7321428571428571,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1356.9268999999622,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "20",
+                    "category": "diagram",
+                    "ref": "Geopol Predictions: Current Model          A_x = Agent X\n                                           Sequential\n                                           SA_x = Subagent\nA_1 \u2192 Job\n      Actuation &\n      Mgmt                RSS   EXA AI\n                            \u2198   \u2199\n                             Google\n                             News\n        \u2198\n         A_2   SITREP Gen\n               Grounding                       \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n                                               \u2502 LLM  \u2502\n         \u2198                             \u2192 SA_1 \u2190\u2502COUNCIL\u2502\n          A_3   Prediction                     \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n                MGR               \u2192 SA_2\n          Pass SITREP, define\n          task, structured output\n\n          A_4  Analysis, Charts, Comparison w/\n               Run X-1\n\n          A_5  Generate Report (Typst)\n    \u2193\n  CONCAT   \u2192   PDF",
+                    "pred": "(c0opoe Pre ot CT1aas * Cur et No de-( - ' AR =< A \u00a5 = lynne , Seq ema SA a Suee7ee WZ ies QeIs 15, CHRETS, COMPAR WON ff Crves t) Awh cys concatT\u2014 PDT",
+                    "cer": 0.7458100558659218,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1574.9612000072375,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "21",
+                    "category": "diagram",
+                    "ref": "Whiteboard \u2192 Dev Spec \u2192 Agent Dev\n\nWhiteboard(s)  \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2192  Gemini API\n\nGemini \u2500\u2192 Cleaned Tech Diagrams (image 2 image)\n       \u2198 Narrative of Agent Model (image 2 txt)\n\nAgent 2: Convert these things \u2192 Dev Spec\n    \u21b3 Plan def w/ human\n    \u21b3 Generate tasks, define subagents,\n      checkpoints etc",
+                    "pred": "Wy HA TTR eeDdCS) \u2014~) Genin AP\\ Gerinvl \u2014 Llen wed Tec DiAGeANS (nave 2 ree) : A : ra VAAnAaTive of well (innec _ -) A jeal ConvetT Test. Tunes 2 Oe Se i PLAW DEF w/ HUA GencantE TASKS, Defive. SeraselS J Checke-pstats ET",
+                    "cer": 0.5202952029520295,
+                    "wer": 0.9361702127659575,
+                    "exact_match": false,
+                    "latency_ms": 1561.2609999952838,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                }
+            ]
+        },
+        "candidate": {
+            "config_name": "psm6",
+            "psm_config": "--psm 6",
+            "sample_count": 10,
+            "mean_cer": 0.7104,
+            "mean_wer": 1.0222,
+            "exact_match_rate": 0.0,
+            "mean_latency_ms": 1475.87,
+            "median_latency_ms": 1496.67,
+            "evaluations": [
+                {
+                    "sample_id": "06",
+                    "category": "diagram",
+                    "ref": "Few Shot Learning - 1\n\n        Apples\n       \u2197\n      /\n( FRUITS ) \u2192 Oranges\n      \\\u2192 Bananas\n       \u2198\n        Lemons\nKiwis \u2190\n     \u2199\nMelons",
+                    "pred": "Shot Leaniay \u2014/ =e p Aepp tee Kiwi? Se ett on LRVAWAS ices ler-eas",
+                    "cer": 0.6777777777777778,
+                    "wer": 0.9523809523809523,
+                    "exact_match": false,
+                    "latency_ms": 1215.6978999992134,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "12",
+                    "category": "diagram",
+                    "ref": "(could be voice \u2192 voice!) \u2192 Extract content \u2192 V[ector DB]\n\n[bot] \u2500\u2500> [ What's your fav food? ]\n           [ PIZZA! ]  :)\n  \u2193\nCREATE MEMORY\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502 Daniel's fav  \u2502\n\u2502 food = PIZZA  \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n        \u2193\n     ( VECTOR DB )",
+                    "pred": "= het 'S ta Ss CACATE neneey cancers FAK 7 feol= 22a up",
+                    "cer": 0.8373205741626795,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1366.0258000018075,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "13",
+                    "category": "diagram",
+                    "ref": "PERSONALISED AI \u2014 WORKFLOW 2\n\n(user) Hey bot! Let's build out my food & drink\n       context store!\n\n(bot)  Sure! Let me see what gaps we have...\n       \u2193\n       READ \u2192 (vector DB) \u2192 (bot) Hmm. nothing about\n                                   beer preferences!\n\n(bot) What beer do you prefer?\n(user) Super bitter IPAs          CREATE \u2192\n                        \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n                  (bot) \u2502 User's fav beer =   \u2502\n                        \u2502 bitter IPA          \u2502\n                        \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
+                    "pred": "PENS \u00a9 MALIS\u00e9D Al ~ Ven Flou/n \u2014 o~ Hey bet! Lets bu ry > context aay wilh OF VY food a Ani Fly Sane! Let me Jee whet 9 Ap we Awe... fea? ew LEX tae, rot hy See heen Pel\u201cr~ mc\u2019 s \\",
+                    "cer": 0.7338935574229691,
+                    "wer": 0.9841269841269841,
+                    "exact_match": false,
+                    "latency_ms": 1737.2073000005912,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "14",
+                    "category": "diagram",
+                    "ref": "PERSONALISED AI \u2014 LATENT VALUE AREAS\n\n            (user)              (bot)\n            USER                LLM'S\n            PROMPTS             OUTPUTS\n              \u2502                   \u2502\n              \u2193                   \u2193\n         PROMPT           \u2192   CONVO (1)\n         HISTORY  (2)         STORE\n              \u2193                 \u2502   \u2198\n              \u2193                 \u2193    WIKI\n         PROMPT              DOWNSTREAM\n         LIB \u2192 USER          OUTPUTS\n               CONTEXT        \u2199   \u2193   \u2198\n                          PODCASTS  CPD  DOCS",
+                    "pred": "User GOUA) ae ov? apU / Promets a ae toe pao? T (2) pewastzcare WIXI pp OP reoreT \u201c18 Viste tT revensTs \u00a9",
+                    "cer": 0.7365853658536585,
+                    "wer": 0.9523809523809523,
+                    "exact_match": false,
+                    "latency_ms": 1527.4854000017513,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "15",
+                    "category": "diagram",
+                    "ref": "(bot) LLM'S OUTPUTS  \u2192  CONVO (1)\n                         STORE\n                          \u2502   \u2198\n                          \u2193    WIKI\n                      DOWNSTREAM\n                      OUTPUTS\n                       \u2199   \u2193   \u2198\n                  PODCASTS CPD DOCS",
+                    "pred": "Les ot ee q Z we\u2019 \u201ca ae STLE \u2018 7 ASS ee ex v peoers 75 or E pocs \u2014eaaee",
+                    "cer": 0.7362637362637363,
+                    "wer": 1.105263157894737,
+                    "exact_match": false,
+                    "latency_ms": 1540.1910000073258,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "16",
+                    "category": "diagram",
+                    "ref": "(user)                    (bot)\nUSER                      LLM'S\nPROMPTS                   OUT[PUTS]\n   \u2502\n   \u2193\nPROMPT           \u2500\u2500\u2500\u2500\u2510\nHISTORY  (2)         \u2502\n   \u2502                 \u2193\n   \u2193              USER\nPROMPT LIB        CONTEXT",
+                    "pred": "= a me USe kh Pron?ts MIS TORS (22) ma \u00bb | r her Hg Con TEx T Pou:",
+                    "cer": 0.7058823529411765,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1313.7622000067495,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "18",
+                    "category": "table",
+                    "ref": "Task: Whiteboard \u2192 Calendar\n\nMy Week Plan\n\n        SUN    MON    TUES    WEDS    THURS    FRI    SAT\n        \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n                      ACCOUNTANT\n\n0900\n\n1200                                    DAY\n                                        OFF\n1500  DOCTOR\n\n1800\n\n2100\n\n0000",
+                    "pred": "7p hk: Wil(7eS{cotk- \u2014-> \u2014\u2014\u2014 ny ay ae Lavewoard : g{o9 per CUT Sa (VOY 50? oexet pry wo\u201d a 2! gJ 79",
+                    "cer": 0.8314606741573034,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1284.4484000088414,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "19",
+                    "category": "mixed",
+                    "ref": "Task: Whiteboard \u2192 Mixed Elements.\n\nWhiteboard \u2192 Handwriting          \u2502   Questions\n    \u21b3 Gather samples              \u2502   \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n    \u21b3 Determine priorities        \u2502   Existing datasets?\n    \u21b3 Send to David               \u2502   Separate fine tunes for\n                                  \u2502   handwriting creation vs.\n                                  \u2502   reading?",
+                    "pred": "TASh : WHI Te 8cnth \u2014> - fy (xE\u20acD = | yhiteScoad 5 Yaadveal THA Coa yes UNI | bathe fanp les ee peteem \u00a9 paontt\u00a9> moNey gascnseks * Zz Ionute Bm hme ON fre \u00a9? Dev OT m bion meade",
+                    "cer": 0.6830357142857143,
+                    "wer": 1.1388888888888888,
+                    "exact_match": false,
+                    "latency_ms": 1465.8484999963548,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "20",
+                    "category": "diagram",
+                    "ref": "Geopol Predictions: Current Model          A_x = Agent X\n                                           Sequential\n                                           SA_x = Subagent\nA_1 \u2192 Job\n      Actuation &\n      Mgmt                RSS   EXA AI\n                            \u2198   \u2199\n                             Google\n                             News\n        \u2198\n         A_2   SITREP Gen\n               Grounding                       \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n                                               \u2502 LLM  \u2502\n         \u2198                             \u2192 SA_1 \u2190\u2502COUNCIL\u2502\n          A_3   Prediction                     \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n                MGR               \u2192 SA_2\n          Pass SITREP, define\n          task, structured output\n\n          A_4  Analysis, Charts, Comparison w/\n               Run X-1\n\n          A_5  Generate Report (Typst)\n    \u2193\n  CONCAT   \u2192   PDF",
+                    "pred": "(c0opoe Pre oF CTS * Gear ot Ne e-( mS so KM . Seq ema | fi, 3e\u00b0 gsh Exe eal a a avvrs Seal Gon L Se qe iD 0 (este, La tener aor | 2 el > - She geass SITY set! ot | crash , keueed om fa, avarys' 5, CHRETS, comparison \u00bb/ Ron X-\\ pe, Cenere, Reroct Crves x) : Pan Choy am PDT |",
+                    "cer": 0.6564245810055865,
+                    "wer": 1.0461538461538462,
+                    "exact_match": false,
+                    "latency_ms": 1739.5366999990074,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "21",
+                    "category": "diagram",
+                    "ref": "Whiteboard \u2192 Dev Spec \u2192 Agent Dev\n\nWhiteboard(s)  \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2192  Gemini API\n\nGemini \u2500\u2192 Cleaned Tech Diagrams (image 2 image)\n       \u2198 Narrative of Agent Model (image 2 txt)\n\nAgent 2: Convert these things \u2192 Dev Spec\n    \u21b3 Plan def w/ human\n    \u21b3 Generate tasks, define subagents,\n      checkpoints etc",
+                    "pred": "Wh TEBCReD \u2014 DEV Spt Bn gee Wy HAITERoe@DC3) \u2014\u2014\u2014A Genin AP\\ Genin \u2014 | Llen wed Teer DiAGeANS (nave 2 ree) | AGNe + waanativ\u00e9 of pees (rane , 7) A jeal ConvetT Test. Tunes 2 Oe Se me eper as) Hee a Geneaanve TASS, DEFIVaR Son asety Chect-peiars ET",
+                    "cer": 0.5055350553505535,
+                    "wer": 1.0425531914893618,
+                    "exact_match": false,
+                    "latency_ms": 1568.5291999980109,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                }
+            ]
+        }
+    },
+    "full_comparison": {
+        "baseline": {
+            "config_name": "baseline",
+            "psm_config": "",
+            "sample_count": 21,
+            "mean_cer": 0.6955,
+            "mean_wer": 1.0097,
+            "exact_match_rate": 0.0,
+            "mean_latency_ms": 1511.43,
+            "median_latency_ms": 1516.97,
+            "evaluations": [
+                {
+                    "sample_id": "01",
+                    "category": "prose",
+                    "ref": "WHITEBOARD OCR \u2192 FEW SAMPLE TEST\n\nI have rediscovered whiteboarding!\nBUT!\nIt's mounted at a really awkward height\nAND\nI have barely written by hand in years\nSo\nmy writing is hard to decipher",
+                    "pred": "WHIT EBSALD \u201c2 fe SM ry\u2019 lt we LLL LLL aa Bur! 14's nous tek at a Lolly ouihtoer A Aeigh \u00e9 ALD ( hove beregy wei EC by honk In fens My whi ti\u00a2 13 foad \u20ac\u00b0 fect phere",
+                    "cer": 0.5343915343915344,
+                    "wer": 1.0588235294117647,
+                    "exact_match": false,
+                    "latency_ms": 1628.7152000004426,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "02",
+                    "category": "list",
+                    "ref": "SOME QUESTIONS\n\nCan you train a vision model / multimodal model on\na few reference images w/ manual transcriptions / ground\ntruths?\nWhat about abbreviations like w/ for with?",
+                    "pred": "lone Glu &5 7% 00S Com you Lhair we Wsrot nol / null tot o\u00e9 0 lal on a for repavre \u2018eye </ale decates ie ei pear is oe gbrvtotiens Va of fe wi oo",
+                    "cer": 0.6358381502890174,
+                    "wer": 1.0689655172413792,
+                    "exact_match": false,
+                    "latency_ms": 1458.8192000082927,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "03",
+                    "category": "list",
+                    "ref": "SOME QUESTIONS\n\n\u2022 Can you train a vision model / multimodal model on\n  a few reference images w/ manual transcriptions / ground\n  truths?\n\u2022 What about abbreviations like w/ for with?\n\u2022 Could I get AI to create a custom TTF font & if so\n  how much training data?",
+                    "pred": "So wE Ques 7 cas See 4 Com you Lbaire we wrote mold / rwtAtedleal telah oa a few ne feck (ma teb wf panel PAB\"P Bi GOs previeciens Vila of fae wilh? py) hte bot OC me Lol / get gee",
+                    "cer": 0.6732283464566929,
+                    "wer": 0.9795918367346939,
+                    "exact_match": false,
+                    "latency_ms": 1466.8955000088317,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "04",
+                    "category": "list",
+                    "ref": "SOME QUESTIONS\n\n\u2022 Can you train a vision model / multimodal model on\n  a few reference images w/ manual transcriptions / ground\n  truths?\n\u2022 What about abbreviations like w/ for with?\n\u2022 Could I get AI to create a custom TTF font & if so\n  how much training data?",
+                    "pred": "fo we vues 7icas : ow Owe Lhair wa wngroe mole / nit@tedat to lal On 4 for refocrrce lmazes \u201c/ nannel Paeserip lees vA [read bho Bot sgbroietiens Wha Vf fe with? Al bcat \u00a9 stor 77\u00a2 flat a 16 Se fart let yee",
+                    "cer": 0.5826771653543307,
+                    "wer": 0.9795918367346939,
+                    "exact_match": false,
+                    "latency_ms": 1596.5228999993997,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "05",
+                    "category": "list",
+                    "ref": "Why / Applications\n\n\u25cb Whiteboard workflows:\n    \u21b3 Whiteboard \u2192 cleaned up tech diagram\n      (nano banana). needs to be able to parse a\n      \"OCR\" raw text. Objective: \u2191 accuracy &\n      \u2193 pseudotext\n    \u21b3 Whiteboard \u2192 text / todo list / SOL etc.",
+                    "pred": "wy 1A PPA CAILS 0 hj $3 ond wee hflorF - Zi teh t& cork =~ chleateh vp feel MI yahoo [hea ae pawam). ree fe be Sle 72 RAEI. A_ ek RO Feet. COR Sec TIVE _- ae toc ~~ tN psontotext Ly phtedennee > Tat (00 ise / Sor cle",
+                    "cer": 0.6,
+                    "wer": 1.2195121951219512,
+                    "exact_match": false,
+                    "latency_ms": 1482.7767999959178,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "06",
+                    "category": "diagram",
+                    "ref": "Few Shot Learning - 1\n\n        Apples\n       \u2197\n      /\n( FRUITS ) \u2192 Oranges\n      \\\u2192 Bananas\n       \u2198\n        Lemons\nKiwis \u2190\n     \u2199\nMelons",
+                    "pred": "",
+                    "cer": 1.0,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1139.0910999907646,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "07",
+                    "category": "table",
+                    "ref": "Few Shot Learning - 2\n\nWORLD CAPITALS\n\nCITY          | COUNTRY\n--------------+---------\nDublin        | Ireland\nAmman         | Jordan\nWashington DC | USA",
+                    "pred": "Faw Shot Llearrigy \u2014 a Yon to CAeIMES CITY Dub lw |e harc\u2014 firnor Son han",
+                    "cer": 0.6796875,
+                    "wer": 0.9523809523809523,
+                    "exact_match": false,
+                    "latency_ms": 1452.1191000094404,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "08",
+                    "category": "flowchart",
+                    "ref": "Few Shot Learning - 3\n\n        Zoom Meeting Prep SOP\n\n        Is my hair a mess?\n           /           \\\n          Y             N\n          \u2193             \u2193\n      \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510   \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n      \u2502COMB HAIR\u2502   \u2502CHILL OUT!\u2502\n      \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518   \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
+                    "pred": "RS het Leases \u2014- > Joow Meet 4 frep (of bs ny hear need \u00b0 Y hy",
+                    "cer": 0.7516778523489933,
+                    "wer": 0.9642857142857143,
+                    "exact_match": false,
+                    "latency_ms": 1371.8039999948815,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "09",
+                    "category": "list",
+                    "ref": "Few Shot Learning - 3\n\nWhat about variability in how we write letters?\n  \u21b3 Sometimes I dot i's. Sometimes I don't.\n  \u21b3 Informal / missing punctuation?\n  \u21b3 \"Code switching\" & misspellings?\n  \u21b3 Sometimes I write 'b' like balloon & sometimes\n    balloon (why? IDK!)",
+                    "pred": "Fis Shot Lenny = > ly hat Bol hi by ) a i waite leeces? . a forrisp: mesg pnw tebe Lote suite oF nist pe? 2 L fontins, / we! \u2018L' jhe haloon pene ined Gbecs (uy? 10k!)",
+                    "cer": 0.6265060240963856,
+                    "wer": 0.9534883720930233,
+                    "exact_match": false,
+                    "latency_ms": 1734.991599994828,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "10",
+                    "category": "list",
+                    "ref": "Few Shot Learning - 3\n\nWhat about txt like speech?\n  \u2193\n\nLLMs R cool         \u2192  LLMs are cool!\n   or incorrect uppercase\nLLMs R cool         \u2192  LLMs are cool",
+                    "pred": "Faw Shot leawigy - > 9 YT ae ( 4 , a Ls we sew ns & FOr pe jaegRnet \u201cae Litts ore cool",
+                    "cer": 0.6106870229007634,
+                    "wer": 0.8928571428571429,
+                    "exact_match": false,
+                    "latency_ms": 1543.8417999976082,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "11",
+                    "category": "diagram",
+                    "ref": "PERSONALISED AI \u2192 BASIC IDEA\n\nUse-case: Human wants to create a task-specific AI agent\n& frontload context\n\nTactic: Create AI agent to \"interview\" you \u2192 transcribe\n        (could be voice \u2192 voice!) \u2192 extract content \u2192 vector DB\n\n[bot] \u2500\u2500> [ What's your fav food? ]\n           [ PIZZA! ]  :)\n  \u2193\nCREATE MEMORY\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502 Daniel's fav  \u2502\n\u2502 food = PIZZA  \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n        \u2193\n      ( VECTOR DB )",
+                    "pred": "PERS 0 A 1 GAS% rr MAUS 2D { A IDEA e- case: Hunan WANTS To ee a Tesh SspecmrBe A/ agent bS etek e TAA A, \u201c| (a) phai (coll Ge porce re) 79 os oe T=T hheat 'S . - eantEDs FAK Tl feod = 22a 4",
+                    "cer": 0.7073170731707317,
+                    "wer": 0.9558823529411765,
+                    "exact_match": false,
+                    "latency_ms": 1695.2199999941513,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "12",
+                    "category": "diagram",
+                    "ref": "(could be voice \u2192 voice!) \u2192 Extract content \u2192 V[ector DB]\n\n[bot] \u2500\u2500> [ What's your fav food? ]\n           [ PIZZA! ]  :)\n  \u2193\nCREATE MEMORY\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502 Daniel's fav  \u2502\n\u2502 food = PIZZA  \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n        \u2193\n     ( VECTOR DB )",
+                    "pred": "[cont Ge yore voices) I &afnect lm Lena! oN & LZACATE MENF RY eancEs FAK 4",
+                    "cer": 0.7751196172248804,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1516.9693999923766,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "13",
+                    "category": "diagram",
+                    "ref": "PERSONALISED AI \u2014 WORKFLOW 2\n\n(user) Hey bot! Let's build out my food & drink\n       context store!\n\n(bot)  Sure! Let me see what gaps we have...\n       \u2193\n       READ \u2192 (vector DB) \u2192 (bot) Hmm. nothing about\n                                   beer preferences!\n\n(bot) What beer do you prefer?\n(user) Super bitter IPAs          CREATE \u2192\n                        \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n                  (bot) \u2502 User's fav beer =   \u2502\n                        \u2502 bitter IPA          \u2502\n                        \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
+                    "pred": "\u2014\u2014S>\u2014\u2014 EO \u2014\u2014\u2014\u2014 PENS ce MAUS ED Al \u2014VYoORhe lowe ~~ Mey bet ! Lets bulk OF TY food 3. dniak. oe context stoec! Fly Sone! Let me See whet gan we \u2014\u2014 is ao, ee i: pothigs Sok > = ( Aowe.. Et Wine be HO\" ae = bitten IPAs | fa cea Te Spee oi :",
+                    "cer": 0.6918767507002801,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1894.4423999928404,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "14",
+                    "category": "diagram",
+                    "ref": "PERSONALISED AI \u2014 LATENT VALUE AREAS\n\n            (user)              (bot)\n            USER                LLM'S\n            PROMPTS             OUTPUTS\n              \u2502                   \u2502\n              \u2193                   \u2193\n         PROMPT           \u2192   CONVO (1)\n         HISTORY  (2)         STORE\n              \u2193                 \u2502   \u2198\n              \u2193                 \u2193    WIKI\n         PROMPT              DOWNSTREAM\n         LIB \u2192 USER          OUTPUTS\n               CONTEXT        \u2199   \u2193   \u2198\n                          PODCASTS  CPD  DOCS",
+                    "pred": "eC OEE EAT ET V/A a 2 D Z v7 T \u2014\u2014\u2014 e_ (+R ELS ie ee. De wf Sih (7 Dipl i (K fod CAST: 5 CFP Docs P goteT LB",
+                    "cer": 0.7707317073170732,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1595.2819999947678,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "15",
+                    "category": "diagram",
+                    "ref": "(bot) LLM'S OUTPUTS  \u2192  CONVO (1)\n                         STORE\n                          \u2502   \u2198\n                          \u2193    WIKI\n                      DOWNSTREAM\n                      OUTPUTS\n                       \u2199   \u2193   \u2198\n                  PODCASTS CPD DOCS",
+                    "pred": "3 or LteWws owl O 7 wae ; \u2018 | bits 2 ne A . pensTS \u00a9 : pb I> cs",
+                    "cer": 0.6813186813186813,
+                    "wer": 1.105263157894737,
+                    "exact_match": false,
+                    "latency_ms": 1613.7702999985777,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "16",
+                    "category": "diagram",
+                    "ref": "(user)                    (bot)\nUSER                      LLM'S\nPROMPTS                   OUT[PUTS]\n   \u2502\n   \u2193\nPROMPT           \u2500\u2500\u2500\u2500\u2510\nHISTORY  (2)         \u2502\n   \u2502                 \u2193\n   \u2193              USER\nPROMPT LIB        CONTEXT",
+                    "pred": "Peoney LIQ SER.",
+                    "cer": 0.9019607843137255,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1166.465900008916,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "17",
+                    "category": "prose",
+                    "ref": "Other Common Whiteboard Imperfections\n\n  o  Use X or strikethrough\n\n        Here's      cool  ~~ideas~~\n               \u2717           ideas\n           are\n          some",
+                    "pred": "other (ewmon VH/ TeheAtpD npifecti> 0 be x & st ai be tm yar",
+                    "cer": 0.6534653465346535,
+                    "wer": 0.9375,
+                    "exact_match": false,
+                    "latency_ms": 1421.6330000053858,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "18",
+                    "category": "table",
+                    "ref": "Task: Whiteboard \u2192 Calendar\n\nMy Week Plan\n\n        SUN    MON    TUES    WEDS    THURS    FRI    SAT\n        \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n                      ACCOUNTANT\n\n0900\n\n1200                                    DAY\n                                        OFF\n1500  DOCTOR\n\n1800\n\n2100\n\n0000",
+                    "pred": "Tish: Will Te fost \u2014 ya Lavewoard py wee PLAY Suar (wr Tuts Weos Hs Lee Cy aa ae go? pe AE (7.09 gee xo, oer xo? a! oJ 79",
+                    "cer": 0.7303370786516854,
+                    "wer": 1.2,
+                    "exact_match": false,
+                    "latency_ms": 1414.0362000034656,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "19",
+                    "category": "mixed",
+                    "ref": "Task: Whiteboard \u2192 Mixed Elements.\n\nWhiteboard \u2192 Handwriting          \u2502   Questions\n    \u21b3 Gather samples              \u2502   \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n    \u21b3 Determine priorities        \u2502   Existing datasets?\n    \u21b3 Send to David               \u2502   Separate fine tunes for\n                                  \u2502   handwriting creation vs.\n                                  \u2502   reading?",
+                    "pred": "VE BY : WHIT t 400th \u2014 m/xEed yA feSccad a Yaarve/ mne- peteem' La fre \u00a9? pe (Ques UNS ee Gastey garesesks sf Jeanaate fe Ther ci fodkui Y Mca 010F ?",
+                    "cer": 0.7321428571428571,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1394.197500005248,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "20",
+                    "category": "diagram",
+                    "ref": "Geopol Predictions: Current Model          A_x = Agent X\n                                           Sequential\n                                           SA_x = Subagent\nA_1 \u2192 Job\n      Actuation &\n      Mgmt                RSS   EXA AI\n                            \u2198   \u2199\n                             Google\n                             News\n        \u2198\n         A_2   SITREP Gen\n               Grounding                       \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n                                               \u2502 LLM  \u2502\n         \u2198                             \u2192 SA_1 \u2190\u2502COUNCIL\u2502\n          A_3   Prediction                     \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n                MGR               \u2192 SA_2\n          Pass SITREP, define\n          task, structured output\n\n          A_4  Analysis, Charts, Comparison w/\n               Run X-1\n\n          A_5  Generate Report (Typst)\n    \u2193\n  CONCAT   \u2192   PDF",
+                    "pred": "(c0opoe Pre ot CT1aas * Cur et No de-( - ' AR =< A \u00a5 = lynne , Seq ema SA a Suee7ee WZ ies QeIs 15, CHRETS, COMPAR WON ff Crves t) Awh cys concatT\u2014 PDT",
+                    "cer": 0.7458100558659218,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1581.9151000032434,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "21",
+                    "category": "diagram",
+                    "ref": "Whiteboard \u2192 Dev Spec \u2192 Agent Dev\n\nWhiteboard(s)  \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2192  Gemini API\n\nGemini \u2500\u2192 Cleaned Tech Diagrams (image 2 image)\n       \u2198 Narrative of Agent Model (image 2 txt)\n\nAgent 2: Convert these things \u2192 Dev Spec\n    \u21b3 Plan def w/ human\n    \u21b3 Generate tasks, define subagents,\n      checkpoints etc",
+                    "pred": "Wy HA TTR eeDdCS) \u2014~) Genin AP\\ Gerinvl \u2014 Llen wed Tec DiAGeANS (nave 2 ree) : A : ra VAAnAaTive of well (innec _ -) A jeal ConvetT Test. Tunes 2 Oe Se i PLAW DEF w/ HUA GencantE TASKS, Defive. SeraselS J Checke-pstats ET",
+                    "cer": 0.5202952029520295,
+                    "wer": 0.9361702127659575,
+                    "exact_match": false,
+                    "latency_ms": 1570.501599999261,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                }
+            ]
+        },
+        "candidate": {
+            "config_name": "psm6",
+            "psm_config": "--psm 6",
+            "sample_count": 21,
+            "mean_cer": 0.6696,
+            "mean_wer": 1.0108,
+            "exact_match_rate": 0.0,
+            "mean_latency_ms": 1440.48,
+            "median_latency_ms": 1422.69,
+            "evaluations": [
+                {
+                    "sample_id": "01",
+                    "category": "prose",
+                    "ref": "WHITEBOARD OCR \u2192 FEW SAMPLE TEST\n\nI have rediscovered whiteboarding!\nBUT!\nIt's mounted at a really awkward height\nAND\nI have barely written by hand in years\nSo\nmy writing is hard to decipher",
+                    "pred": "/ hove Replrcovece L whi ER b conde gy | | Bur! 14's nous tek at a Lolly oushtoer &- Aeigh \u00a2 ArLD ( heve borey waite by hork IN (EMS | ry waitin foad 0 fect p hee",
+                    "cer": 0.5714285714285714,
+                    "wer": 1.0294117647058822,
+                    "exact_match": false,
+                    "latency_ms": 1449.9591999920085,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "02",
+                    "category": "list",
+                    "ref": "SOME QUESTIONS\n\nCan you train a vision model / multimodal model on\na few reference images w/ manual transcriptions / ground\ntruths?\nWhat about abbreviations like w/ for with?",
+                    "pred": "ng omE OUEST: o@\u00a7 Conyac team 0 18 roe modal ie nutlitedel Mole cn a for repavre \u2018eye y Asta pomena Acale Prats ? tecrens ln of fe ib! ne\"",
+                    "cer": 0.6242774566473989,
+                    "wer": 1.0344827586206897,
+                    "exact_match": false,
+                    "latency_ms": 1366.573999999673,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "03",
+                    "category": "list",
+                    "ref": "SOME QUESTIONS\n\n\u2022 Can you train a vision model / multimodal model on\n  a few reference images w/ manual transcriptions / ground\n  truths?\n\u2022 What about abbreviations like w/ for with?\n\u2022 Could I get AI to create a custom TTF font & if so\n  how much training data?",
+                    "pred": "Nome Qvasrices my \"A a Chad a visror mold Vk nulnodleal to lel oat Re feck Oe ww / pAwel Saenger peters . Yak Loud Borner fila ff fa with? Carla / get Al bBcek ~ nator 71t fat a1tSe",
+                    "cer": 0.6259842519685039,
+                    "wer": 0.9387755102040817,
+                    "exact_match": false,
+                    "latency_ms": 1422.6874000014504,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "04",
+                    "category": "list",
+                    "ref": "SOME QUESTIONS\n\n\u2022 Can you train a vision model / multimodal model on\n  a few reference images w/ manual transcriptions / ground\n  truths?\n\u2022 What about abbreviations like w/ for with?\n\u2022 Could I get AI to create a custom TTF font & if so\n  how much training data?",
+                    "pred": "| Bee ieee? 7\u201c GB \u00abfs ig i . | hep ete ss ) Ene tes 2 iS ely a _ ht # J rane Reser\u2019? wie ; ough agbrelorion \u201c3 / Ge On vie me i ue [ita re a frit siete rei artSe",
+                    "cer": 0.7086614173228346,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1552.59350000415,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "05",
+                    "category": "list",
+                    "ref": "Why / Applications\n\n\u25cb Whiteboard workflows:\n    \u21b3 Whiteboard \u2192 cleaned up tech diagram\n      (nano banana). needs to be able to parse a\n      \"OCR\" raw text. Objective: \u2191 accuracy &\n      \u2193 pseudotext\n    \u21b3 Whiteboard \u2192 text / todo list / SOL etc.",
+                    "pred": "wy 1A fp Pld Cat (XS | 3 br Ait oorek \u2014~ cleaterh +e fee\u2019 Al peor fraae pawam). ree fo be ale 72 PAES\u00ae A_ : ek RO Feet. COR Sec TIVE _- ae toc ~~ | v psoctotext Ly phtedennee > Tat (00 hse / Soe cee",
+                    "cer": 0.5909090909090909,
+                    "wer": 1.146341463414634,
+                    "exact_match": false,
+                    "latency_ms": 1355.8028999977978,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "06",
+                    "category": "diagram",
+                    "ref": "Few Shot Learning - 1\n\n        Apples\n       \u2197\n      /\n( FRUITS ) \u2192 Oranges\n      \\\u2192 Bananas\n       \u2198\n        Lemons\nKiwis \u2190\n     \u2199\nMelons",
+                    "pred": "Shot Leaniay \u2014/ =e p Aepp tee Kiwi? Se ett on LRVAWAS ices ler-eas",
+                    "cer": 0.6777777777777778,
+                    "wer": 0.9523809523809523,
+                    "exact_match": false,
+                    "latency_ms": 1227.8308000095421,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "07",
+                    "category": "table",
+                    "ref": "Few Shot Learning - 2\n\nWORLD CAPITALS\n\nCITY          | COUNTRY\n--------------+---------\nDublin        | Ireland\nAmman         | Jordan\nWashington DC | USA",
+                    "pred": "fiw Shet Le arity \u2014 2 LITY LOWMTEK ZF Dub lies |e Laorc\u2014 finnonr Son han\u2019 Was higgtew DC USA",
+                    "cer": 0.640625,
+                    "wer": 0.9047619047619048,
+                    "exact_match": false,
+                    "latency_ms": 1396.21900000202,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "08",
+                    "category": "flowchart",
+                    "ref": "Few Shot Learning - 3\n\n        Zoom Meeting Prep SOP\n\n        Is my hair a mess?\n           /           \\\n          Y             N\n          \u2193             \u2193\n      \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510   \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n      \u2502COMB HAIR\u2502   \u2502CHILL OUT!\u2502\n      \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518   \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
+                    "pred": "Zoow Vutiss (rep (oP /s my hair 2 eed ? pe ee",
+                    "cer": 0.8053691275167785,
+                    "wer": 0.9285714285714286,
+                    "exact_match": false,
+                    "latency_ms": 1197.2496999951545,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "09",
+                    "category": "list",
+                    "ref": "Few Shot Learning - 3\n\nWhat about variability in how we write letters?\n  \u21b3 Sometimes I dot i's. Sometimes I don't.\n  \u21b3 Informal / missing punctuation?\n  \u21b3 \"Code switching\" & misspellings?\n  \u21b3 Sometimes I write 'b' like balloon & sometimes\n    balloon (why? IDK!)",
+                    "pred": "\u2014 yhe Aowtl par rehs lif \u2014 Me few We wale LOM OAS en [fot ig Soratines ! CE Infanainy mensigpe pie 0A ne Cy Lote seit A Ka mere \u00a9 L Jonetinee, / waite (L' Ihe Saloon + sore 77rd \u2014_ Cow? 10 e!)",
+                    "cer": 0.6265060240963856,
+                    "wer": 1.0465116279069768,
+                    "exact_match": false,
+                    "latency_ms": 1632.0581000036327,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "10",
+                    "category": "list",
+                    "ref": "Few Shot Learning - 3\n\nWhat about txt like speech?\n  \u2193\n\nLLMs R cool         \u2192  LLMs are cool!\n   or incorrect uppercase\nLLMs R cool         \u2192  LLMs are cool",
+                    "pred": "fw Shot Lea) - > ae Iy be vB0 fot like speech? y ity * geo l Pe (Ls ore cool! ot jacgnnet eee Lins & oe! De oh nal ra",
+                    "cer": 0.5114503816793893,
+                    "wer": 0.9285714285714286,
+                    "exact_match": false,
+                    "latency_ms": 1464.2519000044558,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "11",
+                    "category": "diagram",
+                    "ref": "PERSONALISED AI \u2192 BASIC IDEA\n\nUse-case: Human wants to create a task-specific AI agent\n& frontload context\n\nTactic: Create AI agent to \"interview\" you \u2192 transcribe\n        (could be voice \u2192 voice!) \u2192 extract content \u2192 vector DB\n\n[bot] \u2500\u2500> [ What's your fav food? ]\n           [ PIZZA! ]  :)\n  \u2193\nCREATE MEMORY\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502 Daniel's fav  \u2502\n\u2502 food = PIZZA  \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n        \u2193\n      ( VECTOR DB )",
+                    "pred": "Pease telisen A 1 use (eA bSe- Case: Lurk wants Po chee a Teak space Al agent a front boo\u20ac qatene TRAE Ctlate 40 agent fo \u201clathe (es\" you? TRONS CHO Fam. aa (coll Ge porce re) Ft kx fnock cote t\u2014) yreter 02 a hhet'S Your pa gecaTe NEMERY Uma! 4 @ oan Es FAK Tl | ao. = 2tA",
+                    "cer": 0.5880758807588076,
+                    "wer": 0.9852941176470589,
+                    "exact_match": false,
+                    "latency_ms": 1681.1276999942493,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "12",
+                    "category": "diagram",
+                    "ref": "(could be voice \u2192 voice!) \u2192 Extract content \u2192 V[ector DB]\n\n[bot] \u2500\u2500> [ What's your fav food? ]\n           [ PIZZA! ]  :)\n  \u2193\nCREATE MEMORY\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502 Daniel's fav  \u2502\n\u2502 food = PIZZA  \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n        \u2193\n     ( VECTOR DB )",
+                    "pred": "= het 'S ta Ss CACATE neneey cancers FAK 7 feol= 22a up",
+                    "cer": 0.8373205741626795,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1347.9009000002407,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "13",
+                    "category": "diagram",
+                    "ref": "PERSONALISED AI \u2014 WORKFLOW 2\n\n(user) Hey bot! Let's build out my food & drink\n       context store!\n\n(bot)  Sure! Let me see what gaps we have...\n       \u2193\n       READ \u2192 (vector DB) \u2192 (bot) Hmm. nothing about\n                                   beer preferences!\n\n(bot) What beer do you prefer?\n(user) Super bitter IPAs          CREATE \u2192\n                        \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n                  (bot) \u2502 User's fav beer =   \u2502\n                        \u2502 bitter IPA          \u2502\n                        \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
+                    "pred": "PENS \u00a9 MALIS\u00e9D Al ~ Ven Flou/n \u2014 o~ Hey bet! Lets bu ry > context aay wilh OF VY food a Ani Fly Sane! Let me Jee whet 9 Ap we Awe... fea? ew LEX tae, rot hy See heen Pel\u201cr~ mc\u2019 s \\",
+                    "cer": 0.7338935574229691,
+                    "wer": 0.9841269841269841,
+                    "exact_match": false,
+                    "latency_ms": 1616.8692999926861,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "14",
+                    "category": "diagram",
+                    "ref": "PERSONALISED AI \u2014 LATENT VALUE AREAS\n\n            (user)              (bot)\n            USER                LLM'S\n            PROMPTS             OUTPUTS\n              \u2502                   \u2502\n              \u2193                   \u2193\n         PROMPT           \u2192   CONVO (1)\n         HISTORY  (2)         STORE\n              \u2193                 \u2502   \u2198\n              \u2193                 \u2193    WIKI\n         PROMPT              DOWNSTREAM\n         LIB \u2192 USER          OUTPUTS\n               CONTEXT        \u2199   \u2193   \u2198\n                          PODCASTS  CPD  DOCS",
+                    "pred": "User GOUA) ae ov? apU / Promets a ae toe pao? T (2) pewastzcare WIXI pp OP reoreT \u201c18 Viste tT revensTs \u00a9",
+                    "cer": 0.7365853658536585,
+                    "wer": 0.9523809523809523,
+                    "exact_match": false,
+                    "latency_ms": 1463.2559000019683,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "15",
+                    "category": "diagram",
+                    "ref": "(bot) LLM'S OUTPUTS  \u2192  CONVO (1)\n                         STORE\n                          \u2502   \u2198\n                          \u2193    WIKI\n                      DOWNSTREAM\n                      OUTPUTS\n                       \u2199   \u2193   \u2198\n                  PODCASTS CPD DOCS",
+                    "pred": "Les ot ee q Z we\u2019 \u201ca ae STLE \u2018 7 ASS ee ex v peoers 75 or E pocs \u2014eaaee",
+                    "cer": 0.7362637362637363,
+                    "wer": 1.105263157894737,
+                    "exact_match": false,
+                    "latency_ms": 1494.7439999959897,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "16",
+                    "category": "diagram",
+                    "ref": "(user)                    (bot)\nUSER                      LLM'S\nPROMPTS                   OUT[PUTS]\n   \u2502\n   \u2193\nPROMPT           \u2500\u2500\u2500\u2500\u2510\nHISTORY  (2)         \u2502\n   \u2502                 \u2193\n   \u2193              USER\nPROMPT LIB        CONTEXT",
+                    "pred": "= a me USe kh Pron?ts MIS TORS (22) ma \u00bb | r her Hg Con TEx T Pou:",
+                    "cer": 0.7058823529411765,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1299.683700010064,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "17",
+                    "category": "prose",
+                    "ref": "Other Common Whiteboard Imperfections\n\n  o  Use X or strikethrough\n\n        Here's      cool  ~~ideas~~\n               \u2717           ideas\n           are\n          some",
+                    "pred": "Other (2 of/M 0 9 VE a x ow staibe they \u2014_ dh a x oe ute oe wine) some",
+                    "cer": 0.6633663366336634,
+                    "wer": 1.0625,
+                    "exact_match": false,
+                    "latency_ms": 1355.2018000045791,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "18",
+                    "category": "table",
+                    "ref": "Task: Whiteboard \u2192 Calendar\n\nMy Week Plan\n\n        SUN    MON    TUES    WEDS    THURS    FRI    SAT\n        \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n                      ACCOUNTANT\n\n0900\n\n1200                                    DAY\n                                        OFF\n1500  DOCTOR\n\n1800\n\n2100\n\n0000",
+                    "pred": "7p hk: Wil(7eS{cotk- \u2014-> \u2014\u2014\u2014 ny ay ae Lavewoard : g{o9 per CUT Sa (VOY 50? oexet pry wo\u201d a 2! gJ 79",
+                    "cer": 0.8314606741573034,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1256.8236999941291,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "19",
+                    "category": "mixed",
+                    "ref": "Task: Whiteboard \u2192 Mixed Elements.\n\nWhiteboard \u2192 Handwriting          \u2502   Questions\n    \u21b3 Gather samples              \u2502   \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n    \u21b3 Determine priorities        \u2502   Existing datasets?\n    \u21b3 Send to David               \u2502   Separate fine tunes for\n                                  \u2502   handwriting creation vs.\n                                  \u2502   reading?",
+                    "pred": "TASh : WHI Te 8cnth \u2014> - fy (xE\u20acD = | yhiteScoad 5 Yaadveal THA Coa yes UNI | bathe fanp les ee peteem \u00a9 paontt\u00a9> moNey gascnseks * Zz Ionute Bm hme ON fre \u00a9? Dev OT m bion meade",
+                    "cer": 0.6830357142857143,
+                    "wer": 1.1388888888888888,
+                    "exact_match": false,
+                    "latency_ms": 1411.1874000082025,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "20",
+                    "category": "diagram",
+                    "ref": "Geopol Predictions: Current Model          A_x = Agent X\n                                           Sequential\n                                           SA_x = Subagent\nA_1 \u2192 Job\n      Actuation &\n      Mgmt                RSS   EXA AI\n                            \u2198   \u2199\n                             Google\n                             News\n        \u2198\n         A_2   SITREP Gen\n               Grounding                       \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n                                               \u2502 LLM  \u2502\n         \u2198                             \u2192 SA_1 \u2190\u2502COUNCIL\u2502\n          A_3   Prediction                     \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n                MGR               \u2192 SA_2\n          Pass SITREP, define\n          task, structured output\n\n          A_4  Analysis, Charts, Comparison w/\n               Run X-1\n\n          A_5  Generate Report (Typst)\n    \u2193\n  CONCAT   \u2192   PDF",
+                    "pred": "(c0opoe Pre oF CTS * Gear ot Ne e-( mS so KM . Seq ema | fi, 3e\u00b0 gsh Exe eal a a avvrs Seal Gon L Se qe iD 0 (este, La tener aor | 2 el > - She geass SITY set! ot | crash , keueed om fa, avarys' 5, CHRETS, comparison \u00bb/ Ron X-\\ pe, Cenere, Reroct Crves x) : Pan Choy am PDT |",
+                    "cer": 0.6564245810055865,
+                    "wer": 1.0461538461538462,
+                    "exact_match": false,
+                    "latency_ms": 1687.0262999873376,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                },
+                {
+                    "sample_id": "21",
+                    "category": "diagram",
+                    "ref": "Whiteboard \u2192 Dev Spec \u2192 Agent Dev\n\nWhiteboard(s)  \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2192  Gemini API\n\nGemini \u2500\u2192 Cleaned Tech Diagrams (image 2 image)\n       \u2198 Narrative of Agent Model (image 2 txt)\n\nAgent 2: Convert these things \u2192 Dev Spec\n    \u21b3 Plan def w/ human\n    \u21b3 Generate tasks, define subagents,\n      checkpoints etc",
+                    "pred": "Wh TEBCReD \u2014 DEV Spt Bn gee Wy HAITERoe@DC3) \u2014\u2014\u2014A Genin AP\\ Genin \u2014 | Llen wed Teer DiAGeANS (nave 2 ree) | AGNe + waanativ\u00e9 of pees (rane , 7) A jeal ConvetT Test. Tunes 2 Oe Se me eper as) Hee a Geneaanve TASS, DEFIVaR Son asety Chect-peiars ET",
+                    "cer": 0.5055350553505535,
+                    "wer": 1.0425531914893618,
+                    "exact_match": false,
+                    "latency_ms": 1571.0524000023725,
+                    "dimensions": [
+                        4096,
+                        3072
+                    ],
+                    "channels": 3,
+                    "status": "SUCCESS"
+                }
+            ]
+        }
+    }
+}
