@@ -200,3 +200,133 @@ def test_legacy_firmware_compatibility():
     assert t.check_temp(35) == "NORMAL"
     assert t.check_temp(65) == "WARM"
     assert t.check_temp(85) == "CRITICAL"
+
+
+def test_battery_recovery_cannot_override_critical_thermal():
+    """Safety Invariant: Critical thermal protection must NEVER be overridden by battery recharge."""
+    manager = PowerThermalPolicyManager()
+
+    # Trigger critical thermal condition (72°C)
+    manager.update_thermal_telemetry(ThermalTelemetry(temperature_celsius=72.0, timestamp=1.0), current_time=1.0)
+    assert manager.thermal_status == ThermalStatus.CRITICAL
+    assert manager.requested_state == OperatingState.CRITICAL_SHUTDOWN
+
+    # Battery discharges to low
+    manager.update_battery_telemetry(BatteryTelemetry(voltage_volts=3.5, percentage=12.0, timestamp=2.0), current_time=2.0)
+    assert manager.battery_status == BatteryStatus.LOW
+    assert manager.requested_state == OperatingState.CRITICAL_SHUTDOWN
+
+    # Battery now recharges to 100% while temperature is still critical (72°C)
+    manager.update_battery_telemetry(BatteryTelemetry(voltage_volts=4.2, percentage=100.0, is_charging=True, timestamp=3.0), current_time=3.0)
+    assert manager.battery_status == BatteryStatus.FULL
+    # MUST remain in CRITICAL_SHUTDOWN
+    assert manager.requested_state == OperatingState.CRITICAL_SHUTDOWN
+    assert manager.can_execute_workload(WorkloadPriority.VISION_CAPTURE)[0] is False
+
+    # Manual attempt to request IDLE must also be rejected
+    ok, msg = manager.request_state(OperatingState.IDLE)
+    assert ok is False
+    assert "Thermal status is CRITICAL" in msg
+
+
+def test_battery_recovery_cannot_override_hot_throttled():
+    """Safety Invariant: Battery recharge must not clear active thermal throttling restrictions."""
+    manager = PowerThermalPolicyManager()
+
+    # Enter thermal throttling (58°C) & low battery (14%)
+    manager.update_thermal_telemetry(ThermalTelemetry(temperature_celsius=58.0, timestamp=1.0), current_time=1.0)
+    manager.update_battery_telemetry(BatteryTelemetry(voltage_volts=3.55, percentage=14.0, timestamp=1.0), current_time=1.0)
+    assert manager.thermal_status == ThermalStatus.HOT_THROTTLED
+    assert manager.battery_status == BatteryStatus.LOW
+    assert manager.requested_state == OperatingState.LOW_POWER
+
+    # Battery recovers to 85%
+    manager.update_battery_telemetry(BatteryTelemetry(voltage_volts=4.0, percentage=85.0, timestamp=2.0), current_time=2.0)
+    assert manager.battery_status == BatteryStatus.NORMAL
+
+    # State must not be IDLE because thermal throttling remains active
+    assert manager.requested_state == OperatingState.LOW_POWER
+    assert manager.can_execute_workload(WorkloadPriority.VISION_CAPTURE)[0] is False
+
+    # Direct request to CAPTURE state must be rejected from LOW_POWER
+    ok, msg = manager.request_state(OperatingState.CAPTURE)
+    assert ok is False
+
+    # Also verify from IDLE state: if manager is IDLE and HOT_THROTTLED, CAPTURE is rejected
+    idle_manager = PowerThermalPolicyManager()
+    idle_manager.update_thermal_telemetry(ThermalTelemetry(temperature_celsius=58.0, timestamp=1.0), current_time=1.0)
+    assert idle_manager.thermal_status == ThermalStatus.HOT_THROTTLED
+    ok2, msg2 = idle_manager.request_state(OperatingState.CAPTURE)
+    assert ok2 is False
+    assert "HOT_THROTTLED" in msg2
+
+
+def test_thermal_recovery_preserves_low_battery_restriction():
+    """Safety Invariant: Cooling down must not bypass an active low-battery restriction."""
+    manager = PowerThermalPolicyManager()
+
+    # Set low battery (12%)
+    manager.update_battery_telemetry(BatteryTelemetry(voltage_volts=3.5, percentage=12.0, timestamp=1.0), current_time=1.0)
+    assert manager.battery_status == BatteryStatus.LOW
+    assert manager.requested_state == OperatingState.LOW_POWER
+
+    # Thermal spike to critical (75°C) -> CRITICAL_SHUTDOWN
+    manager.update_thermal_telemetry(ThermalTelemetry(temperature_celsius=75.0, timestamp=2.0), current_time=2.0)
+    assert manager.thermal_status == ThermalStatus.CRITICAL
+    assert manager.requested_state == OperatingState.CRITICAL_SHUTDOWN
+
+    # Thermal cools down to 32°C (NORMAL) while battery remains 12% (LOW)
+    manager.update_thermal_telemetry(ThermalTelemetry(temperature_celsius=32.0, timestamp=3.0), current_time=3.0)
+    assert manager.thermal_status == ThermalStatus.NORMAL
+    # Must recover to LOW_POWER, NOT to IDLE!
+    assert manager.requested_state == OperatingState.LOW_POWER
+    assert manager.can_execute_workload(WorkloadPriority.VISION_CAPTURE)[0] is False
+
+
+def test_full_recovery_from_critical_shutdown():
+    """Verify dual recovery when both thermal and battery conditions return to safe operating levels."""
+    manager = PowerThermalPolicyManager()
+
+    # Both critical: 3% battery, 74°C die temp
+    manager.update_battery_telemetry(BatteryTelemetry(voltage_volts=3.3, percentage=3.0, timestamp=1.0), current_time=1.0)
+    manager.update_thermal_telemetry(ThermalTelemetry(temperature_celsius=74.0, timestamp=1.0), current_time=1.0)
+    assert manager.battery_status == BatteryStatus.CRITICAL
+    assert manager.thermal_status == ThermalStatus.CRITICAL
+    assert manager.requested_state == OperatingState.CRITICAL_SHUTDOWN
+
+    # Thermal cools first to 30°C, but battery still critical -> remains CRITICAL_SHUTDOWN
+    manager.update_thermal_telemetry(ThermalTelemetry(temperature_celsius=30.0, timestamp=2.0), current_time=2.0)
+    assert manager.thermal_status == ThermalStatus.NORMAL
+    assert manager.requested_state == OperatingState.CRITICAL_SHUTDOWN
+
+    # Battery now recharges to 70% -> full recovery to IDLE
+    manager.update_battery_telemetry(BatteryTelemetry(voltage_volts=3.85, percentage=70.0, timestamp=3.0), current_time=3.0)
+    assert manager.battery_status == BatteryStatus.NORMAL
+    assert manager.requested_state == OperatingState.IDLE
+    assert manager.can_execute_workload(WorkloadPriority.VISION_CAPTURE)[0] is True
+
+
+@pytest.mark.parametrize(
+    "bat_pct,temp_c,expected_bat,expected_therm,expected_state,vision_allowed",
+    [
+        (85.0, 32.0, BatteryStatus.NORMAL, ThermalStatus.NORMAL, OperatingState.IDLE, True),
+        (14.0, 32.0, BatteryStatus.LOW, ThermalStatus.NORMAL, OperatingState.LOW_POWER, False),
+        (3.0, 32.0, BatteryStatus.CRITICAL, ThermalStatus.NORMAL, OperatingState.CRITICAL_SHUTDOWN, False),
+        (85.0, 47.0, BatteryStatus.NORMAL, ThermalStatus.WARM, OperatingState.IDLE, True),
+        (85.0, 58.0, BatteryStatus.NORMAL, ThermalStatus.HOT_THROTTLED, OperatingState.IDLE, False),
+        (85.0, 72.0, BatteryStatus.NORMAL, ThermalStatus.CRITICAL, OperatingState.CRITICAL_SHUTDOWN, False),
+        (14.0, 58.0, BatteryStatus.LOW, ThermalStatus.HOT_THROTTLED, OperatingState.LOW_POWER, False),
+        (14.0, 72.0, BatteryStatus.LOW, ThermalStatus.CRITICAL, OperatingState.CRITICAL_SHUTDOWN, False),
+        (3.0, 72.0, BatteryStatus.CRITICAL, ThermalStatus.CRITICAL, OperatingState.CRITICAL_SHUTDOWN, False),
+    ],
+)
+def test_power_thermal_matrix_interactions(bat_pct, temp_c, expected_bat, expected_therm, expected_state, vision_allowed):
+    """Table-driven verification of multi-variable power and thermal interaction states."""
+    manager = PowerThermalPolicyManager()
+    manager.update_battery_telemetry(BatteryTelemetry(voltage_volts=3.3 + (bat_pct / 100.0) * 0.9, percentage=bat_pct, timestamp=1.0), current_time=1.0)
+    manager.update_thermal_telemetry(ThermalTelemetry(temperature_celsius=temp_c, timestamp=1.0), current_time=1.0)
+
+    assert manager.battery_status == expected_bat
+    assert manager.thermal_status == expected_therm
+    assert manager.requested_state == expected_state
+    assert manager.can_execute_workload(WorkloadPriority.VISION_CAPTURE)[0] is vision_allowed

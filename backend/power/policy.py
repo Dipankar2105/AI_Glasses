@@ -61,7 +61,8 @@ class PowerThermalPolicyManager:
             OperatingState.CRITICAL_SHUTDOWN,
         },
         OperatingState.CRITICAL_SHUTDOWN: {
-            OperatingState.IDLE,  # Only permissible after battery/thermal recovery
+            OperatingState.IDLE,  # Permissible after battery/thermal recovery
+            OperatingState.LOW_POWER,  # Permissible if thermal cools while battery is LOW
         },
     }
 
@@ -154,7 +155,7 @@ class PowerThermalPolicyManager:
             self.request_state(OperatingState.CRITICAL_SHUTDOWN, reason="Critical battery discharge")
         elif self.battery_status == BatteryStatus.LOW and self.requested_state not in (OperatingState.LOW_POWER, OperatingState.CRITICAL_SHUTDOWN):
             self.request_state(OperatingState.LOW_POWER, reason="Low battery conservation")
-        elif self.battery_status in (BatteryStatus.NORMAL, BatteryStatus.FULL, BatteryStatus.CHARGING) and self.requested_state == OperatingState.LOW_POWER:
+        elif self.battery_status in (BatteryStatus.NORMAL, BatteryStatus.FULL, BatteryStatus.CHARGING) and self.requested_state in (OperatingState.LOW_POWER, OperatingState.CRITICAL_SHUTDOWN):
             if self.thermal_status not in (ThermalStatus.CRITICAL, ThermalStatus.HOT_THROTTLED):
                 self.request_state(OperatingState.IDLE, reason="Battery recovered to normal operating level")
 
@@ -202,9 +203,14 @@ class PowerThermalPolicyManager:
             else:
                 self.thermal_status = ThermalStatus.NORMAL
 
-        # Emergency cutoff if critical thermal condition
+        # Emergency cutoff if critical thermal condition or recovery handling
         if self.thermal_status == ThermalStatus.CRITICAL:
             self.request_state(OperatingState.CRITICAL_SHUTDOWN, reason=f"Critical die temperature: {temp:.1f}°C")
+        elif self.thermal_status in (ThermalStatus.NORMAL, ThermalStatus.WARM) and self.requested_state == OperatingState.CRITICAL_SHUTDOWN:
+            if self.battery_status in (BatteryStatus.NORMAL, BatteryStatus.FULL, BatteryStatus.CHARGING):
+                self.request_state(OperatingState.IDLE, reason="Thermal conditions normalized")
+            elif self.battery_status == BatteryStatus.LOW:
+                self.request_state(OperatingState.LOW_POWER, reason="Thermal conditions normalized while battery is low")
 
         return self.thermal_status
 
@@ -225,9 +231,11 @@ class PowerThermalPolicyManager:
         if target_state not in allowed_transitions:
             return False, f"Invalid transition from {self.requested_state} to {target_state}"
 
-        # 4. Low-power restrictions
+        # 4. Low-power and thermal throttling restrictions
         if self.battery_status == BatteryStatus.LOW and target_state in (OperatingState.CAPTURE, OperatingState.PROCESSING):
             return False, f"Cannot enter heavy workload state {target_state} during LOW battery"
+        if self.thermal_status == ThermalStatus.HOT_THROTTLED and target_state == OperatingState.CAPTURE:
+            return False, f"Cannot enter heavy workload state {target_state} during HOT_THROTTLED thermal status"
 
         self.requested_state = target_state
         # In software simulation, confirmed state updates immediately upon policy approval
