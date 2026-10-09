@@ -41,3 +41,7 @@ class AIEngineRegistry:
         if not self.active_scene or self.active_scene not in self.scenes:
             raise AIVisionError(AIVisionErrorStatus.ENGINE_UNAVAILABLE, "No active SceneAnalyzerEngine")
         return self.scenes[self.active_scene]
+
+    def load_production_ocr(self, set_active: bool = True):
+        from backend.ai.tesseract_ocr import TesseractOCREngine
+        self.register_ocr("tesseract", TesseractOCREngine(), set_active=set_active)
