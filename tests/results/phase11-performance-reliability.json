@@ -1,1 +1,64 @@
-{"status": "COMPLETE"}
+{
+    "timestamp": 1791554468.2359908,
+    "environment": {
+        "python_version": "3.14.6 | packaged by Anaconda, Inc. | (main, Jul  9 2026, 14:29:05) [MSC v.1942 64 bit (AMD64)]",
+        "platform": "win32"
+    },
+    "benchmarks": {
+        "protocol_framing": {
+            "iterations": 1000,
+            "cold_start_ms": 0.0028,
+            "mean_ms": 0.003,
+            "median_ms": 0.0029,
+            "p95_ms": 0.0031,
+            "p99_ms": 0.0039,
+            "min_ms": 0.0028,
+            "max_ms": 0.026,
+            "throughput_ops_per_sec": 335480.4
+        },
+        "motion_processing": {
+            "iterations": 1000,
+            "cold_start_ms": 0.0031,
+            "mean_ms": 0.0216,
+            "median_ms": 0.0216,
+            "p95_ms": 0.0226,
+            "p99_ms": 0.0246,
+            "min_ms": 0.0031,
+            "max_ms": 0.3499,
+            "throughput_samples_per_sec": 46366.1
+        },
+        "power_policy": {
+            "iterations": 1000,
+            "cold_start_ms": 0.0033,
+            "mean_ms": 0.0035,
+            "median_ms": 0.0034,
+            "p95_ms": 0.0036,
+            "p99_ms": 0.0046,
+            "min_ms": 0.0033,
+            "max_ms": 0.0516,
+            "throughput_cycles_per_sec": 285380.0
+        },
+        "conversation_session": {
+            "iterations": 1000,
+            "cold_start_ms": 0.0035,
+            "mean_ms": 0.0048,
+            "median_ms": 0.0043,
+            "p95_ms": 0.0046,
+            "p99_ms": 0.0073,
+            "min_ms": 0.0035,
+            "max_ms": 0.329,
+            "throughput_ops_per_sec": 207749.0
+        },
+        "end_to_end_orchestrator": {
+            "iterations": 1000,
+            "cold_start_ms": 0.3328,
+            "mean_ms": 0.4754,
+            "median_ms": 0.3964,
+            "p95_ms": 0.5092,
+            "p99_ms": 0.7888,
+            "min_ms": 0.3328,
+            "max_ms": 17.3089,
+            "throughput_events_per_sec": 2103.4
+        }
+    }
+}
