@@ -45,10 +45,10 @@
         }
     },
     "computational_cost": {
-        "avg_frame_processing_time_sec": 0.0011338845638389505,
-        "max_frame_processing_time_sec": 0.0015959999946062453,
+        "avg_frame_processing_time_sec": 0.0011229395973628962,
+        "max_frame_processing_time_sec": 0.0016969999996945262,
         "frame_duration_sec": 0.016,
-        "real_time_factor": 0.07086778523993441
+        "real_time_factor": 0.07018372483518101
     },
     "latency": {
         "algorithmic_latency_frames": 1,

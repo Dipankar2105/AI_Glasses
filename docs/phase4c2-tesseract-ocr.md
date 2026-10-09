@@ -34,3 +34,6 @@ Tests are located in `backend/tests/test_tesseract_ocr.py`.
 
 ## 6. Preprocessing Experiments & Latency Observations
 Since the Tesseract executable is heavily OS-dependent, the local experiments script (	ests/scripts/ocr_experiments.py) handles graceful fallback skipping. When tested with local installation, we observe deterministic processing of uppercase, lowercase, numeric, blank, grayscale and RGB synthetic Pillow fixtures. Performance latency metrics heavily depend on the local CPU cores allocating thread-counts to the tesseract C++ engine. The framework records these latencies deterministically.
+
+## 7. Explicit TESSERACT_CMD Configuration
+The engine initialization securely checks for the TESSERACT_CMD environment variable. If defined locally, it bridges the Tesseract python wrapper directly to this executable binary. This entirely prevents hardcoding native paths into the python codebase, keeping it strictly platform-agnostic.

@@ -61,24 +61,59 @@ def generate_fixtures():
     return fixtures
 
 def run_experiments():
+    import os
     if not has_tesseract():
         print("Tesseract not available. Skipping experiments and latency measurements.")
         return
         
-    fixtures = generate_fixtures()
     engine = TesseractOCREngine()
     
-    print("--- OCR EXPERIMENTS ---")
-    for name, arr in fixtures.items():
+    # 1. Base test image (simulated original capture)
+    # We will draw a greyish text on a slightly noisy background
+    img = Image.new('RGB', (300, 60), color=(180, 180, 180))
+    d = ImageDraw.Draw(img)
+    d.text((20, 15), "AI GLASSES TEST", fill=(50, 50, 50))
+    arr_rgb = np.array(img)
+    
+    print("--- PREPROCESSING EXPERIMENTS ---")
+    expected_text = "AI GLASSES TEST"
+    
+    # A. Original grayscale image
+    from backend.vision.pipeline import VisionPipeline
+    pipeline = VisionPipeline()
+    import backend.vision.frame as frame_module
+    raw_frame = frame_module.CameraFrame(arr_rgb, 300, 60, 3, "uint8", 100, 1)
+    
+    # Let's run raw grayscale conversion directly (simulate A, B, C, D)
+    arr_gray = np.dot(arr_rgb[...,:3], [0.2989, 0.5870, 0.1140]).astype(np.uint8)
+    
+    # C. Existing contrast normalized
+    arr_norm = pipeline._contrast_normalize(arr_gray)
+    
+    # D. OCR-local thresholding
+    arr_thresh = np.where(arr_gray < 128, 0, 255).astype(np.uint8)
+    
+    variations = {
+        "A. RGB": arr_rgb,
+        "B. Grayscale": arr_gray,
+        "C. Contrast Norm": arr_norm,
+        "D. Thresholding": arr_thresh
+    }
+    
+    for name, arr in variations.items():
         h, w = arr.shape[:2]
         c = 1 if len(arr.shape) == 2 else arr.shape[2]
         inp = OCRInput(arr, w, h, c, (0, 255), 0, 0)
         
         try:
             res = engine.process(inp)
-            print(f"Fixture: {name.ljust(12)} -> Extracted: '{res.full_text}'")
+            success = expected_text in res.full_text.upper()
+            conf = res.regions[0].confidence if res.regions else 0.0
+            print(f"{name.ljust(18)} | Expected: '{expected_text}' | Recog: '{res.full_text}' | Recovered: {success} | Conf: {conf:.2f}")
         except AIVisionError as e:
-            print(f"Fixture: {name.ljust(12)} -> Error: {e}")
+            print(f"{name.ljust(18)} | Error: {e}")
+            
+    # Latency checks
             
     # Latency checks
     print("\n--- PERFORMANCE OBSERVATIONS ---")

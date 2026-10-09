@@ -13,6 +13,13 @@ from backend.vision.frame import OCRInput
 from backend.ai.errors import AIVisionError, AIVisionErrorStatus
 
 class TesseractOCREngine(OCREngine):
+    def __init__(self):
+        super().__init__()
+        import os
+        cmd = os.environ.get('TESSERACT_CMD')
+        if cmd:
+            pytesseract.pytesseract.tesseract_cmd = cmd
+
     def process(self, input_data: OCRInput) -> OCRResult:
         if input_data.image is None or input_data.dimensions[0] == 0 or input_data.dimensions[1] == 0:
             raise AIVisionError(AIVisionErrorStatus.INVALID_INPUT, "Dimensions are zero or image is missing")
