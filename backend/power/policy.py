@@ -154,6 +154,9 @@ class PowerThermalPolicyManager:
             self.request_state(OperatingState.CRITICAL_SHUTDOWN, reason="Critical battery discharge")
         elif self.battery_status == BatteryStatus.LOW and self.requested_state not in (OperatingState.LOW_POWER, OperatingState.CRITICAL_SHUTDOWN):
             self.request_state(OperatingState.LOW_POWER, reason="Low battery conservation")
+        elif self.battery_status in (BatteryStatus.NORMAL, BatteryStatus.FULL, BatteryStatus.CHARGING) and self.requested_state == OperatingState.LOW_POWER:
+            if self.thermal_status not in (ThermalStatus.CRITICAL, ThermalStatus.HOT_THROTTLED):
+                self.request_state(OperatingState.IDLE, reason="Battery recovered to normal operating level")
 
         return self.battery_status
 

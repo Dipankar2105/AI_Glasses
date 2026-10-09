@@ -1,11 +1,11 @@
-"""Automated integration tests verifying the NextSight local system demonstration path."""
+"""Automated integration tests verifying the NextSight local system demonstration path and negative edge cases."""
 
 import json
 import pytest
 from fastapi.testclient import TestClient
 from backend.app import app
 from backend.protocol.contracts import PacketType
-from backend.protocol.framing import ProtocolFraming
+from backend.protocol.framing import ProtocolFraming, HEADER_SIZE
 from backend.protocol.device_sim import SimulatedESP32Device
 from backend.reliability.orchestrator import SystemIntegrationOrchestrator
 from backend.reliability.circuit_breaker import CircuitBreaker, CircuitState
@@ -86,7 +86,7 @@ def test_demo_stage3_interaction_dispatching(orchestrator):
 
 
 def test_demo_stage4_power_gating(orchestrator):
-    """Verify low-battery telemetry halts heavy vision workloads."""
+    """Verify low-battery telemetry halts heavy vision workloads and restores after recovery."""
     sim = SimulatedESP32Device()
     sim.connect()
 
@@ -102,13 +102,25 @@ def test_demo_stage4_power_gating(orchestrator):
     blocked_res = orchestrator.process_incoming_device_packet(dt_packet)
     assert blocked_res["status"] == "BLOCKED_BY_POWER_POLICY"
 
+    # Recover battery to 60%
+    recov_packet = sim.send_telemetry(battery_pct=60.0, temp_c=32.0)
+    orchestrator.process_incoming_device_packet(recov_packet)
+    allowed_res = orchestrator.process_incoming_device_packet(dt_packet)
+    assert allowed_res["status"] == "DISPATCHED"
+
 
 def test_demo_stage5_mcp_and_conversation(api_client):
-    """Verify MCP direct execution and conversation message integration."""
+    """Verify MCP direct execution, non-existent tool error, and conversation message integration."""
     # Direct MCP tool call
     mcp_res = api_client.post("/api/v1/mcp/tools/call", json={"name": "get_system_status", "arguments": {}})
     assert mcp_res.status_code == 200
     assert mcp_res.json()["is_error"] is False
+
+    # Call unknown MCP tool
+    unknown_tool_res = api_client.post("/api/v1/mcp/tools/call", json={"name": "non_existent_tool", "arguments": {}})
+    assert unknown_tool_res.status_code == 200
+    assert unknown_tool_res.json()["is_error"] is True
+    assert "Unknown tool" in unknown_tool_res.json()["error_message"]
 
     # Conversation message with tool invocation
     conv_res = api_client.post(
@@ -122,11 +134,40 @@ def test_demo_stage5_mcp_and_conversation(api_client):
 
 
 def test_demo_stage6_fault_tolerance(orchestrator):
-    """Verify corrupt packet handling and circuit breaker trip."""
-    # Bad magic
+    """Verify corrupt packet handling, CRC mismatch, truncated bytes, and circuit breaker trip."""
+    # Bad magic bytes
     bad_bytes = b"\x12\x34\x01\x00\x00\x01\x00\x00\x00\x00\x00\x04DATA\x00\x00\x00\x00"
-    res = orchestrator.process_incoming_device_packet(bad_bytes)
-    assert res["status"] == "REJECTED"
+    res_magic = orchestrator.process_incoming_device_packet(bad_bytes)
+    assert res_magic["status"] == "REJECTED"
+    assert "Invalid magic" in res_magic["error"]
+
+    # Truncated packet
+    res_trunc = orchestrator.process_incoming_device_packet(b"\xAA\x55\x01\x00")
+    assert res_trunc["status"] == "REJECTED"
+    assert "Packet too short" in res_trunc["error"]
+
+    # Corrupted CRC payload
+    valid_packet = bytearray(
+        ProtocolFraming.encode_message(
+            packet_type=PacketType.TELEMETRY,
+            payload=b'{"battery_pct": 90.0}',
+            sequence_number=5,
+        )
+    )
+    valid_packet[HEADER_SIZE + 2] ^= 0xFF  # Corrupt payload byte
+    res_crc = orchestrator.process_incoming_device_packet(bytes(valid_packet))
+    assert res_crc["status"] == "REJECTED"
+    assert "CRC32 mismatch" in res_crc["error"]
+
+    # Malformed JSON in valid framing
+    malformed_json_packet = ProtocolFraming.encode_message(
+        packet_type=PacketType.TELEMETRY,
+        payload=b"NOT_VALID_JSON{{{",
+        sequence_number=6,
+    )
+    res_json = orchestrator.process_incoming_device_packet(malformed_json_packet)
+    assert res_json["status"] == "ERROR"
+    assert "Failed to parse telemetry" in res_json["error"]
 
     # Circuit breaker
     cb = CircuitBreaker(name="test_circuit", failure_threshold=2, recovery_timeout_s=0.05)
