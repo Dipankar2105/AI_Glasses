@@ -1,0 +1,1822 @@
+{
+    "benchmark_name": "Phase 4C.15 OCR Engine Selection Feasibility",
+    "timestamp": "2026-10-09 15:52:16",
+    "dev_split_evaluation": {
+        "Tesseract_Only": {
+            "strategy_name": "Tesseract_Only",
+            "sample_count": 11,
+            "macro_cer": 0.6414,
+            "macro_wer": 0.9966,
+            "mean_latency_ms": 1145.48,
+            "median_latency_ms": 1123.71,
+            "exact_match_rate": 0.0,
+            "evaluations": [
+                {
+                    "sample_id": "01",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.5344,
+                    "wer": 1.0588,
+                    "exact_match": false,
+                    "latency_ms": 1251.63,
+                    "prediction": "WHIT EBSALD \u201c2 fe SM ry\u2019 lt we LLL LLL aa Bur! 14's nous tek at a Lolly ouihtoer A Aeigh \u00e9 ALD ( hove beregy wei EC by honk In fens My whi ti\u00a2 13 foad \u20ac\u00b0 fect phere"
+                },
+                {
+                    "sample_id": "02",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6358,
+                    "wer": 1.069,
+                    "exact_match": false,
+                    "latency_ms": 1051.62,
+                    "prediction": "lone Glu &5 7% 00S Com you Lhair we Wsrot nol / null tot o\u00e9 0 lal on a for repavre \u2018eye </ale decates ie ei pear is oe gbrvtotiens Va of fe wi oo"
+                },
+                {
+                    "sample_id": "03",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6732,
+                    "wer": 0.9796,
+                    "exact_match": false,
+                    "latency_ms": 1107.35,
+                    "prediction": "So wE Ques 7 cas See 4 Com you Lbaire we wrote mold / rwtAtedleal telah oa a few ne feck (ma teb wf panel PAB\"P Bi GOs previeciens Vila of fae wilh? py) hte bot OC me Lol / get gee"
+                },
+                {
+                    "sample_id": "04",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.5827,
+                    "wer": 0.9796,
+                    "exact_match": false,
+                    "latency_ms": 1164.88,
+                    "prediction": "fo we vues 7icas : ow Owe Lhair wa wngroe mole / nit@tedat to lal On 4 for refocrrce lmazes \u201c/ nannel Paeserip lees vA [read bho Bot sgbroietiens Wha Vf fe with? Al bcat \u00a9 stor 77\u00a2 flat a 16 Se fart let yee"
+                },
+                {
+                    "sample_id": "05",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6,
+                    "wer": 1.2195,
+                    "exact_match": false,
+                    "latency_ms": 1123.71,
+                    "prediction": "wy 1A PPA CAILS 0 hj $3 ond wee hflorF - Zi teh t& cork =~ chleateh vp feel MI yahoo [hea ae pawam). ree fe be Sle 72 RAEI. A_ ek RO Feet. COR Sec TIVE _- ae toc ~~ tN psontotext Ly phtedennee > Tat (00 ise / Sor cle"
+                },
+                {
+                    "sample_id": "07",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6797,
+                    "wer": 0.9524,
+                    "exact_match": false,
+                    "latency_ms": 1086.55,
+                    "prediction": "Faw Shot Llearrigy \u2014 a Yon to CAeIMES CITY Dub lw |e harc\u2014 firnor Son han"
+                },
+                {
+                    "sample_id": "08",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.7517,
+                    "wer": 0.9643,
+                    "exact_match": false,
+                    "latency_ms": 1014.21,
+                    "prediction": "RS het Leases \u2014- > Joow Meet 4 frep (of bs ny hear need \u00b0 Y hy"
+                },
+                {
+                    "sample_id": "09",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6265,
+                    "wer": 0.9535,
+                    "exact_match": false,
+                    "latency_ms": 1351.38,
+                    "prediction": "Fis Shot Lenny = > ly hat Bol hi by ) a i waite leeces? . a forrisp: mesg pnw tebe Lote suite oF nist pe? 2 L fontins, / we! \u2018L' jhe haloon pene ined Gbecs (uy? 10k!)"
+                },
+                {
+                    "sample_id": "10",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6107,
+                    "wer": 0.8929,
+                    "exact_match": false,
+                    "latency_ms": 1186.47,
+                    "prediction": "Faw Shot leawigy - > 9 YT ae ( 4 , a Ls we sew ns & FOr pe jaegRnet \u201cae Litts ore cool"
+                },
+                {
+                    "sample_id": "11",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.7073,
+                    "wer": 0.9559,
+                    "exact_match": false,
+                    "latency_ms": 1230.66,
+                    "prediction": "PERS 0 A 1 GAS% rr MAUS 2D { A IDEA e- case: Hunan WANTS To ee a Tesh SspecmrBe A/ agent bS etek e TAA A, \u201c| (a) phai (coll Ge porce re) 79 os oe T=T hheat 'S . - eantEDs FAK Tl feod = 22a 4"
+                },
+                {
+                    "sample_id": "17",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6535,
+                    "wer": 0.9375,
+                    "exact_match": false,
+                    "latency_ms": 1031.86,
+                    "prediction": "other (ewmon VH/ TeheAtpD npifecti> 0 be x & st ai be tm yar"
+                }
+            ]
+        },
+        "RapidOCR_Only": {
+            "strategy_name": "RapidOCR_Only",
+            "sample_count": 11,
+            "macro_cer": 0.7653,
+            "macro_wer": 0.9547,
+            "mean_latency_ms": 2328.73,
+            "median_latency_ms": 2334.23,
+            "exact_match_rate": 0.0,
+            "evaluations": [
+                {
+                    "sample_id": "01",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.7249,
+                    "wer": 0.9118,
+                    "exact_match": false,
+                    "latency_ms": 3417.15,
+                    "prediction": "BUT! mkvnt heio t by hond in yenes baruy n wn Ete / hove k So to deciphe my wnitig is oal"
+                },
+                {
+                    "sample_id": "02",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.7919,
+                    "wer": 0.9655,
+                    "exact_match": false,
+                    "latency_ms": 2334.23,
+                    "prediction": "nulhinodol no lel on- a hiior nol I rAwel 'fhancatpties n-r?"
+                },
+                {
+                    "sample_id": "03",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.7559,
+                    "wer": 0.9796,
+                    "exact_match": false,
+                    "latency_ms": 2399.25,
+                    "prediction": "nulhinodol no ll on- .Cov hiior mol rAwel 'hangcapties nepow irgs ~/ n ? uston TTf Ant \u03b1 \"tso I Jet Al  cat Loula"
+                },
+                {
+                    "sample_id": "04",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.7953,
+                    "wer": 0.9796,
+                    "exact_match": false,
+                    "latency_ms": 2171.93,
+                    "prediction": "nulbhinodal no lel on- a hiior nol aangceptres nAnvel +nr ? ughom Tf nt \u03b1 \"tso"
+                },
+                {
+                    "sample_id": "05",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.7136,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 2485.05,
+                    "prediction": "ktlous : 0 hhitsoand p e CLeAneL c L hhiteloon - 8 t . neeu t b T ako : CNA NO DANAM). fept. c Ce Tec hive : 'ocn'Rm L PSdotex+"
+                },
+                {
+                    "sample_id": "07",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.8516,
+                    "wer": 0.9524,
+                    "exact_match": false,
+                    "latency_ms": 1814.5,
+                    "prediction": "LOWNTR) DusIIN Arn USA"
+                },
+                {
+                    "sample_id": "08",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.9195,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1667.42,
+                    "prediction": "hy haic [Cons He-I"
+                },
+                {
+                    "sample_id": "09",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.7992,
+                    "wer": 0.9767,
+                    "exact_match": false,
+                    "latency_ms": 2295.31,
+                    "prediction": "umil lte8? I loit. A Sontines \u03b1 nispeliny ? + Cole shitehy\" Jonetins,"
+                },
+                {
+                    "sample_id": "10",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.5954,
+                    "wer": 0.8571,
+                    "exact_match": false,
+                    "latency_ms": 2360.53,
+                    "prediction": "h het asout fot [ile speeck? LLMs inRnect hrcase \u2192 LLMs orc Cool"
+                },
+                {
+                    "sample_id": "11",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.7778,
+                    "wer": 0.9412,
+                    "exact_match": false,
+                    "latency_ms": 2574.81,
+                    "prediction": "IDEA PENSO NAUSED AI - BASIC fnontload TRANSCRS TAL hhat's Youn PIZZA! HEMOR LLCATE ood : (PrzzA VETOR DB"
+                },
+                {
+                    "sample_id": "17",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.6931,
+                    "wer": 0.9375,
+                    "exact_match": false,
+                    "latency_ms": 2095.84,
+                    "prediction": "othen Le x n StRib+hm Henos  co l -tlea. Jome"
+                }
+            ]
+        },
+        "Zero_Detection_Fallback": {
+            "strategy_name": "Zero_Detection_Fallback",
+            "sample_count": 11,
+            "macro_cer": 0.6414,
+            "macro_wer": 0.9966,
+            "mean_latency_ms": 1141.42,
+            "median_latency_ms": 1105.58,
+            "exact_match_rate": 0.0,
+            "evaluations": [
+                {
+                    "sample_id": "01",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.5344,
+                    "wer": 1.0588,
+                    "exact_match": false,
+                    "latency_ms": 1221.2,
+                    "prediction": "WHIT EBSALD \u201c2 fe SM ry\u2019 lt we LLL LLL aa Bur! 14's nous tek at a Lolly ouihtoer A Aeigh \u00e9 ALD ( hove beregy wei EC by honk In fens My whi ti\u00a2 13 foad \u20ac\u00b0 fect phere"
+                },
+                {
+                    "sample_id": "02",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6358,
+                    "wer": 1.069,
+                    "exact_match": false,
+                    "latency_ms": 1064.33,
+                    "prediction": "lone Glu &5 7% 00S Com you Lhair we Wsrot nol / null tot o\u00e9 0 lal on a for repavre \u2018eye </ale decates ie ei pear is oe gbrvtotiens Va of fe wi oo"
+                },
+                {
+                    "sample_id": "03",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6732,
+                    "wer": 0.9796,
+                    "exact_match": false,
+                    "latency_ms": 1102.31,
+                    "prediction": "So wE Ques 7 cas See 4 Com you Lbaire we wrote mold / rwtAtedleal telah oa a few ne feck (ma teb wf panel PAB\"P Bi GOs previeciens Vila of fae wilh? py) hte bot OC me Lol / get gee"
+                },
+                {
+                    "sample_id": "04",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.5827,
+                    "wer": 0.9796,
+                    "exact_match": false,
+                    "latency_ms": 1164.75,
+                    "prediction": "fo we vues 7icas : ow Owe Lhair wa wngroe mole / nit@tedat to lal On 4 for refocrrce lmazes \u201c/ nannel Paeserip lees vA [read bho Bot sgbroietiens Wha Vf fe with? Al bcat \u00a9 stor 77\u00a2 flat a 16 Se fart let yee"
+                },
+                {
+                    "sample_id": "05",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6,
+                    "wer": 1.2195,
+                    "exact_match": false,
+                    "latency_ms": 1105.58,
+                    "prediction": "wy 1A PPA CAILS 0 hj $3 ond wee hflorF - Zi teh t& cork =~ chleateh vp feel MI yahoo [hea ae pawam). ree fe be Sle 72 RAEI. A_ ek RO Feet. COR Sec TIVE _- ae toc ~~ tN psontotext Ly phtedennee > Tat (00 ise / Sor cle"
+                },
+                {
+                    "sample_id": "07",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6797,
+                    "wer": 0.9524,
+                    "exact_match": false,
+                    "latency_ms": 1086.53,
+                    "prediction": "Faw Shot Llearrigy \u2014 a Yon to CAeIMES CITY Dub lw |e harc\u2014 firnor Son han"
+                },
+                {
+                    "sample_id": "08",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.7517,
+                    "wer": 0.9643,
+                    "exact_match": false,
+                    "latency_ms": 1009.21,
+                    "prediction": "RS het Leases \u2014- > Joow Meet 4 frep (of bs ny hear need \u00b0 Y hy"
+                },
+                {
+                    "sample_id": "09",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6265,
+                    "wer": 0.9535,
+                    "exact_match": false,
+                    "latency_ms": 1346.8,
+                    "prediction": "Fis Shot Lenny = > ly hat Bol hi by ) a i waite leeces? . a forrisp: mesg pnw tebe Lote suite oF nist pe? 2 L fontins, / we! \u2018L' jhe haloon pene ined Gbecs (uy? 10k!)"
+                },
+                {
+                    "sample_id": "10",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6107,
+                    "wer": 0.8929,
+                    "exact_match": false,
+                    "latency_ms": 1190.0,
+                    "prediction": "Faw Shot leawigy - > 9 YT ae ( 4 , a Ls we sew ns & FOr pe jaegRnet \u201cae Litts ore cool"
+                },
+                {
+                    "sample_id": "11",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.7073,
+                    "wer": 0.9559,
+                    "exact_match": false,
+                    "latency_ms": 1235.31,
+                    "prediction": "PERS 0 A 1 GAS% rr MAUS 2D { A IDEA e- case: Hunan WANTS To ee a Tesh SspecmrBe A/ agent bS etek e TAA A, \u201c| (a) phai (coll Ge porce re) 79 os oe T=T hheat 'S . - eantEDs FAK Tl feod = 22a 4"
+                },
+                {
+                    "sample_id": "17",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6535,
+                    "wer": 0.9375,
+                    "exact_match": false,
+                    "latency_ms": 1029.58,
+                    "prediction": "other (ewmon VH/ TeheAtpD npifecti> 0 be x & st ai be tm yar"
+                }
+            ]
+        },
+        "Low_Confidence_Fallback": {
+            "strategy_name": "Low_Confidence_Fallback",
+            "sample_count": 11,
+            "macro_cer": 0.6974,
+            "macro_wer": 0.9854,
+            "mean_latency_ms": 1800.43,
+            "median_latency_ms": 1158.99,
+            "exact_match_rate": 0.0,
+            "evaluations": [
+                {
+                    "sample_id": "01",
+                    "engine_used": "rapidocr_fallback",
+                    "fallback_triggered": true,
+                    "cer": 0.7249,
+                    "wer": 0.9118,
+                    "exact_match": false,
+                    "latency_ms": 2846.01,
+                    "prediction": "BUT! mkvnt heio t by hond in yenes baruy n wn Ete / hove k So to deciphe my wnitig is oal"
+                },
+                {
+                    "sample_id": "02",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6358,
+                    "wer": 1.069,
+                    "exact_match": false,
+                    "latency_ms": 1107.22,
+                    "prediction": "lone Glu &5 7% 00S Com you Lhair we Wsrot nol / null tot o\u00e9 0 lal on a for repavre \u2018eye </ale decates ie ei pear is oe gbrvtotiens Va of fe wi oo"
+                },
+                {
+                    "sample_id": "03",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6732,
+                    "wer": 0.9796,
+                    "exact_match": false,
+                    "latency_ms": 1107.25,
+                    "prediction": "So wE Ques 7 cas See 4 Com you Lbaire we wrote mold / rwtAtedleal telah oa a few ne feck (ma teb wf panel PAB\"P Bi GOs previeciens Vila of fae wilh? py) hte bot OC me Lol / get gee"
+                },
+                {
+                    "sample_id": "04",
+                    "engine_used": "rapidocr_fallback",
+                    "fallback_triggered": true,
+                    "cer": 0.7953,
+                    "wer": 0.9796,
+                    "exact_match": false,
+                    "latency_ms": 2975.1,
+                    "prediction": "nulbhinodal no lel on- a hiior nol aangceptres nAnvel +nr ? ughom Tf nt \u03b1 \"tso"
+                },
+                {
+                    "sample_id": "05",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6,
+                    "wer": 1.2195,
+                    "exact_match": false,
+                    "latency_ms": 1129.37,
+                    "prediction": "wy 1A PPA CAILS 0 hj $3 ond wee hflorF - Zi teh t& cork =~ chleateh vp feel MI yahoo [hea ae pawam). ree fe be Sle 72 RAEI. A_ ek RO Feet. COR Sec TIVE _- ae toc ~~ tN psontotext Ly phtedennee > Tat (00 ise / Sor cle"
+                },
+                {
+                    "sample_id": "07",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6797,
+                    "wer": 0.9524,
+                    "exact_match": false,
+                    "latency_ms": 1092.64,
+                    "prediction": "Faw Shot Llearrigy \u2014 a Yon to CAeIMES CITY Dub lw |e harc\u2014 firnor Son han"
+                },
+                {
+                    "sample_id": "08",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.7517,
+                    "wer": 0.9643,
+                    "exact_match": false,
+                    "latency_ms": 1023.27,
+                    "prediction": "RS het Leases \u2014- > Joow Meet 4 frep (of bs ny hear need \u00b0 Y hy"
+                },
+                {
+                    "sample_id": "09",
+                    "engine_used": "rapidocr_fallback",
+                    "fallback_triggered": true,
+                    "cer": 0.7992,
+                    "wer": 0.9767,
+                    "exact_match": false,
+                    "latency_ms": 3317.53,
+                    "prediction": "umil lte8? I loit. A Sontines \u03b1 nispeliny ? + Cole shitehy\" Jonetins,"
+                },
+                {
+                    "sample_id": "10",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6107,
+                    "wer": 0.8929,
+                    "exact_match": false,
+                    "latency_ms": 1158.99,
+                    "prediction": "Faw Shot leawigy - > 9 YT ae ( 4 , a Ls we sew ns & FOr pe jaegRnet \u201cae Litts ore cool"
+                },
+                {
+                    "sample_id": "11",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.7073,
+                    "wer": 0.9559,
+                    "exact_match": false,
+                    "latency_ms": 1247.77,
+                    "prediction": "PERS 0 A 1 GAS% rr MAUS 2D { A IDEA e- case: Hunan WANTS To ee a Tesh SspecmrBe A/ agent bS etek e TAA A, \u201c| (a) phai (coll Ge porce re) 79 os oe T=T hheat 'S . - eantEDs FAK Tl feod = 22a 4"
+                },
+                {
+                    "sample_id": "17",
+                    "engine_used": "rapidocr_fallback",
+                    "fallback_triggered": true,
+                    "cer": 0.6931,
+                    "wer": 0.9375,
+                    "exact_match": false,
+                    "latency_ms": 2799.53,
+                    "prediction": "othen Le x n StRib+hm Henos  co l -tlea. Jome"
+                }
+            ]
+        }
+    },
+    "heldout_split_evaluation": {
+        "Tesseract_Only": {
+            "strategy_name": "Tesseract_Only",
+            "sample_count": 10,
+            "macro_cer": 0.755,
+            "macro_wer": 1.0241,
+            "mean_latency_ms": 1113.71,
+            "median_latency_ms": 1140.85,
+            "exact_match_rate": 0.0,
+            "evaluations": [
+                {
+                    "sample_id": "06",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 1.0,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 821.44,
+                    "prediction": ""
+                },
+                {
+                    "sample_id": "12",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.7751,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1104.29,
+                    "prediction": "[cont Ge yore voices) I &afnect lm Lena! oN & LZACATE MENF RY eancEs FAK 4"
+                },
+                {
+                    "sample_id": "13",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6919,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1402.18,
+                    "prediction": "\u2014\u2014S>\u2014\u2014 EO \u2014\u2014\u2014\u2014 PENS ce MAUS ED Al \u2014VYoORhe lowe ~~ Mey bet ! Lets bulk OF TY food 3. dniak. oe context stoec! Fly Sone! Let me See whet gan we \u2014\u2014 is ao, ee i: pothigs Sok > = ( Aowe.. Et Wine be HO\" ae = bitten IPAs | fa cea Te Spee oi :"
+                },
+                {
+                    "sample_id": "14",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.7707,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1230.79,
+                    "prediction": "eC OEE EAT ET V/A a 2 D Z v7 T \u2014\u2014\u2014 e_ (+R ELS ie ee. De wf Sih (7 Dipl i (K fod CAST: 5 CFP Docs P goteT LB"
+                },
+                {
+                    "sample_id": "15",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6813,
+                    "wer": 1.1053,
+                    "exact_match": false,
+                    "latency_ms": 1264.33,
+                    "prediction": "3 or LteWws owl O 7 wae ; \u2018 | bits 2 ne A . pensTS \u00a9 : pb I> cs"
+                },
+                {
+                    "sample_id": "16",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.902,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 842.61,
+                    "prediction": "Peoney LIQ SER."
+                },
+                {
+                    "sample_id": "18",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.7303,
+                    "wer": 1.2,
+                    "exact_match": false,
+                    "latency_ms": 1078.8,
+                    "prediction": "Tish: Will Te fost \u2014 ya Lavewoard py wee PLAY Suar (wr Tuts Weos Hs Lee Cy aa ae go? pe AE (7.09 gee xo, oer xo? a! oJ 79"
+                },
+                {
+                    "sample_id": "19",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.7321,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1028.1,
+                    "prediction": "VE BY : WHIT t 400th \u2014 m/xEed yA feSccad a Yaarve/ mne- peteem' La fre \u00a9? pe (Ques UNS ee Gastey garesesks sf Jeanaate fe Ther ci fodkui Y Mca 010F ?"
+                },
+                {
+                    "sample_id": "20",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.7458,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1177.41,
+                    "prediction": "(c0opoe Pre ot CT1aas * Cur et No de-( - ' AR =< A \u00a5 = lynne , Seq ema SA a Suee7ee WZ ies QeIs 15, CHRETS, COMPAR WON ff Crves t) Awh cys concatT\u2014 PDT"
+                },
+                {
+                    "sample_id": "21",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.5203,
+                    "wer": 0.9362,
+                    "exact_match": false,
+                    "latency_ms": 1187.15,
+                    "prediction": "Wy HA TTR eeDdCS) \u2014~) Genin AP\\ Gerinvl \u2014 Llen wed Tec DiAGeANS (nave 2 ree) : A : ra VAAnAaTive of well (innec _ -) A jeal ConvetT Test. Tunes 2 Oe Se i PLAW DEF w/ HUA GencantE TASKS, Defive. SeraselS J Checke-pstats ET"
+                }
+            ]
+        },
+        "RapidOCR_Only": {
+            "strategy_name": "RapidOCR_Only",
+            "sample_count": 10,
+            "macro_cer": 0.6288,
+            "macro_wer": 0.9053,
+            "mean_latency_ms": 2513.62,
+            "median_latency_ms": 2430.12,
+            "exact_match_rate": 0.0,
+            "evaluations": [
+                {
+                    "sample_id": "06",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.5778,
+                    "wer": 0.8571,
+                    "exact_match": false,
+                    "latency_ms": 2112.77,
+                    "prediction": "Fo Shot leAuvey-! AVCeS FRUITS BANAVAS kiwis lervas n!lons"
+                },
+                {
+                    "sample_id": "12",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.6986,
+                    "wer": 0.9048,
+                    "exact_match": false,
+                    "latency_ms": 2465.4,
+                    "prediction": "act(ontet\u2192 coull Se voice+Voice. hhat's PIZZA! CRCATE MEMORY D4NIECSFAV PIZZA VETOR DB"
+                },
+                {
+                    "sample_id": "13",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.6359,
+                    "wer": 0.9048,
+                    "exact_match": false,
+                    "latency_ms": 2739.33,
+                    "prediction": "PERSOIAuSED AI -VOnLFLOWQ Hey bot! lets build out ry Podl  dhink Contx+ stoc! hae . Hnm. rot hiy cout been prceuences READ Yr PrePo, \u56fdhhat be lo bi IPRs CCA TE Srpek been bitte"
+                },
+                {
+                    "sample_id": "14",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.5902,
+                    "wer": 0.9048,
+                    "exact_match": false,
+                    "latency_ms": 2543.11,
+                    "prediction": "PENSOIAUSED AI - LATENT VNLUL AREAS LLNS useL OUTTUTS PAOMTS STORC PnopT DOWNSTLEAM OWTPUTS CPD rUDASTS LIB PLONPT"
+                },
+                {
+                    "sample_id": "15",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.5385,
+                    "wer": 0.8947,
+                    "exact_match": false,
+                    "latency_ms": 2388.56,
+                    "prediction": "LLNS OUTTUTS STORC wikI DOWASTLEAM WTPUTS CPD PUDLRSTS"
+                },
+                {
+                    "sample_id": "16",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.7451,
+                    "wer": 0.9,
+                    "exact_match": false,
+                    "latency_ms": 2121.96,
+                    "prediction": "LLNS PROMPTS PnompT PLONPT LIB"
+                },
+                {
+                    "sample_id": "18",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.5787,
+                    "wer": 0.88,
+                    "exact_match": false,
+                    "latency_ms": 2394.85,
+                    "prediction": "TASh : hHITESOCLL \u2192 CALENDAR WleL PLAN ny min Tots wEos SA T AULUNTANT 0100 DAY 1200 1800 0 0 00"
+                },
+                {
+                    "sample_id": "19",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.6652,
+                    "wer": 0.9722,
+                    "exact_match": false,
+                    "latency_ms": 2386.94,
+                    "prediction": "TASh : h/HITESocad \u2192 iXED ELEmN. Ques ti yhieSoaaL  HAnDVnI TAC- datasea ? ha pwnithes JpArate Hn tnes Detcam ine DAUID"
+                },
+                {
+                    "sample_id": "20",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.6564,
+                    "wer": 0.8769,
+                    "exact_match": false,
+                    "latency_ms": 3035.33,
+                    "prediction": "Agnt \u00d7 PneDICTlens : Cearet No le( G(O POL Serunt'al RSS EXA AI GOOC SGB ACTU ATION MCMT SITREP LLM PRCDICTEn ME Pass SITRen detinL A4 ANALYSIS, CHRLTS, (OMPARSOn RUN X-I CdNCAT-"
+                },
+                {
+                    "sample_id": "21",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.6015,
+                    "wer": 0.9574,
+                    "exact_match": false,
+                    "latency_ms": 2947.98,
+                    "prediction": "DEVSP ACT WHITEBOALD API W H (TCBOARD(S) (NAVe DIAGANS ACIANED GEnIn! INAGL 1 TXT NAAnATIVL OF AGNE nodel THESL Agntl: (onveeT HUMAN PLAN DEP SUBAOTS TASnS, DEFINL CheuPoinT ET"
+                }
+            ]
+        },
+        "Zero_Detection_Fallback": {
+            "strategy_name": "Zero_Detection_Fallback",
+            "sample_count": 10,
+            "macro_cer": 0.7127,
+            "macro_wer": 1.0099,
+            "mean_latency_ms": 1272.1,
+            "median_latency_ms": 1192.61,
+            "exact_match_rate": 0.0,
+            "evaluations": [
+                {
+                    "sample_id": "06",
+                    "engine_used": "rapidocr_fallback",
+                    "fallback_triggered": true,
+                    "cer": 0.5778,
+                    "wer": 0.8571,
+                    "exact_match": false,
+                    "latency_ms": 2400.24,
+                    "prediction": "Fo Shot leAuvey-! AVCeS FRUITS BANAVAS kiwis lervas n!lons"
+                },
+                {
+                    "sample_id": "12",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.7751,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1125.11,
+                    "prediction": "[cont Ge yore voices) I &afnect lm Lena! oN & LZACATE MENF RY eancEs FAK 4"
+                },
+                {
+                    "sample_id": "13",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6919,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1401.2,
+                    "prediction": "\u2014\u2014S>\u2014\u2014 EO \u2014\u2014\u2014\u2014 PENS ce MAUS ED Al \u2014VYoORhe lowe ~~ Mey bet ! Lets bulk OF TY food 3. dniak. oe context stoec! Fly Sone! Let me See whet gan we \u2014\u2014 is ao, ee i: pothigs Sok > = ( Aowe.. Et Wine be HO\" ae = bitten IPAs | fa cea Te Spee oi :"
+                },
+                {
+                    "sample_id": "14",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.7707,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1217.16,
+                    "prediction": "eC OEE EAT ET V/A a 2 D Z v7 T \u2014\u2014\u2014 e_ (+R ELS ie ee. De wf Sih (7 Dipl i (K fod CAST: 5 CFP Docs P goteT LB"
+                },
+                {
+                    "sample_id": "15",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6813,
+                    "wer": 1.1053,
+                    "exact_match": false,
+                    "latency_ms": 1266.39,
+                    "prediction": "3 or LteWws owl O 7 wae ; \u2018 | bits 2 ne A . pensTS \u00a9 : pb I> cs"
+                },
+                {
+                    "sample_id": "16",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.902,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 847.04,
+                    "prediction": "Peoney LIQ SER."
+                },
+                {
+                    "sample_id": "18",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.7303,
+                    "wer": 1.2,
+                    "exact_match": false,
+                    "latency_ms": 1052.39,
+                    "prediction": "Tish: Will Te fost \u2014 ya Lavewoard py wee PLAY Suar (wr Tuts Weos Hs Lee Cy aa ae go? pe AE (7.09 gee xo, oer xo? a! oJ 79"
+                },
+                {
+                    "sample_id": "19",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.7321,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1026.21,
+                    "prediction": "VE BY : WHIT t 400th \u2014 m/xEed yA feSccad a Yaarve/ mne- peteem' La fre \u00a9? pe (Ques UNS ee Gastey garesesks sf Jeanaate fe Ther ci fodkui Y Mca 010F ?"
+                },
+                {
+                    "sample_id": "20",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.7458,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1189.44,
+                    "prediction": "(c0opoe Pre ot CT1aas * Cur et No de-( - ' AR =< A \u00a5 = lynne , Seq ema SA a Suee7ee WZ ies QeIs 15, CHRETS, COMPAR WON ff Crves t) Awh cys concatT\u2014 PDT"
+                },
+                {
+                    "sample_id": "21",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.5203,
+                    "wer": 0.9362,
+                    "exact_match": false,
+                    "latency_ms": 1195.77,
+                    "prediction": "Wy HA TTR eeDdCS) \u2014~) Genin AP\\ Gerinvl \u2014 Llen wed Tec DiAGeANS (nave 2 ree) : A : ra VAAnAaTive of well (innec _ -) A jeal ConvetT Test. Tunes 2 Oe Se i PLAW DEF w/ HUA GencantE TASKS, Defive. SeraselS J Checke-pstats ET"
+                }
+            ]
+        },
+        "Low_Confidence_Fallback": {
+            "strategy_name": "Low_Confidence_Fallback",
+            "sample_count": 10,
+            "macro_cer": 0.6758,
+            "macro_wer": 0.9438,
+            "mean_latency_ms": 2277.35,
+            "median_latency_ms": 2653.46,
+            "exact_match_rate": 0.0,
+            "evaluations": [
+                {
+                    "sample_id": "06",
+                    "engine_used": "rapidocr_fallback",
+                    "fallback_triggered": true,
+                    "cer": 0.5778,
+                    "wer": 0.8571,
+                    "exact_match": false,
+                    "latency_ms": 2396.24,
+                    "prediction": "Fo Shot leAuvey-! AVCeS FRUITS BANAVAS kiwis lervas n!lons"
+                },
+                {
+                    "sample_id": "12",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.7751,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1158.65,
+                    "prediction": "[cont Ge yore voices) I &afnect lm Lena! oN & LZACATE MENF RY eancEs FAK 4"
+                },
+                {
+                    "sample_id": "13",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6919,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1404.01,
+                    "prediction": "\u2014\u2014S>\u2014\u2014 EO \u2014\u2014\u2014\u2014 PENS ce MAUS ED Al \u2014VYoORhe lowe ~~ Mey bet ! Lets bulk OF TY food 3. dniak. oe context stoec! Fly Sone! Let me See whet gan we \u2014\u2014 is ao, ee i: pothigs Sok > = ( Aowe.. Et Wine be HO\" ae = bitten IPAs | fa cea Te Spee oi :"
+                },
+                {
+                    "sample_id": "14",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.7707,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1229.44,
+                    "prediction": "eC OEE EAT ET V/A a 2 D Z v7 T \u2014\u2014\u2014 e_ (+R ELS ie ee. De wf Sih (7 Dipl i (K fod CAST: 5 CFP Docs P goteT LB"
+                },
+                {
+                    "sample_id": "15",
+                    "engine_used": "rapidocr_fallback",
+                    "fallback_triggered": true,
+                    "cer": 0.5385,
+                    "wer": 0.8947,
+                    "exact_match": false,
+                    "latency_ms": 3274.91,
+                    "prediction": "LLNS OUTTUTS STORC wikI DOWASTLEAM WTPUTS CPD PUDLRSTS"
+                },
+                {
+                    "sample_id": "16",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.902,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 855.81,
+                    "prediction": "Peoney LIQ SER."
+                },
+                {
+                    "sample_id": "18",
+                    "engine_used": "rapidocr_fallback",
+                    "fallback_triggered": true,
+                    "cer": 0.5787,
+                    "wer": 0.88,
+                    "exact_match": false,
+                    "latency_ms": 2953.32,
+                    "prediction": "TASh : hHITESOCLL \u2192 CALENDAR WleL PLAN ny min Tots wEos SA T AULUNTANT 0100 DAY 1200 1800 0 0 00"
+                },
+                {
+                    "sample_id": "19",
+                    "engine_used": "rapidocr_fallback",
+                    "fallback_triggered": true,
+                    "cer": 0.6652,
+                    "wer": 0.9722,
+                    "exact_match": false,
+                    "latency_ms": 2910.68,
+                    "prediction": "TASh : h/HITESocad \u2192 iXED ELEmN. Ques ti yhieSoaaL  HAnDVnI TAC- datasea ? ha pwnithes JpArate Hn tnes Detcam ine DAUID"
+                },
+                {
+                    "sample_id": "20",
+                    "engine_used": "rapidocr_fallback",
+                    "fallback_triggered": true,
+                    "cer": 0.6564,
+                    "wer": 0.8769,
+                    "exact_match": false,
+                    "latency_ms": 3302.61,
+                    "prediction": "Agnt \u00d7 PneDICTlens : Cearet No le( G(O POL Serunt'al RSS EXA AI GOOC SGB ACTU ATION MCMT SITREP LLM PRCDICTEn ME Pass SITRen detinL A4 ANALYSIS, CHRLTS, (OMPARSOn RUN X-I CdNCAT-"
+                },
+                {
+                    "sample_id": "21",
+                    "engine_used": "rapidocr_fallback",
+                    "fallback_triggered": true,
+                    "cer": 0.6015,
+                    "wer": 0.9574,
+                    "exact_match": false,
+                    "latency_ms": 3287.86,
+                    "prediction": "DEVSP ACT WHITEBOALD API W H (TCBOARD(S) (NAVe DIAGANS ACIANED GEnIn! INAGL 1 TXT NAAnATIVL OF AGNE nodel THESL Agntl: (onveeT HUMAN PLAN DEP SUBAOTS TASnS, DEFINL CheuPoinT ET"
+                }
+            ]
+        }
+    },
+    "full_dataset_evaluation": {
+        "Tesseract_Only": {
+            "strategy_name": "Tesseract_Only",
+            "sample_count": 21,
+            "macro_cer": 0.6955,
+            "macro_wer": 1.0097,
+            "mean_latency_ms": 1125.37,
+            "median_latency_ms": 1097.63,
+            "exact_match_rate": 0.0,
+            "evaluations": [
+                {
+                    "sample_id": "01",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.5344,
+                    "wer": 1.0588,
+                    "exact_match": false,
+                    "latency_ms": 1237.97,
+                    "prediction": "WHIT EBSALD \u201c2 fe SM ry\u2019 lt we LLL LLL aa Bur! 14's nous tek at a Lolly ouihtoer A Aeigh \u00e9 ALD ( hove beregy wei EC by honk In fens My whi ti\u00a2 13 foad \u20ac\u00b0 fect phere"
+                },
+                {
+                    "sample_id": "02",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6358,
+                    "wer": 1.069,
+                    "exact_match": false,
+                    "latency_ms": 1064.33,
+                    "prediction": "lone Glu &5 7% 00S Com you Lhair we Wsrot nol / null tot o\u00e9 0 lal on a for repavre \u2018eye </ale decates ie ei pear is oe gbrvtotiens Va of fe wi oo"
+                },
+                {
+                    "sample_id": "03",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6732,
+                    "wer": 0.9796,
+                    "exact_match": false,
+                    "latency_ms": 1097.63,
+                    "prediction": "So wE Ques 7 cas See 4 Com you Lbaire we wrote mold / rwtAtedleal telah oa a few ne feck (ma teb wf panel PAB\"P Bi GOs previeciens Vila of fae wilh? py) hte bot OC me Lol / get gee"
+                },
+                {
+                    "sample_id": "04",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.5827,
+                    "wer": 0.9796,
+                    "exact_match": false,
+                    "latency_ms": 1161.04,
+                    "prediction": "fo we vues 7icas : ow Owe Lhair wa wngroe mole / nit@tedat to lal On 4 for refocrrce lmazes \u201c/ nannel Paeserip lees vA [read bho Bot sgbroietiens Wha Vf fe with? Al bcat \u00a9 stor 77\u00a2 flat a 16 Se fart let yee"
+                },
+                {
+                    "sample_id": "05",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6,
+                    "wer": 1.2195,
+                    "exact_match": false,
+                    "latency_ms": 1097.56,
+                    "prediction": "wy 1A PPA CAILS 0 hj $3 ond wee hflorF - Zi teh t& cork =~ chleateh vp feel MI yahoo [hea ae pawam). ree fe be Sle 72 RAEI. A_ ek RO Feet. COR Sec TIVE _- ae toc ~~ tN psontotext Ly phtedennee > Tat (00 ise / Sor cle"
+                },
+                {
+                    "sample_id": "06",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 1.0,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 797.66,
+                    "prediction": ""
+                },
+                {
+                    "sample_id": "07",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6797,
+                    "wer": 0.9524,
+                    "exact_match": false,
+                    "latency_ms": 1089.4,
+                    "prediction": "Faw Shot Llearrigy \u2014 a Yon to CAeIMES CITY Dub lw |e harc\u2014 firnor Son han"
+                },
+                {
+                    "sample_id": "08",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.7517,
+                    "wer": 0.9643,
+                    "exact_match": false,
+                    "latency_ms": 1008.14,
+                    "prediction": "RS het Leases \u2014- > Joow Meet 4 frep (of bs ny hear need \u00b0 Y hy"
+                },
+                {
+                    "sample_id": "09",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6265,
+                    "wer": 0.9535,
+                    "exact_match": false,
+                    "latency_ms": 1336.71,
+                    "prediction": "Fis Shot Lenny = > ly hat Bol hi by ) a i waite leeces? . a forrisp: mesg pnw tebe Lote suite oF nist pe? 2 L fontins, / we! \u2018L' jhe haloon pene ined Gbecs (uy? 10k!)"
+                },
+                {
+                    "sample_id": "10",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6107,
+                    "wer": 0.8929,
+                    "exact_match": false,
+                    "latency_ms": 1160.67,
+                    "prediction": "Faw Shot leawigy - > 9 YT ae ( 4 , a Ls we sew ns & FOr pe jaegRnet \u201cae Litts ore cool"
+                },
+                {
+                    "sample_id": "11",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.7073,
+                    "wer": 0.9559,
+                    "exact_match": false,
+                    "latency_ms": 1224.25,
+                    "prediction": "PERS 0 A 1 GAS% rr MAUS 2D { A IDEA e- case: Hunan WANTS To ee a Tesh SspecmrBe A/ agent bS etek e TAA A, \u201c| (a) phai (coll Ge porce re) 79 os oe T=T hheat 'S . - eantEDs FAK Tl feod = 22a 4"
+                },
+                {
+                    "sample_id": "12",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.7751,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1092.71,
+                    "prediction": "[cont Ge yore voices) I &afnect lm Lena! oN & LZACATE MENF RY eancEs FAK 4"
+                },
+                {
+                    "sample_id": "13",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6919,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1409.4,
+                    "prediction": "\u2014\u2014S>\u2014\u2014 EO \u2014\u2014\u2014\u2014 PENS ce MAUS ED Al \u2014VYoORhe lowe ~~ Mey bet ! Lets bulk OF TY food 3. dniak. oe context stoec! Fly Sone! Let me See whet gan we \u2014\u2014 is ao, ee i: pothigs Sok > = ( Aowe.. Et Wine be HO\" ae = bitten IPAs | fa cea Te Spee oi :"
+                },
+                {
+                    "sample_id": "14",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.7707,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1233.11,
+                    "prediction": "eC OEE EAT ET V/A a 2 D Z v7 T \u2014\u2014\u2014 e_ (+R ELS ie ee. De wf Sih (7 Dipl i (K fod CAST: 5 CFP Docs P goteT LB"
+                },
+                {
+                    "sample_id": "15",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6813,
+                    "wer": 1.1053,
+                    "exact_match": false,
+                    "latency_ms": 1270.96,
+                    "prediction": "3 or LteWws owl O 7 wae ; \u2018 | bits 2 ne A . pensTS \u00a9 : pb I> cs"
+                },
+                {
+                    "sample_id": "16",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.902,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 866.99,
+                    "prediction": "Peoney LIQ SER."
+                },
+                {
+                    "sample_id": "17",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6535,
+                    "wer": 0.9375,
+                    "exact_match": false,
+                    "latency_ms": 1029.67,
+                    "prediction": "other (ewmon VH/ TeheAtpD npifecti> 0 be x & st ai be tm yar"
+                },
+                {
+                    "sample_id": "18",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.7303,
+                    "wer": 1.2,
+                    "exact_match": false,
+                    "latency_ms": 1051.49,
+                    "prediction": "Tish: Will Te fost \u2014 ya Lavewoard py wee PLAY Suar (wr Tuts Weos Hs Lee Cy aa ae go? pe AE (7.09 gee xo, oer xo? a! oJ 79"
+                },
+                {
+                    "sample_id": "19",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.7321,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1032.29,
+                    "prediction": "VE BY : WHIT t 400th \u2014 m/xEed yA feSccad a Yaarve/ mne- peteem' La fre \u00a9? pe (Ques UNS ee Gastey garesesks sf Jeanaate fe Ther ci fodkui Y Mca 010F ?"
+                },
+                {
+                    "sample_id": "20",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.7458,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1178.01,
+                    "prediction": "(c0opoe Pre ot CT1aas * Cur et No de-( - ' AR =< A \u00a5 = lynne , Seq ema SA a Suee7ee WZ ies QeIs 15, CHRETS, COMPAR WON ff Crves t) Awh cys concatT\u2014 PDT"
+                },
+                {
+                    "sample_id": "21",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.5203,
+                    "wer": 0.9362,
+                    "exact_match": false,
+                    "latency_ms": 1192.72,
+                    "prediction": "Wy HA TTR eeDdCS) \u2014~) Genin AP\\ Gerinvl \u2014 Llen wed Tec DiAGeANS (nave 2 ree) : A : ra VAAnAaTive of well (innec _ -) A jeal ConvetT Test. Tunes 2 Oe Se i PLAW DEF w/ HUA GencantE TASKS, Defive. SeraselS J Checke-pstats ET"
+                }
+            ]
+        },
+        "RapidOCR_Only": {
+            "strategy_name": "RapidOCR_Only",
+            "sample_count": 21,
+            "macro_cer": 0.7003,
+            "macro_wer": 0.9311,
+            "mean_latency_ms": 3326.31,
+            "median_latency_ms": 2045.14,
+            "exact_match_rate": 0.0,
+            "evaluations": [
+                {
+                    "sample_id": "01",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.7249,
+                    "wer": 0.9118,
+                    "exact_match": false,
+                    "latency_ms": 1800.26,
+                    "prediction": "BUT! mkvnt heio t by hond in yenes baruy n wn Ete / hove k So to deciphe my wnitig is oal"
+                },
+                {
+                    "sample_id": "02",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.7919,
+                    "wer": 0.9655,
+                    "exact_match": false,
+                    "latency_ms": 1671.87,
+                    "prediction": "nulhinodol no lel on- a hiior nol I rAwel 'fhancatpties n-r?"
+                },
+                {
+                    "sample_id": "03",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.7559,
+                    "wer": 0.9796,
+                    "exact_match": false,
+                    "latency_ms": 1840.88,
+                    "prediction": "nulhinodol no ll on- .Cov hiior mol rAwel 'hangcapties nepow irgs ~/ n ? uston TTf Ant \u03b1 \"tso I Jet Al  cat Loula"
+                },
+                {
+                    "sample_id": "04",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.7953,
+                    "wer": 0.9796,
+                    "exact_match": false,
+                    "latency_ms": 1628.33,
+                    "prediction": "nulbhinodal no lel on- a hiior nol aangceptres nAnvel +nr ? ughom Tf nt \u03b1 \"tso"
+                },
+                {
+                    "sample_id": "05",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.7136,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1924.09,
+                    "prediction": "ktlous : 0 hhitsoand p e CLeAneL c L hhiteloon - 8 t . neeu t b T ako : CNA NO DANAM). fept. c Ce Tec hive : 'ocn'Rm L PSdotex+"
+                },
+                {
+                    "sample_id": "06",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.5778,
+                    "wer": 0.8571,
+                    "exact_match": false,
+                    "latency_ms": 1689.65,
+                    "prediction": "Fo Shot leAuvey-! AVCeS FRUITS BANAVAS kiwis lervas n!lons"
+                },
+                {
+                    "sample_id": "07",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.8516,
+                    "wer": 0.9524,
+                    "exact_match": false,
+                    "latency_ms": 1712.23,
+                    "prediction": "LOWNTR) DusIIN Arn USA"
+                },
+                {
+                    "sample_id": "08",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.9195,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1598.59,
+                    "prediction": "hy haic [Cons He-I"
+                },
+                {
+                    "sample_id": "09",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.7992,
+                    "wer": 0.9767,
+                    "exact_match": false,
+                    "latency_ms": 1868.23,
+                    "prediction": "umil lte8? I loit. A Sontines \u03b1 nispeliny ? + Cole shitehy\" Jonetins,"
+                },
+                {
+                    "sample_id": "10",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.5954,
+                    "wer": 0.8571,
+                    "exact_match": false,
+                    "latency_ms": 1963.83,
+                    "prediction": "h het asout fot [ile speeck? LLMs inRnect hrcase \u2192 LLMs orc Cool"
+                },
+                {
+                    "sample_id": "11",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.7778,
+                    "wer": 0.9412,
+                    "exact_match": false,
+                    "latency_ms": 2045.14,
+                    "prediction": "IDEA PENSO NAUSED AI - BASIC fnontload TRANSCRS TAL hhat's Youn PIZZA! HEMOR LLCATE ood : (PrzzA VETOR DB"
+                },
+                {
+                    "sample_id": "12",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.6986,
+                    "wer": 0.9048,
+                    "exact_match": false,
+                    "latency_ms": 2143.74,
+                    "prediction": "act(ontet\u2192 coull Se voice+Voice. hhat's PIZZA! CRCATE MEMORY D4NIECSFAV PIZZA VETOR DB"
+                },
+                {
+                    "sample_id": "13",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.6359,
+                    "wer": 0.9048,
+                    "exact_match": false,
+                    "latency_ms": 2540.84,
+                    "prediction": "PERSOIAuSED AI -VOnLFLOWQ Hey bot! lets build out ry Podl  dhink Contx+ stoc! hae . Hnm. rot hiy cout been prceuences READ Yr PrePo, \u56fdhhat be lo bi IPRs CCA TE Srpek been bitte"
+                },
+                {
+                    "sample_id": "14",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.5902,
+                    "wer": 0.9048,
+                    "exact_match": false,
+                    "latency_ms": 6330.43,
+                    "prediction": "PENSOIAUSED AI - LATENT VNLUL AREAS LLNS useL OUTTUTS PAOMTS STORC PnopT DOWNSTLEAM OWTPUTS CPD rUDASTS LIB PLONPT"
+                },
+                {
+                    "sample_id": "15",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.5385,
+                    "wer": 0.8947,
+                    "exact_match": false,
+                    "latency_ms": 5507.13,
+                    "prediction": "LLNS OUTTUTS STORC wikI DOWASTLEAM WTPUTS CPD PUDLRSTS"
+                },
+                {
+                    "sample_id": "16",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.7451,
+                    "wer": 0.9,
+                    "exact_match": false,
+                    "latency_ms": 4777.25,
+                    "prediction": "LLNS PROMPTS PnompT PLONPT LIB"
+                },
+                {
+                    "sample_id": "17",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.6931,
+                    "wer": 0.9375,
+                    "exact_match": false,
+                    "latency_ms": 4834.57,
+                    "prediction": "othen Le x n StRib+hm Henos  co l -tlea. Jome"
+                },
+                {
+                    "sample_id": "18",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.5787,
+                    "wer": 0.88,
+                    "exact_match": false,
+                    "latency_ms": 5567.66,
+                    "prediction": "TASh : hHITESOCLL \u2192 CALENDAR WleL PLAN ny min Tots wEos SA T AULUNTANT 0100 DAY 1200 1800 0 0 00"
+                },
+                {
+                    "sample_id": "19",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.6652,
+                    "wer": 0.9722,
+                    "exact_match": false,
+                    "latency_ms": 5322.21,
+                    "prediction": "TASh : h/HITESocad \u2192 iXED ELEmN. Ques ti yhieSoaaL  HAnDVnI TAC- datasea ? ha pwnithes JpArate Hn tnes Detcam ine DAUID"
+                },
+                {
+                    "sample_id": "20",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.6564,
+                    "wer": 0.8769,
+                    "exact_match": false,
+                    "latency_ms": 6650.53,
+                    "prediction": "Agnt \u00d7 PneDICTlens : Cearet No le( G(O POL Serunt'al RSS EXA AI GOOC SGB ACTU ATION MCMT SITREP LLM PRCDICTEn ME Pass SITRen detinL A4 ANALYSIS, CHRLTS, (OMPARSOn RUN X-I CdNCAT-"
+                },
+                {
+                    "sample_id": "21",
+                    "engine_used": "rapidocr",
+                    "fallback_triggered": false,
+                    "cer": 0.6015,
+                    "wer": 0.9574,
+                    "exact_match": false,
+                    "latency_ms": 6435.07,
+                    "prediction": "DEVSP ACT WHITEBOALD API W H (TCBOARD(S) (NAVe DIAGANS ACIANED GEnIn! INAGL 1 TXT NAAnATIVL OF AGNE nodel THESL Agntl: (onveeT HUMAN PLAN DEP SUBAOTS TASnS, DEFINL CheuPoinT ET"
+                }
+            ]
+        },
+        "Zero_Detection_Fallback": {
+            "strategy_name": "Zero_Detection_Fallback",
+            "sample_count": 21,
+            "macro_cer": 0.6754,
+            "macro_wer": 1.0029,
+            "mean_latency_ms": 1761.84,
+            "median_latency_ms": 1539.28,
+            "exact_match_rate": 0.0,
+            "evaluations": [
+                {
+                    "sample_id": "01",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.5344,
+                    "wer": 1.0588,
+                    "exact_match": false,
+                    "latency_ms": 1641.08,
+                    "prediction": "WHIT EBSALD \u201c2 fe SM ry\u2019 lt we LLL LLL aa Bur! 14's nous tek at a Lolly ouihtoer A Aeigh \u00e9 ALD ( hove beregy wei EC by honk In fens My whi ti\u00a2 13 foad \u20ac\u00b0 fect phere"
+                },
+                {
+                    "sample_id": "02",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6358,
+                    "wer": 1.069,
+                    "exact_match": false,
+                    "latency_ms": 1438.78,
+                    "prediction": "lone Glu &5 7% 00S Com you Lhair we Wsrot nol / null tot o\u00e9 0 lal on a for repavre \u2018eye </ale decates ie ei pear is oe gbrvtotiens Va of fe wi oo"
+                },
+                {
+                    "sample_id": "03",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6732,
+                    "wer": 0.9796,
+                    "exact_match": false,
+                    "latency_ms": 1507.2,
+                    "prediction": "So wE Ques 7 cas See 4 Com you Lbaire we wrote mold / rwtAtedleal telah oa a few ne feck (ma teb wf panel PAB\"P Bi GOs previeciens Vila of fae wilh? py) hte bot OC me Lol / get gee"
+                },
+                {
+                    "sample_id": "04",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.5827,
+                    "wer": 0.9796,
+                    "exact_match": false,
+                    "latency_ms": 1539.28,
+                    "prediction": "fo we vues 7icas : ow Owe Lhair wa wngroe mole / nit@tedat to lal On 4 for refocrrce lmazes \u201c/ nannel Paeserip lees vA [read bho Bot sgbroietiens Wha Vf fe with? Al bcat \u00a9 stor 77\u00a2 flat a 16 Se fart let yee"
+                },
+                {
+                    "sample_id": "05",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6,
+                    "wer": 1.2195,
+                    "exact_match": false,
+                    "latency_ms": 1462.54,
+                    "prediction": "wy 1A PPA CAILS 0 hj $3 ond wee hflorF - Zi teh t& cork =~ chleateh vp feel MI yahoo [hea ae pawam). ree fe be Sle 72 RAEI. A_ ek RO Feet. COR Sec TIVE _- ae toc ~~ tN psontotext Ly phtedennee > Tat (00 ise / Sor cle"
+                },
+                {
+                    "sample_id": "06",
+                    "engine_used": "rapidocr_fallback",
+                    "fallback_triggered": true,
+                    "cer": 0.5778,
+                    "wer": 0.8571,
+                    "exact_match": false,
+                    "latency_ms": 6117.73,
+                    "prediction": "Fo Shot leAuvey-! AVCeS FRUITS BANAVAS kiwis lervas n!lons"
+                },
+                {
+                    "sample_id": "07",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6797,
+                    "wer": 0.9524,
+                    "exact_match": false,
+                    "latency_ms": 1486.72,
+                    "prediction": "Faw Shot Llearrigy \u2014 a Yon to CAeIMES CITY Dub lw |e harc\u2014 firnor Son han"
+                },
+                {
+                    "sample_id": "08",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.7517,
+                    "wer": 0.9643,
+                    "exact_match": false,
+                    "latency_ms": 1338.67,
+                    "prediction": "RS het Leases \u2014- > Joow Meet 4 frep (of bs ny hear need \u00b0 Y hy"
+                },
+                {
+                    "sample_id": "09",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6265,
+                    "wer": 0.9535,
+                    "exact_match": false,
+                    "latency_ms": 1713.1,
+                    "prediction": "Fis Shot Lenny = > ly hat Bol hi by ) a i waite leeces? . a forrisp: mesg pnw tebe Lote suite oF nist pe? 2 L fontins, / we! \u2018L' jhe haloon pene ined Gbecs (uy? 10k!)"
+                },
+                {
+                    "sample_id": "10",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6107,
+                    "wer": 0.8929,
+                    "exact_match": false,
+                    "latency_ms": 1678.62,
+                    "prediction": "Faw Shot leawigy - > 9 YT ae ( 4 , a Ls we sew ns & FOr pe jaegRnet \u201cae Litts ore cool"
+                },
+                {
+                    "sample_id": "11",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.7073,
+                    "wer": 0.9559,
+                    "exact_match": false,
+                    "latency_ms": 1627.24,
+                    "prediction": "PERS 0 A 1 GAS% rr MAUS 2D { A IDEA e- case: Hunan WANTS To ee a Tesh SspecmrBe A/ agent bS etek e TAA A, \u201c| (a) phai (coll Ge porce re) 79 os oe T=T hheat 'S . - eantEDs FAK Tl feod = 22a 4"
+                },
+                {
+                    "sample_id": "12",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.7751,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1489.95,
+                    "prediction": "[cont Ge yore voices) I &afnect lm Lena! oN & LZACATE MENF RY eancEs FAK 4"
+                },
+                {
+                    "sample_id": "13",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6919,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1894.87,
+                    "prediction": "\u2014\u2014S>\u2014\u2014 EO \u2014\u2014\u2014\u2014 PENS ce MAUS ED Al \u2014VYoORhe lowe ~~ Mey bet ! Lets bulk OF TY food 3. dniak. oe context stoec! Fly Sone! Let me See whet gan we \u2014\u2014 is ao, ee i: pothigs Sok > = ( Aowe.. Et Wine be HO\" ae = bitten IPAs | fa cea Te Spee oi :"
+                },
+                {
+                    "sample_id": "14",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.7707,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1639.44,
+                    "prediction": "eC OEE EAT ET V/A a 2 D Z v7 T \u2014\u2014\u2014 e_ (+R ELS ie ee. De wf Sih (7 Dipl i (K fod CAST: 5 CFP Docs P goteT LB"
+                },
+                {
+                    "sample_id": "15",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6813,
+                    "wer": 1.1053,
+                    "exact_match": false,
+                    "latency_ms": 1596.04,
+                    "prediction": "3 or LteWws owl O 7 wae ; \u2018 | bits 2 ne A . pensTS \u00a9 : pb I> cs"
+                },
+                {
+                    "sample_id": "16",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.902,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1209.47,
+                    "prediction": "Peoney LIQ SER."
+                },
+                {
+                    "sample_id": "17",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6535,
+                    "wer": 0.9375,
+                    "exact_match": false,
+                    "latency_ms": 1445.54,
+                    "prediction": "other (ewmon VH/ TeheAtpD npifecti> 0 be x & st ai be tm yar"
+                },
+                {
+                    "sample_id": "18",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.7303,
+                    "wer": 1.2,
+                    "exact_match": false,
+                    "latency_ms": 1395.35,
+                    "prediction": "Tish: Will Te fost \u2014 ya Lavewoard py wee PLAY Suar (wr Tuts Weos Hs Lee Cy aa ae go? pe AE (7.09 gee xo, oer xo? a! oJ 79"
+                },
+                {
+                    "sample_id": "19",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.7321,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1411.93,
+                    "prediction": "VE BY : WHIT t 400th \u2014 m/xEed yA feSccad a Yaarve/ mne- peteem' La fre \u00a9? pe (Ques UNS ee Gastey garesesks sf Jeanaate fe Ther ci fodkui Y Mca 010F ?"
+                },
+                {
+                    "sample_id": "20",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.7458,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1728.36,
+                    "prediction": "(c0opoe Pre ot CT1aas * Cur et No de-( - ' AR =< A \u00a5 = lynne , Seq ema SA a Suee7ee WZ ies QeIs 15, CHRETS, COMPAR WON ff Crves t) Awh cys concatT\u2014 PDT"
+                },
+                {
+                    "sample_id": "21",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.5203,
+                    "wer": 0.9362,
+                    "exact_match": false,
+                    "latency_ms": 1636.69,
+                    "prediction": "Wy HA TTR eeDdCS) \u2014~) Genin AP\\ Gerinvl \u2014 Llen wed Tec DiAGeANS (nave 2 ree) : A : ra VAAnAaTive of well (innec _ -) A jeal ConvetT Test. Tunes 2 Oe Se i PLAW DEF w/ HUA GencantE TASKS, Defive. SeraselS J Checke-pstats ET"
+                }
+            ]
+        },
+        "Low_Confidence_Fallback": {
+            "strategy_name": "Low_Confidence_Fallback",
+            "sample_count": 21,
+            "macro_cer": 0.6871,
+            "macro_wer": 0.9656,
+            "mean_latency_ms": 4138.44,
+            "median_latency_ms": 1897.03,
+            "exact_match_rate": 0.0,
+            "evaluations": [
+                {
+                    "sample_id": "01",
+                    "engine_used": "rapidocr_fallback",
+                    "fallback_triggered": true,
+                    "cer": 0.7249,
+                    "wer": 0.9118,
+                    "exact_match": false,
+                    "latency_ms": 6708.66,
+                    "prediction": "BUT! mkvnt heio t by hond in yenes baruy n wn Ete / hove k So to deciphe my wnitig is oal"
+                },
+                {
+                    "sample_id": "02",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6358,
+                    "wer": 1.069,
+                    "exact_match": false,
+                    "latency_ms": 1442.81,
+                    "prediction": "lone Glu &5 7% 00S Com you Lhair we Wsrot nol / null tot o\u00e9 0 lal on a for repavre \u2018eye </ale decates ie ei pear is oe gbrvtotiens Va of fe wi oo"
+                },
+                {
+                    "sample_id": "03",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6732,
+                    "wer": 0.9796,
+                    "exact_match": false,
+                    "latency_ms": 1522.32,
+                    "prediction": "So wE Ques 7 cas See 4 Com you Lbaire we wrote mold / rwtAtedleal telah oa a few ne feck (ma teb wf panel PAB\"P Bi GOs previeciens Vila of fae wilh? py) hte bot OC me Lol / get gee"
+                },
+                {
+                    "sample_id": "04",
+                    "engine_used": "rapidocr_fallback",
+                    "fallback_triggered": true,
+                    "cer": 0.7953,
+                    "wer": 0.9796,
+                    "exact_match": false,
+                    "latency_ms": 6759.32,
+                    "prediction": "nulbhinodal no lel on- a hiior nol aangceptres nAnvel +nr ? ughom Tf nt \u03b1 \"tso"
+                },
+                {
+                    "sample_id": "05",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6,
+                    "wer": 1.2195,
+                    "exact_match": false,
+                    "latency_ms": 1481.17,
+                    "prediction": "wy 1A PPA CAILS 0 hj $3 ond wee hflorF - Zi teh t& cork =~ chleateh vp feel MI yahoo [hea ae pawam). ree fe be Sle 72 RAEI. A_ ek RO Feet. COR Sec TIVE _- ae toc ~~ tN psontotext Ly phtedennee > Tat (00 ise / Sor cle"
+                },
+                {
+                    "sample_id": "06",
+                    "engine_used": "rapidocr_fallback",
+                    "fallback_triggered": true,
+                    "cer": 0.5778,
+                    "wer": 0.8571,
+                    "exact_match": false,
+                    "latency_ms": 6002.12,
+                    "prediction": "Fo Shot leAuvey-! AVCeS FRUITS BANAVAS kiwis lervas n!lons"
+                },
+                {
+                    "sample_id": "07",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6797,
+                    "wer": 0.9524,
+                    "exact_match": false,
+                    "latency_ms": 1550.44,
+                    "prediction": "Faw Shot Llearrigy \u2014 a Yon to CAeIMES CITY Dub lw |e harc\u2014 firnor Son han"
+                },
+                {
+                    "sample_id": "08",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.7517,
+                    "wer": 0.9643,
+                    "exact_match": false,
+                    "latency_ms": 1379.55,
+                    "prediction": "RS het Leases \u2014- > Joow Meet 4 frep (of bs ny hear need \u00b0 Y hy"
+                },
+                {
+                    "sample_id": "09",
+                    "engine_used": "rapidocr_fallback",
+                    "fallback_triggered": true,
+                    "cer": 0.7992,
+                    "wer": 0.9767,
+                    "exact_match": false,
+                    "latency_ms": 6948.21,
+                    "prediction": "umil lte8? I loit. A Sontines \u03b1 nispeliny ? + Cole shitehy\" Jonetins,"
+                },
+                {
+                    "sample_id": "10",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6107,
+                    "wer": 0.8929,
+                    "exact_match": false,
+                    "latency_ms": 1543.0,
+                    "prediction": "Faw Shot leawigy - > 9 YT ae ( 4 , a Ls we sew ns & FOr pe jaegRnet \u201cae Litts ore cool"
+                },
+                {
+                    "sample_id": "11",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.7073,
+                    "wer": 0.9559,
+                    "exact_match": false,
+                    "latency_ms": 1687.97,
+                    "prediction": "PERS 0 A 1 GAS% rr MAUS 2D { A IDEA e- case: Hunan WANTS To ee a Tesh SspecmrBe A/ agent bS etek e TAA A, \u201c| (a) phai (coll Ge porce re) 79 os oe T=T hheat 'S . - eantEDs FAK Tl feod = 22a 4"
+                },
+                {
+                    "sample_id": "12",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.7751,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1478.45,
+                    "prediction": "[cont Ge yore voices) I &afnect lm Lena! oN & LZACATE MENF RY eancEs FAK 4"
+                },
+                {
+                    "sample_id": "13",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.6919,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1897.03,
+                    "prediction": "\u2014\u2014S>\u2014\u2014 EO \u2014\u2014\u2014\u2014 PENS ce MAUS ED Al \u2014VYoORhe lowe ~~ Mey bet ! Lets bulk OF TY food 3. dniak. oe context stoec! Fly Sone! Let me See whet gan we \u2014\u2014 is ao, ee i: pothigs Sok > = ( Aowe.. Et Wine be HO\" ae = bitten IPAs | fa cea Te Spee oi :"
+                },
+                {
+                    "sample_id": "14",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.7707,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1634.06,
+                    "prediction": "eC OEE EAT ET V/A a 2 D Z v7 T \u2014\u2014\u2014 e_ (+R ELS ie ee. De wf Sih (7 Dipl i (K fod CAST: 5 CFP Docs P goteT LB"
+                },
+                {
+                    "sample_id": "15",
+                    "engine_used": "rapidocr_fallback",
+                    "fallback_triggered": true,
+                    "cer": 0.5385,
+                    "wer": 0.8947,
+                    "exact_match": false,
+                    "latency_ms": 7178.9,
+                    "prediction": "LLNS OUTTUTS STORC wikI DOWASTLEAM WTPUTS CPD PUDLRSTS"
+                },
+                {
+                    "sample_id": "16",
+                    "engine_used": "tesseract",
+                    "fallback_triggered": false,
+                    "cer": 0.902,
+                    "wer": 1.0,
+                    "exact_match": false,
+                    "latency_ms": 1164.1,
+                    "prediction": "Peoney LIQ SER."
+                },
+                {
+                    "sample_id": "17",
+                    "engine_used": "rapidocr_fallback",
+                    "fallback_triggered": true,
+                    "cer": 0.6931,
+                    "wer": 0.9375,
+                    "exact_match": false,
+                    "latency_ms": 6479.95,
+                    "prediction": "othen Le x n StRib+hm Henos  co l -tlea. Jome"
+                },
+                {
+                    "sample_id": "18",
+                    "engine_used": "rapidocr_fallback",
+                    "fallback_triggered": true,
+                    "cer": 0.5787,
+                    "wer": 0.88,
+                    "exact_match": false,
+                    "latency_ms": 6965.76,
+                    "prediction": "TASh : hHITESOCLL \u2192 CALENDAR WleL PLAN ny min Tots wEos SA T AULUNTANT 0100 DAY 1200 1800 0 0 00"
+                },
+                {
+                    "sample_id": "19",
+                    "engine_used": "rapidocr_fallback",
+                    "fallback_triggered": true,
+                    "cer": 0.6652,
+                    "wer": 0.9722,
+                    "exact_match": false,
+                    "latency_ms": 6874.52,
+                    "prediction": "TASh : h/HITESocad \u2192 iXED ELEmN. Ques ti yhieSoaaL  HAnDVnI TAC- datasea ? ha pwnithes JpArate Hn tnes Detcam ine DAUID"
+                },
+                {
+                    "sample_id": "20",
+                    "engine_used": "rapidocr_fallback",
+                    "fallback_triggered": true,
+                    "cer": 0.6564,
+                    "wer": 0.8769,
+                    "exact_match": false,
+                    "latency_ms": 8229.5,
+                    "prediction": "Agnt \u00d7 PneDICTlens : Cearet No le( G(O POL Serunt'al RSS EXA AI GOOC SGB ACTU ATION MCMT SITREP LLM PRCDICTEn ME Pass SITRen detinL A4 ANALYSIS, CHRLTS, (OMPARSOn RUN X-I CdNCAT-"
+                },
+                {
+                    "sample_id": "21",
+                    "engine_used": "rapidocr_fallback",
+                    "fallback_triggered": true,
+                    "cer": 0.6015,
+                    "wer": 0.9574,
+                    "exact_match": false,
+                    "latency_ms": 7979.49,
+                    "prediction": "DEVSP ACT WHITEBOALD API W H (TCBOARD(S) (NAVe DIAGANS ACIANED GEnIn! INAGL 1 TXT NAAnATIVL OF AGNE nodel THESL Agntl: (onveeT HUMAN PLAN DEP SUBAOTS TASnS, DEFINL CheuPoinT ET"
+                }
+            ]
+        }
+    }
+}
