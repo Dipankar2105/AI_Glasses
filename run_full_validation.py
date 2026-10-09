@@ -40,7 +40,7 @@ def main() -> int:
     print(f"Benchmark Suite Status: {'PASSED' if bench_result.returncode == 0 else 'FAILED'}")
 
     if test_result.returncode == 0 and bench_result.returncode == 0:
-        print("\nAll 192 software test cases and benchmark suites passed validation successfully!")
+        print("\nAll software test cases and benchmark suites passed validation successfully!")
         return 0
     else:
         print("\nValidation completed with failures. Inspect logs above.")
