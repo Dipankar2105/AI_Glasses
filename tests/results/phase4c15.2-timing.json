@@ -1,0 +1,708 @@
+{
+    "benchmark_name": "Phase 4C.15.2 Controlled Fallback Timing & Integrity Benchmark",
+    "timestamp": "2026-10-09 17:00:38",
+    "cold_start_latencies_ms": {
+        "tesseract": 4.86,
+        "rapidocr": 1922.14
+    },
+    "measurement_parameters": {
+        "repetitions": 3,
+        "timing_boundary": "OCRInput -> OCREngine.process() -> OCRResult (excluding disk I/O and image decoding)",
+        "memory_preloading": true,
+        "hardware": "AMD64 Windows 11 CPU"
+    },
+    "dataset_summaries": {
+        "full_dataset": {
+            "sample_count": 21,
+            "fallback_count": 1,
+            "fallback_rate": 0.0476,
+            "macro_cer": 0.6754,
+            "macro_wer": 1.0029,
+            "exact_match_count": 0,
+            "exact_match_rate": 0.0,
+            "strategy_c_mean_lat_ms": 1591.6,
+            "strategy_c_median_lat_ms": 1379.6,
+            "tesseract_mean_lat_ms": 1405.91,
+            "tesseract_median_lat_ms": 1431.37
+        },
+        "dev_split": {
+            "sample_count": 11,
+            "fallback_count": 0,
+            "fallback_rate": 0.0,
+            "macro_cer": 0.6414,
+            "macro_wer": 0.9966,
+            "exact_match_count": 0,
+            "exact_match_rate": 0.0,
+            "strategy_c_mean_lat_ms": 1388.34,
+            "strategy_c_median_lat_ms": 1364.25,
+            "tesseract_mean_lat_ms": 1455.26,
+            "tesseract_median_lat_ms": 1450.46
+        },
+        "heldout_split": {
+            "sample_count": 10,
+            "fallback_count": 1,
+            "fallback_rate": 0.1,
+            "macro_cer": 0.7127,
+            "macro_wer": 1.0099,
+            "exact_match_count": 0,
+            "exact_match_rate": 0.0,
+            "strategy_c_mean_lat_ms": 1815.18,
+            "strategy_c_median_lat_ms": 1418.74,
+            "tesseract_mean_lat_ms": 1351.63,
+            "tesseract_median_lat_ms": 1377.18
+        }
+    },
+    "per_sample_evaluations": [
+        {
+            "sample_id": "01",
+            "split": "Dev",
+            "category": "prose",
+            "file_name": "01.webp",
+            "dimensions": [
+                4096,
+                3072
+            ],
+            "fallback_triggered": false,
+            "engine_used": "tesseract",
+            "tesseract_latencies_ms": [
+                1734.81,
+                1552.79,
+                1556.39
+            ],
+            "tesseract_mean_lat_ms": 1614.66,
+            "tesseract_median_lat_ms": 1556.39,
+            "strategy_c_latencies_ms": [
+                1562.35,
+                1521.94,
+                1217.08
+            ],
+            "strategy_c_mean_lat_ms": 1433.79,
+            "strategy_c_median_lat_ms": 1521.94,
+            "cer": 0.5344,
+            "wer": 1.0588,
+            "exact_match": false,
+            "reference_text": "WHITEBOARD OCR \u2192 FEW SAMPLE TEST\n\nI have rediscovered whiteboarding!\nBUT!\nIt's mounted at a really awkward height\nAND\nI have barely written by hand in years\nSo\nmy writing is hard to decipher",
+            "prediction": "WHIT EBSALD \u201c2 fe SM ry\u2019 lt we LLL LLL aa Bur! 14's nous tek at a Lolly ouihtoer A Aeigh \u00e9 ALD ( hove beregy wei EC by honk In fens My whi ti\u00a2 13 foad \u20ac\u00b0 fect phere"
+        },
+        {
+            "sample_id": "02",
+            "split": "Dev",
+            "category": "list",
+            "file_name": "02.webp",
+            "dimensions": [
+                4096,
+                3072
+            ],
+            "fallback_triggered": false,
+            "engine_used": "tesseract",
+            "tesseract_latencies_ms": [
+                1392.73,
+                1388.72,
+                1384.51
+            ],
+            "tesseract_mean_lat_ms": 1388.65,
+            "tesseract_median_lat_ms": 1388.72,
+            "strategy_c_latencies_ms": [
+                1367.53,
+                1433.06,
+                1050.69
+            ],
+            "strategy_c_mean_lat_ms": 1283.76,
+            "strategy_c_median_lat_ms": 1367.53,
+            "cer": 0.6358,
+            "wer": 1.069,
+            "exact_match": false,
+            "reference_text": "SOME QUESTIONS\n\nCan you train a vision model / multimodal model on\na few reference images w/ manual transcriptions / ground\ntruths?\nWhat about abbreviations like w/ for with?",
+            "prediction": "lone Glu &5 7% 00S Com you Lhair we Wsrot nol / null tot o\u00e9 0 lal on a for repavre \u2018eye </ale decates ie ei pear is oe gbrvtotiens Va of fe wi oo"
+        },
+        {
+            "sample_id": "03",
+            "split": "Dev",
+            "category": "list",
+            "file_name": "03.webp",
+            "dimensions": [
+                4096,
+                3072
+            ],
+            "fallback_triggered": false,
+            "engine_used": "tesseract",
+            "tesseract_latencies_ms": [
+                1428.27,
+                1457.99,
+                1465.11
+            ],
+            "tesseract_mean_lat_ms": 1450.46,
+            "tesseract_median_lat_ms": 1457.99,
+            "strategy_c_latencies_ms": [
+                1432.76,
+                1428.4,
+                1096.04
+            ],
+            "strategy_c_mean_lat_ms": 1319.07,
+            "strategy_c_median_lat_ms": 1428.4,
+            "cer": 0.6732,
+            "wer": 0.9796,
+            "exact_match": false,
+            "reference_text": "SOME QUESTIONS\n\n\u2022 Can you train a vision model / multimodal model on\n  a few reference images w/ manual transcriptions / ground\n  truths?\n\u2022 What about abbreviations like w/ for with?\n\u2022 Could I get AI to create a custom TTF font & if so\n  how much training data?",
+            "prediction": "So wE Ques 7 cas See 4 Com you Lbaire we wrote mold / rwtAtedleal telah oa a few ne feck (ma teb wf panel PAB\"P Bi GOs previeciens Vila of fae wilh? py) hte bot OC me Lol / get gee"
+        },
+        {
+            "sample_id": "04",
+            "split": "Dev",
+            "category": "list",
+            "file_name": "04.webp",
+            "dimensions": [
+                4096,
+                3072
+            ],
+            "fallback_triggered": false,
+            "engine_used": "tesseract",
+            "tesseract_latencies_ms": [
+                1475.95,
+                1497.87,
+                1511.66
+            ],
+            "tesseract_mean_lat_ms": 1495.16,
+            "tesseract_median_lat_ms": 1497.87,
+            "strategy_c_latencies_ms": [
+                1501.87,
+                1509.8,
+                1127.15
+            ],
+            "strategy_c_mean_lat_ms": 1379.6,
+            "strategy_c_median_lat_ms": 1501.87,
+            "cer": 0.5827,
+            "wer": 0.9796,
+            "exact_match": false,
+            "reference_text": "SOME QUESTIONS\n\n\u2022 Can you train a vision model / multimodal model on\n  a few reference images w/ manual transcriptions / ground\n  truths?\n\u2022 What about abbreviations like w/ for with?\n\u2022 Could I get AI to create a custom TTF font & if so\n  how much training data?",
+            "prediction": "fo we vues 7icas : ow Owe Lhair wa wngroe mole / nit@tedat to lal On 4 for refocrrce lmazes \u201c/ nannel Paeserip lees vA [read bho Bot sgbroietiens Wha Vf fe with? Al bcat \u00a9 stor 77\u00a2 flat a 16 Se fart let yee"
+        },
+        {
+            "sample_id": "05",
+            "split": "Dev",
+            "category": "list",
+            "file_name": "05.webp",
+            "dimensions": [
+                4096,
+                3072
+            ],
+            "fallback_triggered": false,
+            "engine_used": "tesseract",
+            "tesseract_latencies_ms": [
+                1464.61,
+                1398.69,
+                1430.81
+            ],
+            "tesseract_mean_lat_ms": 1431.37,
+            "tesseract_median_lat_ms": 1430.81,
+            "strategy_c_latencies_ms": [
+                1415.69,
+                1422.11,
+                1096.85
+            ],
+            "strategy_c_mean_lat_ms": 1311.55,
+            "strategy_c_median_lat_ms": 1415.69,
+            "cer": 0.6,
+            "wer": 1.2195,
+            "exact_match": false,
+            "reference_text": "Why / Applications\n\n\u25cb Whiteboard workflows:\n    \u21b3 Whiteboard \u2192 cleaned up tech diagram\n      (nano banana). needs to be able to parse a\n      \"OCR\" raw text. Objective: \u2191 accuracy &\n      \u2193 pseudotext\n    \u21b3 Whiteboard \u2192 text / todo list / SOL etc.",
+            "prediction": "wy 1A PPA CAILS 0 hj $3 ond wee hflorF - Zi teh t& cork =~ chleateh vp feel MI yahoo [hea ae pawam). ree fe be Sle 72 RAEI. A_ ek RO Feet. COR Sec TIVE _- ae toc ~~ tN psontotext Ly phtedennee > Tat (00 ise / Sor cle"
+        },
+        {
+            "sample_id": "06",
+            "split": "HeldOut",
+            "category": "diagram",
+            "file_name": "06.webp",
+            "dimensions": [
+                4096,
+                3072
+            ],
+            "fallback_triggered": true,
+            "engine_used": "rapidocr_fallback",
+            "tesseract_latencies_ms": [
+                1110.67,
+                1125.34,
+                1112.91
+            ],
+            "tesseract_mean_lat_ms": 1116.3,
+            "tesseract_median_lat_ms": 1112.91,
+            "strategy_c_latencies_ms": [
+                9119.37,
+                5840.66,
+                2453.06
+            ],
+            "strategy_c_mean_lat_ms": 5804.36,
+            "strategy_c_median_lat_ms": 5840.66,
+            "cer": 0.5778,
+            "wer": 0.8571,
+            "exact_match": false,
+            "reference_text": "Few Shot Learning - 1\n\n        Apples\n       \u2197\n      /\n( FRUITS ) \u2192 Oranges\n      \\\u2192 Bananas\n       \u2198\n        Lemons\nKiwis \u2190\n     \u2199\nMelons",
+            "prediction": "Fo Shot leAuvey-! AVCeS FRUITS BANAVAS kiwis lervas n!lons"
+        },
+        {
+            "sample_id": "07",
+            "split": "Dev",
+            "category": "table",
+            "file_name": "07.webp",
+            "dimensions": [
+                4096,
+                3072
+            ],
+            "fallback_triggered": false,
+            "engine_used": "tesseract",
+            "tesseract_latencies_ms": [
+                1407.32,
+                1454.43,
+                1412.09
+            ],
+            "tesseract_mean_lat_ms": 1424.61,
+            "tesseract_median_lat_ms": 1412.09,
+            "strategy_c_latencies_ms": [
+                1827.57,
+                1890.17,
+                1356.8
+            ],
+            "strategy_c_mean_lat_ms": 1691.51,
+            "strategy_c_median_lat_ms": 1827.57,
+            "cer": 0.6797,
+            "wer": 0.9524,
+            "exact_match": false,
+            "reference_text": "Few Shot Learning - 2\n\nWORLD CAPITALS\n\nCITY          | COUNTRY\n--------------+---------\nDublin        | Ireland\nAmman         | Jordan\nWashington DC | USA",
+            "prediction": "Faw Shot Llearrigy \u2014 a Yon to CAeIMES CITY Dub lw |e harc\u2014 firnor Son han"
+        },
+        {
+            "sample_id": "08",
+            "split": "Dev",
+            "category": "flowchart",
+            "file_name": "08.webp",
+            "dimensions": [
+                4096,
+                3072
+            ],
+            "fallback_triggered": false,
+            "engine_used": "tesseract",
+            "tesseract_latencies_ms": [
+                1307.31,
+                1342.54,
+                1304.68
+            ],
+            "tesseract_mean_lat_ms": 1318.17,
+            "tesseract_median_lat_ms": 1307.31,
+            "strategy_c_latencies_ms": [
+                1293.74,
+                1324.33,
+                1027.48
+            ],
+            "strategy_c_mean_lat_ms": 1215.18,
+            "strategy_c_median_lat_ms": 1293.74,
+            "cer": 0.7517,
+            "wer": 0.9643,
+            "exact_match": false,
+            "reference_text": "Few Shot Learning - 3\n\n        Zoom Meeting Prep SOP\n\n        Is my hair a mess?\n           /           \\\n          Y             N\n          \u2193             \u2193\n      \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510   \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n      \u2502COMB HAIR\u2502   \u2502CHILL OUT!\u2502\n      \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518   \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
+            "prediction": "RS het Leases \u2014- > Joow Meet 4 frep (of bs ny hear need \u00b0 Y hy"
+        },
+        {
+            "sample_id": "09",
+            "split": "Dev",
+            "category": "list",
+            "file_name": "09.webp",
+            "dimensions": [
+                4096,
+                3072
+            ],
+            "fallback_triggered": false,
+            "engine_used": "tesseract",
+            "tesseract_latencies_ms": [
+                1643.67,
+                1682.42,
+                1646.91
+            ],
+            "tesseract_mean_lat_ms": 1657.67,
+            "tesseract_median_lat_ms": 1646.91,
+            "strategy_c_latencies_ms": [
+                1648.38,
+                1693.64,
+                1330.56
+            ],
+            "strategy_c_mean_lat_ms": 1557.52,
+            "strategy_c_median_lat_ms": 1648.38,
+            "cer": 0.6265,
+            "wer": 0.9535,
+            "exact_match": false,
+            "reference_text": "Few Shot Learning - 3\n\nWhat about variability in how we write letters?\n  \u21b3 Sometimes I dot i's. Sometimes I don't.\n  \u21b3 Informal / missing punctuation?\n  \u21b3 \"Code switching\" & misspellings?\n  \u21b3 Sometimes I write 'b' like balloon & sometimes\n    balloon (why? IDK!)",
+            "prediction": "Fis Shot Lenny = > ly hat Bol hi by ) a i waite leeces? . a forrisp: mesg pnw tebe Lote suite oF nist pe? 2 L fontins, / we! \u2018L' jhe haloon pene ined Gbecs (uy? 10k!)"
+        },
+        {
+            "sample_id": "10",
+            "split": "Dev",
+            "category": "list",
+            "file_name": "10.webp",
+            "dimensions": [
+                4096,
+                3072
+            ],
+            "fallback_triggered": false,
+            "engine_used": "tesseract",
+            "tesseract_latencies_ms": [
+                1485.57,
+                1476.77,
+                1515.37
+            ],
+            "tesseract_mean_lat_ms": 1492.57,
+            "tesseract_median_lat_ms": 1485.57,
+            "strategy_c_latencies_ms": [
+                1457.17,
+                1473.3,
+                1162.28
+            ],
+            "strategy_c_mean_lat_ms": 1364.25,
+            "strategy_c_median_lat_ms": 1457.17,
+            "cer": 0.6107,
+            "wer": 0.8929,
+            "exact_match": false,
+            "reference_text": "Few Shot Learning - 3\n\nWhat about txt like speech?\n  \u2193\n\nLLMs R cool         \u2192  LLMs are cool!\n   or incorrect uppercase\nLLMs R cool         \u2192  LLMs are cool",
+            "prediction": "Faw Shot leawigy - > 9 YT ae ( 4 , a Ls we sew ns & FOr pe jaegRnet \u201cae Litts ore cool"
+        },
+        {
+            "sample_id": "11",
+            "split": "Dev",
+            "category": "diagram",
+            "file_name": "11.webp",
+            "dimensions": [
+                4096,
+                3072
+            ],
+            "fallback_triggered": false,
+            "engine_used": "tesseract",
+            "tesseract_latencies_ms": [
+                1623.43,
+                1584.52,
+                1248.51
+            ],
+            "tesseract_mean_lat_ms": 1485.49,
+            "tesseract_median_lat_ms": 1584.52,
+            "strategy_c_latencies_ms": [
+                1593.32,
+                1591.98,
+                1218.46
+            ],
+            "strategy_c_mean_lat_ms": 1467.92,
+            "strategy_c_median_lat_ms": 1591.98,
+            "cer": 0.7073,
+            "wer": 0.9559,
+            "exact_match": false,
+            "reference_text": "PERSONALISED AI \u2192 BASIC IDEA\n\nUse-case: Human wants to create a task-specific AI agent\n& frontload context\n\nTactic: Create AI agent to \"interview\" you \u2192 transcribe\n        (could be voice \u2192 voice!) \u2192 extract content \u2192 vector DB\n\n[bot] \u2500\u2500> [ What's your fav food? ]\n           [ PIZZA! ]  :)\n  \u2193\nCREATE MEMORY\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502 Daniel's fav  \u2502\n\u2502 food = PIZZA  \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n        \u2193\n      ( VECTOR DB )",
+            "prediction": "PERS 0 A 1 GAS% rr MAUS 2D { A IDEA e- case: Hunan WANTS To ee a Tesh SspecmrBe A/ agent bS etek e TAA A, \u201c| (a) phai (coll Ge porce re) 79 os oe T=T hheat 'S . - eantEDs FAK Tl feod = 22a 4"
+        },
+        {
+            "sample_id": "12",
+            "split": "HeldOut",
+            "category": "diagram",
+            "file_name": "12.webp",
+            "dimensions": [
+                4096,
+                3072
+            ],
+            "fallback_triggered": false,
+            "engine_used": "tesseract",
+            "tesseract_latencies_ms": [
+                1437.5,
+                1425.18,
+                1137.61
+            ],
+            "tesseract_mean_lat_ms": 1333.43,
+            "tesseract_median_lat_ms": 1425.18,
+            "strategy_c_latencies_ms": [
+                1472.83,
+                1448.07,
+                1069.41
+            ],
+            "strategy_c_mean_lat_ms": 1330.1,
+            "strategy_c_median_lat_ms": 1448.07,
+            "cer": 0.7751,
+            "wer": 1.0,
+            "exact_match": false,
+            "reference_text": "(could be voice \u2192 voice!) \u2192 Extract content \u2192 V[ector DB]\n\n[bot] \u2500\u2500> [ What's your fav food? ]\n           [ PIZZA! ]  :)\n  \u2193\nCREATE MEMORY\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502 Daniel's fav  \u2502\n\u2502 food = PIZZA  \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n        \u2193\n     ( VECTOR DB )",
+            "prediction": "[cont Ge yore voices) I &afnect lm Lena! oN & LZACATE MENF RY eancEs FAK 4"
+        },
+        {
+            "sample_id": "13",
+            "split": "HeldOut",
+            "category": "diagram",
+            "file_name": "13.webp",
+            "dimensions": [
+                4096,
+                3072
+            ],
+            "fallback_triggered": false,
+            "engine_used": "tesseract",
+            "tesseract_latencies_ms": [
+                1756.9,
+                1793.48,
+                1409.84
+            ],
+            "tesseract_mean_lat_ms": 1653.41,
+            "tesseract_median_lat_ms": 1756.9,
+            "strategy_c_latencies_ms": [
+                1842.93,
+                1764.92,
+                1381.85
+            ],
+            "strategy_c_mean_lat_ms": 1663.23,
+            "strategy_c_median_lat_ms": 1764.92,
+            "cer": 0.6919,
+            "wer": 1.0,
+            "exact_match": false,
+            "reference_text": "PERSONALISED AI \u2014 WORKFLOW 2\n\n(user) Hey bot! Let's build out my food & drink\n       context store!\n\n(bot)  Sure! Let me see what gaps we have...\n       \u2193\n       READ \u2192 (vector DB) \u2192 (bot) Hmm. nothing about\n                                   beer preferences!\n\n(bot) What beer do you prefer?\n(user) Super bitter IPAs          CREATE \u2192\n                        \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n                  (bot) \u2502 User's fav beer =   \u2502\n                        \u2502 bitter IPA          \u2502\n                        \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
+            "prediction": "\u2014\u2014S>\u2014\u2014 EO \u2014\u2014\u2014\u2014 PENS ce MAUS ED Al \u2014VYoORhe lowe ~~ Mey bet ! Lets bulk OF TY food 3. dniak. oe context stoec! Fly Sone! Let me See whet gan we \u2014\u2014 is ao, ee i: pothigs Sok > = ( Aowe.. Et Wine be HO\" ae = bitten IPAs | fa cea Te Spee oi :"
+        },
+        {
+            "sample_id": "14",
+            "split": "HeldOut",
+            "category": "diagram",
+            "file_name": "14.webp",
+            "dimensions": [
+                4096,
+                3072
+            ],
+            "fallback_triggered": false,
+            "engine_used": "tesseract",
+            "tesseract_latencies_ms": [
+                1567.47,
+                1573.57,
+                1230.26
+            ],
+            "tesseract_mean_lat_ms": 1457.1,
+            "tesseract_median_lat_ms": 1567.47,
+            "strategy_c_latencies_ms": [
+                1588.2,
+                1588.91,
+                1205.38
+            ],
+            "strategy_c_mean_lat_ms": 1460.83,
+            "strategy_c_median_lat_ms": 1588.2,
+            "cer": 0.7707,
+            "wer": 1.0,
+            "exact_match": false,
+            "reference_text": "PERSONALISED AI \u2014 LATENT VALUE AREAS\n\n            (user)              (bot)\n            USER                LLM'S\n            PROMPTS             OUTPUTS\n              \u2502                   \u2502\n              \u2193                   \u2193\n         PROMPT           \u2192   CONVO (1)\n         HISTORY  (2)         STORE\n              \u2193                 \u2502   \u2198\n              \u2193                 \u2193    WIKI\n         PROMPT              DOWNSTREAM\n         LIB \u2192 USER          OUTPUTS\n               CONTEXT        \u2199   \u2193   \u2198\n                          PODCASTS  CPD  DOCS",
+            "prediction": "eC OEE EAT ET V/A a 2 D Z v7 T \u2014\u2014\u2014 e_ (+R ELS ie ee. De wf Sih (7 Dipl i (K fod CAST: 5 CFP Docs P goteT LB"
+        },
+        {
+            "sample_id": "15",
+            "split": "HeldOut",
+            "category": "diagram",
+            "file_name": "15.webp",
+            "dimensions": [
+                4096,
+                3072
+            ],
+            "fallback_triggered": false,
+            "engine_used": "tesseract",
+            "tesseract_latencies_ms": [
+                1557.97,
+                1596.8,
+                1281.4
+            ],
+            "tesseract_mean_lat_ms": 1478.72,
+            "tesseract_median_lat_ms": 1557.97,
+            "strategy_c_latencies_ms": [
+                1593.98,
+                1639.06,
+                1243.73
+            ],
+            "strategy_c_mean_lat_ms": 1492.25,
+            "strategy_c_median_lat_ms": 1593.98,
+            "cer": 0.6813,
+            "wer": 1.1053,
+            "exact_match": false,
+            "reference_text": "(bot) LLM'S OUTPUTS  \u2192  CONVO (1)\n                         STORE\n                          \u2502   \u2198\n                          \u2193    WIKI\n                      DOWNSTREAM\n                      OUTPUTS\n                       \u2199   \u2193   \u2198\n                  PODCASTS CPD DOCS",
+            "prediction": "3 or LteWws owl O 7 wae ; \u2018 | bits 2 ne A . pensTS \u00a9 : pb I> cs"
+        },
+        {
+            "sample_id": "16",
+            "split": "HeldOut",
+            "category": "diagram",
+            "file_name": "16.webp",
+            "dimensions": [
+                4096,
+                3072
+            ],
+            "fallback_triggered": false,
+            "engine_used": "tesseract",
+            "tesseract_latencies_ms": [
+                1155.9,
+                1189.75,
+                827.62
+            ],
+            "tesseract_mean_lat_ms": 1057.76,
+            "tesseract_median_lat_ms": 1155.9,
+            "strategy_c_latencies_ms": [
+                1175.94,
+                1171.93,
+                823.22
+            ],
+            "strategy_c_mean_lat_ms": 1057.03,
+            "strategy_c_median_lat_ms": 1171.93,
+            "cer": 0.902,
+            "wer": 1.0,
+            "exact_match": false,
+            "reference_text": "(user)                    (bot)\nUSER                      LLM'S\nPROMPTS                   OUT[PUTS]\n   \u2502\n   \u2193\nPROMPT           \u2500\u2500\u2500\u2500\u2510\nHISTORY  (2)         \u2502\n   \u2502                 \u2193\n   \u2193              USER\nPROMPT LIB        CONTEXT",
+            "prediction": "Peoney LIQ SER."
+        },
+        {
+            "sample_id": "17",
+            "split": "Dev",
+            "category": "prose",
+            "file_name": "17.webp",
+            "dimensions": [
+                4096,
+                3072
+            ],
+            "fallback_triggered": false,
+            "engine_used": "tesseract",
+            "tesseract_latencies_ms": [
+                1307.62,
+                1422.97,
+                1016.6
+            ],
+            "tesseract_mean_lat_ms": 1249.06,
+            "tesseract_median_lat_ms": 1307.62,
+            "strategy_c_latencies_ms": [
+                1352.57,
+                1382.79,
+                1007.56
+            ],
+            "strategy_c_mean_lat_ms": 1247.64,
+            "strategy_c_median_lat_ms": 1352.57,
+            "cer": 0.6535,
+            "wer": 0.9375,
+            "exact_match": false,
+            "reference_text": "Other Common Whiteboard Imperfections\n\n  o  Use X or strikethrough\n\n        Here's      cool  ~~ideas~~\n               \u2717           ideas\n           are\n          some",
+            "prediction": "other (ewmon VH/ TeheAtpD npifecti> 0 be x & st ai be tm yar"
+        },
+        {
+            "sample_id": "18",
+            "split": "HeldOut",
+            "category": "table",
+            "file_name": "18.webp",
+            "dimensions": [
+                4096,
+                3072
+            ],
+            "fallback_triggered": false,
+            "engine_used": "tesseract",
+            "tesseract_latencies_ms": [
+                1379.2,
+                1418.24,
+                1049.64
+            ],
+            "tesseract_mean_lat_ms": 1282.36,
+            "tesseract_median_lat_ms": 1379.2,
+            "strategy_c_latencies_ms": [
+                1388.23,
+                1391.84,
+                1037.63
+            ],
+            "strategy_c_mean_lat_ms": 1272.57,
+            "strategy_c_median_lat_ms": 1388.23,
+            "cer": 0.7303,
+            "wer": 1.2,
+            "exact_match": false,
+            "reference_text": "Task: Whiteboard \u2192 Calendar\n\nMy Week Plan\n\n        SUN    MON    TUES    WEDS    THURS    FRI    SAT\n        \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n                      ACCOUNTANT\n\n0900\n\n1200                                    DAY\n                                        OFF\n1500  DOCTOR\n\n1800\n\n2100\n\n0000",
+            "prediction": "Tish: Will Te fost \u2014 ya Lavewoard py wee PLAY Suar (wr Tuts Weos Hs Lee Cy aa ae go? pe AE (7.09 gee xo, oer xo? a! oJ 79"
+        },
+        {
+            "sample_id": "19",
+            "split": "HeldOut",
+            "category": "mixed",
+            "file_name": "19.webp",
+            "dimensions": [
+                4096,
+                3072
+            ],
+            "fallback_triggered": false,
+            "engine_used": "tesseract",
+            "tesseract_latencies_ms": [
+                1404.79,
+                1337.04,
+                1029.98
+            ],
+            "tesseract_mean_lat_ms": 1257.27,
+            "tesseract_median_lat_ms": 1337.04,
+            "strategy_c_latencies_ms": [
+                1349.21,
+                1343.97,
+                1008.77
+            ],
+            "strategy_c_mean_lat_ms": 1233.98,
+            "strategy_c_median_lat_ms": 1343.97,
+            "cer": 0.7321,
+            "wer": 1.0,
+            "exact_match": false,
+            "reference_text": "Task: Whiteboard \u2192 Mixed Elements.\n\nWhiteboard \u2192 Handwriting          \u2502   Questions\n    \u21b3 Gather samples              \u2502   \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n    \u21b3 Determine priorities        \u2502   Existing datasets?\n    \u21b3 Send to David               \u2502   Separate fine tunes for\n                                  \u2502   handwriting creation vs.\n                                  \u2502   reading?",
+            "prediction": "VE BY : WHIT t 400th \u2014 m/xEed yA feSccad a Yaarve/ mne- peteem' La fre \u00a9? pe (Ques UNS ee Gastey garesesks sf Jeanaate fe Ther ci fodkui Y Mca 010F ?"
+        },
+        {
+            "sample_id": "20",
+            "split": "HeldOut",
+            "category": "diagram",
+            "file_name": "20.webp",
+            "dimensions": [
+                4096,
+                3072
+            ],
+            "fallback_triggered": false,
+            "engine_used": "tesseract",
+            "tesseract_latencies_ms": [
+                1603.83,
+                1569.49,
+                1203.73
+            ],
+            "tesseract_mean_lat_ms": 1459.02,
+            "tesseract_median_lat_ms": 1569.49,
+            "strategy_c_latencies_ms": [
+                1560.74,
+                1538.26,
+                1175.43
+            ],
+            "strategy_c_mean_lat_ms": 1424.81,
+            "strategy_c_median_lat_ms": 1538.26,
+            "cer": 0.7458,
+            "wer": 1.0,
+            "exact_match": false,
+            "reference_text": "Geopol Predictions: Current Model          A_x = Agent X\n                                           Sequential\n                                           SA_x = Subagent\nA_1 \u2192 Job\n      Actuation &\n      Mgmt                RSS   EXA AI\n                            \u2198   \u2199\n                             Google\n                             News\n        \u2198\n         A_2   SITREP Gen\n               Grounding                       \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n                                               \u2502 LLM  \u2502\n         \u2198                             \u2192 SA_1 \u2190\u2502COUNCIL\u2502\n          A_3   Prediction                     \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n                MGR               \u2192 SA_2\n          Pass SITREP, define\n          task, structured output\n\n          A_4  Analysis, Charts, Comparison w/\n               Run X-1\n\n          A_5  Generate Report (Typst)\n    \u2193\n  CONCAT   \u2192   PDF",
+            "prediction": "(c0opoe Pre ot CT1aas * Cur et No de-( - ' AR =< A \u00a5 = lynne , Seq ema SA a Suee7ee WZ ies QeIs 15, CHRETS, COMPAR WON ff Crves t) Awh cys concatT\u2014 PDT"
+        },
+        {
+            "sample_id": "21",
+            "split": "HeldOut",
+            "category": "diagram",
+            "file_name": "21.webp",
+            "dimensions": [
+                4096,
+                3072
+            ],
+            "fallback_triggered": false,
+            "engine_used": "tesseract",
+            "tesseract_latencies_ms": [
+                1552.71,
+                1542.03,
+                1168.05
+            ],
+            "tesseract_mean_lat_ms": 1420.93,
+            "tesseract_median_lat_ms": 1542.03,
+            "strategy_c_latencies_ms": [
+                1585.74,
+                1481.33,
+                1170.92
+            ],
+            "strategy_c_mean_lat_ms": 1412.66,
+            "strategy_c_median_lat_ms": 1481.33,
+            "cer": 0.5203,
+            "wer": 0.9362,
+            "exact_match": false,
+            "reference_text": "Whiteboard \u2192 Dev Spec \u2192 Agent Dev\n\nWhiteboard(s)  \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2192  Gemini API\n\nGemini \u2500\u2192 Cleaned Tech Diagrams (image 2 image)\n       \u2198 Narrative of Agent Model (image 2 txt)\n\nAgent 2: Convert these things \u2192 Dev Spec\n    \u21b3 Plan def w/ human\n    \u21b3 Generate tasks, define subagents,\n      checkpoints etc",
+            "prediction": "Wy HA TTR eeDdCS) \u2014~) Genin AP\\ Gerinvl \u2014 Llen wed Tec DiAGeANS (nave 2 ree) : A : ra VAAnAaTive of well (innec _ -) A jeal ConvetT Test. Tunes 2 Oe Se i PLAW DEF w/ HUA GencantE TASKS, Defive. SeraselS J Checke-pstats ET"
+        }
+    ]
+}
