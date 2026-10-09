@@ -116,3 +116,35 @@ def test_evaluate_engine_with_tesseract():
     assert summary["mean_cer"] < 0.20
     assert summary["evaluations"][0].sample.sample_id == "A1_printed_simple"
     assert summary["evaluations"][1].sample.sample_id == "D2_blackboard_chalk"
+
+
+def test_metric_edge_cases_and_properties():
+    # Identical strings -> 0.0
+    assert calculate_cer("abc 123", "abc 123") == 0.0
+    assert calculate_wer("abc 123", "abc 123") == 0.0
+    
+    # Complete mismatch
+    assert calculate_cer("abc", "xyz") == 1.0
+    assert calculate_wer("abc def", "xyz uvw") == 1.0
+    
+    # Longer hypothesis (insertions)
+    # Ref "a", Hyp "abc" -> distance 2 (2 insertions) -> CER = 2 / 1 = 2.0
+    assert calculate_cer("a", "abc") == 2.0
+    
+    # Multi-space and punctuation normalization
+    assert normalize_text("  hello,   world!  \n\n\t") == "hello, world!"
+
+
+def test_benchmark_traceability():
+    samples = generate_multi_type_benchmark()
+    mock_engine = MockOCREngine()
+    summary = evaluate_engine_on_benchmark(mock_engine, samples)
+    
+    for ev in summary["evaluations"]:
+        assert ev.sample.sample_id is not None
+        assert ev.sample.provenance is not None
+        assert ev.sample.category is not None
+        assert ev.cer >= 0.0
+        assert ev.wer >= 0.0
+        assert isinstance(ev.exact_match, bool)
+        assert ev.latency_ms >= 0.0

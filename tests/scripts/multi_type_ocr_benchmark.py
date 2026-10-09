@@ -105,6 +105,51 @@ def run_benchmark():
         wer = calculate_wer(ref_text, res.full_text)
         print(f"{exp_name:<30} | Recog: '{res.full_text}' | CER: {cer:.2f} | WER: {wer:.2f}")
 
+    # Save machine-readable JSON results
+    import json
+    import pytesseract
+    try:
+        tess_ver = str(pytesseract.get_tesseract_version())
+    except Exception:
+        tess_ver = "unknown"
+
+    raw_sample_data = []
+    for ev in results["evaluations"]:
+        raw_sample_data.append({
+            "sample_id": ev.sample.sample_id,
+            "category": ev.sample.category.value,
+            "provenance": ev.sample.provenance.value,
+            "reference_text": ev.sample.expected_text,
+            "actual_prediction": ev.recognized_text,
+            "cer": round(ev.cer, 4),
+            "wer": round(ev.wer, 4),
+            "exact_match": ev.exact_match,
+            "confidence": round(ev.confidence, 4),
+            "latency_ms": round(ev.latency_ms, 2),
+            "regions_count": ev.regions_count,
+            "preprocessing": "none (raw uint8)",
+            "error_or_skip_reason": None if ev.recognized_text or ev.exact_match else "unrecognized_or_empty"
+        })
+
+    persisted_results = {
+        "benchmark_phase": "Phase 4C.5",
+        "engine_name": "TesseractOCREngine",
+        "tesseract_version": tess_ver,
+        "total_samples": results["total_samples"],
+        "mean_cer": round(results["mean_cer"], 4),
+        "mean_wer": round(results["mean_wer"], 4),
+        "exact_match_rate": round(results["exact_match_rate"], 4),
+        "mean_latency_ms": round(results["mean_latency_ms"], 2),
+        "category_breakdown": results["category_breakdown"],
+        "sample_evaluations": raw_sample_data
+    }
+
+    os.makedirs('tests/results', exist_ok=True)
+    out_path = 'tests/results/phase4c-ocr-benchmark.json'
+    with open(out_path, 'w') as f:
+        json.dump(persisted_results, f, indent=4)
+    print(f"\nSaved machine-readable benchmark results to: {out_path}")
+
 
 if __name__ == "__main__":
     run_benchmark()
