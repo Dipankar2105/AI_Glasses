@@ -1,0 +1,304 @@
+"""Policy manager for power state transitions, battery thresholds, thermal throttling, and workload scheduling."""
+
+import time
+from typing import Optional, Set, Tuple
+from backend.power.contracts import (
+    OperatingState,
+    BatteryStatus,
+    ThermalStatus,
+    WorkloadPriority,
+    BatteryTelemetry,
+    ThermalTelemetry,
+    SystemPowerSnapshot,
+    PeripheralType,
+)
+from backend.power.model import (
+    PowerModel,
+    STATE_PERIPHERAL_ACTIVATION,
+)
+
+
+class PowerThermalPolicyManager:
+    """Manages system power states, battery/thermal threshold hysteresis, and workload gating."""
+
+    # Valid state transition graph: from_state -> set of allowed target_states
+    VALID_TRANSITIONS: dict[OperatingState, Set[OperatingState]] = {
+        OperatingState.IDLE: {
+            OperatingState.LISTENING,
+            OperatingState.CAPTURE,
+            OperatingState.PROCESSING,
+            OperatingState.LOW_POWER,
+            OperatingState.CRITICAL_SHUTDOWN,
+        },
+        OperatingState.LISTENING: {
+            OperatingState.IDLE,
+            OperatingState.PROCESSING,
+            OperatingState.SPEAKING,
+            OperatingState.LOW_POWER,
+            OperatingState.CRITICAL_SHUTDOWN,
+        },
+        OperatingState.CAPTURE: {
+            OperatingState.IDLE,
+            OperatingState.PROCESSING,
+            OperatingState.LOW_POWER,
+            OperatingState.CRITICAL_SHUTDOWN,
+        },
+        OperatingState.PROCESSING: {
+            OperatingState.IDLE,
+            OperatingState.SPEAKING,
+            OperatingState.CAPTURE,
+            OperatingState.LOW_POWER,
+            OperatingState.CRITICAL_SHUTDOWN,
+        },
+        OperatingState.SPEAKING: {
+            OperatingState.IDLE,
+            OperatingState.LISTENING,
+            OperatingState.LOW_POWER,
+            OperatingState.CRITICAL_SHUTDOWN,
+        },
+        OperatingState.LOW_POWER: {
+            OperatingState.IDLE,
+            OperatingState.CRITICAL_SHUTDOWN,
+        },
+        OperatingState.CRITICAL_SHUTDOWN: {
+            OperatingState.IDLE,  # Only permissible after battery/thermal recovery
+        },
+    }
+
+    def __init__(
+        self,
+        power_model: Optional[PowerModel] = None,
+        # Battery hysteresis thresholds
+        low_battery_entry_pct: float = 15.0,
+        low_battery_exit_pct: float = 20.0,
+        critical_battery_entry_pct: float = 5.0,
+        critical_battery_exit_pct: float = 10.0,
+        # Thermal hysteresis thresholds (°C)
+        warm_entry_temp_c: float = 45.0,
+        warm_exit_temp_c: float = 40.0,
+        throttle_entry_temp_c: float = 55.0,
+        throttle_exit_temp_c: float = 48.0,
+        critical_thermal_entry_c: float = 70.0,
+        critical_thermal_exit_c: float = 60.0,
+        # Staleness thresholds (seconds)
+        battery_stale_timeout_s: float = 30.0,
+        thermal_stale_timeout_s: float = 15.0,
+    ) -> None:
+        self.power_model = power_model or PowerModel()
+
+        self.low_battery_entry_pct = low_battery_entry_pct
+        self.low_battery_exit_pct = low_battery_exit_pct
+        self.critical_battery_entry_pct = critical_battery_entry_pct
+        self.critical_battery_exit_pct = critical_battery_exit_pct
+
+        self.warm_entry_temp_c = warm_entry_temp_c
+        self.warm_exit_temp_c = warm_exit_temp_c
+        self.throttle_entry_temp_c = throttle_entry_temp_c
+        self.throttle_exit_temp_c = throttle_exit_temp_c
+        self.critical_thermal_entry_c = critical_thermal_entry_c
+        self.critical_thermal_exit_c = critical_thermal_exit_c
+
+        self.battery_stale_timeout_s = battery_stale_timeout_s
+        self.thermal_stale_timeout_s = thermal_stale_timeout_s
+
+        # State tracking
+        self.requested_state = OperatingState.IDLE
+        self.confirmed_state = OperatingState.IDLE
+        self.battery_status = BatteryStatus.NORMAL
+        self.thermal_status = ThermalStatus.NORMAL
+
+        self.last_battery: Optional[BatteryTelemetry] = None
+        self.last_thermal: Optional[ThermalTelemetry] = None
+
+    def update_battery_telemetry(self, telemetry: BatteryTelemetry, current_time: Optional[float] = None) -> BatteryStatus:
+        """Process incoming battery telemetry with hysteresis and staleness checking."""
+        now = current_time if current_time is not None else time.time()
+        self.last_battery = telemetry
+
+        if not telemetry.is_valid:
+            self.battery_status = BatteryStatus.UNKNOWN
+            return self.battery_status
+
+        # Staleness check
+        if telemetry.timestamp > 0.0 and (now - telemetry.timestamp) > self.battery_stale_timeout_s:
+            self.battery_status = BatteryStatus.STALE
+            return self.battery_status
+
+        if telemetry.is_charging:
+            if telemetry.percentage >= 98.0:
+                self.battery_status = BatteryStatus.FULL
+            else:
+                self.battery_status = BatteryStatus.CHARGING
+            return self.battery_status
+
+        # Hysteresis state machine for battery discharge
+        pct = telemetry.percentage
+        if self.battery_status == BatteryStatus.CRITICAL:
+            if pct > self.critical_battery_exit_pct:
+                self.battery_status = BatteryStatus.LOW if pct <= self.low_battery_exit_pct else BatteryStatus.NORMAL
+        elif self.battery_status == BatteryStatus.LOW:
+            if pct <= self.critical_battery_entry_pct:
+                self.battery_status = BatteryStatus.CRITICAL
+            elif pct > self.low_battery_exit_pct:
+                self.battery_status = BatteryStatus.NORMAL
+        else:  # NORMAL, FULL, CHARGING, UNKNOWN, STALE
+            if pct <= self.critical_battery_entry_pct:
+                self.battery_status = BatteryStatus.CRITICAL
+            elif pct <= self.low_battery_entry_pct:
+                self.battery_status = BatteryStatus.LOW
+            else:
+                self.battery_status = BatteryStatus.NORMAL
+
+        # Auto-enforce low power or shutdown on critical status
+        if self.battery_status == BatteryStatus.CRITICAL:
+            self.request_state(OperatingState.CRITICAL_SHUTDOWN, reason="Critical battery discharge")
+        elif self.battery_status == BatteryStatus.LOW and self.requested_state not in (OperatingState.LOW_POWER, OperatingState.CRITICAL_SHUTDOWN):
+            self.request_state(OperatingState.LOW_POWER, reason="Low battery conservation")
+
+        return self.battery_status
+
+    def update_thermal_telemetry(self, telemetry: ThermalTelemetry, current_time: Optional[float] = None) -> ThermalStatus:
+        """Process incoming thermal telemetry with hysteresis and emergency safeguards."""
+        now = current_time if current_time is not None else time.time()
+        self.last_thermal = telemetry
+
+        if not telemetry.is_valid:
+            self.thermal_status = ThermalStatus.UNKNOWN
+            return self.thermal_status
+
+        # Staleness check
+        if telemetry.timestamp > 0.0 and (now - telemetry.timestamp) > self.thermal_stale_timeout_s:
+            self.thermal_status = ThermalStatus.STALE
+            return self.thermal_status
+
+        temp = telemetry.temperature_celsius
+
+        # Hysteresis state machine for thermal tracking
+        if self.thermal_status == ThermalStatus.CRITICAL:
+            if temp < self.critical_thermal_exit_c:
+                self.thermal_status = ThermalStatus.HOT_THROTTLED if temp >= self.throttle_entry_temp_c else ThermalStatus.NORMAL
+        elif self.thermal_status == ThermalStatus.HOT_THROTTLED:
+            if temp >= self.critical_thermal_entry_c:
+                self.thermal_status = ThermalStatus.CRITICAL
+            elif temp < self.throttle_exit_temp_c:
+                self.thermal_status = ThermalStatus.WARM if temp >= self.warm_entry_temp_c else ThermalStatus.NORMAL
+        elif self.thermal_status == ThermalStatus.WARM:
+            if temp >= self.critical_thermal_entry_c:
+                self.thermal_status = ThermalStatus.CRITICAL
+            elif temp >= self.throttle_entry_temp_c:
+                self.thermal_status = ThermalStatus.HOT_THROTTLED
+            elif temp < self.warm_exit_temp_c:
+                self.thermal_status = ThermalStatus.NORMAL
+        else:  # NORMAL, UNKNOWN, STALE
+            if temp >= self.critical_thermal_entry_c:
+                self.thermal_status = ThermalStatus.CRITICAL
+            elif temp >= self.throttle_entry_temp_c:
+                self.thermal_status = ThermalStatus.HOT_THROTTLED
+            elif temp >= self.warm_entry_temp_c:
+                self.thermal_status = ThermalStatus.WARM
+            else:
+                self.thermal_status = ThermalStatus.NORMAL
+
+        # Emergency cutoff if critical thermal condition
+        if self.thermal_status == ThermalStatus.CRITICAL:
+            self.request_state(OperatingState.CRITICAL_SHUTDOWN, reason=f"Critical die temperature: {temp:.1f}°C")
+
+        return self.thermal_status
+
+    def request_state(self, target_state: OperatingState, reason: str = "") -> Tuple[bool, str]:
+        """Request a transition to target operating state with precondition and safety checks."""
+        # 1. Check if already in target state
+        if self.requested_state == target_state:
+            return True, f"Already in requested state {target_state}"
+
+        # 2. Block escalation if in critical conditions
+        if self.battery_status == BatteryStatus.CRITICAL and target_state != OperatingState.CRITICAL_SHUTDOWN:
+            return False, f"Cannot enter {target_state}: Battery is CRITICAL"
+        if self.thermal_status == ThermalStatus.CRITICAL and target_state != OperatingState.CRITICAL_SHUTDOWN:
+            return False, f"Cannot enter {target_state}: Thermal status is CRITICAL"
+
+        # 3. Check valid transition graph
+        allowed_transitions = self.VALID_TRANSITIONS.get(self.requested_state, set())
+        if target_state not in allowed_transitions:
+            return False, f"Invalid transition from {self.requested_state} to {target_state}"
+
+        # 4. Low-power restrictions
+        if self.battery_status == BatteryStatus.LOW and target_state in (OperatingState.CAPTURE, OperatingState.PROCESSING):
+            return False, f"Cannot enter heavy workload state {target_state} during LOW battery"
+
+        self.requested_state = target_state
+        # In software simulation, confirmed state updates immediately upon policy approval
+        self.confirmed_state = target_state
+        return True, f"Transitioned to {target_state} (Reason: {reason})"
+
+    def confirm_hardware_state(self, hardware_state: OperatingState) -> None:
+        """Acknowledge hardware-confirmed operating state."""
+        self.confirmed_state = hardware_state
+
+    def can_execute_workload(self, priority: WorkloadPriority) -> Tuple[bool, str]:
+        """Check whether a given workload is permitted under current power/thermal constraints."""
+        if self.battery_status == BatteryStatus.CRITICAL or self.thermal_status == ThermalStatus.CRITICAL:
+            if priority == WorkloadPriority.SAFETY_CRITICAL:
+                return True, "Safety critical operation permitted during emergency"
+            return False, "System in critical condition; non-essential workloads suspended"
+
+        if priority == WorkloadPriority.SAFETY_CRITICAL:
+            return True, "Permitted"
+
+        if priority == WorkloadPriority.TIME_SENSITIVE_AUDIO:
+            if self.battery_status == BatteryStatus.LOW:
+                return True, "Permitted in low power mode with high priority"
+            return True, "Permitted"
+
+        if priority == WorkloadPriority.SENSOR_PROCESSING:
+            return True, "Permitted"
+
+        if priority == WorkloadPriority.VISION_CAPTURE:
+            if self.battery_status == BatteryStatus.LOW:
+                return False, "Vision capture disabled to conserve low battery"
+            if self.thermal_status == ThermalStatus.HOT_THROTTLED:
+                return False, "Vision capture throttled due to high thermal load"
+            if self.requested_state == OperatingState.LOW_POWER:
+                return False, "Vision capture disallowed in LOW_POWER state"
+            return True, "Permitted"
+
+        if priority == WorkloadPriority.BACKGROUND_SYNC:
+            if self.battery_status in (BatteryStatus.LOW, BatteryStatus.CRITICAL):
+                return False, "Background sync suspended during low battery"
+            if self.thermal_status in (ThermalStatus.HOT_THROTTLED, ThermalStatus.CRITICAL):
+                return False, "Background sync suspended during thermal throttling"
+            if self.requested_state != OperatingState.IDLE:
+                return False, "Background sync deferred during active interaction"
+            return True, "Permitted"
+
+        return True, "Permitted"
+
+    def get_snapshot(self, current_time: Optional[float] = None) -> SystemPowerSnapshot:
+        """Produce consolidated snapshot of system power, thermal, and peripheral activations."""
+        now = current_time if current_time is not None else time.time()
+
+        bat = self.last_battery or BatteryTelemetry(voltage_volts=3.8, percentage=75.0, timestamp=now)
+        therm = self.last_thermal or ThermalTelemetry(temperature_celsius=32.0, timestamp=now)
+
+        power_mw = self.power_model.estimate_state_power_mw(self.confirmed_state)
+
+        throttle_factor = 1.0
+        if self.thermal_status == ThermalStatus.HOT_THROTTLED:
+            throttle_factor = 0.5
+        elif self.thermal_status == ThermalStatus.CRITICAL:
+            throttle_factor = 0.0
+
+        active_peripherals = STATE_PERIPHERAL_ACTIVATION.get(self.confirmed_state, {}).copy()
+
+        return SystemPowerSnapshot(
+            requested_state=self.requested_state,
+            confirmed_state=self.confirmed_state,
+            battery_status=self.battery_status,
+            thermal_status=self.thermal_status,
+            battery=bat,
+            thermal=therm,
+            total_estimated_power_mw=power_mw,
+            throttle_factor=throttle_factor,
+            active_peripherals=active_peripherals,
+            timestamp=now,
+        )
