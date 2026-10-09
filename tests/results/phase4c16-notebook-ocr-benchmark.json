@@ -1,0 +1,1435 @@
+{
+    "benchmark_name": "Phase 4C.16 Genuine Handwritten Notebook OCR Benchmark",
+    "timestamp": "2026-10-09 17:36:56",
+    "provenance_summary": {
+        "dataset_name": "NoTeS-Bank / ICDAR 2025 Handwritten Notes Understanding Challenge",
+        "sample_count": 30,
+        "dev_samples": 15,
+        "heldout_samples": 15,
+        "license": "CC BY 4.0 / Open Access Research Dataset",
+        "source_repository": "https://huggingface.co/datasets/NoTeS-Bank/ICDAR_2025_Handwritten_Notes_Understanding_Challenge"
+    },
+    "cold_start_latencies_ms": {
+        "tesseract": 2.32,
+        "rapidocr": 647.43
+    },
+    "system_environment": {
+        "tesseract_version": "5.4.0.20240606",
+        "rapidocr_version": "1.2.3 (onnxruntime 1.31.0, PP-OCRv4)",
+        "hardware": "AMD64 Windows 11 CPU",
+        "repetitions": 3
+    },
+    "dataset_summaries": {
+        "full_dataset": {
+            "tesseract": {
+                "sample_count": 30,
+                "macro_cer": 3.4584,
+                "macro_wer": 6.1131,
+                "micro_cer": 3.4301,
+                "micro_wer": 5.5365,
+                "exact_match_count": 0,
+                "exact_match_rate": 0.0,
+                "empty_output_count": 0,
+                "empty_output_rate": 0.0,
+                "mean_latency_ms": 1531.91,
+                "median_latency_ms": 919.45
+            },
+            "rapidocr": {
+                "sample_count": 30,
+                "macro_cer": 2.4361,
+                "macro_wer": 3.5659,
+                "micro_cer": 2.4009,
+                "micro_wer": 3.1515,
+                "exact_match_count": 0,
+                "exact_match_rate": 0.0,
+                "empty_output_count": 0,
+                "empty_output_rate": 0.0,
+                "mean_latency_ms": 8983.69,
+                "median_latency_ms": 6215.51
+            }
+        },
+        "dev_split": {
+            "tesseract": {
+                "sample_count": 15,
+                "macro_cer": 3.4484,
+                "macro_wer": 5.975,
+                "micro_cer": 3.4217,
+                "micro_wer": 5.43,
+                "exact_match_count": 0,
+                "exact_match_rate": 0.0,
+                "empty_output_count": 0,
+                "empty_output_rate": 0.0,
+                "mean_latency_ms": 1543.12,
+                "median_latency_ms": 601.68
+            },
+            "rapidocr": {
+                "sample_count": 15,
+                "macro_cer": 2.3717,
+                "macro_wer": 3.2917,
+                "micro_cer": 2.3266,
+                "micro_wer": 2.9147,
+                "exact_match_count": 0,
+                "exact_match_rate": 0.0,
+                "empty_output_count": 0,
+                "empty_output_rate": 0.0,
+                "mean_latency_ms": 8890.31,
+                "median_latency_ms": 5408.04
+            }
+        },
+        "heldout_split": {
+            "tesseract": {
+                "sample_count": 15,
+                "macro_cer": 3.4683,
+                "macro_wer": 6.2512,
+                "micro_cer": 3.4384,
+                "micro_wer": 5.653,
+                "exact_match_count": 0,
+                "exact_match_rate": 0.0,
+                "empty_output_count": 0,
+                "empty_output_rate": 0.0,
+                "mean_latency_ms": 1520.71,
+                "median_latency_ms": 955.94
+            },
+            "rapidocr": {
+                "sample_count": 15,
+                "macro_cer": 2.5005,
+                "macro_wer": 3.8402,
+                "micro_cer": 2.4734,
+                "micro_wer": 3.4104,
+                "exact_match_count": 0,
+                "exact_match_rate": 0.0,
+                "empty_output_count": 0,
+                "empty_output_rate": 0.0,
+                "mean_latency_ms": 9077.07,
+                "median_latency_ms": 6267.12
+            }
+        }
+    },
+    "per_sample_evaluations": [
+        {
+            "sample_id": "nb_01",
+            "split": "Dev",
+            "category": "data_structures",
+            "subject": "Computer Science",
+            "topic": "Stack Operations & LIFO Structure",
+            "file_name": "nb_01_ds_stack.jpg",
+            "dimensions": [
+                1240,
+                1755
+            ],
+            "reference_text": "Stack is a linear data structure that follows LIFO principle. The operations are Push and Pop. Top points to top element.",
+            "tesseract": {
+                "prediction": ": pes tog 1 . ar ba 1 bor ne gr HRA: as a+b xd[e-ftgrb has. : 3 H \u201cap Eo Let assouahie - oe Leh assoualwe . oF AH \u201cfxd by | oa . -) \u201ccd \u00e9 +qh aS or) Jecde | 14a 1@D [cde | . rea \u00abi | \" = a: yoa+\u2014+\u2014blgedet",
+                "cer": 1.2893,
+                "wer": 2.619,
+                "exact_match": false,
+                "regions_count": 55,
+                "latencies_ms": [
+                    601.68,
+                    662.08,
+                    577.4
+                ],
+                "mean_latency_ms": 613.72,
+                "median_latency_ms": 601.68
+            },
+            "rapidocr": {
+                "prediction": "pos t 00 Q8.A.QO&. Same Tevel a=-b+cxdl 501 preledance table Raht / ip Left assoualwe Left assocacthwe 1gh [*cde \u4e2agh 7*cde 7=a+-t-bleederf+ gh \u00d7ij .1",
+                "cer": 0.9917,
+                "wer": 1.1905,
+                "exact_match": false,
+                "regions_count": 18,
+                "latencies_ms": [
+                    7004.83,
+                    4074.73,
+                    4123.43
+                ],
+                "mean_latency_ms": 5067.66,
+                "median_latency_ms": 4123.43
+            },
+            "error_categories": [
+                "cursive_script_segmentation_failure"
+            ]
+        },
+        {
+            "sample_id": "nb_02",
+            "split": "Dev",
+            "category": "data_structures",
+            "subject": "Computer Science",
+            "topic": "Queue Operations & FIFO Principle",
+            "file_name": "nb_02_ds_queue.jpg",
+            "dimensions": [
+                1240,
+                1755
+            ],
+            "reference_text": "Queue follows First In First Out (FIFO) order. Enqueue inserts at rear and Dequeue removes from front.",
+            "tesseract": {
+                "prediction": "Spee cer} ath a aa) b- | cS ne Ces a be cae 3 Seer inal ; aaGaz eT igre g S| ippeele, sath ob I. aide\u2019 t ee gh, #4 a oaths ab, \u2014 cd ce] faba ~ id at= ene ae Quy Give te shack - eT. hyo elements safle. fist & ts ewalueded o a,3 bp 51 cr \u201842 7 ae Wes raat fs die Fits wesulk \u00a2 c \"ake songs 160 2 wilulde oS . \u00bb 3 by ~ dh i Qe which of th. Aan nd posible beck Golet PRP wh \u00a2 Tele e mre ) Nae ee",
+                "cer": 3.2647,
+                "wer": 6.0588,
+                "exact_match": false,
+                "regions_count": 103,
+                "latencies_ms": [
+                    549.56,
+                    524.63,
+                    528.14
+                ],
+                "mean_latency_ms": 534.11,
+                "median_latency_ms": 528.14
+            },
+            "rapidocr": {
+                "prediction": "ab-cd*et fah+lj* b+Ci*d /ef4gth.+ \u2014icd*e/+foh\u4e2a\u4e2ai\uff3d fixst * is Giue thei stack eluaded Whatsmehna eenpress10n ev aluated 13 Shack Which of the Fotlowia Conjent . poss tble",
+                "cer": 1.2843,
+                "wer": 1.5294,
+                "exact_match": false,
+                "regions_count": 15,
+                "latencies_ms": [
+                    6504.95,
+                    4681.19,
+                    4619.61
+                ],
+                "mean_latency_ms": 5268.59,
+                "median_latency_ms": 4681.19
+            },
+            "error_categories": [
+                "cursive_script_segmentation_failure"
+            ]
+        },
+        {
+            "sample_id": "nb_03",
+            "split": "Dev",
+            "category": "data_structures",
+            "subject": "Computer Science",
+            "topic": "Linked List Node & Pointer Traversals",
+            "file_name": "nb_03_ds_linkedlist.jpg",
+            "dimensions": [
+                1240,
+                1755
+            ],
+            "reference_text": "Singly Linked List node contains data and next pointer. Head points to first node and tail points to NULL.",
+            "tesseract": {
+                "prediction": "Ps Qyaluciton \u2018Operand A [e) yator : - . : pebd o> fie Galshdn hip poh sesulk oOo ou a i a ef oe en nha dae W Jan] @} 7 hs : al \u2014+1 4234 |",
+                "cer": 1.0,
+                "wer": 1.9474,
+                "exact_match": false,
+                "regions_count": 37,
+                "latencies_ms": [
+                    389.53,
+                    368.96,
+                    364.82
+                ],
+                "mean_latency_ms": 374.44,
+                "median_latency_ms": 368.96
+            },
+            "rapidocr": {
+                "prediction": "ewaluaHton 6-&= 4: oncept operand  push Operato? dod Coluhon tiy push sesul. 12. ... Qn3. *3 *3 *Q3: +1\u7c7323 234",
+                "cer": 0.8774,
+                "wer": 1.0526,
+                "exact_match": false,
+                "regions_count": 16,
+                "latencies_ms": [
+                    7114.91,
+                    4781.87,
+                    4684.57
+                ],
+                "mean_latency_ms": 5527.12,
+                "median_latency_ms": 4781.87
+            },
+            "error_categories": [
+                "cursive_script_segmentation_failure"
+            ]
+        },
+        {
+            "sample_id": "nb_04",
+            "split": "Dev",
+            "category": "data_structures",
+            "subject": "Computer Science",
+            "topic": "Binary Search Tree Properties",
+            "file_name": "nb_04_ds_trees.jpg",
+            "dimensions": [
+                1240,
+                1755
+            ],
+            "reference_text": "Binary Search Tree property: left child < root < right child. Inorder traversal of BST gives sorted keys.",
+            "tesseract": {
+                "prediction": "~~ bewer Sue err va nk, 54,3, air, 7. a sibitw) as JIS p42. tp Diveck | Retnys too 4 : Fai. Rewrson by bead Riayssrdo iy todiveck Reais ity Weted Recuss ton Wr Facessive Qeouss 100 ae factoaa): . : Gy Tawa F Hlaosi (ies) \u00bb HY WES\u00bb G Bebensennrt funchoo (a) Caen & I Roa ;",
+                "cer": 2.0762,
+                "wer": 3.2222,
+                "exact_match": false,
+                "regions_count": 58,
+                "latencies_ms": [
+                    426.36,
+                    428.55,
+                    411.21
+                ],
+                "mean_latency_ms": 422.04,
+                "median_latency_ms": 426.36
+            },
+            "rapidocr": {
+                "prediction": "psffix ewau 12 12+2 RECUR.SIOU deisemay : pao0 tactonaj ax Tarl: Reurston Ex. Towu df tanoil(ies) by bead : n - xees. Reaiston M:Ackermann's luncton (JTO) (DrDo) Erressive Tbonacct. ..",
+                "cer": 1.381,
+                "wer": 1.6667,
+                "exact_match": false,
+                "regions_count": 18,
+                "latencies_ms": [
+                    7619.21,
+                    5256.8,
+                    5408.04
+                ],
+                "mean_latency_ms": 6094.69,
+                "median_latency_ms": 5408.04
+            },
+            "error_categories": [
+                "cursive_script_segmentation_failure"
+            ]
+        },
+        {
+            "sample_id": "nb_05",
+            "split": "Dev",
+            "category": "algorithms",
+            "subject": "Algorithms",
+            "topic": "Recurrence Relations & Time Complexity",
+            "file_name": "nb_05_algo_recurrence.jpg",
+            "dimensions": [
+                2550,
+                3636
+            ],
+            "reference_text": "Divide and Conquer Recurrence T(n) = 2T(n/2) + O(n). By Master Theorem Case 2, T(n) = O(n log n).",
+            "tesseract": {
+                "prediction": "Al orithms . Rate of _ grow te of Junctions : 1, tgtqn, Ign, An, (dan) end, n\u00a9 eceeci \u00bb = 26\u201d yl mig tn ) nang = G. \u2019 m? , n\u00b0 @ra, o\u2122 cod, m, 2 . Note. Ig\u00a2*w = O ns r) Asymptotic Notatow. | iz nm I\u201d (1g) ny! Analesy oo Joy O(gry PL armas te {ln > 2 (4%) Z| tane ot fortee than doml fo) = w Gen) A me te [Oa a Ok ayer > Ut re Leer Ho) 8 OD) u 1%) . \"ae fol I OQ aes BGM KE goo % OM) 7 flm)~ 0 (aor) f(m) AMER ee sepa gey & gregon & fore gy u 1) vec ae Pia pees K poy 2G | &) - OGY > (nm) ~ \u00a9 (gem) + {(n) = 6 (g\u2122) oft a) ~ O (fim). | + 0 (f4g)~ Olmax Cg) \u2014y man ({0),g) - 6 ( +g) | -4en)- 0 (gen) fe gine Ctly) > flme O(ge) . Fm * (him) => fim= OCH). (fo 942. alse) + Oo (fly) +0 (9) = 0 (mam C$ 1 gry ) J O@ee ade mo lo @ _ arth y n a, do = mo Ob | Z. n= ali cor) | pa log k = mlgn k=J . n - i i ae \u2014 = 3 k K=1 pri",
+                "cer": 7.6495,
+                "wer": 11.7368,
+                "exact_match": false,
+                "regions_count": 227,
+                "latencies_ms": [
+                    1932.93,
+                    1885.75,
+                    1910.74
+                ],
+                "mean_latency_ms": 1909.81,
+                "median_latency_ms": 1910.74
+            },
+            "rapidocr": {
+                "prediction": "A1gorithms C71. *n ,.nlgn gn!$ <i Note. Asymbtotic NotaHion. Analogy (a)B) O - (a)f () ( )0 ) - 0 (g(n)) muitpie of g (h0 U= (u) 2 (9(0m2) + grov? fastet than mumpf\u5b50 (f(n) ()) > if grows faster trom cny Cg(m) 1(n) muiple of 8 a+ (u)F ZCER =ER\u2192t n-00 (b)0 - (0+ ((u) ) f(m) 2 ( (m) (=0(g))(g))  0(+) 8\u4e2am (u)b) 0 - (af.\u2190 (cu)b) @ +(u)/ (cuh)(a)  (aub-(uF (n) (wb) (u)f 9(max (f-9) (a))(a \u2192 \u03b8(f+f)= (g(m)) = (u) (() +g(a). . 1m)=(gm)  )=((m) (1(0,g(a)- 0 0(h(m).(f 8+ alo) *f(m)- 0(g() +g() = 0(h(m) 0 (s) ((cu)B+ (a) +) vow) (g (m) 6(f(m) . 0 f= 0(g) 1+4 (\u03b141) k=mign p+1 P= 1+2b+g$+..+nt 2:1++++# pti",
+                "cer": 5.5361,
+                "wer": 6.2105,
+                "exact_match": false,
+                "regions_count": 64,
+                "latencies_ms": [
+                    19323.58,
+                    9218.57,
+                    9019.44
+                ],
+                "mean_latency_ms": 12520.53,
+                "median_latency_ms": 9218.57
+            },
+            "error_categories": [
+                "cursive_script_segmentation_failure"
+            ]
+        },
+        {
+            "sample_id": "nb_06",
+            "split": "Dev",
+            "category": "algorithms",
+            "subject": "Algorithms",
+            "topic": "Greedy Knapsack & Optimal Substructure",
+            "file_name": "nb_06_algo_greedy.jpg",
+            "dimensions": [
+                2550,
+                3633
+            ],
+            "reference_text": "Fractional Knapsack problem is solved by Greedy method. Sort items by value to weight ratio in descending order.",
+            "tesseract": {
+                "prediction": "fr 0G) FF gO) | fm o@) AF ge Ow $= OG) & g= OCb), trem fr OCh) . I atten (or both) bip-oh | As @ RitHe-oh. , then T~ o(h) ; ( Somft are for Ae , 0) nite mot both) sf the 8 4 eplaced by aonothw notation, thon the conclurow usec that ame (the veblaced one) notation, a {7 OD) + (APH G7 8M > f= OW + froly) > Fr OG [> Fre@ 7 t= *@ 7 fe OG) vgs OUP - fet) bur 4x eW ,47 oa (4). * Axtended Master's T(n) = h m*&lg\u2019m) 3 A274; i;k>0 aa (k) ant Hy * \u00a9 (mt lan) alpen 1. 9f a > b*, T(m) - B (nm de%) : 2. Jf a= b*, 3) tf pr-t , Tis 8 (mn Beh ig Phim) ii) Ht pe-t , Th) ~ O(n bo% lglan) wii) Ff p<-4,\u00b0 TCn) = B (a a) 3. if a Lvs, a) M4 b 0, Tn) \u00ab 6 (ok 19 Pa) a) ME pee, Ths) > OG). + Master's or Aubbtraer & mgr Ty) = aT (n-b).+ 0 (mk) h 4 asl o(n* a\u201d) 2>o,b PL, K7O 2. a=i o(n***) \u00a7 a4 On, \u2018 mull A) Insertion Sort Anooyt keys one by ome anto te Kosted subarray sv fhat the key as placed at the. W@rrect place An the soated Subarray - i) coe oe Af vicles the array fmto 2 pests until A elem sw ca S$ remaining Rk tho morse. thom scurtively +o ot a hoxted ao, Wd) 6 viet dort -takoy an ehuw aa pivot, places the pivot at thr omvech pontiow in Sorted arnroy 4 proces AU \u00abmallet clans (than pivol) ty Lott of pi vet a queen ty We Tight. Then Tecurively calk AS on the le44 ho Trait ports. - Cag rch Linewt , Bimas covery: Uae Sr)",
+                "cer": 10.9107,
+                "wer": 17.1111,
+                "exact_match": false,
+                "regions_count": 312,
+                "latencies_ms": [
+                    2017.68,
+                    1972.73,
+                    1953.58
+                ],
+                "mean_latency_ms": 1981.33,
+                "median_latency_ms": 1972.73
+            },
+            "rapidocr": {
+                "prediction": "(f) f O(g) (b)-f{ (or both) f- 0(h) .f bfg-oh er ther wm+ '(g)0 =B # ).( ( Smilat XitHe-oh.\uff0cthem 9().9f (but = 8(), thm am one bot\uff09 by amoth natation, neplacod mof the motaon (the that peplacad one) cConclwn'on Xame uses O(h) 8= 9(h) \uff09=() = 0(g) 0(g) () :(h) m++*()\u3002*F but T(d) - at(%) Extended Master's p reat mumbet () -(u)g 1. 94 \u03b1=b,-1 2. 34 )(u) (n =- T(n) T(m) )\u5bf9<~ ()L (u)l O(n\") Master's Aubtract T(n) = at(n-b)+ o(m*) h/b* a>o,b l\u2265o o(nka .a>l (m*). O(nk a=1. i) Insertion Sort insert keys'one one anto ha subasray that the ky pRace uy the. CoTTeC+ poteog blaced W) Herge sort 1 elem divicles the pag ts Subarray.i array smto unt! remaininy ui) Swck or+ pivot,plaes Hhu pivet a+ t? uw as coec T lace? Aomtedanay all ' maller elaus (tham pivot) pontion in recumively calt. Qs on the lef R tHie ight. Then. Treater Saorchin% Lineat, Bimary 0()",
+                "cer": 6.8393,
+                "wer": 8.7222,
+                "exact_match": false,
+                "regions_count": 104,
+                "latencies_ms": [
+                    21314.57,
+                    10396.66,
+                    10695.38
+                ],
+                "mean_latency_ms": 14135.54,
+                "median_latency_ms": 10695.38
+            },
+            "error_categories": [
+                "cursive_script_segmentation_failure"
+            ]
+        },
+        {
+            "sample_id": "nb_07",
+            "split": "Dev",
+            "category": "database_systems",
+            "subject": "Database Systems",
+            "topic": "Entity-Relationship Model & Primary Keys",
+            "file_name": "nb_07_dbms_er.jpg",
+            "dimensions": [
+                2480,
+                3509
+            ],
+            "reference_text": "Entity Relationship Diagram: Entity represented by rectangle, attribute by oval, and relationship by diamond.",
+            "tesseract": {
+                "prediction": ": Btep 6: Convention 4 manaf-many sutoses au hp \u00a9 hr aah anya oust \u00ab sora dobts \u00a2 o| ) | an chile Keyt of Hide, and | as Tiere as a foxaagn | kag wo He Mew \u201cboble- | 6) Dedouw shu combinakion 4 Josutgn by as | key Por nes bob se. (1 iy xulabions hp conusite COG , include them uo mn the. mewn table \u2014 Mep 6. Conveun 04 cornet wed etd AGI : a) Fox vouh multivalued abt , ouate 0 Separdte Jable and. include. \u00b0 1 ay of poster dable as fovugn key. b) Declou the combination J} \u201cquugn kay f Multi valued otti as I\u00b0 key. Atop T: Convouion a} N-axy sat atconstups. a) For tah N-ary subatroruhp , Cate & geparate table G indude Rey gp ok nid a Jourgn keys b) \u201c_ Hu combinatim 4 gareiy coy os reg \u2014 2 Ae oe OHO \u00ae aoss o",
+                "cer": 5.7523,
+                "wer": 11.0,
+                "exact_match": false,
+                "regions_count": 156,
+                "latencies_ms": [
+                    1139.29,
+                    1133.06,
+                    1126.99
+                ],
+                "mean_latency_ms": 1133.11,
+                "median_latency_ms": 1133.06
+            },
+            "rapidocr": {
+                "prediction": "8tep 5:. Conveuion' : many-many julabin hg @ Por iath' many -mamy ciate a separoli'cble d M gide and'\"N side as Poriqn in ciude \"- 1o ke th\" mew- table. Ded combinahon tin gosuiqn Keu Por new table. dabinhp at  inud them alp coniti t! the mew tonle mti vao! &tep 6: Conveu'won Fon ah mulivalued atty , cuate a sepanate Jable and. incude. to kuy ol parent lable o! Roruqn key b) Declau tnt. combination of. gowign kuy 4 Multi valwed attot s 1\u00b0 key. Convetion ul attonsthipg 8tep a separate slatinhp, cruati a) For eah m-ay incude 1o key d enhhey tabie': d key8 ogm goreign kys a b) Dedare hi co mbnatim my a!",
+                "cer": 4.8165,
+                "wer": 8.3571,
+                "exact_match": false,
+                "regions_count": 44,
+                "latencies_ms": [
+                    12072.15,
+                    7328.43,
+                    7268.62
+                ],
+                "mean_latency_ms": 8889.73,
+                "median_latency_ms": 7328.43
+            },
+            "error_categories": [
+                "cursive_script_segmentation_failure"
+            ]
+        },
+        {
+            "sample_id": "nb_08",
+            "split": "Dev",
+            "category": "database_systems",
+            "subject": "Database Systems",
+            "topic": "Functional Dependencies & 3NF Normalization",
+            "file_name": "nb_08_dbms_normalization.jpg",
+            "dimensions": [
+                2480,
+                3509
+            ],
+            "reference_text": "Normalization reduces data redundancy. 1NF eliminates repeating groups, 2NF removes partial dependency.",
+            "tesseract": {
+                "prediction": "+ INO? I\u20141 and [\u2014M \u2018lev con oo be 8 @ ' uakd at tables, bu in. \u2018el arab be den oe ae Keasons- a PAN hap tee rent tuhiiw | ae - \u00b0 Bs a aa \u20184 we bet. iq PU = R. de am wv \u201cwnveukd AV AVen > dabte ae ou able to Aubueue oul info eer 4, eg h which \u00bb byamehl Tris a dak ch PAN mp ~ hy two 1M. Jalasvonthipr One: v7) ge iy then ices uit bt a Fan Bip oS",
+                "cer": 2.7961,
+                "wer": 7.4167,
+                "exact_match": false,
+                "regions_count": 89,
+                "latencies_ms": [
+                    989.49,
+                    981.13,
+                    999.13
+                ],
+                "mean_latency_ms": 989.92,
+                "median_latency_ms": 989.49
+            },
+            "rapidocr": {
+                "prediction": "I-l and 1--M lahon Can alup be sepctatod a -ableg but . it. mi aduable dru .to :peyormanel eaon. mn table - g mar aj at ds.b. b) bib Ci d) Qi \u03b12 b2 Thap DPAN rapi ?) CHasm hap. FAN rap Diy bt. tee cantsau tunw b2. Ej. belong h bt or be. de. Gine d, ha bmu : I hi .E-R diaam convehd int tabl, liie e  alle : jbiwt du ingo. :.ei, buonge h tihich bramehblig FAN hap y\"due\"h How ho'ridinkly FAN hap?.",
+                "cer": 3.2427,
+                "wer": 7.1667,
+                "exact_match": false,
+                "regions_count": 33,
+                "latencies_ms": [
+                    10051.43,
+                    7264.78,
+                    7306.27
+                ],
+                "mean_latency_ms": 8207.49,
+                "median_latency_ms": 7306.27
+            },
+            "error_categories": [
+                "cursive_script_segmentation_failure"
+            ]
+        },
+        {
+            "sample_id": "nb_09",
+            "split": "Dev",
+            "category": "mathematics",
+            "subject": "Calculus",
+            "topic": "First Order Linear Differential Equations",
+            "file_name": "nb_09_math_ode.jpg",
+            "dimensions": [
+                1240,
+                1754
+            ],
+            "reference_text": "First order linear differential equation dy/dx + P(x)y = Q(x). Integrating Factor IF = exp(integral P(x) dx).",
+            "tesseract": {
+                "prediction": "Neda \u2014 Pett ae ats ar eae 29 of \u2014 raat) | _ ce Pe ee ncommepd Landa = gcady a oe . So } food = { 7y)ty",
+                "cer": 0.8349,
+                "wer": 1.6471,
+                "exact_match": false,
+                "regions_count": 29,
+                "latencies_ms": [
+                    415.27,
+                    398.18,
+                    378.13
+                ],
+                "mean_latency_ms": 397.19,
+                "median_latency_ms": 398.18
+            },
+            "rapidocr": {
+                "prediction": "fey 3+8572367-6 y =$gt?+Gttc d None. Hrst degree itt. egns First odey MdatNdyeo Nofahion dn Wariable Separablemelhod",
+                "cer": 0.8991,
+                "wer": 1.0,
+                "exact_match": false,
+                "regions_count": 14,
+                "latencies_ms": [
+                    6921.93,
+                    4599.23,
+                    4568.01
+                ],
+                "mean_latency_ms": 5363.06,
+                "median_latency_ms": 4599.23
+            },
+            "error_categories": [
+                "cursive_script_segmentation_failure",
+                "mathematical_notation_substitution"
+            ]
+        },
+        {
+            "sample_id": "nb_10",
+            "split": "Dev",
+            "category": "mathematics",
+            "subject": "Calculus",
+            "topic": "Exact Equations & Integrating Factors",
+            "file_name": "nb_10_math_exact.jpg",
+            "dimensions": [
+                1240,
+                1754
+            ],
+            "reference_text": "Exact Differential Equation M dx + N dy = 0 where dM/dy = dN/dx. Solution is integral M dx + integral N(free of x) dy = C.",
+            "tesseract": {
+                "prediction": "eet a Ley. Cexyjays yy \u2014 cy = YF aE I dos) - yay = fade\u201d _ Ye Pe [xteyts 4 |",
+                "cer": 0.7705,
+                "wer": 0.963,
+                "exact_match": false,
+                "regions_count": 22,
+                "latencies_ms": [
+                    431.31,
+                    441.62,
+                    421.79
+                ],
+                "mean_latency_ms": 431.57,
+                "median_latency_ms": 431.31
+            },
+            "rapidocr": {
+                "prediction": "1+42 Y2 tan!y. eydx + ydy j-tancxto ?+ Ay",
+                "cer": 0.8279,
+                "wer": 0.963,
+                "exact_match": false,
+                "regions_count": 6,
+                "latencies_ms": [
+                    7098.44,
+                    4836.14,
+                    4693.09
+                ],
+                "mean_latency_ms": 5542.56,
+                "median_latency_ms": 4836.14
+            },
+            "error_categories": [
+                "cursive_script_segmentation_failure",
+                "mathematical_notation_substitution"
+            ]
+        },
+        {
+            "sample_id": "nb_11",
+            "split": "Dev",
+            "category": "physics",
+            "subject": "Physics",
+            "topic": "Torque & Angular Momentum Equations",
+            "file_name": "nb_11_physics_torque.jpg",
+            "dimensions": [
+                1275,
+                900
+            ],
+            "reference_text": "Torque tau = r x F = I alpha. Angular momentum L = I omega. Conservation of angular momentum holds when external torque is zero.",
+            "tesseract": {
+                "prediction": "aateieetien ana ee ee ee ee ee a 7. mens eabody iA pDwduck @&. jinta This sb pics = f Me Ma : = L= Pn on",
+                "cer": 0.7891,
+                "wer": 1.08,
+                "exact_match": false,
+                "regions_count": 27,
+                "latencies_ms": [
+                    528.35,
+                    504.23,
+                    490.43
+                ],
+                "mean_latency_ms": 507.67,
+                "median_latency_ms": 504.23
+            },
+            "rapidocr": {
+                "prediction": "ddisbonce utahon. L=Pn&in\u4e2d =rLeaing)Sciphy.in L-nPL S.I Onit  Arngwa Momeruim Geometrical Meaning of Angudan Momentun",
+                "cer": 0.8125,
+                "wer": 0.96,
+                "exact_match": false,
+                "regions_count": 7,
+                "latencies_ms": [
+                    5514.86,
+                    3762.76,
+                    3525.84
+                ],
+                "mean_latency_ms": 4267.82,
+                "median_latency_ms": 3762.76
+            },
+            "error_categories": [
+                "cursive_script_segmentation_failure"
+            ]
+        },
+        {
+            "sample_id": "nb_12",
+            "split": "Dev",
+            "category": "physics",
+            "subject": "Physics",
+            "topic": "Parallel Axis Theorem & Kinetic Energy",
+            "file_name": "nb_12_physics_inertia.jpg",
+            "dimensions": [
+                1275,
+                815
+            ],
+            "reference_text": "Moment of Inertia I = sum m_i r_i^2. Parallel axis theorem I = I_cm + M d^2. Rotational Kinetic Energy K = 1/2 I omega^2.",
+            "tesseract": {
+                "prediction": "=a Comidn a puticie so tat my plane Z Qbouk an arin or\u00bb ty At any Hime k, ut ok eR\u201d im Q hmalt kine dt particleat K sua b 3 Ol = Rear QOokL, OR+KUeoL\u2019 Keeov -oF\u201d, : a / =Q+dR) -Pady Ano Swept by porition veer in malt fim de R= ann.0f AdkL =. Canal FonaMatogram Ok saatietel = lok xen \u2014\u2014\u2014+",
+                "cer": 1.8595,
+                "wer": 2.48,
+                "exact_match": false,
+                "regions_count": 64,
+                "latencies_ms": [
+                    516.62,
+                    546.38,
+                    522.0
+                ],
+                "mean_latency_ms": 528.34,
+                "median_latency_ms": 522.0
+            },
+            "rapidocr": {
+                "prediction": "Comid a in xy plane aboutanaxisoz. Sciphy.in in a bmalu tim dt parhicle at K yuaun L OR+t-o [ da]",
+                "cer": 0.7686,
+                "wer": 1.0,
+                "exact_match": false,
+                "regions_count": 7,
+                "latencies_ms": [
+                    5189.35,
+                    4184.24,
+                    4397.3
+                ],
+                "mean_latency_ms": 4590.3,
+                "median_latency_ms": 4397.3
+            },
+            "error_categories": [
+                "cursive_script_segmentation_failure",
+                "mathematical_notation_substitution"
+            ]
+        },
+        {
+            "sample_id": "nb_13",
+            "split": "Dev",
+            "category": "chemistry",
+            "subject": "Chemistry",
+            "topic": "Acid-Base Equilibrium & pH Calculations",
+            "file_name": "nb_13_chem_ph.jpg",
+            "dimensions": [
+                6338,
+                9434
+            ],
+            "reference_text": "Arrhenius acid produces H+ ions in aqueous solution. pH is defined as negative logarithm of hydrogen ion concentration: pH = -log[H+].",
+            "tesseract": {
+                "prediction": "\\< Cy}. | f a | | \"NOs, na nc Kno, try (Fh) . KMda + Reg ry (Nib) { \u2014 Kets \"4 NOs, \u00a9 INtby rreaLHoM . Rac). $9 CN Ug -N iy . Q A ec} J. , (| Ru (NOs). \u2014+ Bau, apanes UNIO \u2014VE O-< \u00a5 Dreloceale company of Nig fs fox, Hyeuy thet Of didectrud O} | JO.s\u00a2 COluwh IU! rf a MO TOsutting nto | 04 nates . COMPOUND. er Crompnio\u2019 OD tomparcio Mar \u00a9 \u00b0 Or MOMe Stu} Uy of loveent Cory POLLNM gene (| mye\u2019 ) th ramonier a: Compan \u00a9 WOOT. NQOH + Hey H \" | 2.6 \u2014 N@acl + Hao -( Neuro O0UTON) CANO) DONO Qqud. Sout NUR t NanH, N35 None \u00a2 QM, \u2019 Pie cd - Rane SULLt * - oAaH , a QNHYUCL + CaN ~~? CaCl +N Hs NW 4+ Bin = > Bitlis 4 YH, \u00bb 0 _ Q) ClU\u2014Cl -4:-0n \u20143 UF mote h6 _; : CI [ \u00a5 Qlo a ONHHo M2 \u2014> ATHo C] F+ cP + Aly Lo moth solvolyis & M6 preopernotbry ote). Al : BOs 7 6 Nr \u2014allia_\u00bb 4 Sy NO+y 62 41INHMy preecipta@Ho fx _ Neat (2; NN\u00bb \u2014\u2014\u2014\u2014} +g ) + Ra(rld3y, cn (tno) tn) Blue wed \u00a5 2? + Wzot+ Hoc,",
+                "cer": 5.8955,
+                "wer": 10.2381,
+                "exact_match": false,
+                "regions_count": 217,
+                "latencies_ms": [
+                    6808.93,
+                    7074.81,
+                    6822.91
+                ],
+                "mean_latency_ms": 6902.22,
+                "median_latency_ms": 6822.91
+            },
+            "rapidocr": {
+                "prediction": "KcI+ naNOg Gon > +Tr bu tn (tho) (precipiteaHon) in (Nh) >.kc+.09N03 reaHon. ()g +  buz c(eon)na- + n bue in@n) NultoreducHron BaU+2A9AI03 'nto -ve os \u00d7 oielectrut o onrc soluhiufy tntoasc waer. compocms as compato in ammbnia Morte Solthi ty ortganic ) H20 NacI + H20 - Nuwrali bchon neahon) aud. Thnon. + uahiin. Bane HINU)'+ nhHne I+Bin +a:12 0 H26 ct + Hz0' \u2192 + 1136++I+D Cl. CU2 \u00b1 2NHg 'p Ds prtopenghon oceunn. solvolyys both 2- Nhch< sht 558 + 16 ng",
+                "cer": 2.806,
+                "wer": 3.9524,
+                "exact_match": false,
+                "regions_count": 46,
+                "latencies_ms": [
+                    31936.71,
+                    18860.56,
+                    18259.69
+                ],
+                "mean_latency_ms": 23018.99,
+                "median_latency_ms": 18860.56
+            },
+            "error_categories": [
+                "cursive_script_segmentation_failure"
+            ]
+        },
+        {
+            "sample_id": "nb_14",
+            "split": "Dev",
+            "category": "chemistry",
+            "subject": "Chemistry",
+            "topic": "Henderson-Hasselbalch Equation & Buffer Action",
+            "file_name": "nb_14_chem_buffers.jpg",
+            "dimensions": [
+                6338,
+                8742
+            ],
+            "reference_text": "Henderson-Hasselbalch equation: pH = pKa + log([Conjugate Base] / [Weak Acid]). Buffer resists changes in pH.",
+            "tesseract": {
+                "prediction": "pete 10 om * rAphn lor C / nraphol WO\u00bb pzntowya | 7HlOW), 7 20 | Comelent = > | en ee ZH(OW), 47 aoe cou \u201c need . ua: Nia, Ko Zn (Ne) y ,* 7 ' \u2014\u2014 / } Zl NW, ) 9 \u201c+ 2 sea \\apaen }. , m LEN 597m Un t UNA, zn(hith\\y 4 Nu Sat \u00b0 - nocd. wy pohetve OY ampioferiec EN were CENA AKalry = > Thoce hyalrcorm ee tn tratu\u2019d Nua - amid binave Cv) MLMPHHAGL & ceo mercU onde (ese) and metcu nya Chen) alto behave ay bay tn Ua: Nira. i) i AH +O rig 0 \\\" + NHsy ? \u2014 4,4 iia. + H2. NOH WO TNH, \u2014? Ni 2 Q. \u2018mony Vir fohoweng neathory thoce dau cute feanible in Uquidl ute | - | ly kAldn AGU \u2014J ket + AQND O | AWN 3 C3 & ON HY BMF INH _____> kan + 2NMs, 3 7h ey. ie 3. Fe (co)g + 2e \u2014\u2014\u2014Fe(co)y] + Dw te AN",
+                "cer": 5.6881,
+                "wer": 10.5625,
+                "exact_match": false,
+                "regions_count": 172,
+                "latencies_ms": [
+                    5247.67,
+                    5326.02,
+                    5207.75
+                ],
+                "mean_latency_ms": 5260.48,
+                "median_latency_ms": 5247.67
+            },
+            "rapidocr": {
+                "prediction": "Xehciwiart. Amphoteric 0>[zn(oW)n] 28H ZDOH)2: ho h(\"HIuZ) +2KNH2 cornolern Accd. eccumpboferut'c behcive \u2192 Those hgdrtoride 'Cun pmbn c cmhotert henave amids alo hehare a metcu hydru'de) C hcve) (btue) and Metcu anude Ltq Nrl3. ban + NHS +H2 +N13 NH feasible uquid reauhon those Jau arte burmoot arte > ku + AgN3 KNID A9U \u2192ks + 2NHg Q.+ Nhybr+ kn2 [ te (c0)g] 3. + 9(0) AON :- Al .",
+                "cer": 2.9817,
+                "wer": 4.3125,
+                "exact_match": false,
+                "regions_count": 41,
+                "latencies_ms": [
+                    20887.27,
+                    12390.24,
+                    16864.19
+                ],
+                "mean_latency_ms": 16713.9,
+                "median_latency_ms": 16864.19
+            },
+            "error_categories": [
+                "cursive_script_segmentation_failure"
+            ]
+        },
+        {
+            "sample_id": "nb_15",
+            "split": "Dev",
+            "category": "electronics",
+            "subject": "Digital Electronics",
+            "topic": "Boolean Algebra & Logic Gate Truth Tables",
+            "file_name": "nb_15_digital_logic.jpg",
+            "dimensions": [
+                2480,
+                3509
+            ],
+            "reference_text": "De Morgan's Laws: (A + B)' = A' . B' and (A . B)' = A' + B'. NAND and NOR are universal gates.",
+            "tesseract": {
+                "prediction": "by - bu Gi > segs iF 7 on i he Es pomeranian eee \u2018 PPI IC HM y\u00bb 2 \u00e9 II MIVOVIOOOE 2 aS Sy = a) ra \u2014 thee CTEM ENON. am age sent JEICIES ease",
+                "cer": 1.1489,
+                "wer": 1.5417,
+                "exact_match": false,
+                "regions_count": 38,
+                "latencies_ms": [
+                    1175.24,
+                    1148.06,
+                    1159.13
+                ],
+                "mean_latency_ms": 1160.81,
+                "median_latency_ms": 1159.13
+            },
+            "rapidocr": {
+                "prediction": "1 1:1 1 =I4  CAI+B)CA+B 941 Var tablelex-dR Bveo mo. BX-NOR emenay elahon. ax-NoRide Mowsi.. ample: CEAOROC A R IAB+BCA LCAB BAACOCCA+A y. CAB)' A! tBt 134 Wits rmoilf osr pp.ronp?",
+                "cer": 1.5106,
+                "wer": 1.2917,
+                "exact_match": false,
+                "regions_count": 20,
+                "latencies_ms": [
+                    10660.16,
+                    6490.45,
+                    7289.34
+                ],
+                "mean_latency_ms": 8146.65,
+                "median_latency_ms": 7289.34
+            },
+            "error_categories": [
+                "cursive_script_segmentation_failure"
+            ]
+        },
+        {
+            "sample_id": "nb_16",
+            "split": "HeldOut",
+            "category": "data_structures",
+            "subject": "Computer Science",
+            "topic": "Graph Representation (Matrix vs Adjacency List)",
+            "file_name": "nb_16_ds_graph.jpg",
+            "dimensions": [
+                1240,
+                1755
+            ],
+            "reference_text": "Graph representation: Adjacency Matrix requires O(V^2) space. Adjacency List requires O(V + E) space.",
+            "tesseract": {
+                "prediction": "ii Head Reosysion, ov olher \u201cThan tut) ip Tout Keaars00 (900 Toul) poe 0) 000) oc) fleet! 7\u201d Mia Cues 6 \u201cDein roninber previauly , ai jndivect Reauxsi0d a 5 \u2018w Ohtected! values: fs, hl iten| vty is 2 ES Ei > a * opal\u2019 iy Base ( Terraion Gadi (on Brcko ote. x Pepe sey co) Raise Sep \u00a9 -(08) \u201cie clep \u201cB_ Nd=O | poche ov Bone fact WY [oi hi wd y Ta oem we, pele elep ( Poca )",
+                "cer": 3.1287,
+                "wer": 5.9286,
+                "exact_match": false,
+                "regions_count": 83,
+                "latencies_ms": [
+                    469.79,
+                    438.19,
+                    444.41
+                ],
+                "mean_latency_ms": 450.8,
+                "median_latency_ms": 444.41
+            },
+            "rapidocr": {
+                "prediction": "Reaursion Head Cox semoy lban (ost) o% hey (non Ta'l) Docc) Doc () Do) yExessive ix indivect Reaursion Deesndt vemembe? AC) waluated values Terminahon Base Reasstve Step peated inductwes Anchos Re pealed",
+                "cer": 1.5347,
+                "wer": 2.2857,
+                "exact_match": false,
+                "regions_count": 24,
+                "latencies_ms": [
+                    6543.29,
+                    5004.14,
+                    4991.85
+                ],
+                "mean_latency_ms": 5513.09,
+                "median_latency_ms": 5004.14
+            },
+            "error_categories": [
+                "cursive_script_segmentation_failure"
+            ]
+        },
+        {
+            "sample_id": "nb_17",
+            "split": "HeldOut",
+            "category": "data_structures",
+            "subject": "Computer Science",
+            "topic": "Hash Functions & Collision Resolution",
+            "file_name": "nb_17_ds_hashing.jpg",
+            "dimensions": [
+                1240,
+                1755
+            ],
+            "reference_text": "Hash collisions are resolved by Chaining or Open Addressing (Linear Probing, Quadratic Probing, Double Hashing).",
+            "tesseract": {
+                "prediction": "Seme wwe ew De whew & ew & Poe SB we = & wat: Fak (tw) Ketivn Ve - ; clse Reba. no fact (8-1) Fy je A AB), axf@) . at fad | a fo) A\u00a5SRQHIEL = ay, Or ; Void \u00a9 (wt 0) e (weo) d PoC N~!) PRINT 1h) habat . iS the off. BL RB \u201cof Do(3).. md",
+                "cer": 1.7321,
+                "wer": 4.0667,
+                "exact_match": false,
+                "regions_count": 62,
+                "latencies_ms": [
+                    387.26,
+                    382.4,
+                    391.09
+                ],
+                "mean_latency_ms": 386.91,
+                "median_latency_ms": 387.26
+            },
+            "rapidocr": {
+                "prediction": "Ise N* fact(2-1) 1*3\u7c73\u67651\u7c73 ... Void (0) (-n)0 ? hat is the ole. \"2.",
+                "cer": 0.8036,
+                "wer": 1.0,
+                "exact_match": false,
+                "regions_count": 9,
+                "latencies_ms": [
+                    5527.47,
+                    4962.61,
+                    4861.7
+                ],
+                "mean_latency_ms": 5117.26,
+                "median_latency_ms": 4962.61
+            },
+            "error_categories": [
+                "cursive_script_segmentation_failure"
+            ]
+        },
+        {
+            "sample_id": "nb_18",
+            "split": "HeldOut",
+            "category": "algorithms",
+            "subject": "Algorithms",
+            "topic": "Longest Common Subsequence (LCS)",
+            "file_name": "nb_18_algo_dynamic.jpg",
+            "dimensions": [
+                2550,
+                3659
+            ],
+            "reference_text": "Dynamic Programming characteristics: Overlapping Subproblems and Optimal Substructure. LCS table computed in O(m*n) time.",
+            "tesseract": {
+                "prediction": "\u00e9 Alport \u00b0 Divide A Conquer e Min-max \u00bb Staasson\u2019s MN a4a%% anult\u2122, Meee Soot, Buick Sort, Binary Search/ + d laow' \u00a2 2 att | ay epee Tractimal Ks OCnL n) 1 Sut mony cooling Dlr Job drapramcing with dead bras O(nton) , Kirchoft 4 mmodein toee theorem (fond A enceeb- Spanning trees Fux Qa cumnected graph) $5\" Acw 0 of ; o al f CL Lpae m W Tghe ed oe every Hive, Finding MST -|rvomy adj matsin, \u00bb Kruskal s ponent ( fending MST) - add urna ting: gdaes at lost, first emelude all Peart neg pales am the MST (Disjoinh. Set \u2014Kouskal\u2019s Alga) , Panding. connected compoworts Using, Disj oot Set DS ( af for cach edge, he adj. vertices are not an the same set ,then union) \u00b0 CS horlest Path | , Sungle Source shortest path > Rolaxatow oo (Shortest path ; ostimate) \u00bb Diln rT aly q\u00b0 (us ean pie uw OF , cet of veattces S whose fined aly shogtest bath Jam souxa@ 4S kmowry) @f|-v|?) 1 Bellman God At \u2018thw ( velax cack eae lvl times ) O CIE II v1) [ welaxny vi-d fymes means WE ae finding: shootes+ path nreights LAgeS whow the path Leng th is at max |vi-l Ivi th aelaxatow ks to detect \u201cve nyel\u00e9), Tope log feat hoot Co\u00bb DAG). \"Dynamic Prypromming A Mirbres chain emurapiccation (Hof parenthosizaHons = Cay 1 lig] be min # Scalar pmulipticatton necded compute matria Axis 3 vn [i,j 7 0 fig Te 0\u2019) | S\u00a2 O(n\u2019) ee { ms \u00a5I + mT \u00ab+t! fd + bsg Pe BS a v <4 akK 4] # uniiyve J\u00e9ulapo0 bkeww possi ble -[oo mm [iin] = ; n(n+d + (w-sdtert do = aie ) e\\2e { ci2e 2 sven Pia * Pi",
+                "cer": 11.2066,
+                "wer": 21.4286,
+                "exact_match": false,
+                "regions_count": 300,
+                "latencies_ms": [
+                    2077.3,
+                    2070.21,
+                    2079.12
+                ],
+                "mean_latency_ms": 2075.55,
+                "median_latency_ms": 2077.3
+            },
+            "rapidocr": {
+                "prediction": "Algo rith ms mat mul+n Divide Min-man, Strassen's Conguer Search Aogt, Buick Xut, Bimary Xlgoithmu. : Fractional Ks hp2b coding D(ng n Job 0(nlgm) , urwomby deadlines Kireluo ff's tee theorem men rapl), Posm's every Hme Weighf Conne cfed algosithm from adj MST matoin,, Kruskal's Peaot imclude all a las+, fis+ MST)- add edges Se+ -Kouskal's Algo) , Disjoin+. S MST edses weight (if for each Disjgist Se+ DS Fandimg &eysn componomt conmected Se+ ,th in uniom) Hhe: adj. not vertices xame are shortes+ patho : Relaxattow Shortest Path Sougce ( Shortes+ path hpneb - mat vegHcas Whose set min p1o [] kmown) dlvl), Bellman Fod path shogtes+ Ivi Hmes) O(Iellvi) Lrelaxing Qach edg Afgoithm (relax fmding pah shoates+ Weight Ne Hmes means J50 1v/-1 edges Ivi th #elaxatiom man leng th. is path When oycle), Top log ical (o DAGs). -ve defec+ s to Dy namic 1. Matan chain mu Hipicatiow mti,j be parenthesizatons Ai.j ce mp ute neded matria (tu)0 O (n3) m[ij i- m[i,K]+ m[K+I,j] + mem on byun # m[iin] Xubpoo ble possible n(n+1) (n-1) +... + h+ 552e n cze 2",
+                "cer": 7.8595,
+                "wer": 13.2143,
+                "exact_match": false,
+                "regions_count": 116,
+                "latencies_ms": [
+                    20104.67,
+                    10721.4,
+                    11813.83
+                ],
+                "mean_latency_ms": 14213.3,
+                "median_latency_ms": 11813.83
+            },
+            "error_categories": [
+                "cursive_script_segmentation_failure"
+            ]
+        },
+        {
+            "sample_id": "nb_19",
+            "split": "HeldOut",
+            "category": "algorithms",
+            "subject": "Algorithms",
+            "topic": "Kruskal's & Prim's Minimum Spanning Tree",
+            "file_name": "nb_19_algo_mst.jpg",
+            "dimensions": [
+                2550,
+                3718
+            ],
+            "reference_text": "Minimum Spanning Tree connects all vertices with minimum edge weight. Kruskal uses Disjoint Set Union O(E log V).",
+            "tesseract": {
+                "prediction": "d. Lovges+ common subsequence ( Boute fore B (n2\u201d) Te 0 (wm) ba Tes (a, rt) ipre 4 eds des (4,j-4) ) >. Shortest pally An molistege graph: Vertes pastittaneal | cost (%,j) = Aw { cCy, \\) + cost (i41, e)f frrto \u2018Vis. J 414K | Me Views edge (uv) sk. Verton 4 im Vi Zj,hP EE , | Ue 4 -liyled VE Vig] ele +o verter . We ger Be cdg Te O(E) ov O (v>). Or, A, Binary Kapiacks (_ pseudo - plynowiod Avre) ae} 2 3 4 VY; C[i,w volue of optimal at. fos *+cewe Laugh , and max wedght w \u00bb 0 , 270 or WHO | t= Capauty 6 [4,0] = \u00a2 Li-$, w \u00bb Wy 7H al yi ael Late SoN ay0 ku \u00e9n : @ [4-1, 4] # uncque ssubprolote mvs TG 0 (ne) a weemyor tree = (Fob; s) x Ceapacity) -W%Xe SC O (nc) 5. Cubset Sum ( bevels - pelynowiot sets) - TC O(m:- sum) 4s 5S Cw, sum) = Sc OO (m. sum) Sum = O True, 4ssg (m-4,sum) I is SS Cn-d, fam \u2014 get [nl] ) | 6. \u201cTraveling. Solesman Problem (Held- Karp Aly) ot hauatse glide ey be tem, $4 ae 0(2%\"\") g 4 s) tie { C2 ql, s-4xy)J Se ()(2\"/m) by stories only Lied wy s-4 aS ar s/o any point ef the also .",
+                "cer": 8.1504,
+                "wer": 12.8333,
+                "exact_match": false,
+                "regions_count": 232,
+                "latencies_ms": [
+                    1749.53,
+                    1792.59,
+                    1762.66
+                ],
+                "mean_latency_ms": 1768.26,
+                "median_latency_ms": 1762.66
+            },
+            "rapidocr": {
+                "prediction": "8(n2 Xm,Yn 2. (Boute Longes+ Xubdegino Common Ics (ij) Dp: 1+ Res (i-}, j-1) 70 0 (nm 0 (nm) Ics(i-i,j), 0? man s(ij-)) 3. Shortest path hn'mu Histage rap h. Verhus c0+(+,) cort(ij) 's. 1izk amto ccj.*) edge (u,u) 's.t. V. Vertex 4 j,l>EE in [Yk/= 1 varter t to. wryh++ edg (Snk) 0(E) 0 () C psoudo -p ly nomial Ime) Bsnary Kmapxack amd max I,+*, valr optf mak htnodoo 0 =M10 Wenght max. C[i-l, ] O (nc) #unige Xubproble m O (nc) (#objs) \u00d7 (capacity)~ n \u00d7c tree E pseuao - polynomiel Suw 5. Subset O (n sum False M=0  sum >0 is SS n, sum O (m.sum Tmue =mns is ss (-1, 8um - ge+[nl), LisSs (m-1, sum) 6. Travelng Pootle Sales mam Cheld. Kanp Also) C(2\"n n,s= ()Ci 1 0(2\"h) by storms Icik++(k, S-ik)] min g(i,s) 2e S-1 Kes pont of amy",
+                "cer": 5.7699,
+                "wer": 8.0556,
+                "exact_match": false,
+                "regions_count": 88,
+                "latencies_ms": [
+                    17447.3,
+                    10133.33,
+                    9867.68
+                ],
+                "mean_latency_ms": 12482.77,
+                "median_latency_ms": 10133.33
+            },
+            "error_categories": [
+                "cursive_script_segmentation_failure"
+            ]
+        },
+        {
+            "sample_id": "nb_20",
+            "split": "HeldOut",
+            "category": "database_systems",
+            "subject": "Database Systems",
+            "topic": "ACID Properties & Two-Phase Locking",
+            "file_name": "nb_20_dbms_transactions.jpg",
+            "dimensions": [
+                2480,
+                3509
+            ],
+            "reference_text": "ACID properties: Atomicity, Consistency, Isolation, Durability. 2PL ensures conflict serializability.",
+            "tesseract": {
+                "prediction": "\"ee ooe ? @ 3 sos eocoangeseeas Cri ASR. as : TP be e=\u2014 bs () ce au unobse be idenhty branch de bosits d} by RU> 2. a) it thea Lobt deny lo pbranchl- sintt Fr iy spe Tn lobe Moy | may may\" be coxa - Thi due ho. CHASM Wop: IQ tuo \u2018duustty neloted enkibie Cow. eamntd dru | aun then only wth poxttal paxticipadn (wun hvu am a! ~ CHASM hop: Ho vo fo \u201cebimuinate 7 ) 44 by: am gfecive conmunitalion. ool ang dada bare eigen domau onpent 4 otakthaldent ) Ot WU - S440 ightly, nhegrated wth tefaipe Advant If wae wovivert pur ER auiagin gins fable Ww Joo the fp: f Cute Oy diac meant blw Hrase Qentinal 3) ve u cy lb \u201cunduutand bee abe RS ket ate EET SDS REP TTT Mg TET, ete v4 Sed",
+                "cer": 5.9901,
+                "wer": 14.5,
+                "exact_match": false,
+                "regions_count": 145,
+                "latencies_ms": [
+                    1249.1,
+                    1264.07,
+                    1276.06
+                ],
+                "mean_latency_ms": 1263.08,
+                "median_latency_ms": 1264.07
+            },
+            "rapidocr": {
+                "prediction": "Ki dawn a: Div. &mp er b3 CHi ASM hap Far p? Lob PP ER ctagm inbo fallx the Q pmobs:e thi nabl belongs ho branthi. sinu.fi iy opeamg a) it ho! Labl hou 1 how -.go) cret. ho. CHAsm hap Thi i du How ho idnhh? 'dwty entie ae. commtd fhu watrd fwo paxticipam fuun'the i a w th am tnen \"partial 1 enhh map. CH ASM elimunate ! Ho w Jlatiomuhp. blw Mese .& enhnu Cwate a duct. Advandcge! d 'ER diagram. Quighvt ,domain ' expel 4 stakeholdes. dalabae wmh relahima a). St; t. slie Hightly. integrated. dB-mod.l. wndutamd. 3) t,u",
+                "cer": 4.4257,
+                "wer": 10.3,
+                "exact_match": false,
+                "regions_count": 46,
+                "latencies_ms": [
+                    9741.54,
+                    8102.76,
+                    8063.53
+                ],
+                "mean_latency_ms": 8635.94,
+                "median_latency_ms": 8102.76
+            },
+            "error_categories": [
+                "cursive_script_segmentation_failure"
+            ]
+        },
+        {
+            "sample_id": "nb_21",
+            "split": "HeldOut",
+            "category": "database_systems",
+            "subject": "Database Systems",
+            "topic": "B+ Tree Indexing & File Organization",
+            "file_name": "nb_21_dbms_indexing.jpg",
+            "dimensions": [
+                2480,
+                3509
+            ],
+            "reference_text": "B+ Tree index stores all keys at leaf level linked in sequential order. Search complexity is O(log_B N).",
+            "tesseract": {
+                "prediction": "* , Vasloovont et : , e) y) Lote q) enjounation ontent- a) dunited comulrouns supruenlasion. a) ci oy veel omplen iw small pxoje: iE. v tious AB dain eoncap ts ) Top clown: duign y Bottom Up ciiaig 3) Mixed clesi n , 4) Jide Outside disign top clown bottom up = * Mined in| oug Rnhity COL Ltt Ee by Relateow - - Keb outton plus alty. | R LM { obbrtibetes Atty\u2019 Venkha A MN ie , FO, rejenaligevon cs tob fe. A bobls. Jobles \u2014 ~ bg pajt \u2014 Falk pigjd aN) = \u2014 puorfal \u2014 FQ | novm - _ sys \\ \u201ceat \u2014 differed. dob Les. : Den: Cunchonad Dependan oy HY \u201c4m atrocation amg enkines. Bove, noun Chha, vine eee - Court cedit (Ce) , Rio Snare Bn ae Kno. | Riv - > CNo. = 8 . 4 44 Ey dt Aaaisep. maulnot oatrze.",
+                "cer": 5.9519,
+                "wer": 8.4444,
+                "exact_match": false,
+                "regions_count": 152,
+                "latencies_ms": [
+                    1111.89,
+                    1134.04,
+                    1110.47
+                ],
+                "mean_latency_ms": 1118.8,
+                "median_latency_ms": 1111.89
+            },
+            "rapidocr": {
+                "prediction": "Uuadvaitage : 108 Q 'ngaumation contont . :) Jiited comgraint Xpuntahon. rduuoo. hro no tr small I pojeses. Vaiow dB doxign concn t : Tap . olown du tgn BoHom up dusign Mixed dlesign )Tmide -Outuide dxign top down Bothom ap in/out Mid Emhhy\" all at Relaom ul ation blw altr. I : M Ioltibuteg TEnhhe M:n ER\u00b7 FO, noamatgahon Er tables. tablel. table! big pj+ -8mall pinj mhmd -. Fo,norm -dilict. +able. Degm: Fencthionad Dependancy: gi dem alsocatim ama onhhe.. RNoiname , ( Crcrt cedit(ce) RNo -)name mameI Rno.: RNo=>CA 39 Q.2. A)B 1.01 B5C RNo- BrNo Atc Bno'y-BrNo- agxee ABC mst als tt d f3 maul nst",
+                "cer": 5.1154,
+                "wer": 6.0,
+                "exact_match": false,
+                "regions_count": 61,
+                "latencies_ms": [
+                    12046.01,
+                    8607.7,
+                    8536.19
+                ],
+                "mean_latency_ms": 9729.97,
+                "median_latency_ms": 8607.7
+            },
+            "error_categories": [
+                "cursive_script_segmentation_failure"
+            ]
+        },
+        {
+            "sample_id": "nb_22",
+            "split": "HeldOut",
+            "category": "mathematics",
+            "subject": "Calculus",
+            "topic": "Laplace Transforms & Shifting Theorems",
+            "file_name": "nb_22_math_laplace.jpg",
+            "dimensions": [
+                1240,
+                1754
+            ],
+            "reference_text": "Laplace Transform L{f(t)} = integral from 0 to inf exp(-st) f(t) dt. First Shifting Theorem L{exp(at) f(t)} = F(s-a).",
+            "tesseract": {
+                "prediction": "settee oe PAssrg NN\" gee he . a sin fay a ren be",
+                "cer": 0.8034,
+                "wer": 1.0,
+                "exact_match": false,
+                "regions_count": 13,
+                "latencies_ms": [
+                    350.45,
+                    356.0,
+                    350.67
+                ],
+                "mean_latency_ms": 352.37,
+                "median_latency_ms": 350.67
+            },
+            "rapidocr": {
+                "prediction": "passing Horrug Hnd he cure saHshrg hen Hnd 'y' aben xa?] ynsinlb tc Y  sin'bt) dx 2-3e36 Jogn.. 3t+logc",
+                "cer": 0.8205,
+                "wer": 1.0,
+                "exact_match": false,
+                "regions_count": 12,
+                "latencies_ms": [
+                    5936.29,
+                    4947.21,
+                    4573.17
+                ],
+                "mean_latency_ms": 5152.22,
+                "median_latency_ms": 4947.21
+            },
+            "error_categories": [
+                "cursive_script_segmentation_failure",
+                "mathematical_notation_substitution"
+            ]
+        },
+        {
+            "sample_id": "nb_23",
+            "split": "HeldOut",
+            "category": "mathematics",
+            "subject": "Calculus",
+            "topic": "Power Series Solutions of ODEs",
+            "file_name": "nb_23_math_series.jpg",
+            "dimensions": [
+                1240,
+                1754
+            ],
+            "reference_text": "Frobenius method for differential equation with regular singular point: assume solution y = sum a_n x^(n+r).",
+            "tesseract": {
+                "prediction": "-O. Gh Cotta = he arvot OA sinwe TS eH awe eee Oya @Oasig 7 woe TODS OAT _ ABS oe @\u00ae te the eguedion _Confains Fhe pe lee. coeny) | SINUUTY) Cab thy +, edn be ed ced PB variabie \u201chpackiie Form with substitution 7 Y= AYE v Oraby aes vi 14D + ly aot Sy tev ay \u201cfas ee Rick meal Q\\ \u2014 Ee eid K n 2 P4 ai a i | a) TR) \u00a33 eS)",
+                "cer": 2.4444,
+                "wer": 4.875,
+                "exact_match": false,
+                "regions_count": 79,
+                "latencies_ms": [
+                    574.38,
+                    568.74,
+                    556.05
+                ],
+                "mean_latency_ms": 566.39,
+                "median_latency_ms": 568.74
+            },
+            "rapidocr": {
+                "prediction": "d X=1, 4=1 2 sinn h emel Hhen Find\"y(3)=? Sinx=1 Dx-siny T+r-t& =(h (= (8)h the equcHom contains Hhe\"Term! ke (h+w)is -,Cam tbyt ? eh. be yeduced Vqriable separctble with swbstifuHom an+byr-v .C4+4)2 4++t1=V ta (4nC2+20)",
+                "cer": 1.6481,
+                "wer": 2.25,
+                "exact_match": false,
+                "regions_count": 25,
+                "latencies_ms": [
+                    7624.9,
+                    5556.49,
+                    5587.28
+                ],
+                "mean_latency_ms": 6256.22,
+                "median_latency_ms": 5587.28
+            },
+            "error_categories": [
+                "cursive_script_segmentation_failure",
+                "mathematical_notation_substitution"
+            ]
+        },
+        {
+            "sample_id": "nb_24",
+            "split": "HeldOut",
+            "category": "physics",
+            "subject": "Physics",
+            "topic": "Pure Rolling on Incline without Slipping",
+            "file_name": "nb_24_physics_rolling.jpg",
+            "dimensions": [
+                1275,
+                749
+            ],
+            "reference_text": "Pure rolling condition: v_cm = R omega. Total kinetic energy in rolling = 1/2 M v_cm^2 (1 + k^2/R^2).",
+            "tesseract": {
+                "prediction": "7 uD kde beth ag,",
+                "cer": 0.9109,
+                "wer": 1.0,
+                "exact_match": false,
+                "regions_count": 5,
+                "latencies_ms": [
+                    382.9,
+                    375.03,
+                    354.85
+                ],
+                "mean_latency_ms": 370.93,
+                "median_latency_ms": 375.03
+            },
+            "rapidocr": {
+                "prediction": "Date1 33 Divid bath side by dt Sciphy.in [(a] ] be Unit tim bouhue abousd a given axis s tuice th pnodut  man y bonhule",
+                "cer": 0.9505,
+                "wer": 1.3158,
+                "exact_match": false,
+                "regions_count": 8,
+                "latencies_ms": [
+                    6317.16,
+                    4326.03,
+                    4317.25
+                ],
+                "mean_latency_ms": 4986.81,
+                "median_latency_ms": 4326.03
+            },
+            "error_categories": [
+                "cursive_script_segmentation_failure"
+            ]
+        },
+        {
+            "sample_id": "nb_25",
+            "split": "HeldOut",
+            "category": "physics",
+            "subject": "Physics",
+            "topic": "Angular Momentum Vector & Gyroscopic Precession",
+            "file_name": "nb_25_physics_precession.jpg",
+            "dimensions": [
+                1275,
+                1222
+            ],
+            "reference_text": "Precession angular velocity Omega_p = tau / L = M g r / (I omega). Direction of angular momentum vector follows right hand thumb rule.",
+            "tesseract": {
+                "prediction": "Sciphy.i ie * if man mol paki ! it, sail best ual sid ition Veda \u00a5 p ie , + enacts We know Le pap\u2019 a \u00ab aa AURXp) | oat inne my Ls | ik a LP xg i _ P= rgb} whi me : arr ON taka wo | So =",
+                "cer": 1.0746,
+                "wer": 2.12,
+                "exact_match": false,
+                "regions_count": 53,
+                "latencies_ms": [
+                    721.38,
+                    716.21,
+                    697.99
+                ],
+                "mean_latency_ms": 711.86,
+                "median_latency_ms": 716.21
+            },
+            "rapidocr": {
+                "prediction": "Sciphy.i Page me ahicau hwousu bu lorytant: Relatiom blu Anguan Momentun Tony We know dd(nxp) Senosfndludtot 310 Ponalld vutor is dk",
+                "cer": 0.8209,
+                "wer": 1.0,
+                "exact_match": false,
+                "regions_count": 10,
+                "latencies_ms": [
+                    5661.28,
+                    4173.72,
+                    4166.85
+                ],
+                "mean_latency_ms": 4667.28,
+                "median_latency_ms": 4173.72
+            },
+            "error_categories": [
+                "cursive_script_segmentation_failure"
+            ]
+        },
+        {
+            "sample_id": "nb_26",
+            "split": "HeldOut",
+            "category": "chemistry",
+            "subject": "Chemistry",
+            "topic": "Strong Acid Strong Base Titration Curve",
+            "file_name": "nb_26_chem_titration.jpg",
+            "dimensions": [
+                6338,
+                8496
+            ],
+            "reference_text": "Equivalence point in strong acid strong base titration is at pH 7.0. Phenolphthalein indicator changes color in pH range 8.2 to 10.0.",
+            "tesseract": {
+                "prediction": "ie a \u201cIino wisn, 5 Of WR, : . ay SUF ssa yp 4 Hoe 5OlW5 SBO\\Wh \\aleaucagys 4, Cron COhibNn. c Hae OOK -h 4 fF \u2014 CHacoolua + nF. ' . O He Poy toons name Hy Poy \u2018| Hy 7 M180 y + QOHF <\u2014\u2014\u2014 H3SOy 4 He oo bn men) \u201ctreong OLA Heerrms ppp. 6 + Hof | HCloy PHF ===> Cloy 4+ He oy rapino! ya gurc\u2122 p\u2014Asrregons aud () Le HE 5 [146 \u2014mey a anid | \u2122 , O4 nee NCloy AQHF === Hacid \u2014_\u2014 Cased) (Ram ) AFE F IHF \u2014=S=\u2014 [Are } [tae] Caand) | Shs, P| (bupert autds ) berg very @) BF t DHF === [OFy] 1 MaF (aud) OM Fo +HF ary + Hf (pane ) \u2014 Oye ve pt wrt thy | VO Catthony CHy AFH of [ Ate a )",
+                "cer": 3.7293,
+                "wer": 6.5455,
+                "exact_match": false,
+                "regions_count": 144,
+                "latencies_ms": [
+                    5252.62,
+                    5354.38,
+                    5269.81
+                ],
+                "mean_latency_ms": 5292.27,
+                "median_latency_ms": 5269.81
+            },
+            "rapidocr": {
+                "prediction": "Liquid Hf ot ? aid heno ionusatron ot Hf, HE 3HF - HaF 50lvo Solvo eakai anion caon. CH3COOH CHatoo, + Hf2 nhor HPou hod ht +HF2 HN03 +2HF H2 ND3 + HF HgSOy + HF2 in Tauking . J-i raeth Pmo strcong (ard) HcioY + H2F +2-1 F Cloy hopn. Hacloy +HF2 (Bax) lawe\" AFS +2HF (Qund) L( buos SbiAs.P] Gtve Htwth bfo+ HF (Bfui + H2F (a'd) (pase )",
+                "cer": 2.0075,
+                "wer": 3.1818,
+                "exact_match": false,
+                "regions_count": 46,
+                "latencies_ms": [
+                    24486.84,
+                    16319.22,
+                    15860.53
+                ],
+                "mean_latency_ms": 18888.86,
+                "median_latency_ms": 16319.22
+            },
+            "error_categories": [
+                "cursive_script_segmentation_failure"
+            ]
+        },
+        {
+            "sample_id": "nb_27",
+            "split": "HeldOut",
+            "category": "chemistry",
+            "subject": "Chemistry",
+            "topic": "Salt Hydrolysis Constant & Degree of Hydrolysis",
+            "file_name": "nb_27_chem_hydrolysis.jpg",
+            "dimensions": [
+                6338,
+                9238
+            ],
+            "reference_text": "Salt of weak acid and strong base undergoes anionic hydrolysis: pH = 7 + 1/2 pKa + 1/2 log C. Solution is basic.",
+            "tesseract": {
+                "prediction": "Liqurd #2$0y > i \u2018 Keurgroni 70m ot tou | 5 \u2014 a io i, Blow Smith woak aud . ris ar HapOy + H.s0y =\u2014 HuPdy TH Sog roa ray _ = Oy ae HIND\u00bb 2 \"2S0y s\u2014 H2NO3 tated rht + NO. 9 oirtond aid\u2019 - \u2014\u2014 So 4 | J hogy aus On-F HUBy +-Hygou ClOy laCoy \u00ab= Onrd ). wie GUC | P oid - Hod tHf\u00a3oy <= += Fd? + N3foy > FluprnosulPhonie Quid] fluonoswiwuc Aud ~ \u2014OH . - lo Ou $e [4 S02 F +F R bo > 4s 3 rqore Qu . ~ toce aurd!c | AW roniSaHoni-\u2014 - n @ 6 e 3 Ue $05 F <= [Ha S00FH( Bost J Splv 0 SOIVo CaHO\") ann. j 6 \u00b0 : . Sb $5 F a: SbF + & HSds F oo [Ha S0aF | t [Fs : nyagil Use. ~ | | di solv we)",
+                "cer": 4.5,
+                "wer": 6.5652,
+                "exact_match": false,
+                "regions_count": 154,
+                "latencies_ms": [
+                    5580.95,
+                    5659.37,
+                    5629.21
+                ],
+                "mean_latency_ms": 5623.18,
+                "median_latency_ms": 5629.21
+            },
+            "rapidocr": {
+                "prediction": "Liquid Hasoy ohsoy Pusronizaon Hso y asoy woak aid CHgtOOH+ H2SOy hodhti H3DOy hos rC hoszut -5irtong aid!. HLIOy +-thiDy card asn. H2m07 +Hasoy hogeu + tosH ad OH HS03F OH ortead. tece audrc Awo ronis aho n'- [Ha S0a]+[B03]] \u03b1 He S03 F SolVo SOIVO carn anion. + [F5 Sb0s03 F] SbF5 + 2H$0F Magit a'd drsolvo wux",
+                "cer": 2.2411,
+                "wer": 2.4783,
+                "exact_match": false,
+                "regions_count": 35,
+                "latencies_ms": [
+                    26904.21,
+                    16513.87,
+                    16467.68
+                ],
+                "mean_latency_ms": 19961.92,
+                "median_latency_ms": 16513.87
+            },
+            "error_categories": [
+                "cursive_script_segmentation_failure"
+            ]
+        },
+        {
+            "sample_id": "nb_28",
+            "split": "HeldOut",
+            "category": "electronics",
+            "subject": "Digital Electronics",
+            "topic": "4-Variable Karnaugh Map Simplification",
+            "file_name": "nb_28_digital_kmap.jpg",
+            "dimensions": [
+                2480,
+                3509
+            ],
+            "reference_text": "Karnaugh Map (K-map) minimizes Boolean expressions by grouping adjacent 1s in powers of 2 (pairs, quads, octets).",
+            "tesseract": {
+                "prediction": "my Ae = % ore : ~ : gt * t ilbeeeee o Pro i TT",
+                "cer": 0.7788,
+                "wer": 1.0,
+                "exact_match": false,
+                "regions_count": 16,
+                "latencies_ms": [
+                    882.95,
+                    898.98,
+                    880.71
+                ],
+                "mean_latency_ms": 887.55,
+                "median_latency_ms": 882.95
+            },
+            "rapidocr": {
+                "prediction": "dn'd. -Ve t weuterarrg: biitoge is be.k. Is.-ve le. e  ls. tve sas fcet Versa A'+Bxc Syster + ve\" . AND become .I AnD. heeome kse: Nor",
+                "cer": 0.9646,
+                "wer": 1.5882,
+                "exact_match": false,
+                "regions_count": 14,
+                "latencies_ms": [
+                    8072.15,
+                    6267.12,
+                    6029.75
+                ],
+                "mean_latency_ms": 6789.67,
+                "median_latency_ms": 6267.12
+            },
+            "error_categories": [
+                "cursive_script_segmentation_failure"
+            ]
+        },
+        {
+            "sample_id": "nb_29",
+            "split": "HeldOut",
+            "category": "electronics",
+            "subject": "Digital Electronics",
+            "topic": "JK & D Flip Flop State Transitions",
+            "file_name": "nb_29_digital_flipflops.jpg",
+            "dimensions": [
+                2480,
+                3509
+            ],
+            "reference_text": "JK Flip-Flop characteristic equation: Q(next) = J Q' + K' Q. Race around condition occurs when J=1, K=1 and pulse width is large.",
+            "tesseract": {
+                "prediction": "quad au mbes. 0 @: eatery ian; ond pesrervag oF and there shoud baw ln he ql ( TEN ALES - arom anseaaemae 7\u201d a he \u2014_ e \\",
+                "cer": 0.7907,
+                "wer": 1.2609,
+                "exact_match": false,
+                "regions_count": 29,
+                "latencies_ms": [
+                    955.94,
+                    948.17,
+                    974.75
+                ],
+                "mean_latency_ms": 959.62,
+                "median_latency_ms": 955.94
+            },
+            "rapidocr": {
+                "prediction": "Duiad ily*+ His Hhe: idaall: furnchon +$+$.+. Solhon fdCA,B,c)m A'+ B'+.\"A NotetA bo. Beredual mumbea. 9 ezm and.maxes Hheses",
+                "cer": 0.8527,
+                "wer": 1.0,
+                "exact_match": false,
+                "regions_count": 12,
+                "latencies_ms": [
+                    6915.47,
+                    6163.9,
+                    6125.45
+                ],
+                "mean_latency_ms": 6401.61,
+                "median_latency_ms": 6163.9
+            },
+            "error_categories": [
+                "cursive_script_segmentation_failure"
+            ]
+        },
+        {
+            "sample_id": "nb_30",
+            "split": "HeldOut",
+            "category": "electronics",
+            "subject": "Digital Electronics",
+            "topic": "Synchronous vs Asynchronous Counters",
+            "file_name": "nb_30_digital_counters.jpg",
+            "dimensions": [
+                2480,
+                3509
+            ],
+            "reference_text": "Mod-N counter has N distinct states. Synchronous counter triggers all flip-flops simultaneously with common clock.",
+            "tesseract": {
+                "prediction": "we egend 3 eee ee eet PRACT aie hee fe sole an fi C rt. chon = {iS Ah D. al ls | yes _| _| |. | = _| a _ \u201c4",
+                "cer": 0.8333,
+                "wer": 2.2,
+                "exact_match": false,
+                "regions_count": 33,
+                "latencies_ms": [
+                    990.78,
+                    971.83,
+                    986.69
+                ],
+                "mean_latency_ms": 983.1,
+                "median_latency_ms": 986.69
+            },
+            "rapidocr": {
+                "prediction": "pus TT  mar (ABIC)Z Celt+3pu2i oh a Sele dua fioch > Moim Iolr -so f.Col = (og:0 10) +(c) m&x The...eun e muu exclussrue Hence tit can n.h be' Selp oual (314) ey areMuuat Bx ciystve. pseseml- iphenmere. is no 1 Pi is.couledaseledl seitdul",
+                "cer": 1.693,
+                "wer": 2.9333,
+                "exact_match": false,
+                "regions_count": 20,
+                "latencies_ms": [
+                    8644.6,
+                    6703.16,
+                    6729.63
+                ],
+                "mean_latency_ms": 7359.13,
+                "median_latency_ms": 6729.63
+            },
+            "error_categories": [
+                "cursive_script_segmentation_failure"
+            ]
+        }
+    ]
+}
