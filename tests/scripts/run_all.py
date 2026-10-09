@@ -36,6 +36,8 @@ def main():
         "python backend/tests/test_ai_contracts.py",
         "python backend/tests/test_object_detection.py",
         "python backend/tests/test_ocr.py",
+        "pytest backend/tests/test_tesseract_ocr.py",
+        "pytest backend/tests/test_ocr_benchmark.py",
         "python backend/tests/test_scene_analysis.py",
         "python backend/tests/test_engine_registry.py",
         "python backend/tests/test_vision_orchestrator.py",
