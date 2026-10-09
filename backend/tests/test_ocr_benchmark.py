@@ -148,3 +148,14 @@ def test_benchmark_traceability():
         assert ev.wer >= 0.0
         assert isinstance(ev.exact_match, bool)
         assert ev.latency_ms >= 0.0
+
+
+@pytest.mark.skipif(not has_tesseract(), reason="Tesseract executable not found")
+def test_evaluate_public_ocr_dataset_runner():
+    from tests.scripts.evaluate_public_ocr_dataset import run_public_dataset_evaluation
+    if os.path.exists("data/external/whiteboards/metadata.jsonl"):
+        res = run_public_dataset_evaluation(output_json="tests/results/phase4c6-whiteboard-ocr.json")
+        assert res is not None
+        assert res["total_samples"] == 21
+        assert res["evaluated_samples"] == 21
+        assert res["mean_cer"] > 0.0
