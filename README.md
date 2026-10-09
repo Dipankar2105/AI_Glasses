@@ -1,6 +1,6 @@
 # NextSight Smart Glasses — AI Glasses Framework
 
-[![CI / Regression Tests](https://img.shields.io/badge/Tests-166%20Passed-brightgreen)](https://github.com/Dipankar2105/AI_Glasses)
+[![CI / Regression Tests](https://img.shields.io/badge/Tests-192%20Passed-brightgreen)](https://github.com/Dipankar2105/AI_Glasses)
 [![Platform](https://img.shields.io/badge/Platform-ESP32--S3%20%7C%20FastAPI-blue)](https://github.com/Dipankar2105/AI_Glasses)
 [![Hardware Readiness](https://img.shields.io/badge/Hardware-Ready%20for%20Physical%20Bringup-orange)](docs/phase10-hardware-integration-readiness.md)
 
