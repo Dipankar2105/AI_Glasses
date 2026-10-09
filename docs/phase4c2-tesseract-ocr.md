@@ -31,3 +31,6 @@ Tests are located in `backend/tests/test_tesseract_ocr.py`.
 - **No Physical Hardware OCR Yet**: The OCR executes entirely on backend/host validation layers; it does not deploy C++ tesseract to the microcontrollers.
 - **Windows Setup**: Windows users must download the Tesseract installer separately and add the install directory (e.g., `C:\Program Files\Tesseract-OCR`) to system environment variables.
 - **Bounding Boxes**: Output boxes are globally normalized `[0.0, 1.0]`. If coordinate conversions lose sub-pixel accuracy against microscopic images, minor padding discrepancies might appear on downstream highlighting routines.
+
+## 6. Preprocessing Experiments & Latency Observations
+Since the Tesseract executable is heavily OS-dependent, the local experiments script (	ests/scripts/ocr_experiments.py) handles graceful fallback skipping. When tested with local installation, we observe deterministic processing of uppercase, lowercase, numeric, blank, grayscale and RGB synthetic Pillow fixtures. Performance latency metrics heavily depend on the local CPU cores allocating thread-counts to the tesseract C++ engine. The framework records these latencies deterministically.
