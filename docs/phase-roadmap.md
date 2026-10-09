@@ -1,15 +1,17 @@
 # Phase Roadmap
 
-- Phase 0 — Architecture & Repository Foundation
-- Phase 1 — Xiaozhi Foundation
-- Phase 2 — Audio + DSP
-- Phase 3 — Hardware Abstraction Layer
-- Phase 4 — Camera + Vision Pipeline
-- Phase 5 — Python AI Backend
-- Phase 6 — OCR + Read Aloud
-- Phase 7 — Conversational Intelligence + MCP Tools
-- Phase 8 — Motion + Silent Interaction
-- Phase 9 — Power + Thermal Management
-- Phase 10 — Full Hardware Integration
-- Phase 11 — Performance + Reliability
-- Phase 12 — Final Productization
+- Phase 0 — Architecture & Repository Foundation [COMPLETED]
+- Phase 1 — Xiaozhi Foundation [COMPLETED]
+- Phase 2 — Audio + DSP [COMPLETED]
+- Phase 3 — Hardware Abstraction Layer [COMPLETED]
+- Phase 4 — Camera + Vision Pipeline [COMPLETED]
+- Phase 4C — OCR Research & Notebook Evaluation [ON HOLD]
+- Phase 5 — Python AI Backend Foundation [COMPLETED]
+- Phase 6 — OCR + Read Aloud [DEFERRED - OCR ON HOLD]
+- Phase 7 — Conversational Intelligence + MCP Tools [COMPLETED]
+- Phase 8 — Motion + Silent Interaction [PLANNED]
+- Phase 9 — Power + Thermal Management [PLANNED]
+- Phase 10 — Full Hardware Integration [PLANNED]
+- Phase 11 — Performance + Reliability [PLANNED]
+- Phase 12 — Final Productization [PLANNED]
+

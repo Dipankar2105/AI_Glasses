@@ -5,8 +5,10 @@ from fastapi import FastAPI
 
 from backend.config.settings import AppSettings, get_settings
 from backend.api.routes import router as api_router
+from backend.api.conversation_routes import router as conversation_router
 from backend.api.middleware import RequestCorrelationMiddleware
 from backend.services.vision_service import get_vision_service
+from backend.services.conversation_service import get_conversation_service
 
 def setup_logging(log_level: str = "INFO") -> None:
     """Configures structured application logging."""
@@ -60,6 +62,7 @@ def create_app(settings: Optional[AppSettings] = None) -> FastAPI:
 
     # Include routes
     app.include_router(api_router)
+    app.include_router(conversation_router)
 
     return app
 
