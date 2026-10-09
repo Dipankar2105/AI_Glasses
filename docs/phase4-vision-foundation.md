@@ -37,12 +37,14 @@ Establish a stable, standardized vision preprocessing pipeline bridging the froz
 ## 3. Strict Phase 3 Boundary
 The Phase 4 vision layer is implemented strictly as a consumer of the `CameraFrame` and `CameraHAL` API. Absolutely no modifications were made to the frozen Phase 2 DSP or Phase 3 hardware abstraction layer.
 
-## 4. Preprocessing Implementation
-The `VisionPipeline` class safely handles incoming binary data buffers:
-- **Validation:** Prevents Null/zero-dimension buffer cascades.
-- **Grayscale / Resize / ROI:** Encapsulated wrappers exposing abstract dimension control safely without tightly coupling to third-party bindings right away.
-- **Normalization:** Scales sensor byte thresholds mapping to floating-point gradients [0.0 - 1.0].
-- **Quality Checks:** Simple deterministic metric analysis (e.g. Rejecting purely black frames).
+## 4. Preprocessing Implementation (Phase 4B)
+The `VisionPipeline` class safely handles pure NumPy (`np.ndarray`) image operations without reliance on heavy AI or external frameworks (e.g., `cv2` is avoided for pure determinism). 
+- **Validation:** Defends against missing data, invalid dimensions, unsupported channels, and incorrect data types natively.
+- **Resize:** Deterministic Nearest-Neighbor interpolation, avoiding float drift. Preserves exact identical objects when dimensions match.
+- **RGB/Grayscale Conversion:** Utilizes pure ITU-R BT.601 math (`Y = 0.299R + 0.587G + 0.114B`), converting dimensions exactly (H, W, 3) ↔ (H, W) seamlessly.
+- **Normalization:** Divides pixel vectors mathematically scaling `uint8` limits strictly up to deterministic `float32` [0.0 - 1.0] arrays safely.
+- **Contrast Normalization:** Executes absolute Min-Max contrast stretching per-channel for RGB arrays preventing singular color washout, avoiding `NaN`/`Inf` singularities cleanly.
+- **Quality Checks:** Fully implemented `ImageQualityAnalyzer` yielding Brightness, Contrast, Sharpness (via fast NumPy array Laplacian slicing), Noise Estimation, and Dynamic Range natively. **NOTE: This component strictly measures image degradation indicators; it does not restore, deblur, or fix damaged images. It is read-only and explicitly deterministic.**
 
 ## 5. Output Contract
 The `VisionFrame` standardizes metadata formats allowing backend routines to asynchronously process spatial data consistently.
