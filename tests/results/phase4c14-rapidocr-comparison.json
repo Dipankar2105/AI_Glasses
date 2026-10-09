@@ -1,0 +1,2380 @@
+{
+    "benchmark_name": "Phase 4C.14 Tesseract vs RapidOCR Comparison",
+    "timestamp": "2026-10-09 15:23:35",
+    "tesseract_version": "5.4.0.20240606",
+    "rapidocr_version": "1.2.3 (onnxruntime 1.31.0)",
+    "cold_start_latencies_ms": {
+        "tesseract": 2.47,
+        "rapidocr": 587.47
+    },
+    "datasets": {
+        "Whiteboard_Dev_11": {
+            "tesseract": {
+                "dataset_name": "Whiteboard_Dev_11",
+                "sample_count": 11,
+                "macro_cer": 0.6414,
+                "macro_wer": 0.9966,
+                "micro_cer": 0.6423,
+                "micro_wer": 1.0,
+                "exact_match_count": 0,
+                "exact_match_rate": 0.0,
+                "mean_latency_ms": 1143.94,
+                "median_latency_ms": 1119.45,
+                "sample_evaluations": [
+                    {
+                        "sample_id": "01",
+                        "file_name": "01.webp",
+                        "category": "prose",
+                        "reference_text": "WHITEBOARD OCR \u2192 FEW SAMPLE TEST\n\nI have rediscovered whiteboarding!\nBUT!\nIt's mounted at a really awkward height\nAND\nI have barely written by hand in years\nSo\nmy writing is hard to decipher",
+                        "prediction": "WHIT EBSALD \u201c2 fe SM ry\u2019 lt we LLL LLL aa Bur! 14's nous tek at a Lolly ouihtoer A Aeigh \u00e9 ALD ( hove beregy wei EC by honk In fens My whi ti\u00a2 13 foad \u20ac\u00b0 fect phere",
+                        "cer": 0.5344,
+                        "wer": 1.0588,
+                        "exact_match": false,
+                        "latency_ms": 1262.41,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 40
+                    },
+                    {
+                        "sample_id": "02",
+                        "file_name": "02.webp",
+                        "category": "list",
+                        "reference_text": "SOME QUESTIONS\n\nCan you train a vision model / multimodal model on\na few reference images w/ manual transcriptions / ground\ntruths?\nWhat about abbreviations like w/ for with?",
+                        "prediction": "lone Glu &5 7% 00S Com you Lhair we Wsrot nol / null tot o\u00e9 0 lal on a for repavre \u2018eye </ale decates ie ei pear is oe gbrvtotiens Va of fe wi oo",
+                        "cer": 0.6358,
+                        "wer": 1.069,
+                        "exact_match": false,
+                        "latency_ms": 1071.64,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 35
+                    },
+                    {
+                        "sample_id": "03",
+                        "file_name": "03.webp",
+                        "category": "list",
+                        "reference_text": "SOME QUESTIONS\n\n\u2022 Can you train a vision model / multimodal model on\n  a few reference images w/ manual transcriptions / ground\n  truths?\n\u2022 What about abbreviations like w/ for with?\n\u2022 Could I get AI to create a custom TTF font & if so\n  how much training data?",
+                        "prediction": "So wE Ques 7 cas See 4 Com you Lbaire we wrote mold / rwtAtedleal telah oa a few ne feck (ma teb wf panel PAB\"P Bi GOs previeciens Vila of fae wilh? py) hte bot OC me Lol / get gee",
+                        "cer": 0.6732,
+                        "wer": 0.9796,
+                        "exact_match": false,
+                        "latency_ms": 1116.4,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 42
+                    },
+                    {
+                        "sample_id": "04",
+                        "file_name": "04.webp",
+                        "category": "list",
+                        "reference_text": "SOME QUESTIONS\n\n\u2022 Can you train a vision model / multimodal model on\n  a few reference images w/ manual transcriptions / ground\n  truths?\n\u2022 What about abbreviations like w/ for with?\n\u2022 Could I get AI to create a custom TTF font & if so\n  how much training data?",
+                        "prediction": "fo we vues 7icas : ow Owe Lhair wa wngroe mole / nit@tedat to lal On 4 for refocrrce lmazes \u201c/ nannel Paeserip lees vA [read bho Bot sgbroietiens Wha Vf fe with? Al bcat \u00a9 stor 77\u00a2 flat a 16 Se fart let yee",
+                        "cer": 0.5827,
+                        "wer": 0.9796,
+                        "exact_match": false,
+                        "latency_ms": 1159.41,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 45
+                    },
+                    {
+                        "sample_id": "05",
+                        "file_name": "05.webp",
+                        "category": "list",
+                        "reference_text": "Why / Applications\n\n\u25cb Whiteboard workflows:\n    \u21b3 Whiteboard \u2192 cleaned up tech diagram\n      (nano banana). needs to be able to parse a\n      \"OCR\" raw text. Objective: \u2191 accuracy &\n      \u2193 pseudotext\n    \u21b3 Whiteboard \u2192 text / todo list / SOL etc.",
+                        "prediction": "wy 1A PPA CAILS 0 hj $3 ond wee hflorF - Zi teh t& cork =~ chleateh vp feel MI yahoo [hea ae pawam). ree fe be Sle 72 RAEI. A_ ek RO Feet. COR Sec TIVE _- ae toc ~~ tN psontotext Ly phtedennee > Tat (00 ise / Sor cle",
+                        "cer": 0.6,
+                        "wer": 1.2195,
+                        "exact_match": false,
+                        "latency_ms": 1119.45,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 52
+                    },
+                    {
+                        "sample_id": "07",
+                        "file_name": "07.webp",
+                        "category": "table",
+                        "reference_text": "Few Shot Learning - 2\n\nWORLD CAPITALS\n\nCITY          | COUNTRY\n--------------+---------\nDublin        | Ireland\nAmman         | Jordan\nWashington DC | USA",
+                        "prediction": "Faw Shot Llearrigy \u2014 a Yon to CAeIMES CITY Dub lw |e harc\u2014 firnor Son han",
+                        "cer": 0.6797,
+                        "wer": 0.9524,
+                        "exact_match": false,
+                        "latency_ms": 1081.91,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 16
+                    },
+                    {
+                        "sample_id": "08",
+                        "file_name": "08.webp",
+                        "category": "flowchart",
+                        "reference_text": "Few Shot Learning - 3\n\n        Zoom Meeting Prep SOP\n\n        Is my hair a mess?\n           /           \\\n          Y             N\n          \u2193             \u2193\n      \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510   \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n      \u2502COMB HAIR\u2502   \u2502CHILL OUT!\u2502\n      \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518   \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
+                        "prediction": "RS het Leases \u2014- > Joow Meet 4 frep (of bs ny hear need \u00b0 Y hy",
+                        "cer": 0.7517,
+                        "wer": 0.9643,
+                        "exact_match": false,
+                        "latency_ms": 1008.13,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 17
+                    },
+                    {
+                        "sample_id": "09",
+                        "file_name": "09.webp",
+                        "category": "list",
+                        "reference_text": "Few Shot Learning - 3\n\nWhat about variability in how we write letters?\n  \u21b3 Sometimes I dot i's. Sometimes I don't.\n  \u21b3 Informal / missing punctuation?\n  \u21b3 \"Code switching\" & misspellings?\n  \u21b3 Sometimes I write 'b' like balloon & sometimes\n    balloon (why? IDK!)",
+                        "prediction": "Fis Shot Lenny = > ly hat Bol hi by ) a i waite leeces? . a forrisp: mesg pnw tebe Lote suite oF nist pe? 2 L fontins, / we! \u2018L' jhe haloon pene ined Gbecs (uy? 10k!)",
+                        "cer": 0.6265,
+                        "wer": 0.9535,
+                        "exact_match": false,
+                        "latency_ms": 1352.02,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 39
+                    },
+                    {
+                        "sample_id": "10",
+                        "file_name": "10.webp",
+                        "category": "list",
+                        "reference_text": "Few Shot Learning - 3\n\nWhat about txt like speech?\n  \u2193\n\nLLMs R cool         \u2192  LLMs are cool!\n   or incorrect uppercase\nLLMs R cool         \u2192  LLMs are cool",
+                        "prediction": "Faw Shot leawigy - > 9 YT ae ( 4 , a Ls we sew ns & FOr pe jaegRnet \u201cae Litts ore cool",
+                        "cer": 0.6107,
+                        "wer": 0.8929,
+                        "exact_match": false,
+                        "latency_ms": 1163.81,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 24
+                    },
+                    {
+                        "sample_id": "11",
+                        "file_name": "11.webp",
+                        "category": "diagram",
+                        "reference_text": "PERSONALISED AI \u2192 BASIC IDEA\n\nUse-case: Human wants to create a task-specific AI agent\n& frontload context\n\nTactic: Create AI agent to \"interview\" you \u2192 transcribe\n        (could be voice \u2192 voice!) \u2192 extract content \u2192 vector DB\n\n[bot] \u2500\u2500> [ What's your fav food? ]\n           [ PIZZA! ]  :)\n  \u2193\nCREATE MEMORY\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502 Daniel's fav  \u2502\n\u2502 food = PIZZA  \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n        \u2193\n      ( VECTOR DB )",
+                        "prediction": "PERS 0 A 1 GAS% rr MAUS 2D { A IDEA e- case: Hunan WANTS To ee a Tesh SspecmrBe A/ agent bS etek e TAA A, \u201c| (a) phai (coll Ge porce re) 79 os oe T=T hheat 'S . - eantEDs FAK Tl feod = 22a 4",
+                        "cer": 0.7073,
+                        "wer": 0.9559,
+                        "exact_match": false,
+                        "latency_ms": 1233.39,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 49
+                    },
+                    {
+                        "sample_id": "17",
+                        "file_name": "17.webp",
+                        "category": "prose",
+                        "reference_text": "Other Common Whiteboard Imperfections\n\n  o  Use X or strikethrough\n\n        Here's      cool  ~~ideas~~\n               \u2717           ideas\n           are\n          some",
+                        "prediction": "other (ewmon VH/ TeheAtpD npifecti> 0 be x & st ai be tm yar",
+                        "cer": 0.6535,
+                        "wer": 0.9375,
+                        "exact_match": false,
+                        "latency_ms": 1014.74,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 14
+                    }
+                ]
+            },
+            "rapidocr": {
+                "dataset_name": "Whiteboard_Dev_11",
+                "sample_count": 11,
+                "macro_cer": 0.7653,
+                "macro_wer": 0.9547,
+                "micro_cer": 0.7691,
+                "micro_wer": 0.9581,
+                "exact_match_count": 0,
+                "exact_match_rate": 0.0,
+                "mean_latency_ms": 2447.68,
+                "median_latency_ms": 2346.89,
+                "sample_evaluations": [
+                    {
+                        "sample_id": "01",
+                        "file_name": "01.webp",
+                        "category": "prose",
+                        "reference_text": "WHITEBOARD OCR \u2192 FEW SAMPLE TEST\n\nI have rediscovered whiteboarding!\nBUT!\nIt's mounted at a really awkward height\nAND\nI have barely written by hand in years\nSo\nmy writing is hard to decipher",
+                        "prediction": "BUT! mkvnt heio t by hond in yenes baruy n wn Ete / hove k So to deciphe my wnitig is oal",
+                        "cer": 0.7249,
+                        "wer": 0.9118,
+                        "exact_match": false,
+                        "latency_ms": 3797.72,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 9
+                    },
+                    {
+                        "sample_id": "02",
+                        "file_name": "02.webp",
+                        "category": "list",
+                        "reference_text": "SOME QUESTIONS\n\nCan you train a vision model / multimodal model on\na few reference images w/ manual transcriptions / ground\ntruths?\nWhat about abbreviations like w/ for with?",
+                        "prediction": "nulhinodol no lel on- a hiior nol I rAwel 'fhancatpties n-r?",
+                        "cer": 0.7919,
+                        "wer": 0.9655,
+                        "exact_match": false,
+                        "latency_ms": 2229.84,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 4
+                    },
+                    {
+                        "sample_id": "03",
+                        "file_name": "03.webp",
+                        "category": "list",
+                        "reference_text": "SOME QUESTIONS\n\n\u2022 Can you train a vision model / multimodal model on\n  a few reference images w/ manual transcriptions / ground\n  truths?\n\u2022 What about abbreviations like w/ for with?\n\u2022 Could I get AI to create a custom TTF font & if so\n  how much training data?",
+                        "prediction": "nulhinodol no ll on- .Cov hiior mol rAwel 'hangcapties nepow irgs ~/ n ? uston TTf Ant \u03b1 \"tso I Jet Al  cat Loula",
+                        "cer": 0.7559,
+                        "wer": 0.9796,
+                        "exact_match": false,
+                        "latency_ms": 2511.24,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 9
+                    },
+                    {
+                        "sample_id": "04",
+                        "file_name": "04.webp",
+                        "category": "list",
+                        "reference_text": "SOME QUESTIONS\n\n\u2022 Can you train a vision model / multimodal model on\n  a few reference images w/ manual transcriptions / ground\n  truths?\n\u2022 What about abbreviations like w/ for with?\n\u2022 Could I get AI to create a custom TTF font & if so\n  how much training data?",
+                        "prediction": "nulbhinodal no lel on- a hiior nol aangceptres nAnvel +nr ? ughom Tf nt \u03b1 \"tso",
+                        "cer": 0.7953,
+                        "wer": 0.9796,
+                        "exact_match": false,
+                        "latency_ms": 2346.89,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 6
+                    },
+                    {
+                        "sample_id": "05",
+                        "file_name": "05.webp",
+                        "category": "list",
+                        "reference_text": "Why / Applications\n\n\u25cb Whiteboard workflows:\n    \u21b3 Whiteboard \u2192 cleaned up tech diagram\n      (nano banana). needs to be able to parse a\n      \"OCR\" raw text. Objective: \u2191 accuracy &\n      \u2193 pseudotext\n    \u21b3 Whiteboard \u2192 text / todo list / SOL etc.",
+                        "prediction": "ktlous : 0 hhitsoand p e CLeAneL c L hhiteloon - 8 t . neeu t b T ako : CNA NO DANAM). fept. c Ce Tec hive : 'ocn'Rm L PSdotex+",
+                        "cer": 0.7136,
+                        "wer": 1.0,
+                        "exact_match": false,
+                        "latency_ms": 2646.3,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 13
+                    },
+                    {
+                        "sample_id": "07",
+                        "file_name": "07.webp",
+                        "category": "table",
+                        "reference_text": "Few Shot Learning - 2\n\nWORLD CAPITALS\n\nCITY          | COUNTRY\n--------------+---------\nDublin        | Ireland\nAmman         | Jordan\nWashington DC | USA",
+                        "prediction": "LOWNTR) DusIIN Arn USA",
+                        "cer": 0.8516,
+                        "wer": 0.9524,
+                        "exact_match": false,
+                        "latency_ms": 2016.89,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 4
+                    },
+                    {
+                        "sample_id": "08",
+                        "file_name": "08.webp",
+                        "category": "flowchart",
+                        "reference_text": "Few Shot Learning - 3\n\n        Zoom Meeting Prep SOP\n\n        Is my hair a mess?\n           /           \\\n          Y             N\n          \u2193             \u2193\n      \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510   \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n      \u2502COMB HAIR\u2502   \u2502CHILL OUT!\u2502\n      \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518   \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
+                        "prediction": "hy haic [Cons He-I",
+                        "cer": 0.9195,
+                        "wer": 1.0,
+                        "exact_match": false,
+                        "latency_ms": 1862.91,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 2
+                    },
+                    {
+                        "sample_id": "09",
+                        "file_name": "09.webp",
+                        "category": "list",
+                        "reference_text": "Few Shot Learning - 3\n\nWhat about variability in how we write letters?\n  \u21b3 Sometimes I dot i's. Sometimes I don't.\n  \u21b3 Informal / missing punctuation?\n  \u21b3 \"Code switching\" & misspellings?\n  \u21b3 Sometimes I write 'b' like balloon & sometimes\n    balloon (why? IDK!)",
+                        "prediction": "umil lte8? I loit. A Sontines \u03b1 nispeliny ? + Cole shitehy\" Jonetins,",
+                        "cer": 0.7992,
+                        "wer": 0.9767,
+                        "exact_match": false,
+                        "latency_ms": 2302.43,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 6
+                    },
+                    {
+                        "sample_id": "10",
+                        "file_name": "10.webp",
+                        "category": "list",
+                        "reference_text": "Few Shot Learning - 3\n\nWhat about txt like speech?\n  \u2193\n\nLLMs R cool         \u2192  LLMs are cool!\n   or incorrect uppercase\nLLMs R cool         \u2192  LLMs are cool",
+                        "prediction": "h het asout fot [ile speeck? LLMs inRnect hrcase \u2192 LLMs orc Cool",
+                        "cer": 0.5954,
+                        "wer": 0.8571,
+                        "exact_match": false,
+                        "latency_ms": 2401.52,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 4
+                    },
+                    {
+                        "sample_id": "11",
+                        "file_name": "11.webp",
+                        "category": "diagram",
+                        "reference_text": "PERSONALISED AI \u2192 BASIC IDEA\n\nUse-case: Human wants to create a task-specific AI agent\n& frontload context\n\nTactic: Create AI agent to \"interview\" you \u2192 transcribe\n        (could be voice \u2192 voice!) \u2192 extract content \u2192 vector DB\n\n[bot] \u2500\u2500> [ What's your fav food? ]\n           [ PIZZA! ]  :)\n  \u2193\nCREATE MEMORY\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502 Daniel's fav  \u2502\n\u2502 food = PIZZA  \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n        \u2193\n      ( VECTOR DB )",
+                        "prediction": "IDEA PENSO NAUSED AI - BASIC fnontload TRANSCRS TAL hhat's Youn PIZZA! HEMOR LLCATE ood : (PrzzA VETOR DB",
+                        "cer": 0.7778,
+                        "wer": 0.9412,
+                        "exact_match": false,
+                        "latency_ms": 2646.76,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 12
+                    },
+                    {
+                        "sample_id": "17",
+                        "file_name": "17.webp",
+                        "category": "prose",
+                        "reference_text": "Other Common Whiteboard Imperfections\n\n  o  Use X or strikethrough\n\n        Here's      cool  ~~ideas~~\n               \u2717           ideas\n           are\n          some",
+                        "prediction": "othen Le x n StRib+hm Henos  co l -tlea. Jome",
+                        "cer": 0.6931,
+                        "wer": 0.9375,
+                        "exact_match": false,
+                        "latency_ms": 2161.94,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 4
+                    }
+                ]
+            },
+            "cer_improvement_absolute": -0.1239,
+            "speedup_ratio": 0.47
+        },
+        "Whiteboard_Heldout_10": {
+            "tesseract": {
+                "dataset_name": "Whiteboard_Heldout_10",
+                "sample_count": 10,
+                "macro_cer": 0.755,
+                "macro_wer": 1.0241,
+                "micro_cer": 0.7257,
+                "micro_wer": 1.0105,
+                "exact_match_count": 0,
+                "exact_match_rate": 0.0,
+                "mean_latency_ms": 1124.45,
+                "median_latency_ms": 1153.94,
+                "sample_evaluations": [
+                    {
+                        "sample_id": "06",
+                        "file_name": "06.webp",
+                        "category": "diagram",
+                        "reference_text": "Few Shot Learning - 1\n\n        Apples\n       \u2197\n      /\n( FRUITS ) \u2192 Oranges\n      \\\u2192 Bananas\n       \u2198\n        Lemons\nKiwis \u2190\n     \u2199\nMelons",
+                        "prediction": "",
+                        "cer": 1.0,
+                        "wer": 1.0,
+                        "exact_match": false,
+                        "latency_ms": 833.92,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 0
+                    },
+                    {
+                        "sample_id": "12",
+                        "file_name": "12.webp",
+                        "category": "diagram",
+                        "reference_text": "(could be voice \u2192 voice!) \u2192 Extract content \u2192 V[ector DB]\n\n[bot] \u2500\u2500> [ What's your fav food? ]\n           [ PIZZA! ]  :)\n  \u2193\nCREATE MEMORY\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502 Daniel's fav  \u2502\n\u2502 food = PIZZA  \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n        \u2193\n     ( VECTOR DB )",
+                        "prediction": "[cont Ge yore voices) I &afnect lm Lena! oN & LZACATE MENF RY eancEs FAK 4",
+                        "cer": 0.7751,
+                        "wer": 1.0,
+                        "exact_match": false,
+                        "latency_ms": 1110.04,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 16
+                    },
+                    {
+                        "sample_id": "13",
+                        "file_name": "13.webp",
+                        "category": "diagram",
+                        "reference_text": "PERSONALISED AI \u2014 WORKFLOW 2\n\n(user) Hey bot! Let's build out my food & drink\n       context store!\n\n(bot)  Sure! Let me see what gaps we have...\n       \u2193\n       READ \u2192 (vector DB) \u2192 (bot) Hmm. nothing about\n                                   beer preferences!\n\n(bot) What beer do you prefer?\n(user) Super bitter IPAs          CREATE \u2192\n                        \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n                  (bot) \u2502 User's fav beer =   \u2502\n                        \u2502 bitter IPA          \u2502\n                        \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
+                        "prediction": "\u2014\u2014S>\u2014\u2014 EO \u2014\u2014\u2014\u2014 PENS ce MAUS ED Al \u2014VYoORhe lowe ~~ Mey bet ! Lets bulk OF TY food 3. dniak. oe context stoec! Fly Sone! Let me See whet gan we \u2014\u2014 is ao, ee i: pothigs Sok > = ( Aowe.. Et Wine be HO\" ae = bitten IPAs | fa cea Te Spee oi :",
+                        "cer": 0.6919,
+                        "wer": 1.0,
+                        "exact_match": false,
+                        "latency_ms": 1421.18,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 58
+                    },
+                    {
+                        "sample_id": "14",
+                        "file_name": "14.webp",
+                        "category": "diagram",
+                        "reference_text": "PERSONALISED AI \u2014 LATENT VALUE AREAS\n\n            (user)              (bot)\n            USER                LLM'S\n            PROMPTS             OUTPUTS\n              \u2502                   \u2502\n              \u2193                   \u2193\n         PROMPT           \u2192   CONVO (1)\n         HISTORY  (2)         STORE\n              \u2193                 \u2502   \u2198\n              \u2193                 \u2193    WIKI\n         PROMPT              DOWNSTREAM\n         LIB \u2192 USER          OUTPUTS\n               CONTEXT        \u2199   \u2193   \u2198\n                          PODCASTS  CPD  DOCS",
+                        "prediction": "eC OEE EAT ET V/A a 2 D Z v7 T \u2014\u2014\u2014 e_ (+R ELS ie ee. De wf Sih (7 Dipl i (K fod CAST: 5 CFP Docs P goteT LB",
+                        "cer": 0.7707,
+                        "wer": 1.0,
+                        "exact_match": false,
+                        "latency_ms": 1234.12,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 32
+                    },
+                    {
+                        "sample_id": "15",
+                        "file_name": "15.webp",
+                        "category": "diagram",
+                        "reference_text": "(bot) LLM'S OUTPUTS  \u2192  CONVO (1)\n                         STORE\n                          \u2502   \u2198\n                          \u2193    WIKI\n                      DOWNSTREAM\n                      OUTPUTS\n                       \u2199   \u2193   \u2198\n                  PODCASTS CPD DOCS",
+                        "prediction": "3 or LteWws owl O 7 wae ; \u2018 | bits 2 ne A . pensTS \u00a9 : pb I> cs",
+                        "cer": 0.6813,
+                        "wer": 1.1053,
+                        "exact_match": false,
+                        "latency_ms": 1281.87,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 21
+                    },
+                    {
+                        "sample_id": "16",
+                        "file_name": "16.webp",
+                        "category": "diagram",
+                        "reference_text": "(user)                    (bot)\nUSER                      LLM'S\nPROMPTS                   OUT[PUTS]\n   \u2502\n   \u2193\nPROMPT           \u2500\u2500\u2500\u2500\u2510\nHISTORY  (2)         \u2502\n   \u2502                 \u2193\n   \u2193              USER\nPROMPT LIB        CONTEXT",
+                        "prediction": "Peoney LIQ SER.",
+                        "cer": 0.902,
+                        "wer": 1.0,
+                        "exact_match": false,
+                        "latency_ms": 853.89,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 3
+                    },
+                    {
+                        "sample_id": "18",
+                        "file_name": "18.webp",
+                        "category": "table",
+                        "reference_text": "Task: Whiteboard \u2192 Calendar\n\nMy Week Plan\n\n        SUN    MON    TUES    WEDS    THURS    FRI    SAT\n        \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n                      ACCOUNTANT\n\n0900\n\n1200                                    DAY\n                                        OFF\n1500  DOCTOR\n\n1800\n\n2100\n\n0000",
+                        "prediction": "Tish: Will Te fost \u2014 ya Lavewoard py wee PLAY Suar (wr Tuts Weos Hs Lee Cy aa ae go? pe AE (7.09 gee xo, oer xo? a! oJ 79",
+                        "cer": 0.7303,
+                        "wer": 1.2,
+                        "exact_match": false,
+                        "latency_ms": 1066.58,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 30
+                    },
+                    {
+                        "sample_id": "19",
+                        "file_name": "19.webp",
+                        "category": "mixed",
+                        "reference_text": "Task: Whiteboard \u2192 Mixed Elements.\n\nWhiteboard \u2192 Handwriting          \u2502   Questions\n    \u21b3 Gather samples              \u2502   \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n    \u21b3 Determine priorities        \u2502   Existing datasets?\n    \u21b3 Send to David               \u2502   Separate fine tunes for\n                                  \u2502   handwriting creation vs.\n                                  \u2502   reading?",
+                        "prediction": "VE BY : WHIT t 400th \u2014 m/xEed yA feSccad a Yaarve/ mne- peteem' La fre \u00a9? pe (Ques UNS ee Gastey garesesks sf Jeanaate fe Ther ci fodkui Y Mca 010F ?",
+                        "cer": 0.7321,
+                        "wer": 1.0,
+                        "exact_match": false,
+                        "latency_ms": 1044.62,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 33
+                    },
+                    {
+                        "sample_id": "20",
+                        "file_name": "20.webp",
+                        "category": "diagram",
+                        "reference_text": "Geopol Predictions: Current Model          A_x = Agent X\n                                           Sequential\n                                           SA_x = Subagent\nA_1 \u2192 Job\n      Actuation &\n      Mgmt                RSS   EXA AI\n                            \u2198   \u2199\n                             Google\n                             News\n        \u2198\n         A_2   SITREP Gen\n               Grounding                       \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n                                               \u2502 LLM  \u2502\n         \u2198                             \u2192 SA_1 \u2190\u2502COUNCIL\u2502\n          A_3   Prediction                     \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n                MGR               \u2192 SA_2\n          Pass SITREP, define\n          task, structured output\n\n          A_4  Analysis, Charts, Comparison w/\n               Run X-1\n\n          A_5  Generate Report (Typst)\n    \u2193\n  CONCAT   \u2192   PDF",
+                        "prediction": "(c0opoe Pre ot CT1aas * Cur et No de-( - ' AR =< A \u00a5 = lynne , Seq ema SA a Suee7ee WZ ies QeIs 15, CHRETS, COMPAR WON ff Crves t) Awh cys concatT\u2014 PDT",
+                        "cer": 0.7458,
+                        "wer": 1.0,
+                        "exact_match": false,
+                        "latency_ms": 1200.41,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 37
+                    },
+                    {
+                        "sample_id": "21",
+                        "file_name": "21.webp",
+                        "category": "diagram",
+                        "reference_text": "Whiteboard \u2192 Dev Spec \u2192 Agent Dev\n\nWhiteboard(s)  \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2192  Gemini API\n\nGemini \u2500\u2192 Cleaned Tech Diagrams (image 2 image)\n       \u2198 Narrative of Agent Model (image 2 txt)\n\nAgent 2: Convert these things \u2192 Dev Spec\n    \u21b3 Plan def w/ human\n    \u21b3 Generate tasks, define subagents,\n      checkpoints etc",
+                        "prediction": "Wy HA TTR eeDdCS) \u2014~) Genin AP\\ Gerinvl \u2014 Llen wed Tec DiAGeANS (nave 2 ree) : A : ra VAAnAaTive of well (innec _ -) A jeal ConvetT Test. Tunes 2 Oe Se i PLAW DEF w/ HUA GencantE TASKS, Defive. SeraselS J Checke-pstats ET",
+                        "cer": 0.5203,
+                        "wer": 0.9362,
+                        "exact_match": false,
+                        "latency_ms": 1197.84,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 46
+                    }
+                ]
+            },
+            "rapidocr": {
+                "dataset_name": "Whiteboard_Heldout_10",
+                "sample_count": 10,
+                "macro_cer": 0.6288,
+                "macro_wer": 0.9053,
+                "micro_cer": 0.6336,
+                "micro_wer": 0.9079,
+                "exact_match_count": 0,
+                "exact_match_rate": 0.0,
+                "mean_latency_ms": 2485.49,
+                "median_latency_ms": 2430.98,
+                "sample_evaluations": [
+                    {
+                        "sample_id": "06",
+                        "file_name": "06.webp",
+                        "category": "diagram",
+                        "reference_text": "Few Shot Learning - 1\n\n        Apples\n       \u2197\n      /\n( FRUITS ) \u2192 Oranges\n      \\\u2192 Bananas\n       \u2198\n        Lemons\nKiwis \u2190\n     \u2199\nMelons",
+                        "prediction": "Fo Shot leAuvey-! AVCeS FRUITS BANAVAS kiwis lervas n!lons",
+                        "cer": 0.5778,
+                        "wer": 0.8571,
+                        "exact_match": false,
+                        "latency_ms": 2126.61,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 7
+                    },
+                    {
+                        "sample_id": "12",
+                        "file_name": "12.webp",
+                        "category": "diagram",
+                        "reference_text": "(could be voice \u2192 voice!) \u2192 Extract content \u2192 V[ector DB]\n\n[bot] \u2500\u2500> [ What's your fav food? ]\n           [ PIZZA! ]  :)\n  \u2193\nCREATE MEMORY\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502 Daniel's fav  \u2502\n\u2502 food = PIZZA  \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n        \u2193\n     ( VECTOR DB )",
+                        "prediction": "act(ontet\u2192 coull Se voice+Voice. hhat's PIZZA! CRCATE MEMORY D4NIECSFAV PIZZA VETOR DB",
+                        "cer": 0.6986,
+                        "wer": 0.9048,
+                        "exact_match": false,
+                        "latency_ms": 2427.39,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 9
+                    },
+                    {
+                        "sample_id": "13",
+                        "file_name": "13.webp",
+                        "category": "diagram",
+                        "reference_text": "PERSONALISED AI \u2014 WORKFLOW 2\n\n(user) Hey bot! Let's build out my food & drink\n       context store!\n\n(bot)  Sure! Let me see what gaps we have...\n       \u2193\n       READ \u2192 (vector DB) \u2192 (bot) Hmm. nothing about\n                                   beer preferences!\n\n(bot) What beer do you prefer?\n(user) Super bitter IPAs          CREATE \u2192\n                        \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n                  (bot) \u2502 User's fav beer =   \u2502\n                        \u2502 bitter IPA          \u2502\n                        \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
+                        "prediction": "PERSOIAuSED AI -VOnLFLOWQ Hey bot! lets build out ry Podl  dhink Contx+ stoc! hae . Hnm. rot hiy cout been prceuences READ Yr PrePo, \u56fdhhat be lo bi IPRs CCA TE Srpek been bitte",
+                        "cer": 0.6359,
+                        "wer": 0.9048,
+                        "exact_match": false,
+                        "latency_ms": 2645.51,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 14
+                    },
+                    {
+                        "sample_id": "14",
+                        "file_name": "14.webp",
+                        "category": "diagram",
+                        "reference_text": "PERSONALISED AI \u2014 LATENT VALUE AREAS\n\n            (user)              (bot)\n            USER                LLM'S\n            PROMPTS             OUTPUTS\n              \u2502                   \u2502\n              \u2193                   \u2193\n         PROMPT           \u2192   CONVO (1)\n         HISTORY  (2)         STORE\n              \u2193                 \u2502   \u2198\n              \u2193                 \u2193    WIKI\n         PROMPT              DOWNSTREAM\n         LIB \u2192 USER          OUTPUTS\n               CONTEXT        \u2199   \u2193   \u2198\n                          PODCASTS  CPD  DOCS",
+                        "prediction": "PENSOIAUSED AI - LATENT VNLUL AREAS LLNS useL OUTTUTS PAOMTS STORC PnopT DOWNSTLEAM OWTPUTS CPD rUDASTS LIB PLONPT",
+                        "cer": 0.5902,
+                        "wer": 0.9048,
+                        "exact_match": false,
+                        "latency_ms": 2591.77,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 13
+                    },
+                    {
+                        "sample_id": "15",
+                        "file_name": "15.webp",
+                        "category": "diagram",
+                        "reference_text": "(bot) LLM'S OUTPUTS  \u2192  CONVO (1)\n                         STORE\n                          \u2502   \u2198\n                          \u2193    WIKI\n                      DOWNSTREAM\n                      OUTPUTS\n                       \u2199   \u2193   \u2198\n                  PODCASTS CPD DOCS",
+                        "prediction": "LLNS OUTTUTS STORC wikI DOWASTLEAM WTPUTS CPD PUDLRSTS",
+                        "cer": 0.5385,
+                        "wer": 0.8947,
+                        "exact_match": false,
+                        "latency_ms": 2351.07,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 8
+                    },
+                    {
+                        "sample_id": "16",
+                        "file_name": "16.webp",
+                        "category": "diagram",
+                        "reference_text": "(user)                    (bot)\nUSER                      LLM'S\nPROMPTS                   OUT[PUTS]\n   \u2502\n   \u2193\nPROMPT           \u2500\u2500\u2500\u2500\u2510\nHISTORY  (2)         \u2502\n   \u2502                 \u2193\n   \u2193              USER\nPROMPT LIB        CONTEXT",
+                        "prediction": "LLNS PROMPTS PnompT PLONPT LIB",
+                        "cer": 0.7451,
+                        "wer": 0.9,
+                        "exact_match": false,
+                        "latency_ms": 2151.13,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 4
+                    },
+                    {
+                        "sample_id": "18",
+                        "file_name": "18.webp",
+                        "category": "table",
+                        "reference_text": "Task: Whiteboard \u2192 Calendar\n\nMy Week Plan\n\n        SUN    MON    TUES    WEDS    THURS    FRI    SAT\n        \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n                      ACCOUNTANT\n\n0900\n\n1200                                    DAY\n                                        OFF\n1500  DOCTOR\n\n1800\n\n2100\n\n0000",
+                        "prediction": "TASh : hHITESOCLL \u2192 CALENDAR WleL PLAN ny min Tots wEos SA T AULUNTANT 0100 DAY 1200 1800 0 0 00",
+                        "cer": 0.5787,
+                        "wer": 0.88,
+                        "exact_match": false,
+                        "latency_ms": 2428.16,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 11
+                    },
+                    {
+                        "sample_id": "19",
+                        "file_name": "19.webp",
+                        "category": "mixed",
+                        "reference_text": "Task: Whiteboard \u2192 Mixed Elements.\n\nWhiteboard \u2192 Handwriting          \u2502   Questions\n    \u21b3 Gather samples              \u2502   \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n    \u21b3 Determine priorities        \u2502   Existing datasets?\n    \u21b3 Send to David               \u2502   Separate fine tunes for\n                                  \u2502   handwriting creation vs.\n                                  \u2502   reading?",
+                        "prediction": "TASh : h/HITESocad \u2192 iXED ELEmN. Ques ti yhieSoaaL  HAnDVnI TAC- datasea ? ha pwnithes JpArate Hn tnes Detcam ine DAUID",
+                        "cer": 0.6652,
+                        "wer": 0.9722,
+                        "exact_match": false,
+                        "latency_ms": 2433.81,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 10
+                    },
+                    {
+                        "sample_id": "20",
+                        "file_name": "20.webp",
+                        "category": "diagram",
+                        "reference_text": "Geopol Predictions: Current Model          A_x = Agent X\n                                           Sequential\n                                           SA_x = Subagent\nA_1 \u2192 Job\n      Actuation &\n      Mgmt                RSS   EXA AI\n                            \u2198   \u2199\n                             Google\n                             News\n        \u2198\n         A_2   SITREP Gen\n               Grounding                       \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n                                               \u2502 LLM  \u2502\n         \u2198                             \u2192 SA_1 \u2190\u2502COUNCIL\u2502\n          A_3   Prediction                     \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n                MGR               \u2192 SA_2\n          Pass SITREP, define\n          task, structured output\n\n          A_4  Analysis, Charts, Comparison w/\n               Run X-1\n\n          A_5  Generate Report (Typst)\n    \u2193\n  CONCAT   \u2192   PDF",
+                        "prediction": "Agnt \u00d7 PneDICTlens : Cearet No le( G(O POL Serunt'al RSS EXA AI GOOC SGB ACTU ATION MCMT SITREP LLM PRCDICTEn ME Pass SITRen detinL A4 ANALYSIS, CHRLTS, (OMPARSOn RUN X-I CdNCAT-",
+                        "cer": 0.6564,
+                        "wer": 0.8769,
+                        "exact_match": false,
+                        "latency_ms": 2809.11,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 18
+                    },
+                    {
+                        "sample_id": "21",
+                        "file_name": "21.webp",
+                        "category": "diagram",
+                        "reference_text": "Whiteboard \u2192 Dev Spec \u2192 Agent Dev\n\nWhiteboard(s)  \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2192  Gemini API\n\nGemini \u2500\u2192 Cleaned Tech Diagrams (image 2 image)\n       \u2198 Narrative of Agent Model (image 2 txt)\n\nAgent 2: Convert these things \u2192 Dev Spec\n    \u21b3 Plan def w/ human\n    \u21b3 Generate tasks, define subagents,\n      checkpoints etc",
+                        "prediction": "DEVSP ACT WHITEBOALD API W H (TCBOARD(S) (NAVe DIAGANS ACIANED GEnIn! INAGL 1 TXT NAAnATIVL OF AGNE nodel THESL Agntl: (onveeT HUMAN PLAN DEP SUBAOTS TASnS, DEFINL CheuPoinT ET",
+                        "cer": 0.6015,
+                        "wer": 0.9574,
+                        "exact_match": false,
+                        "latency_ms": 2890.32,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 20
+                    }
+                ]
+            },
+            "cer_improvement_absolute": 0.1262,
+            "speedup_ratio": 0.45
+        },
+        "Whiteboard_Full_21": {
+            "tesseract": {
+                "dataset_name": "Whiteboard_Full_21",
+                "sample_count": 21,
+                "macro_cer": 0.6955,
+                "macro_wer": 1.0097,
+                "micro_cer": 0.6827,
+                "micro_wer": 1.0051,
+                "exact_match_count": 0,
+                "exact_match_rate": 0.0,
+                "mean_latency_ms": 1132.43,
+                "median_latency_ms": 1114.92,
+                "sample_evaluations": [
+                    {
+                        "sample_id": "01",
+                        "file_name": "01.webp",
+                        "category": "prose",
+                        "reference_text": "WHITEBOARD OCR \u2192 FEW SAMPLE TEST\n\nI have rediscovered whiteboarding!\nBUT!\nIt's mounted at a really awkward height\nAND\nI have barely written by hand in years\nSo\nmy writing is hard to decipher",
+                        "prediction": "WHIT EBSALD \u201c2 fe SM ry\u2019 lt we LLL LLL aa Bur! 14's nous tek at a Lolly ouihtoer A Aeigh \u00e9 ALD ( hove beregy wei EC by honk In fens My whi ti\u00a2 13 foad \u20ac\u00b0 fect phere",
+                        "cer": 0.5344,
+                        "wer": 1.0588,
+                        "exact_match": false,
+                        "latency_ms": 1223.85,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 40
+                    },
+                    {
+                        "sample_id": "02",
+                        "file_name": "02.webp",
+                        "category": "list",
+                        "reference_text": "SOME QUESTIONS\n\nCan you train a vision model / multimodal model on\na few reference images w/ manual transcriptions / ground\ntruths?\nWhat about abbreviations like w/ for with?",
+                        "prediction": "lone Glu &5 7% 00S Com you Lhair we Wsrot nol / null tot o\u00e9 0 lal on a for repavre \u2018eye </ale decates ie ei pear is oe gbrvtotiens Va of fe wi oo",
+                        "cer": 0.6358,
+                        "wer": 1.069,
+                        "exact_match": false,
+                        "latency_ms": 1060.43,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 35
+                    },
+                    {
+                        "sample_id": "03",
+                        "file_name": "03.webp",
+                        "category": "list",
+                        "reference_text": "SOME QUESTIONS\n\n\u2022 Can you train a vision model / multimodal model on\n  a few reference images w/ manual transcriptions / ground\n  truths?\n\u2022 What about abbreviations like w/ for with?\n\u2022 Could I get AI to create a custom TTF font & if so\n  how much training data?",
+                        "prediction": "So wE Ques 7 cas See 4 Com you Lbaire we wrote mold / rwtAtedleal telah oa a few ne feck (ma teb wf panel PAB\"P Bi GOs previeciens Vila of fae wilh? py) hte bot OC me Lol / get gee",
+                        "cer": 0.6732,
+                        "wer": 0.9796,
+                        "exact_match": false,
+                        "latency_ms": 1114.92,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 42
+                    },
+                    {
+                        "sample_id": "04",
+                        "file_name": "04.webp",
+                        "category": "list",
+                        "reference_text": "SOME QUESTIONS\n\n\u2022 Can you train a vision model / multimodal model on\n  a few reference images w/ manual transcriptions / ground\n  truths?\n\u2022 What about abbreviations like w/ for with?\n\u2022 Could I get AI to create a custom TTF font & if so\n  how much training data?",
+                        "prediction": "fo we vues 7icas : ow Owe Lhair wa wngroe mole / nit@tedat to lal On 4 for refocrrce lmazes \u201c/ nannel Paeserip lees vA [read bho Bot sgbroietiens Wha Vf fe with? Al bcat \u00a9 stor 77\u00a2 flat a 16 Se fart let yee",
+                        "cer": 0.5827,
+                        "wer": 0.9796,
+                        "exact_match": false,
+                        "latency_ms": 1188.24,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 45
+                    },
+                    {
+                        "sample_id": "05",
+                        "file_name": "05.webp",
+                        "category": "list",
+                        "reference_text": "Why / Applications\n\n\u25cb Whiteboard workflows:\n    \u21b3 Whiteboard \u2192 cleaned up tech diagram\n      (nano banana). needs to be able to parse a\n      \"OCR\" raw text. Objective: \u2191 accuracy &\n      \u2193 pseudotext\n    \u21b3 Whiteboard \u2192 text / todo list / SOL etc.",
+                        "prediction": "wy 1A PPA CAILS 0 hj $3 ond wee hflorF - Zi teh t& cork =~ chleateh vp feel MI yahoo [hea ae pawam). ree fe be Sle 72 RAEI. A_ ek RO Feet. COR Sec TIVE _- ae toc ~~ tN psontotext Ly phtedennee > Tat (00 ise / Sor cle",
+                        "cer": 0.6,
+                        "wer": 1.2195,
+                        "exact_match": false,
+                        "latency_ms": 1098.56,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 52
+                    },
+                    {
+                        "sample_id": "06",
+                        "file_name": "06.webp",
+                        "category": "diagram",
+                        "reference_text": "Few Shot Learning - 1\n\n        Apples\n       \u2197\n      /\n( FRUITS ) \u2192 Oranges\n      \\\u2192 Bananas\n       \u2198\n        Lemons\nKiwis \u2190\n     \u2199\nMelons",
+                        "prediction": "",
+                        "cer": 1.0,
+                        "wer": 1.0,
+                        "exact_match": false,
+                        "latency_ms": 807.9,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 0
+                    },
+                    {
+                        "sample_id": "07",
+                        "file_name": "07.webp",
+                        "category": "table",
+                        "reference_text": "Few Shot Learning - 2\n\nWORLD CAPITALS\n\nCITY          | COUNTRY\n--------------+---------\nDublin        | Ireland\nAmman         | Jordan\nWashington DC | USA",
+                        "prediction": "Faw Shot Llearrigy \u2014 a Yon to CAeIMES CITY Dub lw |e harc\u2014 firnor Son han",
+                        "cer": 0.6797,
+                        "wer": 0.9524,
+                        "exact_match": false,
+                        "latency_ms": 1079.36,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 16
+                    },
+                    {
+                        "sample_id": "08",
+                        "file_name": "08.webp",
+                        "category": "flowchart",
+                        "reference_text": "Few Shot Learning - 3\n\n        Zoom Meeting Prep SOP\n\n        Is my hair a mess?\n           /           \\\n          Y             N\n          \u2193             \u2193\n      \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510   \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n      \u2502COMB HAIR\u2502   \u2502CHILL OUT!\u2502\n      \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518   \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
+                        "prediction": "RS het Leases \u2014- > Joow Meet 4 frep (of bs ny hear need \u00b0 Y hy",
+                        "cer": 0.7517,
+                        "wer": 0.9643,
+                        "exact_match": false,
+                        "latency_ms": 1022.95,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 17
+                    },
+                    {
+                        "sample_id": "09",
+                        "file_name": "09.webp",
+                        "category": "list",
+                        "reference_text": "Few Shot Learning - 3\n\nWhat about variability in how we write letters?\n  \u21b3 Sometimes I dot i's. Sometimes I don't.\n  \u21b3 Informal / missing punctuation?\n  \u21b3 \"Code switching\" & misspellings?\n  \u21b3 Sometimes I write 'b' like balloon & sometimes\n    balloon (why? IDK!)",
+                        "prediction": "Fis Shot Lenny = > ly hat Bol hi by ) a i waite leeces? . a forrisp: mesg pnw tebe Lote suite oF nist pe? 2 L fontins, / we! \u2018L' jhe haloon pene ined Gbecs (uy? 10k!)",
+                        "cer": 0.6265,
+                        "wer": 0.9535,
+                        "exact_match": false,
+                        "latency_ms": 1350.33,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 39
+                    },
+                    {
+                        "sample_id": "10",
+                        "file_name": "10.webp",
+                        "category": "list",
+                        "reference_text": "Few Shot Learning - 3\n\nWhat about txt like speech?\n  \u2193\n\nLLMs R cool         \u2192  LLMs are cool!\n   or incorrect uppercase\nLLMs R cool         \u2192  LLMs are cool",
+                        "prediction": "Faw Shot leawigy - > 9 YT ae ( 4 , a Ls we sew ns & FOr pe jaegRnet \u201cae Litts ore cool",
+                        "cer": 0.6107,
+                        "wer": 0.8929,
+                        "exact_match": false,
+                        "latency_ms": 1177.73,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 24
+                    },
+                    {
+                        "sample_id": "11",
+                        "file_name": "11.webp",
+                        "category": "diagram",
+                        "reference_text": "PERSONALISED AI \u2192 BASIC IDEA\n\nUse-case: Human wants to create a task-specific AI agent\n& frontload context\n\nTactic: Create AI agent to \"interview\" you \u2192 transcribe\n        (could be voice \u2192 voice!) \u2192 extract content \u2192 vector DB\n\n[bot] \u2500\u2500> [ What's your fav food? ]\n           [ PIZZA! ]  :)\n  \u2193\nCREATE MEMORY\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502 Daniel's fav  \u2502\n\u2502 food = PIZZA  \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n        \u2193\n      ( VECTOR DB )",
+                        "prediction": "PERS 0 A 1 GAS% rr MAUS 2D { A IDEA e- case: Hunan WANTS To ee a Tesh SspecmrBe A/ agent bS etek e TAA A, \u201c| (a) phai (coll Ge porce re) 79 os oe T=T hheat 'S . - eantEDs FAK Tl feod = 22a 4",
+                        "cer": 0.7073,
+                        "wer": 0.9559,
+                        "exact_match": false,
+                        "latency_ms": 1246.37,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 49
+                    },
+                    {
+                        "sample_id": "12",
+                        "file_name": "12.webp",
+                        "category": "diagram",
+                        "reference_text": "(could be voice \u2192 voice!) \u2192 Extract content \u2192 V[ector DB]\n\n[bot] \u2500\u2500> [ What's your fav food? ]\n           [ PIZZA! ]  :)\n  \u2193\nCREATE MEMORY\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502 Daniel's fav  \u2502\n\u2502 food = PIZZA  \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n        \u2193\n     ( VECTOR DB )",
+                        "prediction": "[cont Ge yore voices) I &afnect lm Lena! oN & LZACATE MENF RY eancEs FAK 4",
+                        "cer": 0.7751,
+                        "wer": 1.0,
+                        "exact_match": false,
+                        "latency_ms": 1112.6,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 16
+                    },
+                    {
+                        "sample_id": "13",
+                        "file_name": "13.webp",
+                        "category": "diagram",
+                        "reference_text": "PERSONALISED AI \u2014 WORKFLOW 2\n\n(user) Hey bot! Let's build out my food & drink\n       context store!\n\n(bot)  Sure! Let me see what gaps we have...\n       \u2193\n       READ \u2192 (vector DB) \u2192 (bot) Hmm. nothing about\n                                   beer preferences!\n\n(bot) What beer do you prefer?\n(user) Super bitter IPAs          CREATE \u2192\n                        \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n                  (bot) \u2502 User's fav beer =   \u2502\n                        \u2502 bitter IPA          \u2502\n                        \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
+                        "prediction": "\u2014\u2014S>\u2014\u2014 EO \u2014\u2014\u2014\u2014 PENS ce MAUS ED Al \u2014VYoORhe lowe ~~ Mey bet ! Lets bulk OF TY food 3. dniak. oe context stoec! Fly Sone! Let me See whet gan we \u2014\u2014 is ao, ee i: pothigs Sok > = ( Aowe.. Et Wine be HO\" ae = bitten IPAs | fa cea Te Spee oi :",
+                        "cer": 0.6919,
+                        "wer": 1.0,
+                        "exact_match": false,
+                        "latency_ms": 1416.79,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 58
+                    },
+                    {
+                        "sample_id": "14",
+                        "file_name": "14.webp",
+                        "category": "diagram",
+                        "reference_text": "PERSONALISED AI \u2014 LATENT VALUE AREAS\n\n            (user)              (bot)\n            USER                LLM'S\n            PROMPTS             OUTPUTS\n              \u2502                   \u2502\n              \u2193                   \u2193\n         PROMPT           \u2192   CONVO (1)\n         HISTORY  (2)         STORE\n              \u2193                 \u2502   \u2198\n              \u2193                 \u2193    WIKI\n         PROMPT              DOWNSTREAM\n         LIB \u2192 USER          OUTPUTS\n               CONTEXT        \u2199   \u2193   \u2198\n                          PODCASTS  CPD  DOCS",
+                        "prediction": "eC OEE EAT ET V/A a 2 D Z v7 T \u2014\u2014\u2014 e_ (+R ELS ie ee. De wf Sih (7 Dipl i (K fod CAST: 5 CFP Docs P goteT LB",
+                        "cer": 0.7707,
+                        "wer": 1.0,
+                        "exact_match": false,
+                        "latency_ms": 1224.75,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 32
+                    },
+                    {
+                        "sample_id": "15",
+                        "file_name": "15.webp",
+                        "category": "diagram",
+                        "reference_text": "(bot) LLM'S OUTPUTS  \u2192  CONVO (1)\n                         STORE\n                          \u2502   \u2198\n                          \u2193    WIKI\n                      DOWNSTREAM\n                      OUTPUTS\n                       \u2199   \u2193   \u2198\n                  PODCASTS CPD DOCS",
+                        "prediction": "3 or LteWws owl O 7 wae ; \u2018 | bits 2 ne A . pensTS \u00a9 : pb I> cs",
+                        "cer": 0.6813,
+                        "wer": 1.1053,
+                        "exact_match": false,
+                        "latency_ms": 1271.58,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 21
+                    },
+                    {
+                        "sample_id": "16",
+                        "file_name": "16.webp",
+                        "category": "diagram",
+                        "reference_text": "(user)                    (bot)\nUSER                      LLM'S\nPROMPTS                   OUT[PUTS]\n   \u2502\n   \u2193\nPROMPT           \u2500\u2500\u2500\u2500\u2510\nHISTORY  (2)         \u2502\n   \u2502                 \u2193\n   \u2193              USER\nPROMPT LIB        CONTEXT",
+                        "prediction": "Peoney LIQ SER.",
+                        "cer": 0.902,
+                        "wer": 1.0,
+                        "exact_match": false,
+                        "latency_ms": 847.22,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 3
+                    },
+                    {
+                        "sample_id": "17",
+                        "file_name": "17.webp",
+                        "category": "prose",
+                        "reference_text": "Other Common Whiteboard Imperfections\n\n  o  Use X or strikethrough\n\n        Here's      cool  ~~ideas~~\n               \u2717           ideas\n           are\n          some",
+                        "prediction": "other (ewmon VH/ TeheAtpD npifecti> 0 be x & st ai be tm yar",
+                        "cer": 0.6535,
+                        "wer": 0.9375,
+                        "exact_match": false,
+                        "latency_ms": 1038.38,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 14
+                    },
+                    {
+                        "sample_id": "18",
+                        "file_name": "18.webp",
+                        "category": "table",
+                        "reference_text": "Task: Whiteboard \u2192 Calendar\n\nMy Week Plan\n\n        SUN    MON    TUES    WEDS    THURS    FRI    SAT\n        \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n                      ACCOUNTANT\n\n0900\n\n1200                                    DAY\n                                        OFF\n1500  DOCTOR\n\n1800\n\n2100\n\n0000",
+                        "prediction": "Tish: Will Te fost \u2014 ya Lavewoard py wee PLAY Suar (wr Tuts Weos Hs Lee Cy aa ae go? pe AE (7.09 gee xo, oer xo? a! oJ 79",
+                        "cer": 0.7303,
+                        "wer": 1.2,
+                        "exact_match": false,
+                        "latency_ms": 1064.75,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 30
+                    },
+                    {
+                        "sample_id": "19",
+                        "file_name": "19.webp",
+                        "category": "mixed",
+                        "reference_text": "Task: Whiteboard \u2192 Mixed Elements.\n\nWhiteboard \u2192 Handwriting          \u2502   Questions\n    \u21b3 Gather samples              \u2502   \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n    \u21b3 Determine priorities        \u2502   Existing datasets?\n    \u21b3 Send to David               \u2502   Separate fine tunes for\n                                  \u2502   handwriting creation vs.\n                                  \u2502   reading?",
+                        "prediction": "VE BY : WHIT t 400th \u2014 m/xEed yA feSccad a Yaarve/ mne- peteem' La fre \u00a9? pe (Ques UNS ee Gastey garesesks sf Jeanaate fe Ther ci fodkui Y Mca 010F ?",
+                        "cer": 0.7321,
+                        "wer": 1.0,
+                        "exact_match": false,
+                        "latency_ms": 1031.33,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 33
+                    },
+                    {
+                        "sample_id": "20",
+                        "file_name": "20.webp",
+                        "category": "diagram",
+                        "reference_text": "Geopol Predictions: Current Model          A_x = Agent X\n                                           Sequential\n                                           SA_x = Subagent\nA_1 \u2192 Job\n      Actuation &\n      Mgmt                RSS   EXA AI\n                            \u2198   \u2199\n                             Google\n                             News\n        \u2198\n         A_2   SITREP Gen\n               Grounding                       \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n                                               \u2502 LLM  \u2502\n         \u2198                             \u2192 SA_1 \u2190\u2502COUNCIL\u2502\n          A_3   Prediction                     \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n                MGR               \u2192 SA_2\n          Pass SITREP, define\n          task, structured output\n\n          A_4  Analysis, Charts, Comparison w/\n               Run X-1\n\n          A_5  Generate Report (Typst)\n    \u2193\n  CONCAT   \u2192   PDF",
+                        "prediction": "(c0opoe Pre ot CT1aas * Cur et No de-( - ' AR =< A \u00a5 = lynne , Seq ema SA a Suee7ee WZ ies QeIs 15, CHRETS, COMPAR WON ff Crves t) Awh cys concatT\u2014 PDT",
+                        "cer": 0.7458,
+                        "wer": 1.0,
+                        "exact_match": false,
+                        "latency_ms": 1194.85,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 37
+                    },
+                    {
+                        "sample_id": "21",
+                        "file_name": "21.webp",
+                        "category": "diagram",
+                        "reference_text": "Whiteboard \u2192 Dev Spec \u2192 Agent Dev\n\nWhiteboard(s)  \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2192  Gemini API\n\nGemini \u2500\u2192 Cleaned Tech Diagrams (image 2 image)\n       \u2198 Narrative of Agent Model (image 2 txt)\n\nAgent 2: Convert these things \u2192 Dev Spec\n    \u21b3 Plan def w/ human\n    \u21b3 Generate tasks, define subagents,\n      checkpoints etc",
+                        "prediction": "Wy HA TTR eeDdCS) \u2014~) Genin AP\\ Gerinvl \u2014 Llen wed Tec DiAGeANS (nave 2 ree) : A : ra VAAnAaTive of well (innec _ -) A jeal ConvetT Test. Tunes 2 Oe Se i PLAW DEF w/ HUA GencantE TASKS, Defive. SeraselS J Checke-pstats ET",
+                        "cer": 0.5203,
+                        "wer": 0.9362,
+                        "exact_match": false,
+                        "latency_ms": 1208.14,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 46
+                    }
+                ]
+            },
+            "rapidocr": {
+                "dataset_name": "Whiteboard_Full_21",
+                "sample_count": 21,
+                "macro_cer": 0.7003,
+                "macro_wer": 0.9311,
+                "micro_cer": 0.7034,
+                "micro_wer": 0.9338,
+                "exact_match_count": 0,
+                "exact_match_rate": 0.0,
+                "mean_latency_ms": 1933.21,
+                "median_latency_ms": 2022.04,
+                "sample_evaluations": [
+                    {
+                        "sample_id": "01",
+                        "file_name": "01.webp",
+                        "category": "prose",
+                        "reference_text": "WHITEBOARD OCR \u2192 FEW SAMPLE TEST\n\nI have rediscovered whiteboarding!\nBUT!\nIt's mounted at a really awkward height\nAND\nI have barely written by hand in years\nSo\nmy writing is hard to decipher",
+                        "prediction": "BUT! mkvnt heio t by hond in yenes baruy n wn Ete / hove k So to deciphe my wnitig is oal",
+                        "cer": 0.7249,
+                        "wer": 0.9118,
+                        "exact_match": false,
+                        "latency_ms": 1586.72,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 9
+                    },
+                    {
+                        "sample_id": "02",
+                        "file_name": "02.webp",
+                        "category": "list",
+                        "reference_text": "SOME QUESTIONS\n\nCan you train a vision model / multimodal model on\na few reference images w/ manual transcriptions / ground\ntruths?\nWhat about abbreviations like w/ for with?",
+                        "prediction": "nulhinodol no lel on- a hiior nol I rAwel 'fhancatpties n-r?",
+                        "cer": 0.7919,
+                        "wer": 0.9655,
+                        "exact_match": false,
+                        "latency_ms": 1725.43,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 4
+                    },
+                    {
+                        "sample_id": "03",
+                        "file_name": "03.webp",
+                        "category": "list",
+                        "reference_text": "SOME QUESTIONS\n\n\u2022 Can you train a vision model / multimodal model on\n  a few reference images w/ manual transcriptions / ground\n  truths?\n\u2022 What about abbreviations like w/ for with?\n\u2022 Could I get AI to create a custom TTF font & if so\n  how much training data?",
+                        "prediction": "nulhinodol no ll on- .Cov hiior mol rAwel 'hangcapties nepow irgs ~/ n ? uston TTf Ant \u03b1 \"tso I Jet Al  cat Loula",
+                        "cer": 0.7559,
+                        "wer": 0.9796,
+                        "exact_match": false,
+                        "latency_ms": 2049.71,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 9
+                    },
+                    {
+                        "sample_id": "04",
+                        "file_name": "04.webp",
+                        "category": "list",
+                        "reference_text": "SOME QUESTIONS\n\n\u2022 Can you train a vision model / multimodal model on\n  a few reference images w/ manual transcriptions / ground\n  truths?\n\u2022 What about abbreviations like w/ for with?\n\u2022 Could I get AI to create a custom TTF font & if so\n  how much training data?",
+                        "prediction": "nulbhinodal no lel on- a hiior nol aangceptres nAnvel +nr ? ughom Tf nt \u03b1 \"tso",
+                        "cer": 0.7953,
+                        "wer": 0.9796,
+                        "exact_match": false,
+                        "latency_ms": 1901.11,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 6
+                    },
+                    {
+                        "sample_id": "05",
+                        "file_name": "05.webp",
+                        "category": "list",
+                        "reference_text": "Why / Applications\n\n\u25cb Whiteboard workflows:\n    \u21b3 Whiteboard \u2192 cleaned up tech diagram\n      (nano banana). needs to be able to parse a\n      \"OCR\" raw text. Objective: \u2191 accuracy &\n      \u2193 pseudotext\n    \u21b3 Whiteboard \u2192 text / todo list / SOL etc.",
+                        "prediction": "ktlous : 0 hhitsoand p e CLeAneL c L hhiteloon - 8 t . neeu t b T ako : CNA NO DANAM). fept. c Ce Tec hive : 'ocn'Rm L PSdotex+",
+                        "cer": 0.7136,
+                        "wer": 1.0,
+                        "exact_match": false,
+                        "latency_ms": 2022.04,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 13
+                    },
+                    {
+                        "sample_id": "06",
+                        "file_name": "06.webp",
+                        "category": "diagram",
+                        "reference_text": "Few Shot Learning - 1\n\n        Apples\n       \u2197\n      /\n( FRUITS ) \u2192 Oranges\n      \\\u2192 Bananas\n       \u2198\n        Lemons\nKiwis \u2190\n     \u2199\nMelons",
+                        "prediction": "Fo Shot leAuvey-! AVCeS FRUITS BANAVAS kiwis lervas n!lons",
+                        "cer": 0.5778,
+                        "wer": 0.8571,
+                        "exact_match": false,
+                        "latency_ms": 1599.24,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 7
+                    },
+                    {
+                        "sample_id": "07",
+                        "file_name": "07.webp",
+                        "category": "table",
+                        "reference_text": "Few Shot Learning - 2\n\nWORLD CAPITALS\n\nCITY          | COUNTRY\n--------------+---------\nDublin        | Ireland\nAmman         | Jordan\nWashington DC | USA",
+                        "prediction": "LOWNTR) DusIIN Arn USA",
+                        "cer": 0.8516,
+                        "wer": 0.9524,
+                        "exact_match": false,
+                        "latency_ms": 1805.7,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 4
+                    },
+                    {
+                        "sample_id": "08",
+                        "file_name": "08.webp",
+                        "category": "flowchart",
+                        "reference_text": "Few Shot Learning - 3\n\n        Zoom Meeting Prep SOP\n\n        Is my hair a mess?\n           /           \\\n          Y             N\n          \u2193             \u2193\n      \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510   \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n      \u2502COMB HAIR\u2502   \u2502CHILL OUT!\u2502\n      \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518   \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
+                        "prediction": "hy haic [Cons He-I",
+                        "cer": 0.9195,
+                        "wer": 1.0,
+                        "exact_match": false,
+                        "latency_ms": 1510.45,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 2
+                    },
+                    {
+                        "sample_id": "09",
+                        "file_name": "09.webp",
+                        "category": "list",
+                        "reference_text": "Few Shot Learning - 3\n\nWhat about variability in how we write letters?\n  \u21b3 Sometimes I dot i's. Sometimes I don't.\n  \u21b3 Informal / missing punctuation?\n  \u21b3 \"Code switching\" & misspellings?\n  \u21b3 Sometimes I write 'b' like balloon & sometimes\n    balloon (why? IDK!)",
+                        "prediction": "umil lte8? I loit. A Sontines \u03b1 nispeliny ? + Cole shitehy\" Jonetins,",
+                        "cer": 0.7992,
+                        "wer": 0.9767,
+                        "exact_match": false,
+                        "latency_ms": 2025.8,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 6
+                    },
+                    {
+                        "sample_id": "10",
+                        "file_name": "10.webp",
+                        "category": "list",
+                        "reference_text": "Few Shot Learning - 3\n\nWhat about txt like speech?\n  \u2193\n\nLLMs R cool         \u2192  LLMs are cool!\n   or incorrect uppercase\nLLMs R cool         \u2192  LLMs are cool",
+                        "prediction": "h het asout fot [ile speeck? LLMs inRnect hrcase \u2192 LLMs orc Cool",
+                        "cer": 0.5954,
+                        "wer": 0.8571,
+                        "exact_match": false,
+                        "latency_ms": 2058.97,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 4
+                    },
+                    {
+                        "sample_id": "11",
+                        "file_name": "11.webp",
+                        "category": "diagram",
+                        "reference_text": "PERSONALISED AI \u2192 BASIC IDEA\n\nUse-case: Human wants to create a task-specific AI agent\n& frontload context\n\nTactic: Create AI agent to \"interview\" you \u2192 transcribe\n        (could be voice \u2192 voice!) \u2192 extract content \u2192 vector DB\n\n[bot] \u2500\u2500> [ What's your fav food? ]\n           [ PIZZA! ]  :)\n  \u2193\nCREATE MEMORY\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502 Daniel's fav  \u2502\n\u2502 food = PIZZA  \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n        \u2193\n      ( VECTOR DB )",
+                        "prediction": "IDEA PENSO NAUSED AI - BASIC fnontload TRANSCRS TAL hhat's Youn PIZZA! HEMOR LLCATE ood : (PrzzA VETOR DB",
+                        "cer": 0.7778,
+                        "wer": 0.9412,
+                        "exact_match": false,
+                        "latency_ms": 2201.0,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 12
+                    },
+                    {
+                        "sample_id": "12",
+                        "file_name": "12.webp",
+                        "category": "diagram",
+                        "reference_text": "(could be voice \u2192 voice!) \u2192 Extract content \u2192 V[ector DB]\n\n[bot] \u2500\u2500> [ What's your fav food? ]\n           [ PIZZA! ]  :)\n  \u2193\nCREATE MEMORY\n\u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502 Daniel's fav  \u2502\n\u2502 food = PIZZA  \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n        \u2193\n     ( VECTOR DB )",
+                        "prediction": "act(ontet\u2192 coull Se voice+Voice. hhat's PIZZA! CRCATE MEMORY D4NIECSFAV PIZZA VETOR DB",
+                        "cer": 0.6986,
+                        "wer": 0.9048,
+                        "exact_match": false,
+                        "latency_ms": 1925.19,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 9
+                    },
+                    {
+                        "sample_id": "13",
+                        "file_name": "13.webp",
+                        "category": "diagram",
+                        "reference_text": "PERSONALISED AI \u2014 WORKFLOW 2\n\n(user) Hey bot! Let's build out my food & drink\n       context store!\n\n(bot)  Sure! Let me see what gaps we have...\n       \u2193\n       READ \u2192 (vector DB) \u2192 (bot) Hmm. nothing about\n                                   beer preferences!\n\n(bot) What beer do you prefer?\n(user) Super bitter IPAs          CREATE \u2192\n                        \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n                  (bot) \u2502 User's fav beer =   \u2502\n                        \u2502 bitter IPA          \u2502\n                        \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518",
+                        "prediction": "PERSOIAuSED AI -VOnLFLOWQ Hey bot! lets build out ry Podl  dhink Contx+ stoc! hae . Hnm. rot hiy cout been prceuences READ Yr PrePo, \u56fdhhat be lo bi IPRs CCA TE Srpek been bitte",
+                        "cer": 0.6359,
+                        "wer": 0.9048,
+                        "exact_match": false,
+                        "latency_ms": 2156.46,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 14
+                    },
+                    {
+                        "sample_id": "14",
+                        "file_name": "14.webp",
+                        "category": "diagram",
+                        "reference_text": "PERSONALISED AI \u2014 LATENT VALUE AREAS\n\n            (user)              (bot)\n            USER                LLM'S\n            PROMPTS             OUTPUTS\n              \u2502                   \u2502\n              \u2193                   \u2193\n         PROMPT           \u2192   CONVO (1)\n         HISTORY  (2)         STORE\n              \u2193                 \u2502   \u2198\n              \u2193                 \u2193    WIKI\n         PROMPT              DOWNSTREAM\n         LIB \u2192 USER          OUTPUTS\n               CONTEXT        \u2199   \u2193   \u2198\n                          PODCASTS  CPD  DOCS",
+                        "prediction": "PENSOIAUSED AI - LATENT VNLUL AREAS LLNS useL OUTTUTS PAOMTS STORC PnopT DOWNSTLEAM OWTPUTS CPD rUDASTS LIB PLONPT",
+                        "cer": 0.5902,
+                        "wer": 0.9048,
+                        "exact_match": false,
+                        "latency_ms": 2026.63,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 13
+                    },
+                    {
+                        "sample_id": "15",
+                        "file_name": "15.webp",
+                        "category": "diagram",
+                        "reference_text": "(bot) LLM'S OUTPUTS  \u2192  CONVO (1)\n                         STORE\n                          \u2502   \u2198\n                          \u2193    WIKI\n                      DOWNSTREAM\n                      OUTPUTS\n                       \u2199   \u2193   \u2198\n                  PODCASTS CPD DOCS",
+                        "prediction": "LLNS OUTTUTS STORC wikI DOWASTLEAM WTPUTS CPD PUDLRSTS",
+                        "cer": 0.5385,
+                        "wer": 0.8947,
+                        "exact_match": false,
+                        "latency_ms": 2208.13,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 8
+                    },
+                    {
+                        "sample_id": "16",
+                        "file_name": "16.webp",
+                        "category": "diagram",
+                        "reference_text": "(user)                    (bot)\nUSER                      LLM'S\nPROMPTS                   OUT[PUTS]\n   \u2502\n   \u2193\nPROMPT           \u2500\u2500\u2500\u2500\u2510\nHISTORY  (2)         \u2502\n   \u2502                 \u2193\n   \u2193              USER\nPROMPT LIB        CONTEXT",
+                        "prediction": "LLNS PROMPTS PnompT PLONPT LIB",
+                        "cer": 0.7451,
+                        "wer": 0.9,
+                        "exact_match": false,
+                        "latency_ms": 1660.61,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 4
+                    },
+                    {
+                        "sample_id": "17",
+                        "file_name": "17.webp",
+                        "category": "prose",
+                        "reference_text": "Other Common Whiteboard Imperfections\n\n  o  Use X or strikethrough\n\n        Here's      cool  ~~ideas~~\n               \u2717           ideas\n           are\n          some",
+                        "prediction": "othen Le x n StRib+hm Henos  co l -tlea. Jome",
+                        "cer": 0.6931,
+                        "wer": 0.9375,
+                        "exact_match": false,
+                        "latency_ms": 1824.15,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 4
+                    },
+                    {
+                        "sample_id": "18",
+                        "file_name": "18.webp",
+                        "category": "table",
+                        "reference_text": "Task: Whiteboard \u2192 Calendar\n\nMy Week Plan\n\n        SUN    MON    TUES    WEDS    THURS    FRI    SAT\n        \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n                      ACCOUNTANT\n\n0900\n\n1200                                    DAY\n                                        OFF\n1500  DOCTOR\n\n1800\n\n2100\n\n0000",
+                        "prediction": "TASh : hHITESOCLL \u2192 CALENDAR WleL PLAN ny min Tots wEos SA T AULUNTANT 0100 DAY 1200 1800 0 0 00",
+                        "cer": 0.5787,
+                        "wer": 0.88,
+                        "exact_match": false,
+                        "latency_ms": 2138.33,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 11
+                    },
+                    {
+                        "sample_id": "19",
+                        "file_name": "19.webp",
+                        "category": "mixed",
+                        "reference_text": "Task: Whiteboard \u2192 Mixed Elements.\n\nWhiteboard \u2192 Handwriting          \u2502   Questions\n    \u21b3 Gather samples              \u2502   \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\n    \u21b3 Determine priorities        \u2502   Existing datasets?\n    \u21b3 Send to David               \u2502   Separate fine tunes for\n                                  \u2502   handwriting creation vs.\n                                  \u2502   reading?",
+                        "prediction": "TASh : h/HITESocad \u2192 iXED ELEmN. Ques ti yhieSoaaL  HAnDVnI TAC- datasea ? ha pwnithes JpArate Hn tnes Detcam ine DAUID",
+                        "cer": 0.6652,
+                        "wer": 0.9722,
+                        "exact_match": false,
+                        "latency_ms": 1787.86,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 10
+                    },
+                    {
+                        "sample_id": "20",
+                        "file_name": "20.webp",
+                        "category": "diagram",
+                        "reference_text": "Geopol Predictions: Current Model          A_x = Agent X\n                                           Sequential\n                                           SA_x = Subagent\nA_1 \u2192 Job\n      Actuation &\n      Mgmt                RSS   EXA AI\n                            \u2198   \u2199\n                             Google\n                             News\n        \u2198\n         A_2   SITREP Gen\n               Grounding                       \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n                                               \u2502 LLM  \u2502\n         \u2198                             \u2192 SA_1 \u2190\u2502COUNCIL\u2502\n          A_3   Prediction                     \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n                MGR               \u2192 SA_2\n          Pass SITREP, define\n          task, structured output\n\n          A_4  Analysis, Charts, Comparison w/\n               Run X-1\n\n          A_5  Generate Report (Typst)\n    \u2193\n  CONCAT   \u2192   PDF",
+                        "prediction": "Agnt \u00d7 PneDICTlens : Cearet No le( G(O POL Serunt'al RSS EXA AI GOOC SGB ACTU ATION MCMT SITREP LLM PRCDICTEn ME Pass SITRen detinL A4 ANALYSIS, CHRLTS, (OMPARSOn RUN X-I CdNCAT-",
+                        "cer": 0.6564,
+                        "wer": 0.8769,
+                        "exact_match": false,
+                        "latency_ms": 2256.61,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 18
+                    },
+                    {
+                        "sample_id": "21",
+                        "file_name": "21.webp",
+                        "category": "diagram",
+                        "reference_text": "Whiteboard \u2192 Dev Spec \u2192 Agent Dev\n\nWhiteboard(s)  \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2192  Gemini API\n\nGemini \u2500\u2192 Cleaned Tech Diagrams (image 2 image)\n       \u2198 Narrative of Agent Model (image 2 txt)\n\nAgent 2: Convert these things \u2192 Dev Spec\n    \u21b3 Plan def w/ human\n    \u21b3 Generate tasks, define subagents,\n      checkpoints etc",
+                        "prediction": "DEVSP ACT WHITEBOALD API W H (TCBOARD(S) (NAVe DIAGANS ACIANED GEnIn! INAGL 1 TXT NAAnATIVL OF AGNE nodel THESL Agntl: (onveeT HUMAN PLAN DEP SUBAOTS TASnS, DEFINL CheuPoinT ET",
+                        "cer": 0.6015,
+                        "wer": 0.9574,
+                        "exact_match": false,
+                        "latency_ms": 2127.34,
+                        "dimensions": [
+                            4096,
+                            3072
+                        ],
+                        "regions_count": 20
+                    }
+                ]
+            },
+            "cer_improvement_absolute": -0.0048,
+            "speedup_ratio": 0.59
+        },
+        "Printed_Scene_15": {
+            "tesseract": {
+                "dataset_name": "Printed_Scene_15",
+                "sample_count": 15,
+                "macro_cer": 0.0639,
+                "macro_wer": 0.3007,
+                "micro_cer": 0.0423,
+                "micro_wer": 0.186,
+                "exact_match_count": 5,
+                "exact_match_rate": 0.3333,
+                "mean_latency_ms": 133.97,
+                "median_latency_ms": 111.16,
+                "sample_evaluations": [
+                    {
+                        "sample_id": "print_01",
+                        "file_name": "phototest.tif",
+                        "category": "printed_document",
+                        "reference_text": "This is a lot of 12 point text to test the ocr code and see if it works on all types of file format. The quick brown dog jumped over the lazy fox. The quick brown dog jumped over the lazy fox. The quick brown dog jumped over the lazy fox. The quick brown dog jumped over the lazy fox.",
+                        "prediction": "This is a lot of 12 point text to test the ocr code and see if it works on all types of file format. The quick brown dog jumped over the lazy fox. The quick brown dog jumped over the lazy fox. The quick brown dog jumped over the lazy fox. The quick brown dog jumped over the lazy fox.",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 180.31,
+                        "dimensions": [
+                            640,
+                            480
+                        ],
+                        "regions_count": 60
+                    },
+                    {
+                        "sample_id": "print_02",
+                        "file_name": "eurotext.tif",
+                        "category": "printed_document",
+                        "reference_text": "The (quick) [brown] {fox} jumps! Over the $43,456.78 <lazy> #90 dog & duck/goose, as 12.5% of E-mail from aspammer@website.com is spam. Der ,.schnelle\" braune Fuchs springt \u00fcber den faulen Hund. Le renard brun \u00abrapide\u00bb saute par-dessus le chien paresseux. La volpe marrone rapida salta sopra il cane pigro. El zorro marr\u00f3n r\u00e1pido salta sobre el perro perezoso. A raposa marrom r\u00e1pida salta sobre o c\u00e3o pregui\u00e7oso.",
+                        "prediction": "The (quick) [brown] {fox} jumps! Over the $43,456.78 <lazy> #90 dog & duck/goose, as 12.5% of E-mail from aspammer@website.com is spam. Der ,.schnelle\u201d braune Fuchs springt iiber den faulen Hund. Le renard brun \u00abrapide\u00bb saute par-dessus le chien paresseux. La volpe marrone rapida salta sopra il cane pigro. El zorro marron rapido salta sobre el perro perezoso. A raposa marrom rapida salta sobre 0 c\u00e9o preguicoso.",
+                        "cer": 0.0218,
+                        "wer": 0.1212,
+                        "exact_match": false,
+                        "latency_ms": 247.2,
+                        "dimensions": [
+                            1024,
+                            800
+                        ],
+                        "regions_count": 66
+                    },
+                    {
+                        "sample_id": "print_03",
+                        "file_name": "scanned_receipt.png",
+                        "category": "printed_receipt",
+                        "reference_text": "COFFEE SHOP\n1 ESPRESSO $3.50\n1 CROISSANT $4.00\nTOTAL $7.50\nTHANK YOU FOR VISITING",
+                        "prediction": "COFFEE SHOP \u201cESPRESSO $3.50 \u2018OROISSANT$.400, TOTAL $750 THANK YOU FOR VISITING",
+                        "cer": 0.1235,
+                        "wer": 0.4286,
+                        "exact_match": false,
+                        "latency_ms": 108.9,
+                        "dimensions": [
+                            800,
+                            1000
+                        ],
+                        "regions_count": 11
+                    },
+                    {
+                        "sample_id": "print_04",
+                        "file_name": "code_snippet_print.png",
+                        "category": "printed_code",
+                        "reference_text": "def calculate_metrics(ref, pred):\n    return cer(ref, pred)",
+                        "prediction": "defcalculate_metrics(rat pred retumcertret pred)",
+                        "cer": 0.2182,
+                        "wer": 0.8333,
+                        "exact_match": false,
+                        "latency_ms": 105.02,
+                        "dimensions": [
+                            1200,
+                            800
+                        ],
+                        "regions_count": 4
+                    },
+                    {
+                        "sample_id": "print_05",
+                        "file_name": "book_page_scan.png",
+                        "category": "printed_book",
+                        "reference_text": "Chapter 1: The Foundations of Optical Character Recognition and Vision",
+                        "prediction": "Chapter 1: The Foundations of Optical Character Recognition and Vision",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 117.87,
+                        "dimensions": [
+                            1200,
+                            800
+                        ],
+                        "regions_count": 10
+                    },
+                    {
+                        "sample_id": "print_06",
+                        "file_name": "table_document.png",
+                        "category": "printed_table",
+                        "reference_text": "Item Qty Price Total\nSensor 2 $15.00 $30.00\nLens 1 $45.00 $45.00",
+                        "prediction": "tem Qty Price Total Sensor 2 $16.00 $30.00 Lens1 $46.00 $45.00,",
+                        "cer": 0.0781,
+                        "wer": 0.5,
+                        "exact_match": false,
+                        "latency_ms": 111.57,
+                        "dimensions": [
+                            1200,
+                            800
+                        ],
+                        "regions_count": 11
+                    },
+                    {
+                        "sample_id": "print_07",
+                        "file_name": "invoice_sample.png",
+                        "category": "printed_invoice",
+                        "reference_text": "INVOICE #1042\nBILL TO: ROUTEWISE AI\nDATE: 2026-10-09\nSTATUS: PAID",
+                        "prediction": "INVOICE #1042 BILL TO: ROUTEWISEAL DATE: 2026-10-09 STATUS PAID",
+                        "cer": 0.0462,
+                        "wer": 0.3,
+                        "exact_match": false,
+                        "latency_ms": 111.16,
+                        "dimensions": [
+                            800,
+                            1000
+                        ],
+                        "regions_count": 9
+                    },
+                    {
+                        "sample_id": "scene_01",
+                        "file_name": "street_sign_stop.png",
+                        "category": "scene_signage",
+                        "reference_text": "STOP",
+                        "prediction": "STOP",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 101.97,
+                        "dimensions": [
+                            1200,
+                            800
+                        ],
+                        "regions_count": 1
+                    },
+                    {
+                        "sample_id": "scene_02",
+                        "file_name": "speed_limit_sign.png",
+                        "category": "scene_signage",
+                        "reference_text": "SPEED LIMIT 50",
+                        "prediction": "SPEEDLIMITS0",
+                        "cer": 0.2143,
+                        "wer": 1.0,
+                        "exact_match": false,
+                        "latency_ms": 109.2,
+                        "dimensions": [
+                            1200,
+                            800
+                        ],
+                        "regions_count": 1
+                    },
+                    {
+                        "sample_id": "scene_03",
+                        "file_name": "storefront_open.png",
+                        "category": "scene_storefront",
+                        "reference_text": "OPEN 24 HOURS",
+                        "prediction": "OPEN 24 HOURS",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 100.38,
+                        "dimensions": [
+                            1200,
+                            800
+                        ],
+                        "regions_count": 3
+                    },
+                    {
+                        "sample_id": "scene_04",
+                        "file_name": "digital_monitor_display.png",
+                        "category": "digital_screen",
+                        "reference_text": "System Status: Online\nFrame Rate: 30 FPS\nResolution: 1920x1080",
+                        "prediction": "\u2018stem Status Online Frame Rate: 30 FPS Fesolution: 1920x1080",
+                        "cer": 0.0645,
+                        "wer": 0.3333,
+                        "exact_match": false,
+                        "latency_ms": 182.37,
+                        "dimensions": [
+                            1920,
+                            1080
+                        ],
+                        "regions_count": 9
+                    },
+                    {
+                        "sample_id": "scene_05",
+                        "file_name": "projected_slide.png",
+                        "category": "digital_projection",
+                        "reference_text": "AI Glasses Project: Vision & Audio Pipeline Overview",
+                        "prediction": "AlGlasses Project Vision & Audio Pipeline Overview",
+                        "cer": 0.0577,
+                        "wer": 0.375,
+                        "exact_match": false,
+                        "latency_ms": 158.8,
+                        "dimensions": [
+                            1920,
+                            1080
+                        ],
+                        "regions_count": 7
+                    },
+                    {
+                        "sample_id": "scene_06",
+                        "file_name": "warning_placard.png",
+                        "category": "scene_placard",
+                        "reference_text": "CAUTION HIGH VOLTAGE",
+                        "prediction": "CAUTION HIGH VOLTAGE",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 105.31,
+                        "dimensions": [
+                            1200,
+                            800
+                        ],
+                        "regions_count": 3
+                    },
+                    {
+                        "sample_id": "scene_07",
+                        "file_name": "airport_gate_display.png",
+                        "category": "digital_screen",
+                        "reference_text": "GATE B12\nFLIGHT 408 TO TOKYO\nBOARDING",
+                        "prediction": "GATEBIZ FLIGHT 408 TO TOKYO BOARDING",
+                        "cer": 0.0811,
+                        "wer": 0.2857,
+                        "exact_match": false,
+                        "latency_ms": 167.78,
+                        "dimensions": [
+                            1920,
+                            1080
+                        ],
+                        "regions_count": 6
+                    },
+                    {
+                        "sample_id": "scene_08",
+                        "file_name": "bus_destination_sign.png",
+                        "category": "scene_transit",
+                        "reference_text": "72 DOWNTOWN EXPRESS",
+                        "prediction": "172 DOWNTOWN EXPRESS",
+                        "cer": 0.0526,
+                        "wer": 0.3333,
+                        "exact_match": false,
+                        "latency_ms": 101.74,
+                        "dimensions": [
+                            1200,
+                            800
+                        ],
+                        "regions_count": 3
+                    }
+                ]
+            },
+            "rapidocr": {
+                "dataset_name": "Printed_Scene_15",
+                "sample_count": 15,
+                "macro_cer": 0.0174,
+                "macro_wer": 0.141,
+                "micro_cer": 0.0184,
+                "micro_wer": 0.1163,
+                "exact_match_count": 8,
+                "exact_match_rate": 0.5333,
+                "mean_latency_ms": 1060.42,
+                "median_latency_ms": 1152.66,
+                "sample_evaluations": [
+                    {
+                        "sample_id": "print_01",
+                        "file_name": "phototest.tif",
+                        "category": "printed_document",
+                        "reference_text": "This is a lot of 12 point text to test the ocr code and see if it works on all types of file format. The quick brown dog jumped over the lazy fox. The quick brown dog jumped over the lazy fox. The quick brown dog jumped over the lazy fox. The quick brown dog jumped over the lazy fox.",
+                        "prediction": "This is a lot of 12 point text to test the ocr code and see if it works on all types of file format. The quick brown dog jumped over the lazy fox. The quick brown dog jumped over the lazy fox. The quick brown dog jumped over the lazy fox. The quick brown dog jumped over the lazy fox.",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 1576.7,
+                        "dimensions": [
+                            640,
+                            480
+                        ],
+                        "regions_count": 8
+                    },
+                    {
+                        "sample_id": "print_02",
+                        "file_name": "eurotext.tif",
+                        "category": "printed_document",
+                        "reference_text": "The (quick) [brown] {fox} jumps! Over the $43,456.78 <lazy> #90 dog & duck/goose, as 12.5% of E-mail from aspammer@website.com is spam. Der ,.schnelle\" braune Fuchs springt \u00fcber den faulen Hund. Le renard brun \u00abrapide\u00bb saute par-dessus le chien paresseux. La volpe marrone rapida salta sopra il cane pigro. El zorro marr\u00f3n r\u00e1pido salta sobre el perro perezoso. A raposa marrom r\u00e1pida salta sobre o c\u00e3o pregui\u00e7oso.",
+                        "prediction": "The (quick)[brown] (fox} jumps! Over the $43,456.78 <1azy> #90 dog & duck/goose, as 12.5% of E-mail from aspammer@website.com is spam. Der schnelle\" braune Fuchs springt iber den faulen Hund. Le renard brun <rapide\u300b saute par-dessus le chien paresseux. La volpe marrone rapida salta sopra il cane pigro. El zorro marron rapido salta sobre el perro perezoso. A raposa marrom rapida salta sobre o cao preguicoso.",
+                        "cer": 0.0315,
+                        "wer": 0.1818,
+                        "exact_match": false,
+                        "latency_ms": 2407.4,
+                        "dimensions": [
+                            1024,
+                            800
+                        ],
+                        "regions_count": 12
+                    },
+                    {
+                        "sample_id": "print_03",
+                        "file_name": "scanned_receipt.png",
+                        "category": "printed_receipt",
+                        "reference_text": "COFFEE SHOP\n1 ESPRESSO $3.50\n1 CROISSANT $4.00\nTOTAL $7.50\nTHANK YOU FOR VISITING",
+                        "prediction": "COFFEE SHOP 1 ESPRESSO $3.50 1 CROISSANT $4.00 TOTAL $7.50 THANK YOU FOR VISITING",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 1290.7,
+                        "dimensions": [
+                            800,
+                            1000
+                        ],
+                        "regions_count": 5
+                    },
+                    {
+                        "sample_id": "print_04",
+                        "file_name": "code_snippet_print.png",
+                        "category": "printed_code",
+                        "reference_text": "def calculate_metrics(ref, pred):\n    return cer(ref, pred)",
+                        "prediction": "def calculate_metrics(ref, pred): return cer(ret pred)",
+                        "cer": 0.0364,
+                        "wer": 0.1667,
+                        "exact_match": false,
+                        "latency_ms": 1324.55,
+                        "dimensions": [
+                            1200,
+                            800
+                        ],
+                        "regions_count": 2
+                    },
+                    {
+                        "sample_id": "print_05",
+                        "file_name": "book_page_scan.png",
+                        "category": "printed_book",
+                        "reference_text": "Chapter 1: The Foundations of Optical Character Recognition and Vision",
+                        "prediction": "Chapter 1: The Foundations of Optical Character Recognition and Vision",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 1152.66,
+                        "dimensions": [
+                            1200,
+                            800
+                        ],
+                        "regions_count": 1
+                    },
+                    {
+                        "sample_id": "print_06",
+                        "file_name": "table_document.png",
+                        "category": "printed_table",
+                        "reference_text": "Item Qty Price Total\nSensor 2 $15.00 $30.00\nLens 1 $45.00 $45.00",
+                        "prediction": "Ite m Qty Price Total Sensor 2 $15.00 $30.00 Lens 1 $45.00 $45.00",
+                        "cer": 0.0156,
+                        "wer": 0.1667,
+                        "exact_match": false,
+                        "latency_ms": 1291.9,
+                        "dimensions": [
+                            1200,
+                            800
+                        ],
+                        "regions_count": 3
+                    },
+                    {
+                        "sample_id": "print_07",
+                        "file_name": "invoice_sample.png",
+                        "category": "printed_invoice",
+                        "reference_text": "INVOICE #1042\nBILL TO: ROUTEWISE AI\nDATE: 2026-10-09\nSTATUS: PAID",
+                        "prediction": "INVOICE #1042 BILL TO. ROUTEWISE AI DATE: 2026-10-09 STATUS: PAID",
+                        "cer": 0.0154,
+                        "wer": 0.1,
+                        "exact_match": false,
+                        "latency_ms": 1227.78,
+                        "dimensions": [
+                            800,
+                            1000
+                        ],
+                        "regions_count": 4
+                    },
+                    {
+                        "sample_id": "scene_01",
+                        "file_name": "street_sign_stop.png",
+                        "category": "scene_signage",
+                        "reference_text": "STOP",
+                        "prediction": "STOP",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 233.79,
+                        "dimensions": [
+                            1200,
+                            800
+                        ],
+                        "regions_count": 1
+                    },
+                    {
+                        "sample_id": "scene_02",
+                        "file_name": "speed_limit_sign.png",
+                        "category": "scene_signage",
+                        "reference_text": "SPEED LIMIT 50",
+                        "prediction": "SPEED LIMIT50",
+                        "cer": 0.0714,
+                        "wer": 0.6667,
+                        "exact_match": false,
+                        "latency_ms": 414.67,
+                        "dimensions": [
+                            1200,
+                            800
+                        ],
+                        "regions_count": 1
+                    },
+                    {
+                        "sample_id": "scene_03",
+                        "file_name": "storefront_open.png",
+                        "category": "scene_storefront",
+                        "reference_text": "OPEN 24 HOURS",
+                        "prediction": "OPEN 24 HOURS",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 295.97,
+                        "dimensions": [
+                            1200,
+                            800
+                        ],
+                        "regions_count": 1
+                    },
+                    {
+                        "sample_id": "scene_04",
+                        "file_name": "digital_monitor_display.png",
+                        "category": "digital_screen",
+                        "reference_text": "System Status: Online\nFrame Rate: 30 FPS\nResolution: 1920x1080",
+                        "prediction": "Syste m Status Online Frame Rate: 30 FPS Resolution: 1920x1080",
+                        "cer": 0.0323,
+                        "wer": 0.3333,
+                        "exact_match": false,
+                        "latency_ms": 1435.65,
+                        "dimensions": [
+                            1920,
+                            1080
+                        ],
+                        "regions_count": 3
+                    },
+                    {
+                        "sample_id": "scene_05",
+                        "file_name": "projected_slide.png",
+                        "category": "digital_projection",
+                        "reference_text": "AI Glasses Project: Vision & Audio Pipeline Overview",
+                        "prediction": "Al Glasses Project Vision & Audio Pipeline Ove rview",
+                        "cer": 0.0577,
+                        "wer": 0.5,
+                        "exact_match": false,
+                        "latency_ms": 821.6,
+                        "dimensions": [
+                            1920,
+                            1080
+                        ],
+                        "regions_count": 1
+                    },
+                    {
+                        "sample_id": "scene_06",
+                        "file_name": "warning_placard.png",
+                        "category": "scene_placard",
+                        "reference_text": "CAUTION HIGH VOLTAGE",
+                        "prediction": "CAUTION HIGH VOLTAGE",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 798.32,
+                        "dimensions": [
+                            1200,
+                            800
+                        ],
+                        "regions_count": 1
+                    },
+                    {
+                        "sample_id": "scene_07",
+                        "file_name": "airport_gate_display.png",
+                        "category": "digital_screen",
+                        "reference_text": "GATE B12\nFLIGHT 408 TO TOKYO\nBOARDING",
+                        "prediction": "GATE B12 FLIGHT 408 TO TOKYO BOARDING",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 847.37,
+                        "dimensions": [
+                            1920,
+                            1080
+                        ],
+                        "regions_count": 3
+                    },
+                    {
+                        "sample_id": "scene_08",
+                        "file_name": "bus_destination_sign.png",
+                        "category": "scene_transit",
+                        "reference_text": "72 DOWNTOWN EXPRESS",
+                        "prediction": "72 DOWNTOWN EXPRESS",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 787.17,
+                        "dimensions": [
+                            1200,
+                            800
+                        ],
+                        "regions_count": 1
+                    }
+                ]
+            },
+            "cer_improvement_absolute": 0.0465,
+            "speedup_ratio": 0.13
+        },
+        "Handwriting_12": {
+            "tesseract": {
+                "dataset_name": "Handwriting_12",
+                "sample_count": 12,
+                "macro_cer": 0.0381,
+                "macro_wer": 0.2981,
+                "micro_cer": 0.0378,
+                "micro_wer": 0.2816,
+                "exact_match_count": 0,
+                "exact_match_rate": 0.0,
+                "mean_latency_ms": 128.49,
+                "median_latency_ms": 92.15,
+                "sample_evaluations": [
+                    {
+                        "sample_id": "hw_01",
+                        "file_name": "gw_manuscript_line1.png",
+                        "category": "cursive_historic_manuscript",
+                        "reference_text": "Orders of the Day Headquarters Valley Forge",
+                        "prediction": "Ordersof the Day Headquarters Valley Forge",
+                        "cer": 0.0233,
+                        "wer": 0.2857,
+                        "exact_match": false,
+                        "latency_ms": 545.17,
+                        "dimensions": [
+                            1200,
+                            300
+                        ],
+                        "regions_count": 6
+                    },
+                    {
+                        "sample_id": "hw_02",
+                        "file_name": "gw_manuscript_line2.png",
+                        "category": "cursive_historic_manuscript",
+                        "reference_text": "The Commander in Chief directs that all officers",
+                        "prediction": "The Commander in Chief directs thataloficers",
+                        "cer": 0.0833,
+                        "wer": 0.375,
+                        "exact_match": false,
+                        "latency_ms": 81.9,
+                        "dimensions": [
+                            1200,
+                            300
+                        ],
+                        "regions_count": 6
+                    },
+                    {
+                        "sample_id": "hw_03",
+                        "file_name": "bentham_note_line1.png",
+                        "category": "cursive_historic_manuscript",
+                        "reference_text": "Principles of Legislation and Judicial Procedure",
+                        "prediction": "Principlesof Legislation and Judicial Procedure",
+                        "cer": 0.0208,
+                        "wer": 0.3333,
+                        "exact_match": false,
+                        "latency_ms": 79.87,
+                        "dimensions": [
+                            1200,
+                            300
+                        ],
+                        "regions_count": 5
+                    },
+                    {
+                        "sample_id": "hw_04",
+                        "file_name": "bentham_note_line2.png",
+                        "category": "cursive_historic_manuscript",
+                        "reference_text": "Observations upon the utility of public records",
+                        "prediction": "(Observations upon the utilityof public records",
+                        "cer": 0.0426,
+                        "wer": 0.4286,
+                        "exact_match": false,
+                        "latency_ms": 82.98,
+                        "dimensions": [
+                            1200,
+                            300
+                        ],
+                        "regions_count": 6
+                    },
+                    {
+                        "sample_id": "hw_05",
+                        "file_name": "historic_letter_01.png",
+                        "category": "cursive_historic_manuscript",
+                        "reference_text": "My Dear Friend I received your kind letter yesterday",
+                        "prediction": "My Dear Friend | received your kind letter yesterday",
+                        "cer": 0.0192,
+                        "wer": 0.1111,
+                        "exact_match": false,
+                        "latency_ms": 92.49,
+                        "dimensions": [
+                            1000,
+                            600
+                        ],
+                        "regions_count": 9
+                    },
+                    {
+                        "sample_id": "hw_06",
+                        "file_name": "historic_letter_02.png",
+                        "category": "cursive_historic_manuscript",
+                        "reference_text": "We hope to see you in town before the end of the month",
+                        "prediction": "We hope tosee you in town before the endof the month",
+                        "cer": 0.037,
+                        "wer": 0.3077,
+                        "exact_match": false,
+                        "latency_ms": 104.81,
+                        "dimensions": [
+                            1000,
+                            600
+                        ],
+                        "regions_count": 11
+                    },
+                    {
+                        "sample_id": "hw_07",
+                        "file_name": "modern_hw_note_01.png",
+                        "category": "modern_handwritten_note",
+                        "reference_text": "Remember to buy milk eggs and fresh bread on Friday",
+                        "prediction": "Remember to buy milk eggsand fresh bread on Friday",
+                        "cer": 0.0196,
+                        "wer": 0.2,
+                        "exact_match": false,
+                        "latency_ms": 93.24,
+                        "dimensions": [
+                            1000,
+                            600
+                        ],
+                        "regions_count": 9
+                    },
+                    {
+                        "sample_id": "hw_08",
+                        "file_name": "modern_hw_note_02.png",
+                        "category": "modern_handwritten_note",
+                        "reference_text": "Meeting with research team at 3pm in room 402",
+                        "prediction": "Meeting with research team atpm in room 402",
+                        "cer": 0.0444,
+                        "wer": 0.2222,
+                        "exact_match": false,
+                        "latency_ms": 91.94,
+                        "dimensions": [
+                            1000,
+                            600
+                        ],
+                        "regions_count": 8
+                    },
+                    {
+                        "sample_id": "hw_09",
+                        "file_name": "modern_hw_recipe.png",
+                        "category": "modern_handwritten_note",
+                        "reference_text": "Flour 2 cups Sugar 1 cup Butter 100g Bake at 180C",
+                        "prediction": "Flour 2 cups Sugar 1 cup Butter 100g Bake at 180",
+                        "cer": 0.0204,
+                        "wer": 0.0909,
+                        "exact_match": false,
+                        "latency_ms": 92.35,
+                        "dimensions": [
+                            1000,
+                            600
+                        ],
+                        "regions_count": 11
+                    },
+                    {
+                        "sample_id": "hw_10",
+                        "file_name": "modern_hw_memo.png",
+                        "category": "modern_handwritten_note",
+                        "reference_text": "Call doctor for annual checkup appointment",
+                        "prediction": "Call doctor for annualcheckupappointment",
+                        "cer": 0.0476,
+                        "wer": 0.5,
+                        "exact_match": false,
+                        "latency_ms": 90.47,
+                        "dimensions": [
+                            1000,
+                            600
+                        ],
+                        "regions_count": 4
+                    },
+                    {
+                        "sample_id": "hw_11",
+                        "file_name": "modern_hw_form.png",
+                        "category": "modern_handwritten_form",
+                        "reference_text": "Name: John Doe City: Mumbai Postal Code: 400037",
+                        "prediction": "Name: John Doe City Mumbai PostalCode: 400037,",
+                        "cer": 0.0638,
+                        "wer": 0.5,
+                        "exact_match": false,
+                        "latency_ms": 91.95,
+                        "dimensions": [
+                            1000,
+                            600
+                        ],
+                        "regions_count": 7
+                    },
+                    {
+                        "sample_id": "hw_12",
+                        "file_name": "modern_hw_todo.png",
+                        "category": "modern_handwritten_note",
+                        "reference_text": "1. Review pull request 2. Update documentation 3. Deploy",
+                        "prediction": "1. Review pull request 2 Update documentation 3, Deploy",
+                        "cer": 0.0357,
+                        "wer": 0.2222,
+                        "exact_match": false,
+                        "latency_ms": 94.75,
+                        "dimensions": [
+                            1000,
+                            600
+                        ],
+                        "regions_count": 9
+                    }
+                ]
+            },
+            "rapidocr": {
+                "dataset_name": "Handwriting_12",
+                "sample_count": 12,
+                "macro_cer": 0.0243,
+                "macro_wer": 0.2295,
+                "micro_cer": 0.0241,
+                "micro_wer": 0.2136,
+                "exact_match_count": 5,
+                "exact_match_rate": 0.4167,
+                "mean_latency_ms": 1194.2,
+                "median_latency_ms": 1172.1,
+                "sample_evaluations": [
+                    {
+                        "sample_id": "hw_01",
+                        "file_name": "gw_manuscript_line1.png",
+                        "category": "cursive_historic_manuscript",
+                        "reference_text": "Orders of the Day Headquarters Valley Forge",
+                        "prediction": "Ordersof theDay Headquarters Valley Forge",
+                        "cer": 0.0465,
+                        "wer": 0.5714,
+                        "exact_match": false,
+                        "latency_ms": 1206.82,
+                        "dimensions": [
+                            1200,
+                            300
+                        ],
+                        "regions_count": 1
+                    },
+                    {
+                        "sample_id": "hw_02",
+                        "file_name": "gw_manuscript_line2.png",
+                        "category": "cursive_historic_manuscript",
+                        "reference_text": "The Commander in Chief directs that all officers",
+                        "prediction": "The Commander in Chief directs thatalloffice rs",
+                        "cer": 0.0625,
+                        "wer": 0.375,
+                        "exact_match": false,
+                        "latency_ms": 1027.46,
+                        "dimensions": [
+                            1200,
+                            300
+                        ],
+                        "regions_count": 1
+                    },
+                    {
+                        "sample_id": "hw_03",
+                        "file_name": "bentham_note_line1.png",
+                        "category": "cursive_historic_manuscript",
+                        "reference_text": "Principles of Legislation and Judicial Procedure",
+                        "prediction": "Principles of Legislation and Judicial Procedure",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 1350.89,
+                        "dimensions": [
+                            1200,
+                            300
+                        ],
+                        "regions_count": 1
+                    },
+                    {
+                        "sample_id": "hw_04",
+                        "file_name": "bentham_note_line2.png",
+                        "category": "cursive_historic_manuscript",
+                        "reference_text": "Observations upon the utility of public records",
+                        "prediction": "Obse rvations upon the utility of public records",
+                        "cer": 0.0213,
+                        "wer": 0.2857,
+                        "exact_match": false,
+                        "latency_ms": 994.41,
+                        "dimensions": [
+                            1200,
+                            300
+                        ],
+                        "regions_count": 1
+                    },
+                    {
+                        "sample_id": "hw_05",
+                        "file_name": "historic_letter_01.png",
+                        "category": "cursive_historic_manuscript",
+                        "reference_text": "My Dear Friend I received your kind letter yesterday",
+                        "prediction": "My Dear Frie nd I received your kind letter yeste rday",
+                        "cer": 0.0385,
+                        "wer": 0.4444,
+                        "exact_match": false,
+                        "latency_ms": 1505.21,
+                        "dimensions": [
+                            1000,
+                            600
+                        ],
+                        "regions_count": 1
+                    },
+                    {
+                        "sample_id": "hw_06",
+                        "file_name": "historic_letter_02.png",
+                        "category": "cursive_historic_manuscript",
+                        "reference_text": "We hope to see you in town before the end of the month",
+                        "prediction": "We hope to see you in town before the end of the month",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 1179.62,
+                        "dimensions": [
+                            1000,
+                            600
+                        ],
+                        "regions_count": 1
+                    },
+                    {
+                        "sample_id": "hw_07",
+                        "file_name": "modern_hw_note_01.png",
+                        "category": "modern_handwritten_note",
+                        "reference_text": "Remember to buy milk eggs and fresh bread on Friday",
+                        "prediction": "Re me mber to buy milk eggs and fresh bread on Friday",
+                        "cer": 0.0392,
+                        "wer": 0.3,
+                        "exact_match": false,
+                        "latency_ms": 1074.27,
+                        "dimensions": [
+                            1000,
+                            600
+                        ],
+                        "regions_count": 1
+                    },
+                    {
+                        "sample_id": "hw_08",
+                        "file_name": "modern_hw_note_02.png",
+                        "category": "modern_handwritten_note",
+                        "reference_text": "Meeting with research team at 3pm in room 402",
+                        "prediction": "Meeting with research team at 3pm in room 402",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 1164.58,
+                        "dimensions": [
+                            1000,
+                            600
+                        ],
+                        "regions_count": 1
+                    },
+                    {
+                        "sample_id": "hw_09",
+                        "file_name": "modern_hw_recipe.png",
+                        "category": "modern_handwritten_note",
+                        "reference_text": "Flour 2 cups Sugar 1 cup Butter 100g Bake at 180C",
+                        "prediction": "Flour 2 cups Sugar 1 cup Butter 100g Bake at 180C",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 921.92,
+                        "dimensions": [
+                            1000,
+                            600
+                        ],
+                        "regions_count": 1
+                    },
+                    {
+                        "sample_id": "hw_10",
+                        "file_name": "modern_hw_memo.png",
+                        "category": "modern_handwritten_note",
+                        "reference_text": "Call doctor for annual checkup appointment",
+                        "prediction": "Call doctor for annual checkupappointme nt",
+                        "cer": 0.0476,
+                        "wer": 0.3333,
+                        "exact_match": false,
+                        "latency_ms": 1093.45,
+                        "dimensions": [
+                            1000,
+                            600
+                        ],
+                        "regions_count": 1
+                    },
+                    {
+                        "sample_id": "hw_11",
+                        "file_name": "modern_hw_form.png",
+                        "category": "modern_handwritten_form",
+                        "reference_text": "Name: John Doe City: Mumbai Postal Code: 400037",
+                        "prediction": "Name: John Doe City: Mumbai Postal Code: 400037",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 1566.9,
+                        "dimensions": [
+                            1000,
+                            600
+                        ],
+                        "regions_count": 1
+                    },
+                    {
+                        "sample_id": "hw_12",
+                        "file_name": "modern_hw_todo.png",
+                        "category": "modern_handwritten_note",
+                        "reference_text": "1. Review pull request 2. Update documentation 3. Deploy",
+                        "prediction": "1. Review pull request 2. Update docume ntation 3. De ploy",
+                        "cer": 0.0357,
+                        "wer": 0.4444,
+                        "exact_match": false,
+                        "latency_ms": 1244.88,
+                        "dimensions": [
+                            1000,
+                            600
+                        ],
+                        "regions_count": 1
+                    }
+                ]
+            },
+            "cer_improvement_absolute": 0.0138,
+            "speedup_ratio": 0.11
+        }
+    }
+}
