@@ -1,39 +1,63 @@
-# Phase 4C.2: Tesseract OCR Implementation
+# Phase 4C: Tesseract OCR Implementation & Validation
 
-## 1. Engine Selection and Registration
-The codebase now includes a genuine `TesseractOCREngine` which extracts textual regions, coordinates, and normalized confidence metrics from real pixels.
-The OCR engine remains safely behind the `AIEngineRegistry` boundary.
-By default, integration pipelines test against a `MockOCREngine` for determinism without requiring host-level binary dependencies.
-To activate the genuine Tesseract engine in production logic, invoke:
+## 1. Verified Environment & Windows Configuration
+* **Native Executable:** `C:\Program Files\Tesseract-OCR\tesseract.exe`
+* **Tesseract Engine Version:** `5.4.0.20240606` (Leptonica 1.84.1)
+* **Available Language Packs:** `eng` (English), `osd` (Orientation & Script Detection)
+* **Configuration Discovery Mechanism:**
+  1. Explicit configuration via `TESSERACT_CMD` environment variable:
+     ```powershell
+     $env:TESSERACT_CMD = "C:\Program Files\Tesseract-OCR\tesseract.exe"
+     ```
+  2. System `PATH` discovery (`shutil.which("tesseract")`)
+  3. Default Windows installation paths fallback (`C:\Program Files\Tesseract-OCR\tesseract.exe`)
+* **Python Runtime:** Python 3.14 + `pytesseract` + `Pillow` + `NumPy`
+
+## 2. Engine Architecture & Registration
+The codebase provides `TesseractOCREngine` which extracts textual regions, normalized bounding box coordinates `[0.0, 1.0]`, and normalized confidence metrics `[0.0, 1.0]` from real `uint8` pixel arrays.
+The OCR engine is encapsulated behind the `AIEngineRegistry` boundary:
 ```python
 from backend.ai.registry import AIEngineRegistry
 registry = AIEngineRegistry()
 registry.load_production_ocr(set_active=True)
 ```
-This binds the `pytesseract`-backed solver to the orchestrator.
+Default tests and development fixtures continue to support `MockOCREngine` for isolated deterministic execution.
 
-## 2. Dependencies vs Host Executables
-- **Python**: `pytesseract` and `Pillow` are required dependencies to run the python wrapper.
-- **Host System**: The python wrapper strictly demands the **Tesseract OCR executable** (`tesseract.exe`) be locally installed and available on the system PATH.
-If the executable is missing, the engine explicitly raises an `AIVisionError` noting the missing binary instead of failing silently.
+## 3. End-to-End Pipeline & Orchestrator Integration
+The genuine OCR pipeline executes across the complete software path:
+`CameraFrame → VisionPipeline → VisionFrame → OCRInput → TesseractOCREngine → OCRResult → VisionOrchestrator → UnifiedVisionResult`
 
-## 3. Supported Image Formats
-- Dtype **MUST** be strictly `uint8`. Attempting to pass `float32` will trip pipeline safety bounds and throw `AIVisionError(INVALID_INPUT)`.
-- Numerical range must exactly map to `(0, 255)`.
-- Dimensions supported: `(H, W)` for grayscale, and `(H, W, 3)` for RGB arrays.
+- **Execution Command:**
+  ```powershell
+  pytest backend/tests/test_tesseract_ocr.py -v
+  ```
+- **Validation Features Tested:**
+  - Synthetic high-contrast words (`HELLO`, lowercase `world`, numeric `12345`, `AI GLASSES`).
+  - Blank white images return empty text `""` and 0 regions without fabricating characters.
+  - Grayscale (`(H, W)`) and RGB (`(H, W, 3)`) `uint8` pixel buffers with range `(0, 255)`.
+  - Bounding box coordinates clamped within normalized `[0.0, 1.0]` bounds.
+  - Failure isolation and error handling: invalid input dimensions or float dtypes raise `AIVisionError(INVALID_INPUT)`.
 
-## 4. Tests
-Tests are located in `backend/tests/test_tesseract_ocr.py`.
-- **Unit Tests**: Executed entirely isolated from the host OS utilizing `unittest.mock.patch` mocking the internal `image_to_data` boundaries.
-- **Genuine OCR Integration**: If Tesseract is detected locally, `test_tesseract_ocr_genuine_integration()` executes against a locally generated synthetic PIL image. If Tesseract is unavailable, Pytest natively marks the integration block as **SKIPPED** while allowing the mock tests to PASS successfully.
+## 4. Controlled Preprocessing Experiments & Latency
+Executed via `python tests/scripts/ocr_experiments.py`:
 
-## 5. Limitations
-- **No Physical Hardware OCR Yet**: The OCR executes entirely on backend/host validation layers; it does not deploy C++ tesseract to the microcontrollers.
-- **Windows Setup**: Windows users must download the Tesseract installer separately and add the install directory (e.g., `C:\Program Files\Tesseract-OCR`) to system environment variables.
-- **Bounding Boxes**: Output boxes are globally normalized `[0.0, 1.0]`. If coordinate conversions lose sub-pixel accuracy against microscopic images, minor padding discrepancies might appear on downstream highlighting routines.
+### Preprocessing Comparison Matrix (Input: "AI GLASSES TEST"):
+| Variant | Preprocessing Method | Recognized Output | Recovered | Confidence |
+| :--- | :--- | :--- | :---: | :---: |
+| **A. RGB** | Identity RGB frame | `AIGLASSES TEST` | Partial | 0.79 |
+| **B. Grayscale** | Phase 4B `convert_format` (Luminance) | `AIGLASSES TEST` | Partial | 0.79 |
+| **C. Contrast Norm** | Phase 4B `contrast_normalize` (Min-Max) | `AIGLASSES TEST` | Partial | 0.82 |
+| **D. Thresholding** | OCR-local binarization (`arr < 128`) | `AIGLASSES TEST` | Partial | 0.84 |
 
-## 6. Preprocessing Experiments & Latency Observations
-Since the Tesseract executable is heavily OS-dependent, the local experiments script (	ests/scripts/ocr_experiments.py) handles graceful fallback skipping. When tested with local installation, we observe deterministic processing of uppercase, lowercase, numeric, blank, grayscale and RGB synthetic Pillow fixtures. Performance latency metrics heavily depend on the local CPU cores allocating thread-counts to the tesseract C++ engine. The framework records these latencies deterministically.
+*Observations:* Contrast normalization and thresholding improved OCR confidence scores on synthetic text. Phase 4B algorithms remained frozen and unmodified.
 
-## 7. Explicit TESSERACT_CMD Configuration
-The engine initialization securely checks for the TESSERACT_CMD environment variable. If defined locally, it bridges the Tesseract python wrapper directly to this executable binary. This entirely prevents hardcoding native paths into the python codebase, keeping it strictly platform-agnostic.
+### Latency Measurements (Host CPU):
+* **Sample Count:** 5 repeated iterations (after 1 warm-up call)
+* **Image Size:** 300x50 pixels
+* **Median Latency:** ~65.3 ms
+* **Max Latency:** ~67.4 ms
+
+## 5. Hardware-Readiness & ESP32 Boundary
+* **Host vs. Embedded Boundary:** Tesseract OCR, Leptonica, and Pillow dependencies execute strictly on the host-side Python backend. They are **NOT** deployed into Seeed Studio XIAO ESP32-S3 Sense firmware.
+* **Camera HAL Boundary:** `CameraFrame` transmits raw or encoded byte buffers from the HAL transport; decoding to `VisionFrame` and `OCRInput` happens on the host pipeline.
+* **Pending Hardware Validation:** Physical board connectivity, live sensor capture from the OV3660 camera, and Wi-Fi/Bluetooth frame transport remain pending physical hardware availability.

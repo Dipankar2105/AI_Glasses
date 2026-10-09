@@ -10,9 +10,10 @@ from backend.ai.errors import AIVisionError
 def has_tesseract():
     import pytesseract
     try:
+        _ = TesseractOCREngine()
         pytesseract.get_tesseract_version()
         return True
-    except:
+    except Exception:
         return False
 
 def generate_fixtures():
@@ -75,28 +76,37 @@ def run_experiments():
     d.text((20, 15), "AI GLASSES TEST", fill=(50, 50, 50))
     arr_rgb = np.array(img)
     
-    print("--- PREPROCESSING EXPERIMENTS ---")
+    fixtures = generate_fixtures()
+    
+    print("--- FIXTURES RECOGNITION TEST ---")
+    for fix_name, fix_arr in fixtures.items():
+        h, w = fix_arr.shape[:2]
+        c = 1 if len(fix_arr.shape) == 2 else fix_arr.shape[2]
+        inp = OCRInput(fix_arr, w, h, c, (0, 255), 100, 1)
+        res = engine.process(inp)
+        print(f"Fixture: {fix_name.ljust(12)} | Output: '{res.full_text}' | Regions: {len(res.regions)}")
+
+    print("\n--- PREPROCESSING EXPERIMENTS ---")
     expected_text = "AI GLASSES TEST"
     
-    # A. Original grayscale image
     from backend.vision.pipeline import VisionPipeline
     pipeline = VisionPipeline()
-    import backend.vision.frame as frame_module
-    raw_frame = frame_module.CameraFrame(arr_rgb, 300, 60, 3, "uint8", 100, 1)
+    from backend.vision.mock_camera import CameraFrame
+    raw_frame = CameraFrame(300, 60, "RGB", arr_rgb.tobytes(), 100, 1)
     
-    # Let's run raw grayscale conversion directly (simulate A, B, C, D)
-    arr_gray = np.dot(arr_rgb[...,:3], [0.2989, 0.5870, 0.1140]).astype(np.uint8)
-    
+    # A. Original RGB
+    vframe_rgb = pipeline.process(raw_frame)
+    # B. Converted to Grayscale using existing Phase 4B pipeline
+    vframe_gray = pipeline.convert_format(vframe_rgb, "GRAYSCALE")
     # C. Existing contrast normalized
-    arr_norm = pipeline._contrast_normalize(arr_gray)
-    
-    # D. OCR-local thresholding
-    arr_thresh = np.where(arr_gray < 128, 0, 255).astype(np.uint8)
+    vframe_contrast = pipeline.contrast_normalize(vframe_gray)
+    # D. OCR-local thresholding on grayscale data
+    arr_thresh = np.where(vframe_gray.data < 128, 0, 255).astype(np.uint8)
     
     variations = {
-        "A. RGB": arr_rgb,
-        "B. Grayscale": arr_gray,
-        "C. Contrast Norm": arr_norm,
+        "A. RGB": vframe_rgb.data,
+        "B. Grayscale": vframe_gray.data,
+        "C. Contrast Norm": vframe_contrast.data,
         "D. Thresholding": arr_thresh
     }
     
@@ -112,8 +122,6 @@ def run_experiments():
             print(f"{name.ljust(18)} | Expected: '{expected_text}' | Recog: '{res.full_text}' | Recovered: {success} | Conf: {conf:.2f}")
         except AIVisionError as e:
             print(f"{name.ljust(18)} | Error: {e}")
-            
-    # Latency checks
             
     # Latency checks
     print("\n--- PERFORMANCE OBSERVATIONS ---")

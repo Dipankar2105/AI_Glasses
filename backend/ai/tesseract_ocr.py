@@ -13,12 +13,20 @@ from backend.vision.frame import OCRInput
 from backend.ai.errors import AIVisionError, AIVisionErrorStatus
 
 class TesseractOCREngine(OCREngine):
-    def __init__(self):
+    def __init__(self, cmd: str = None):
         super().__init__()
-        import os
-        cmd = os.environ.get('TESSERACT_CMD')
-        if cmd:
-            pytesseract.pytesseract.tesseract_cmd = cmd
+        import os, shutil
+        t_cmd = cmd or os.environ.get('TESSERACT_CMD')
+        if not t_cmd:
+            t_cmd = shutil.which("tesseract")
+        if not t_cmd and os.name == 'nt':
+            # Check standard Windows default install paths if not in PATH
+            prog_files = os.environ.get('ProgramFiles', r'C:\Program Files')
+            default_path = os.path.join(prog_files, 'Tesseract-OCR', 'tesseract.exe')
+            if os.path.exists(default_path):
+                t_cmd = default_path
+        if t_cmd:
+            pytesseract.pytesseract.tesseract_cmd = t_cmd
 
     def process(self, input_data: OCRInput) -> OCRResult:
         if input_data.image is None or input_data.dimensions[0] == 0 or input_data.dimensions[1] == 0:

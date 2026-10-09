@@ -80,9 +80,10 @@ def test_tesseract_ocr_mocked_no_tesseract(mock_image_to_data):
 
 def has_tesseract():
     try:
+        _ = TesseractOCREngine()
         pytesseract.get_tesseract_version()
         return True
-    except:
+    except Exception:
         return False
 
 @pytest.mark.skipif(not has_tesseract(), reason="Tesseract executable not found")
@@ -100,3 +101,74 @@ def test_tesseract_ocr_genuine_integration():
     res = engine.process(inp)
     assert "HELLO" in res.full_text.upper()
     assert len(res.regions) >= 1
+    assert 0.0 <= res.regions[0].confidence <= 1.0
+    assert 0.0 <= res.regions[0].box.x <= 1.0
+    assert 0.0 <= res.regions[0].box.y <= 1.0
+    assert 0.0 <= res.regions[0].box.width <= 1.0
+    assert 0.0 <= res.regions[0].box.height <= 1.0
+
+@pytest.mark.skipif(not has_tesseract(), reason="Tesseract executable not found")
+def test_tesseract_ocr_genuine_blank_image():
+    # Blank white image should not invent text or fake regions
+    img_np = np.full((100, 100), 255, dtype=np.uint8)
+    engine = TesseractOCREngine()
+    inp = OCRInput(img_np, 100, 100, 1, (0, 255), 100, 1)
+    
+    res = engine.process(inp)
+    assert res.full_text == ""
+    assert len(res.regions) == 0
+
+@pytest.mark.skipif(not has_tesseract(), reason="Tesseract executable not found")
+def test_tesseract_ocr_genuine_rgb_and_numbers():
+    # Test RGB image with digits
+    img_pil = Image.new('RGB', (200, 50), color=(255, 255, 255))
+    d = ImageDraw.Draw(img_pil)
+    d.text((10, 10), "98765", fill=(0, 0, 0))
+    img_np = np.array(img_pil)
+    
+    engine = TesseractOCREngine()
+    inp = OCRInput(img_np, 200, 50, 3, (0, 255), 100, 1)
+    
+    res = engine.process(inp)
+    assert "98765" in res.full_text
+    assert len(res.regions) >= 1
+
+@pytest.mark.skipif(not has_tesseract(), reason="Tesseract executable not found")
+def test_tesseract_ocr_orchestrator_e2e():
+    from firmware.hal.camera import CameraFrame
+    from backend.vision.pipeline import VisionPipeline
+    from backend.ai.registry import AIEngineRegistry
+    from backend.ai.orchestrator import VisionOrchestrator
+    from backend.ai.mock_engines import MockObjectDetector, MockSceneAnalyzer
+    
+    # 1. Create a CameraFrame with synthetic text "HELLO"
+    img_pil = Image.new('RGB', (200, 50), color=(255, 255, 255))
+    d = ImageDraw.Draw(img_pil)
+    d.text((10, 10), "HELLO", fill=(0, 0, 0))
+    arr = np.array(img_pil)
+    
+    cam_frame = CameraFrame(200, 50, "RGB", arr.tobytes(), 54321, 42)
+    
+    # 2. VisionPipeline processes CameraFrame -> VisionFrame
+    pipeline = VisionPipeline()
+    vframe = pipeline.process(cam_frame)
+    
+    # 3. Setup Orchestrator with genuine Tesseract
+    registry = AIEngineRegistry()
+    registry.register_detector("mock", MockObjectDetector())
+    registry.load_production_ocr(set_active=True)
+    registry.register_scene_analyzer("mock", MockSceneAnalyzer())
+    
+    orchestrator = VisionOrchestrator(registry)
+    
+    # 4. Process through Orchestrator
+    res = orchestrator.process(vframe)
+    
+    # 5. Verify genuine OCR reached UnifiedVisionResult
+    assert len(res.errors) == 0
+    assert res.timestamp == 54321
+    assert res.seq_num == 42
+    assert res.ocr_result is not None
+    assert "HELLO" in res.ocr_result.full_text.upper()
+    assert len(res.ocr_result.regions) >= 1
+    assert res.ocr_result.metadata["engine"] == "pytesseract"
