@@ -9,7 +9,7 @@
 - Phase 5 — Python AI Backend Foundation [COMPLETED]
 - Phase 6 — OCR + Read Aloud [DEFERRED - OCR ON HOLD]
 - Phase 7 — Conversational Intelligence + MCP Tools [COMPLETED]
-- Phase 8 — Motion + Silent Interaction [PLANNED]
+- Phase 8 — Motion + Silent Interaction [COMPLETED]
 - Phase 9 — Power + Thermal Management [PLANNED]
 - Phase 10 — Full Hardware Integration [PLANNED]
 - Phase 11 — Performance + Reliability [PLANNED]
