@@ -1,0 +1,1879 @@
+{
+    "benchmark_name": "Phase 4C.13 Controlled Whiteboard Benchmark",
+    "tesseract_version": "5.4.0.20240606",
+    "timestamp": "2026-10-09 15:10:18",
+    "dev_sample_ids": [
+        "01",
+        "02",
+        "03",
+        "04",
+        "05",
+        "07",
+        "08",
+        "09",
+        "10",
+        "11",
+        "17"
+    ],
+    "heldout_sample_ids": [
+        "06",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "18",
+        "19",
+        "20",
+        "21"
+    ],
+    "configurations": [
+        {
+            "config_id": "native_psm3",
+            "label": "Native 4K, PSM 3 (Auto)",
+            "psm": "--psm 3",
+            "preprocessing_mode": "native",
+            "mean_cer": 0.6414,
+            "mean_wer": 0.9966,
+            "cold_start_latency_ms": 1146.88,
+            "warm_mean_latency_ms": 1142.11,
+            "overall_median_latency_ms": 1113.98,
+            "repetition_runs": [
+                {
+                    "run_index": 0,
+                    "run_type": "cold_start",
+                    "mean_cer": 0.6414,
+                    "mean_wer": 0.9966,
+                    "mean_latency_ms": 1146.88,
+                    "median_latency_ms": 1127.72,
+                    "total_run_time_ms": 14262.63,
+                    "sample_evaluations": [
+                        {
+                            "sample_id": "01",
+                            "cer": 0.5344,
+                            "wer": 1.0588,
+                            "exact_match": false,
+                            "latency_ms": 1234.9,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "WHIT EBSALD \u201c2 fe SM ry\u2019 lt we LLL LLL aa Bur! 14's nous tek at a Lolly ouihtoer A Aeigh \u00e9 ALD ( hove beregy wei EC by honk In fens My whi ti\u00a2 13 foad \u20ac\u00b0 fect phere"
+                        },
+                        {
+                            "sample_id": "02",
+                            "cer": 0.6358,
+                            "wer": 1.069,
+                            "exact_match": false,
+                            "latency_ms": 1070.95,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "lone Glu &5 7% 00S Com you Lhair we Wsrot nol / null tot o\u00e9 0 lal on a for repavre \u2018eye </ale decates ie ei pear is oe gbrvtotiens Va of fe wi oo"
+                        },
+                        {
+                            "sample_id": "03",
+                            "cer": 0.6732,
+                            "wer": 0.9796,
+                            "exact_match": false,
+                            "latency_ms": 1127.72,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "So wE Ques 7 cas See 4 Com you Lbaire we wrote mold / rwtAtedleal telah oa a few ne feck (ma teb wf panel PAB\"P Bi GOs previeciens Vila of fae wilh? py) hte bot OC me Lol / get gee"
+                        },
+                        {
+                            "sample_id": "04",
+                            "cer": 0.5827,
+                            "wer": 0.9796,
+                            "exact_match": false,
+                            "latency_ms": 1167.97,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "fo we vues 7icas : ow Owe Lhair wa wngroe mole / nit@tedat to lal On 4 for refocrrce lmazes \u201c/ nannel Paeserip lees vA [read bho Bot sgbroietiens Wha Vf fe with? Al bcat \u00a9 stor 77\u00a2 flat a 16 Se fart let yee"
+                        },
+                        {
+                            "sample_id": "05",
+                            "cer": 0.6,
+                            "wer": 1.2195,
+                            "exact_match": false,
+                            "latency_ms": 1110.37,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "wy 1A PPA CAILS 0 hj $3 ond wee hflorF - Zi teh t& cork =~ chleateh vp feel MI yahoo [hea ae pawam). ree fe be Sle 72 RAEI. A_ ek RO Feet. COR Sec TIVE _- ae toc ~~ tN psontotext Ly phtedennee > Tat (00 ise / Sor cle"
+                        },
+                        {
+                            "sample_id": "07",
+                            "cer": 0.6797,
+                            "wer": 0.9524,
+                            "exact_match": false,
+                            "latency_ms": 1094.74,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "Faw Shot Llearrigy \u2014 a Yon to CAeIMES CITY Dub lw |e harc\u2014 firnor Son han"
+                        },
+                        {
+                            "sample_id": "08",
+                            "cer": 0.7517,
+                            "wer": 0.9643,
+                            "exact_match": false,
+                            "latency_ms": 1023.69,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "RS het Leases \u2014- > Joow Meet 4 frep (of bs ny hear need \u00b0 Y hy"
+                        },
+                        {
+                            "sample_id": "09",
+                            "cer": 0.6265,
+                            "wer": 0.9535,
+                            "exact_match": false,
+                            "latency_ms": 1356.02,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "Fis Shot Lenny = > ly hat Bol hi by ) a i waite leeces? . a forrisp: mesg pnw tebe Lote suite oF nist pe? 2 L fontins, / we! \u2018L' jhe haloon pene ined Gbecs (uy? 10k!)"
+                        },
+                        {
+                            "sample_id": "10",
+                            "cer": 0.6107,
+                            "wer": 0.8929,
+                            "exact_match": false,
+                            "latency_ms": 1165.18,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "Faw Shot leawigy - > 9 YT ae ( 4 , a Ls we sew ns & FOr pe jaegRnet \u201cae Litts ore cool"
+                        },
+                        {
+                            "sample_id": "11",
+                            "cer": 0.7073,
+                            "wer": 0.9559,
+                            "exact_match": false,
+                            "latency_ms": 1244.55,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "PERS 0 A 1 GAS% rr MAUS 2D { A IDEA e- case: Hunan WANTS To ee a Tesh SspecmrBe A/ agent bS etek e TAA A, \u201c| (a) phai (coll Ge porce re) 79 os oe T=T hheat 'S . - eantEDs FAK Tl feod = 22a 4"
+                        },
+                        {
+                            "sample_id": "17",
+                            "cer": 0.6535,
+                            "wer": 0.9375,
+                            "exact_match": false,
+                            "latency_ms": 1019.55,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "other (ewmon VH/ TeheAtpD npifecti> 0 be x & st ai be tm yar"
+                        }
+                    ]
+                },
+                {
+                    "run_index": 1,
+                    "run_type": "warm_run_1",
+                    "mean_cer": 0.6414,
+                    "mean_wer": 0.9966,
+                    "mean_latency_ms": 1141.95,
+                    "median_latency_ms": 1109.47,
+                    "total_run_time_ms": 14200.86,
+                    "sample_evaluations": [
+                        {
+                            "sample_id": "01",
+                            "cer": 0.5344,
+                            "wer": 1.0588,
+                            "exact_match": false,
+                            "latency_ms": 1223.45,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "WHIT EBSALD \u201c2 fe SM ry\u2019 lt we LLL LLL aa Bur! 14's nous tek at a Lolly ouihtoer A Aeigh \u00e9 ALD ( hove beregy wei EC by honk In fens My whi ti\u00a2 13 foad \u20ac\u00b0 fect phere"
+                        },
+                        {
+                            "sample_id": "02",
+                            "cer": 0.6358,
+                            "wer": 1.069,
+                            "exact_match": false,
+                            "latency_ms": 1063.27,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "lone Glu &5 7% 00S Com you Lhair we Wsrot nol / null tot o\u00e9 0 lal on a for repavre \u2018eye </ale decates ie ei pear is oe gbrvtotiens Va of fe wi oo"
+                        },
+                        {
+                            "sample_id": "03",
+                            "cer": 0.6732,
+                            "wer": 0.9796,
+                            "exact_match": false,
+                            "latency_ms": 1109.47,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "So wE Ques 7 cas See 4 Com you Lbaire we wrote mold / rwtAtedleal telah oa a few ne feck (ma teb wf panel PAB\"P Bi GOs previeciens Vila of fae wilh? py) hte bot OC me Lol / get gee"
+                        },
+                        {
+                            "sample_id": "04",
+                            "cer": 0.5827,
+                            "wer": 0.9796,
+                            "exact_match": false,
+                            "latency_ms": 1164.79,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "fo we vues 7icas : ow Owe Lhair wa wngroe mole / nit@tedat to lal On 4 for refocrrce lmazes \u201c/ nannel Paeserip lees vA [read bho Bot sgbroietiens Wha Vf fe with? Al bcat \u00a9 stor 77\u00a2 flat a 16 Se fart let yee"
+                        },
+                        {
+                            "sample_id": "05",
+                            "cer": 0.6,
+                            "wer": 1.2195,
+                            "exact_match": false,
+                            "latency_ms": 1106.97,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "wy 1A PPA CAILS 0 hj $3 ond wee hflorF - Zi teh t& cork =~ chleateh vp feel MI yahoo [hea ae pawam). ree fe be Sle 72 RAEI. A_ ek RO Feet. COR Sec TIVE _- ae toc ~~ tN psontotext Ly phtedennee > Tat (00 ise / Sor cle"
+                        },
+                        {
+                            "sample_id": "07",
+                            "cer": 0.6797,
+                            "wer": 0.9524,
+                            "exact_match": false,
+                            "latency_ms": 1097.36,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "Faw Shot Llearrigy \u2014 a Yon to CAeIMES CITY Dub lw |e harc\u2014 firnor Son han"
+                        },
+                        {
+                            "sample_id": "08",
+                            "cer": 0.7517,
+                            "wer": 0.9643,
+                            "exact_match": false,
+                            "latency_ms": 1002.76,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "RS het Leases \u2014- > Joow Meet 4 frep (of bs ny hear need \u00b0 Y hy"
+                        },
+                        {
+                            "sample_id": "09",
+                            "cer": 0.6265,
+                            "wer": 0.9535,
+                            "exact_match": false,
+                            "latency_ms": 1343.3,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "Fis Shot Lenny = > ly hat Bol hi by ) a i waite leeces? . a forrisp: mesg pnw tebe Lote suite oF nist pe? 2 L fontins, / we! \u2018L' jhe haloon pene ined Gbecs (uy? 10k!)"
+                        },
+                        {
+                            "sample_id": "10",
+                            "cer": 0.6107,
+                            "wer": 0.8929,
+                            "exact_match": false,
+                            "latency_ms": 1180.56,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "Faw Shot leawigy - > 9 YT ae ( 4 , a Ls we sew ns & FOr pe jaegRnet \u201cae Litts ore cool"
+                        },
+                        {
+                            "sample_id": "11",
+                            "cer": 0.7073,
+                            "wer": 0.9559,
+                            "exact_match": false,
+                            "latency_ms": 1228.13,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "PERS 0 A 1 GAS% rr MAUS 2D { A IDEA e- case: Hunan WANTS To ee a Tesh SspecmrBe A/ agent bS etek e TAA A, \u201c| (a) phai (coll Ge porce re) 79 os oe T=T hheat 'S . - eantEDs FAK Tl feod = 22a 4"
+                        },
+                        {
+                            "sample_id": "17",
+                            "cer": 0.6535,
+                            "wer": 0.9375,
+                            "exact_match": false,
+                            "latency_ms": 1041.37,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "other (ewmon VH/ TeheAtpD npifecti> 0 be x & st ai be tm yar"
+                        }
+                    ]
+                },
+                {
+                    "run_index": 2,
+                    "run_type": "warm_run_2",
+                    "mean_cer": 0.6414,
+                    "mean_wer": 0.9966,
+                    "mean_latency_ms": 1142.26,
+                    "median_latency_ms": 1113.98,
+                    "total_run_time_ms": 14209.32,
+                    "sample_evaluations": [
+                        {
+                            "sample_id": "01",
+                            "cer": 0.5344,
+                            "wer": 1.0588,
+                            "exact_match": false,
+                            "latency_ms": 1231.25,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "WHIT EBSALD \u201c2 fe SM ry\u2019 lt we LLL LLL aa Bur! 14's nous tek at a Lolly ouihtoer A Aeigh \u00e9 ALD ( hove beregy wei EC by honk In fens My whi ti\u00a2 13 foad \u20ac\u00b0 fect phere"
+                        },
+                        {
+                            "sample_id": "02",
+                            "cer": 0.6358,
+                            "wer": 1.069,
+                            "exact_match": false,
+                            "latency_ms": 1061.07,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "lone Glu &5 7% 00S Com you Lhair we Wsrot nol / null tot o\u00e9 0 lal on a for repavre \u2018eye </ale decates ie ei pear is oe gbrvtotiens Va of fe wi oo"
+                        },
+                        {
+                            "sample_id": "03",
+                            "cer": 0.6732,
+                            "wer": 0.9796,
+                            "exact_match": false,
+                            "latency_ms": 1113.98,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "So wE Ques 7 cas See 4 Com you Lbaire we wrote mold / rwtAtedleal telah oa a few ne feck (ma teb wf panel PAB\"P Bi GOs previeciens Vila of fae wilh? py) hte bot OC me Lol / get gee"
+                        },
+                        {
+                            "sample_id": "04",
+                            "cer": 0.5827,
+                            "wer": 0.9796,
+                            "exact_match": false,
+                            "latency_ms": 1171.06,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "fo we vues 7icas : ow Owe Lhair wa wngroe mole / nit@tedat to lal On 4 for refocrrce lmazes \u201c/ nannel Paeserip lees vA [read bho Bot sgbroietiens Wha Vf fe with? Al bcat \u00a9 stor 77\u00a2 flat a 16 Se fart let yee"
+                        },
+                        {
+                            "sample_id": "05",
+                            "cer": 0.6,
+                            "wer": 1.2195,
+                            "exact_match": false,
+                            "latency_ms": 1108.98,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "wy 1A PPA CAILS 0 hj $3 ond wee hflorF - Zi teh t& cork =~ chleateh vp feel MI yahoo [hea ae pawam). ree fe be Sle 72 RAEI. A_ ek RO Feet. COR Sec TIVE _- ae toc ~~ tN psontotext Ly phtedennee > Tat (00 ise / Sor cle"
+                        },
+                        {
+                            "sample_id": "07",
+                            "cer": 0.6797,
+                            "wer": 0.9524,
+                            "exact_match": false,
+                            "latency_ms": 1099.24,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "Faw Shot Llearrigy \u2014 a Yon to CAeIMES CITY Dub lw |e harc\u2014 firnor Son han"
+                        },
+                        {
+                            "sample_id": "08",
+                            "cer": 0.7517,
+                            "wer": 0.9643,
+                            "exact_match": false,
+                            "latency_ms": 1010.43,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "RS het Leases \u2014- > Joow Meet 4 frep (of bs ny hear need \u00b0 Y hy"
+                        },
+                        {
+                            "sample_id": "09",
+                            "cer": 0.6265,
+                            "wer": 0.9535,
+                            "exact_match": false,
+                            "latency_ms": 1359.74,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "Fis Shot Lenny = > ly hat Bol hi by ) a i waite leeces? . a forrisp: mesg pnw tebe Lote suite oF nist pe? 2 L fontins, / we! \u2018L' jhe haloon pene ined Gbecs (uy? 10k!)"
+                        },
+                        {
+                            "sample_id": "10",
+                            "cer": 0.6107,
+                            "wer": 0.8929,
+                            "exact_match": false,
+                            "latency_ms": 1157.21,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "Faw Shot leawigy - > 9 YT ae ( 4 , a Ls we sew ns & FOr pe jaegRnet \u201cae Litts ore cool"
+                        },
+                        {
+                            "sample_id": "11",
+                            "cer": 0.7073,
+                            "wer": 0.9559,
+                            "exact_match": false,
+                            "latency_ms": 1239.04,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "PERS 0 A 1 GAS% rr MAUS 2D { A IDEA e- case: Hunan WANTS To ee a Tesh SspecmrBe A/ agent bS etek e TAA A, \u201c| (a) phai (coll Ge porce re) 79 os oe T=T hheat 'S . - eantEDs FAK Tl feod = 22a 4"
+                        },
+                        {
+                            "sample_id": "17",
+                            "cer": 0.6535,
+                            "wer": 0.9375,
+                            "exact_match": false,
+                            "latency_ms": 1012.81,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "other (ewmon VH/ TeheAtpD npifecti> 0 be x & st ai be tm yar"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "config_id": "native_psm6",
+            "label": "Native 4K, PSM 6 (Single Block)",
+            "psm": "--psm 6",
+            "preprocessing_mode": "native",
+            "mean_cer": 0.6324,
+            "mean_wer": 1.0005,
+            "cold_start_latency_ms": 1079.61,
+            "warm_mean_latency_ms": 1075.72,
+            "overall_median_latency_ms": 1060.03,
+            "repetition_runs": [
+                {
+                    "run_index": 0,
+                    "run_type": "cold_start",
+                    "mean_cer": 0.6324,
+                    "mean_wer": 1.0005,
+                    "mean_latency_ms": 1079.61,
+                    "median_latency_ms": 1071.74,
+                    "total_run_time_ms": 13541.9,
+                    "sample_evaluations": [
+                        {
+                            "sample_id": "01",
+                            "cer": 0.5714,
+                            "wer": 1.0294,
+                            "exact_match": false,
+                            "latency_ms": 1073.91,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "/ hove Replrcovece L whi ER b conde gy | | Bur! 14's nous tek at a Lolly oushtoer &- Aeigh \u00a2 ArLD ( heve borey waite by hork IN (EMS | ry waitin foad 0 fect p hee"
+                        },
+                        {
+                            "sample_id": "02",
+                            "cer": 0.6243,
+                            "wer": 1.0345,
+                            "exact_match": false,
+                            "latency_ms": 1031.4,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "ng omE OUEST: o@\u00a7 Conyac team 0 18 roe modal ie nutlitedel Mole cn a for repavre \u2018eye y Asta pomena Acale Prats ? tecrens ln of fe ib! ne\""
+                        },
+                        {
+                            "sample_id": "03",
+                            "cer": 0.626,
+                            "wer": 0.9388,
+                            "exact_match": false,
+                            "latency_ms": 1071.74,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "Nome Qvasrices my \"A a Chad a visror mold Vk nulnodleal to lel oat Re feck Oe ww / pAwel Saenger peters . Yak Loud Borner fila ff fa with? Carla / get Al bBcek ~ nator 71t fat a1tSe"
+                        },
+                        {
+                            "sample_id": "04",
+                            "cer": 0.7087,
+                            "wer": 1.0,
+                            "exact_match": false,
+                            "latency_ms": 1196.18,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "| Bee ieee? 7\u201c GB \u00abfs ig i . | hep ete ss ) Ene tes 2 iS ely a _ ht # J rane Reser\u2019? wie ; ough agbrelorion \u201c3 / Ge On vie me i ue [ita re a frit siete rei artSe"
+                        },
+                        {
+                            "sample_id": "05",
+                            "cer": 0.5909,
+                            "wer": 1.1463,
+                            "exact_match": false,
+                            "latency_ms": 1021.25,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "wy 1A fp Pld Cat (XS | 3 br Ait oorek \u2014~ cleaterh +e fee\u2019 Al peor fraae pawam). ree fo be ale 72 PAES\u00ae A_ : ek RO Feet. COR Sec TIVE _- ae toc ~~ | v psoctotext Ly phtedennee > Tat (00 hse / Soe cee"
+                        },
+                        {
+                            "sample_id": "07",
+                            "cer": 0.6406,
+                            "wer": 0.9048,
+                            "exact_match": false,
+                            "latency_ms": 1006.67,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "fiw Shet Le arity \u2014 2 LITY LOWMTEK ZF Dub lies |e Laorc\u2014 finnonr Son han\u2019 Was higgtew DC USA"
+                        },
+                        {
+                            "sample_id": "08",
+                            "cer": 0.8054,
+                            "wer": 0.9286,
+                            "exact_match": false,
+                            "latency_ms": 870.75,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "Zoow Vutiss (rep (oP /s my hair 2 eed ? pe ee"
+                        },
+                        {
+                            "sample_id": "09",
+                            "cer": 0.6265,
+                            "wer": 1.0465,
+                            "exact_match": false,
+                            "latency_ms": 1249.73,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "\u2014 yhe Aowtl par rehs lif \u2014 Me few We wale LOM OAS en [fot ig Soratines ! CE Infanainy mensigpe pie 0A ne Cy Lote seit A Ka mere \u00a9 L Jonetinee, / waite (L' Ihe Saloon + sore 77rd \u2014_ Cow? 10 e!)"
+                        },
+                        {
+                            "sample_id": "10",
+                            "cer": 0.5115,
+                            "wer": 0.9286,
+                            "exact_match": false,
+                            "latency_ms": 1084.25,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "fw Shot Lea) - > ae Iy be vB0 fot like speech? y ity * geo l Pe (Ls ore cool! ot jacgnnet eee Lins & oe! De oh nal ra"
+                        },
+                        {
+                            "sample_id": "11",
+                            "cer": 0.5881,
+                            "wer": 0.9853,
+                            "exact_match": false,
+                            "latency_ms": 1267.35,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "Pease telisen A 1 use (eA bSe- Case: Lurk wants Po chee a Teak space Al agent a front boo\u20ac qatene TRAE Ctlate 40 agent fo \u201clathe (es\" you? TRONS CHO Fam. aa (coll Ge porce re) Ft kx fnock cote t\u2014) yreter 02 a hhet'S Your pa gecaTe NEMERY Uma! 4 @ oan Es FAK Tl | ao. = 2tA"
+                        },
+                        {
+                            "sample_id": "17",
+                            "cer": 0.6634,
+                            "wer": 1.0625,
+                            "exact_match": false,
+                            "latency_ms": 1002.49,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "Other (2 of/M 0 9 VE a x ow staibe they \u2014_ dh a x oe ute oe wine) some"
+                        }
+                    ]
+                },
+                {
+                    "run_index": 1,
+                    "run_type": "warm_run_1",
+                    "mean_cer": 0.6324,
+                    "mean_wer": 1.0005,
+                    "mean_latency_ms": 1073.2,
+                    "median_latency_ms": 1060.03,
+                    "total_run_time_ms": 13462.14,
+                    "sample_evaluations": [
+                        {
+                            "sample_id": "01",
+                            "cer": 0.5714,
+                            "wer": 1.0294,
+                            "exact_match": false,
+                            "latency_ms": 1060.03,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "/ hove Replrcovece L whi ER b conde gy | | Bur! 14's nous tek at a Lolly oushtoer &- Aeigh \u00a2 ArLD ( heve borey waite by hork IN (EMS | ry waitin foad 0 fect p hee"
+                        },
+                        {
+                            "sample_id": "02",
+                            "cer": 0.6243,
+                            "wer": 1.0345,
+                            "exact_match": false,
+                            "latency_ms": 1013.13,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "ng omE OUEST: o@\u00a7 Conyac team 0 18 roe modal ie nutlitedel Mole cn a for repavre \u2018eye y Asta pomena Acale Prats ? tecrens ln of fe ib! ne\""
+                        },
+                        {
+                            "sample_id": "03",
+                            "cer": 0.626,
+                            "wer": 0.9388,
+                            "exact_match": false,
+                            "latency_ms": 1061.83,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "Nome Qvasrices my \"A a Chad a visror mold Vk nulnodleal to lel oat Re feck Oe ww / pAwel Saenger peters . Yak Loud Borner fila ff fa with? Carla / get Al bBcek ~ nator 71t fat a1tSe"
+                        },
+                        {
+                            "sample_id": "04",
+                            "cer": 0.7087,
+                            "wer": 1.0,
+                            "exact_match": false,
+                            "latency_ms": 1201.15,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "| Bee ieee? 7\u201c GB \u00abfs ig i . | hep ete ss ) Ene tes 2 iS ely a _ ht # J rane Reser\u2019? wie ; ough agbrelorion \u201c3 / Ge On vie me i ue [ita re a frit siete rei artSe"
+                        },
+                        {
+                            "sample_id": "05",
+                            "cer": 0.5909,
+                            "wer": 1.1463,
+                            "exact_match": false,
+                            "latency_ms": 1002.44,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "wy 1A fp Pld Cat (XS | 3 br Ait oorek \u2014~ cleaterh +e fee\u2019 Al peor fraae pawam). ree fo be ale 72 PAES\u00ae A_ : ek RO Feet. COR Sec TIVE _- ae toc ~~ | v psoctotext Ly phtedennee > Tat (00 hse / Soe cee"
+                        },
+                        {
+                            "sample_id": "07",
+                            "cer": 0.6406,
+                            "wer": 0.9048,
+                            "exact_match": false,
+                            "latency_ms": 1007.48,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "fiw Shet Le arity \u2014 2 LITY LOWMTEK ZF Dub lies |e Laorc\u2014 finnonr Son han\u2019 Was higgtew DC USA"
+                        },
+                        {
+                            "sample_id": "08",
+                            "cer": 0.8054,
+                            "wer": 0.9286,
+                            "exact_match": false,
+                            "latency_ms": 868.49,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "Zoow Vutiss (rep (oP /s my hair 2 eed ? pe ee"
+                        },
+                        {
+                            "sample_id": "09",
+                            "cer": 0.6265,
+                            "wer": 1.0465,
+                            "exact_match": false,
+                            "latency_ms": 1229.48,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "\u2014 yhe Aowtl par rehs lif \u2014 Me few We wale LOM OAS en [fot ig Soratines ! CE Infanainy mensigpe pie 0A ne Cy Lote seit A Ka mere \u00a9 L Jonetinee, / waite (L' Ihe Saloon + sore 77rd \u2014_ Cow? 10 e!)"
+                        },
+                        {
+                            "sample_id": "10",
+                            "cer": 0.5115,
+                            "wer": 0.9286,
+                            "exact_match": false,
+                            "latency_ms": 1103.01,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "fw Shot Lea) - > ae Iy be vB0 fot like speech? y ity * geo l Pe (Ls ore cool! ot jacgnnet eee Lins & oe! De oh nal ra"
+                        },
+                        {
+                            "sample_id": "11",
+                            "cer": 0.5881,
+                            "wer": 0.9853,
+                            "exact_match": false,
+                            "latency_ms": 1264.13,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "Pease telisen A 1 use (eA bSe- Case: Lurk wants Po chee a Teak space Al agent a front boo\u20ac qatene TRAE Ctlate 40 agent fo \u201clathe (es\" you? TRONS CHO Fam. aa (coll Ge porce re) Ft kx fnock cote t\u2014) yreter 02 a hhet'S Your pa gecaTe NEMERY Uma! 4 @ oan Es FAK Tl | ao. = 2tA"
+                        },
+                        {
+                            "sample_id": "17",
+                            "cer": 0.6634,
+                            "wer": 1.0625,
+                            "exact_match": false,
+                            "latency_ms": 994.02,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "Other (2 of/M 0 9 VE a x ow staibe they \u2014_ dh a x oe ute oe wine) some"
+                        }
+                    ]
+                },
+                {
+                    "run_index": 2,
+                    "run_type": "warm_run_2",
+                    "mean_cer": 0.6324,
+                    "mean_wer": 1.0005,
+                    "mean_latency_ms": 1078.23,
+                    "median_latency_ms": 1057.11,
+                    "total_run_time_ms": 13513.21,
+                    "sample_evaluations": [
+                        {
+                            "sample_id": "01",
+                            "cer": 0.5714,
+                            "wer": 1.0294,
+                            "exact_match": false,
+                            "latency_ms": 1083.91,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "/ hove Replrcovece L whi ER b conde gy | | Bur! 14's nous tek at a Lolly oushtoer &- Aeigh \u00a2 ArLD ( heve borey waite by hork IN (EMS | ry waitin foad 0 fect p hee"
+                        },
+                        {
+                            "sample_id": "02",
+                            "cer": 0.6243,
+                            "wer": 1.0345,
+                            "exact_match": false,
+                            "latency_ms": 1032.01,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "ng omE OUEST: o@\u00a7 Conyac team 0 18 roe modal ie nutlitedel Mole cn a for repavre \u2018eye y Asta pomena Acale Prats ? tecrens ln of fe ib! ne\""
+                        },
+                        {
+                            "sample_id": "03",
+                            "cer": 0.626,
+                            "wer": 0.9388,
+                            "exact_match": false,
+                            "latency_ms": 1057.11,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "Nome Qvasrices my \"A a Chad a visror mold Vk nulnodleal to lel oat Re feck Oe ww / pAwel Saenger peters . Yak Loud Borner fila ff fa with? Carla / get Al bBcek ~ nator 71t fat a1tSe"
+                        },
+                        {
+                            "sample_id": "04",
+                            "cer": 0.7087,
+                            "wer": 1.0,
+                            "exact_match": false,
+                            "latency_ms": 1200.24,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "| Bee ieee? 7\u201c GB \u00abfs ig i . | hep ete ss ) Ene tes 2 iS ely a _ ht # J rane Reser\u2019? wie ; ough agbrelorion \u201c3 / Ge On vie me i ue [ita re a frit siete rei artSe"
+                        },
+                        {
+                            "sample_id": "05",
+                            "cer": 0.5909,
+                            "wer": 1.1463,
+                            "exact_match": false,
+                            "latency_ms": 1004.68,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "wy 1A fp Pld Cat (XS | 3 br Ait oorek \u2014~ cleaterh +e fee\u2019 Al peor fraae pawam). ree fo be ale 72 PAES\u00ae A_ : ek RO Feet. COR Sec TIVE _- ae toc ~~ | v psoctotext Ly phtedennee > Tat (00 hse / Soe cee"
+                        },
+                        {
+                            "sample_id": "07",
+                            "cer": 0.6406,
+                            "wer": 0.9048,
+                            "exact_match": false,
+                            "latency_ms": 1012.81,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "fiw Shet Le arity \u2014 2 LITY LOWMTEK ZF Dub lies |e Laorc\u2014 finnonr Son han\u2019 Was higgtew DC USA"
+                        },
+                        {
+                            "sample_id": "08",
+                            "cer": 0.8054,
+                            "wer": 0.9286,
+                            "exact_match": false,
+                            "latency_ms": 858.35,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "Zoow Vutiss (rep (oP /s my hair 2 eed ? pe ee"
+                        },
+                        {
+                            "sample_id": "09",
+                            "cer": 0.6265,
+                            "wer": 1.0465,
+                            "exact_match": false,
+                            "latency_ms": 1244.19,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "\u2014 yhe Aowtl par rehs lif \u2014 Me few We wale LOM OAS en [fot ig Soratines ! CE Infanainy mensigpe pie 0A ne Cy Lote seit A Ka mere \u00a9 L Jonetinee, / waite (L' Ihe Saloon + sore 77rd \u2014_ Cow? 10 e!)"
+                        },
+                        {
+                            "sample_id": "10",
+                            "cer": 0.5115,
+                            "wer": 0.9286,
+                            "exact_match": false,
+                            "latency_ms": 1100.34,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "fw Shot Lea) - > ae Iy be vB0 fot like speech? y ity * geo l Pe (Ls ore cool! ot jacgnnet eee Lins & oe! De oh nal ra"
+                        },
+                        {
+                            "sample_id": "11",
+                            "cer": 0.5881,
+                            "wer": 0.9853,
+                            "exact_match": false,
+                            "latency_ms": 1263.06,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "Pease telisen A 1 use (eA bSe- Case: Lurk wants Po chee a Teak space Al agent a front boo\u20ac qatene TRAE Ctlate 40 agent fo \u201clathe (es\" you? TRONS CHO Fam. aa (coll Ge porce re) Ft kx fnock cote t\u2014) yreter 02 a hhet'S Your pa gecaTe NEMERY Uma! 4 @ oan Es FAK Tl | ao. = 2tA"
+                        },
+                        {
+                            "sample_id": "17",
+                            "cer": 0.6634,
+                            "wer": 1.0625,
+                            "exact_match": false,
+                            "latency_ms": 1003.8,
+                            "dimensions": [
+                                4096,
+                                3072
+                            ],
+                            "prediction": "Other (2 of/M 0 9 VE a x ow staibe they \u2014_ dh a x oe ute oe wine) some"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "config_id": "resize2048_psm3",
+            "label": "Max Dim 2048, PSM 3 (Auto)",
+            "psm": "--psm 3",
+            "preprocessing_mode": "resize_2048",
+            "mean_cer": 0.6756,
+            "mean_wer": 1.0698,
+            "cold_start_latency_ms": 486.98,
+            "warm_mean_latency_ms": 483.88,
+            "overall_median_latency_ms": 477.53,
+            "repetition_runs": [
+                {
+                    "run_index": 0,
+                    "run_type": "cold_start",
+                    "mean_cer": 0.6756,
+                    "mean_wer": 1.0698,
+                    "mean_latency_ms": 486.98,
+                    "median_latency_ms": 477.53,
+                    "total_run_time_ms": 7572.88,
+                    "sample_evaluations": [
+                        {
+                            "sample_id": "01",
+                            "cer": 0.4974,
+                            "wer": 1.2647,
+                            "exact_match": false,
+                            "latency_ms": 542.35,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "WAIT EBOALD C25 feo Sanpete Te = 0 SSIS aaa / hove Redlacovee \u00a3 whi ER b cond gy | Bur! It's rou tele ot w edly onteioant eign \u20ac AID C heve berey ware by hea in yeas ny waitigg 1 head \u20ac\u00b0 fect pher_"
+                        },
+                        {
+                            "sample_id": "02",
+                            "cer": 0.763,
+                            "wer": 1.3448,
+                            "exact_match": false,
+                            "latency_ms": 484.14,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "nf ome G2 UV ES 71 0aS Leal ae aw we oe nol {ruts Red aot vt 0 Lal On Con you ie facnscaip tics Lp \u201ca for wepocore '~eHe Jntes 2 \u2018 ud 086 fe wih ? fhe 8"
+                        },
+                        {
+                            "sample_id": "03",
+                            "cer": 0.689,
+                            "wer": 0.9796,
+                            "exact_match": false,
+                            "latency_ms": 482.47,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "A, owe ; Qu ES 71 0aS \u2014C ow 2 3 at ofl he fe (rea po wf pAwel PacrscniPE Tes / _ r Ory tas f h/ ht phodd abrelerion ; we estore 71h fat a 1b Se dete? Lorla Jt Lim hd tere frou mr"
+                        },
+                        {
+                            "sample_id": "04",
+                            "cer": 0.6811,
+                            "wer": 0.9592,
+                            "exact_match": false,
+                            "latency_ms": 473.79,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "lowe Qu ES 7 00s \u2018 Cone you Lihat a wusroe nol / nrwtlApolal\u00e9d to lel. oa, a for a ineayeb ed Ta Prcnseurp tT / fypo vad pgornoL iors fila of fa wilh? nstore 77 flor a rE Se"
+                        },
+                        {
+                            "sample_id": "05",
+                            "cer": 0.65,
+                            "wer": 1.122,
+                            "exact_match": false,
+                            "latency_ms": 477.53,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "wy Vy fp Pll Cat (AS id ( SS o Wap taEet week f los \u00bb cleaned up fee\u20ac AO yo Zi eh tS core 2 neets fo be eSle 72 PAESR A_ Grade Dawa). och Rae tet. OR Sec Hive : N- ae toes ~~ v psonpotex\u00ae"
+                        },
+                        {
+                            "sample_id": "07",
+                            "cer": 0.8906,
+                            "wer": 1.0,
+                            "exact_match": false,
+                            "latency_ms": 418.16,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "ee eee -* h/ornto CAOVALS"
+                        },
+                        {
+                            "sample_id": "08",
+                            "cer": 0.7785,
+                            "wer": 1.0,
+                            "exact_match": false,
+                            "latency_ms": 391.42,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "Faw Shet leawias \u2014- > Zoow Meet 4 frep [oP Va hy"
+                        },
+                        {
+                            "sample_id": "09",
+                            "cer": 0.6506,
+                            "wer": 1.0233,
+                            "exact_match": false,
+                            "latency_ms": 541.21,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "Few S hot Learigy - =i hae Boul vases lG\u2014 few we wail | | les a . mal (ee reli neds ee ai la a pueblo eet ho: ow nist pe 2 y jhe haloon & sore TICES Ly font ine, [ wei Gbeor Cur? 10!)"
+                        },
+                        {
+                            "sample_id": "10",
+                            "cer": 0.5725,
+                            "wer": 0.9643,
+                            "exact_match": false,
+                            "latency_ms": 473.96,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "> fw Shot bearetty \u2014 phot weet 1OT ibe speech! / d , o> Ls we oa nm & [ee pei jacpenet ne Litts ore cool"
+                        },
+                        {
+                            "sample_id": "11",
+                            "cer": 0.645,
+                            "wer": 0.9853,
+                            "exact_match": false,
+                            "latency_ms": 608.99,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "Pease Melisip A 4 SS (P54 pse-case: Hunan panry fo cheek a Tek specie Al agent a front look oottente Le. ate A a gent fe \u201clathe l(es \"fou? THERS CAO Fem Tae (ae (could Ge pores voce) 4 a drock cotert\u2014J yeeten 02 Way Lema! \\ \u00a9 4 gacaTeEe TENE EF eee Hoke | 2!"
+                        },
+                        {
+                            "sample_id": "17",
+                            "cer": 0.6139,
+                            "wer": 1.125,
+                            "exact_match": false,
+                            "latency_ms": 462.81,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "Ofher [ewwon Vu/7eheAtD In pte feett5 0 vex & sta be hey eM x coo bE Mens Font"
+                        }
+                    ]
+                },
+                {
+                    "run_index": 1,
+                    "run_type": "warm_run_1",
+                    "mean_cer": 0.6756,
+                    "mean_wer": 1.0698,
+                    "mean_latency_ms": 483.92,
+                    "median_latency_ms": 475.21,
+                    "total_run_time_ms": 7532.83,
+                    "sample_evaluations": [
+                        {
+                            "sample_id": "01",
+                            "cer": 0.4974,
+                            "wer": 1.2647,
+                            "exact_match": false,
+                            "latency_ms": 526.79,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "WAIT EBOALD C25 feo Sanpete Te = 0 SSIS aaa / hove Redlacovee \u00a3 whi ER b cond gy | Bur! It's rou tele ot w edly onteioant eign \u20ac AID C heve berey ware by hea in yeas ny waitigg 1 head \u20ac\u00b0 fect pher_"
+                        },
+                        {
+                            "sample_id": "02",
+                            "cer": 0.763,
+                            "wer": 1.3448,
+                            "exact_match": false,
+                            "latency_ms": 458.56,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "nf ome G2 UV ES 71 0aS Leal ae aw we oe nol {ruts Red aot vt 0 Lal On Con you ie facnscaip tics Lp \u201ca for wepocore '~eHe Jntes 2 \u2018 ud 086 fe wih ? fhe 8"
+                        },
+                        {
+                            "sample_id": "03",
+                            "cer": 0.689,
+                            "wer": 0.9796,
+                            "exact_match": false,
+                            "latency_ms": 481.63,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "A, owe ; Qu ES 71 0aS \u2014C ow 2 3 at ofl he fe (rea po wf pAwel PacrscniPE Tes / _ r Ory tas f h/ ht phodd abrelerion ; we estore 71h fat a 1b Se dete? Lorla Jt Lim hd tere frou mr"
+                        },
+                        {
+                            "sample_id": "04",
+                            "cer": 0.6811,
+                            "wer": 0.9592,
+                            "exact_match": false,
+                            "latency_ms": 475.21,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "lowe Qu ES 7 00s \u2018 Cone you Lihat a wusroe nol / nrwtlApolal\u00e9d to lel. oa, a for a ineayeb ed Ta Prcnseurp tT / fypo vad pgornoL iors fila of fa wilh? nstore 77 flor a rE Se"
+                        },
+                        {
+                            "sample_id": "05",
+                            "cer": 0.65,
+                            "wer": 1.122,
+                            "exact_match": false,
+                            "latency_ms": 484.33,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "wy Vy fp Pll Cat (AS id ( SS o Wap taEet week f los \u00bb cleaned up fee\u20ac AO yo Zi eh tS core 2 neets fo be eSle 72 PAESR A_ Grade Dawa). och Rae tet. OR Sec Hive : N- ae toes ~~ v psonpotex\u00ae"
+                        },
+                        {
+                            "sample_id": "07",
+                            "cer": 0.8906,
+                            "wer": 1.0,
+                            "exact_match": false,
+                            "latency_ms": 433.16,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "ee eee -* h/ornto CAOVALS"
+                        },
+                        {
+                            "sample_id": "08",
+                            "cer": 0.7785,
+                            "wer": 1.0,
+                            "exact_match": false,
+                            "latency_ms": 398.88,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "Faw Shet leawias \u2014- > Zoow Meet 4 frep [oP Va hy"
+                        },
+                        {
+                            "sample_id": "09",
+                            "cer": 0.6506,
+                            "wer": 1.0233,
+                            "exact_match": false,
+                            "latency_ms": 552.06,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "Few S hot Learigy - =i hae Boul vases lG\u2014 few we wail | | les a . mal (ee reli neds ee ai la a pueblo eet ho: ow nist pe 2 y jhe haloon & sore TICES Ly font ine, [ wei Gbeor Cur? 10!)"
+                        },
+                        {
+                            "sample_id": "10",
+                            "cer": 0.5725,
+                            "wer": 0.9643,
+                            "exact_match": false,
+                            "latency_ms": 468.66,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "> fw Shot bearetty \u2014 phot weet 1OT ibe speech! / d , o> Ls we oa nm & [ee pei jacpenet ne Litts ore cool"
+                        },
+                        {
+                            "sample_id": "11",
+                            "cer": 0.645,
+                            "wer": 0.9853,
+                            "exact_match": false,
+                            "latency_ms": 575.22,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "Pease Melisip A 4 SS (P54 pse-case: Hunan panry fo cheek a Tek specie Al agent a front look oottente Le. ate A a gent fe \u201clathe l(es \"fou? THERS CAO Fem Tae (ae (could Ge pores voce) 4 a drock cotert\u2014J yeeten 02 Way Lema! \\ \u00a9 4 gacaTeEe TENE EF eee Hoke | 2!"
+                        },
+                        {
+                            "sample_id": "17",
+                            "cer": 0.6139,
+                            "wer": 1.125,
+                            "exact_match": false,
+                            "latency_ms": 468.59,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "Ofher [ewwon Vu/7eheAtD In pte feett5 0 vex & sta be hey eM x coo bE Mens Font"
+                        }
+                    ]
+                },
+                {
+                    "run_index": 2,
+                    "run_type": "warm_run_2",
+                    "mean_cer": 0.6756,
+                    "mean_wer": 1.0698,
+                    "mean_latency_ms": 483.84,
+                    "median_latency_ms": 480.18,
+                    "total_run_time_ms": 7529.96,
+                    "sample_evaluations": [
+                        {
+                            "sample_id": "01",
+                            "cer": 0.4974,
+                            "wer": 1.2647,
+                            "exact_match": false,
+                            "latency_ms": 522.95,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "WAIT EBOALD C25 feo Sanpete Te = 0 SSIS aaa / hove Redlacovee \u00a3 whi ER b cond gy | Bur! It's rou tele ot w edly onteioant eign \u20ac AID C heve berey ware by hea in yeas ny waitigg 1 head \u20ac\u00b0 fect pher_"
+                        },
+                        {
+                            "sample_id": "02",
+                            "cer": 0.763,
+                            "wer": 1.3448,
+                            "exact_match": false,
+                            "latency_ms": 461.66,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "nf ome G2 UV ES 71 0aS Leal ae aw we oe nol {ruts Red aot vt 0 Lal On Con you ie facnscaip tics Lp \u201ca for wepocore '~eHe Jntes 2 \u2018 ud 086 fe wih ? fhe 8"
+                        },
+                        {
+                            "sample_id": "03",
+                            "cer": 0.689,
+                            "wer": 0.9796,
+                            "exact_match": false,
+                            "latency_ms": 494.02,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "A, owe ; Qu ES 71 0aS \u2014C ow 2 3 at ofl he fe (rea po wf pAwel PacrscniPE Tes / _ r Ory tas f h/ ht phodd abrelerion ; we estore 71h fat a 1b Se dete? Lorla Jt Lim hd tere frou mr"
+                        },
+                        {
+                            "sample_id": "04",
+                            "cer": 0.6811,
+                            "wer": 0.9592,
+                            "exact_match": false,
+                            "latency_ms": 480.18,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "lowe Qu ES 7 00s \u2018 Cone you Lihat a wusroe nol / nrwtlApolal\u00e9d to lel. oa, a for a ineayeb ed Ta Prcnseurp tT / fypo vad pgornoL iors fila of fa wilh? nstore 77 flor a rE Se"
+                        },
+                        {
+                            "sample_id": "05",
+                            "cer": 0.65,
+                            "wer": 1.122,
+                            "exact_match": false,
+                            "latency_ms": 485.39,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "wy Vy fp Pll Cat (AS id ( SS o Wap taEet week f los \u00bb cleaned up fee\u20ac AO yo Zi eh tS core 2 neets fo be eSle 72 PAESR A_ Grade Dawa). och Rae tet. OR Sec Hive : N- ae toes ~~ v psonpotex\u00ae"
+                        },
+                        {
+                            "sample_id": "07",
+                            "cer": 0.8906,
+                            "wer": 1.0,
+                            "exact_match": false,
+                            "latency_ms": 432.3,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "ee eee -* h/ornto CAOVALS"
+                        },
+                        {
+                            "sample_id": "08",
+                            "cer": 0.7785,
+                            "wer": 1.0,
+                            "exact_match": false,
+                            "latency_ms": 394.92,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "Faw Shet leawias \u2014- > Zoow Meet 4 frep [oP Va hy"
+                        },
+                        {
+                            "sample_id": "09",
+                            "cer": 0.6506,
+                            "wer": 1.0233,
+                            "exact_match": false,
+                            "latency_ms": 549.62,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "Few S hot Learigy - =i hae Boul vases lG\u2014 few we wail | | les a . mal (ee reli neds ee ai la a pueblo eet ho: ow nist pe 2 y jhe haloon & sore TICES Ly font ine, [ wei Gbeor Cur? 10!)"
+                        },
+                        {
+                            "sample_id": "10",
+                            "cer": 0.5725,
+                            "wer": 0.9643,
+                            "exact_match": false,
+                            "latency_ms": 461.08,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "> fw Shot bearetty \u2014 phot weet 1OT ibe speech! / d , o> Ls we oa nm & [ee pei jacpenet ne Litts ore cool"
+                        },
+                        {
+                            "sample_id": "11",
+                            "cer": 0.645,
+                            "wer": 0.9853,
+                            "exact_match": false,
+                            "latency_ms": 581.86,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "Pease Melisip A 4 SS (P54 pse-case: Hunan panry fo cheek a Tek specie Al agent a front look oottente Le. ate A a gent fe \u201clathe l(es \"fou? THERS CAO Fem Tae (ae (could Ge pores voce) 4 a drock cotert\u2014J yeeten 02 Way Lema! \\ \u00a9 4 gacaTeEe TENE EF eee Hoke | 2!"
+                        },
+                        {
+                            "sample_id": "17",
+                            "cer": 0.6139,
+                            "wer": 1.125,
+                            "exact_match": false,
+                            "latency_ms": 458.26,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "Ofher [ewwon Vu/7eheAtD In pte feett5 0 vex & sta be hey eM x coo bE Mens Font"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "config_id": "resize2048_gray_clahe",
+            "label": "Max Dim 2048, Grayscale CLAHE, PSM 6",
+            "psm": "--psm 6",
+            "preprocessing_mode": "resize_2048_gray_clahe",
+            "mean_cer": 0.6529,
+            "mean_wer": 1.0045,
+            "cold_start_latency_ms": 261.02,
+            "warm_mean_latency_ms": 258.15,
+            "overall_median_latency_ms": 255.0,
+            "repetition_runs": [
+                {
+                    "run_index": 0,
+                    "run_type": "cold_start",
+                    "mean_cer": 0.6529,
+                    "mean_wer": 1.0045,
+                    "mean_latency_ms": 261.02,
+                    "median_latency_ms": 251.46,
+                    "total_run_time_ms": 5076.23,
+                    "sample_evaluations": [
+                        {
+                            "sample_id": "01",
+                            "cer": 0.6984,
+                            "wer": 0.9412,
+                            "exact_match": false,
+                            "latency_ms": 241.59,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "WATE BSACD 00> the Hopes Tor | bor! | AND ( heve borey we Ete by honk IN ERS Se a"
+                        },
+                        {
+                            "sample_id": "02",
+                            "cer": 0.6185,
+                            "wer": 1.0345,
+                            "exact_match": false,
+                            "latency_ms": 251.46,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "n\u00a2 omE Clues Ti os _ i. Con you Lair w nsroe OY ONE Mo lal oa a fow repre eps cf et Lee Gee e a a\u201d ot pgbrerto\u20aclers like of fe with?"
+                        },
+                        {
+                            "sample_id": "03",
+                            "cer": 0.5866,
+                            "wer": 1.0408,
+                            "exact_match": false,
+                            "latency_ms": 279.98,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "Nome Ques rns \u2014 4 ee. % DY a tf Bad aw usroe moll Wh rule neleal oe lel a few Re focrre inva w/ pAtwel Sacngen - wtics Lntes ? an (one Tale pgbrvtotions (ha Vf fa wit? foal / get Al cet ~ wstore 71\u00a2 flat a rl Se ows mevche Fe0i\u201d o"
+                        },
+                        {
+                            "sample_id": "04",
+                            "cer": 0.6535,
+                            "wer": 0.9592,
+                            "exact_match": false,
+                            "latency_ms": 282.64,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "Bee Bees rs . ad Phair wa nuyrot YE tte lel a few Re focwre ira w/ phwel faenscatptIrs - ton aye ~/ VA Jroweee Whe Bot \u201cein BED ON AEN . Corll / get Al cet nator 71t fat a r\u00e9Se"
+                        },
+                        {
+                            "sample_id": "05",
+                            "cer": 0.6227,
+                            "wer": 1.0732,
+                            "exact_match": false,
+                            "latency_ms": 255.0,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "why Vy fp Pll Cat (AS Qo php t3 ork wee hflore - Zi ber tS core +4 cleaned vp fee Al vytom [rade pawn). Nee fo be Sle 72 PAESR A_ ck ROT tet. OR Sec Hive | vn ang .hoey- ~~ v psuntotext"
+                        },
+                        {
+                            "sample_id": "07",
+                            "cer": 0.6797,
+                            "wer": 0.8095,
+                            "exact_match": false,
+                            "latency_ms": 212.91,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "few Shot Leni -2 D yb her [bard Was hiogtew DC USA"
+                        },
+                        {
+                            "sample_id": "08",
+                            "cer": 0.7785,
+                            "wer": 0.9643,
+                            "exact_match": false,
+                            "latency_ms": 214.63,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "ee ceeeety \u2014 > Loon Mutg [rer Cr : /s ay hair \u00abeed ? \u2014\u2014e \u00a5 Nv yO"
+                        },
+                        {
+                            "sample_id": "09",
+                            "cer": 0.5823,
+                            "wer": 0.9767,
+                            "exact_match": false,
+                            "latency_ms": 284.7,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "Fae Shot Leareiyy - > tii | phot Bout verre tO hoy we wail Lem eed? an [Lot ix. Sorotrnes 1 Gore fpaforsigp mF porn true: C Lote suite Seer e \u00a9 4 Sonctrnes, / waite (L' fhe Aaloon + sere T7023 les Cur? 10!)"
+                        },
+                        {
+                            "sample_id": "10",
+                            "cer": 0.6565,
+                            "wer": 1.0,
+                            "exact_match": false,
+                            "latency_ms": 240.14,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "Pie? [enue - phot ret 107 [ike speee\u00ae / \u00e9 reo ( eet (ELE on coo! ns @ os a jacpRnet \u201cin Psa ore cool (LO i, \""
+                        },
+                        {
+                            "sample_id": "11",
+                            "cer": 0.6612,
+                            "wer": 1.0,
+                            "exact_match": false,
+                            "latency_ms": 386.12,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "PERSe MAUS id A 4 645 (PEA bS = Case? Hunan wants te wen aa ee a Tek \u00a7 a 5 A front look tere peche Al agent : Tere Letate A agent fe latevitas\u201d You ey ey EP ree ets Ea) ch intak tO wen ee wheat 'S mun = Cacase AEN\u00ae RY Leeza CF canes fac \\ : lz 2 224 | L, ia yero\u00ae bo"
+                        },
+                        {
+                            "sample_id": "17",
+                            "cer": 0.6436,
+                            "wer": 1.25,
+                            "exact_match": false,
+                            "latency_ms": 222.03,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "other (2 otYM 0 4 le P ttf ec x ow sta be FAO \u2014 _ Heats 4 C0 OA pe (dens Some"
+                        }
+                    ]
+                },
+                {
+                    "run_index": 1,
+                    "run_type": "warm_run_1",
+                    "mean_cer": 0.6529,
+                    "mean_wer": 1.0045,
+                    "mean_latency_ms": 258.18,
+                    "median_latency_ms": 258.69,
+                    "total_run_time_ms": 5053.92,
+                    "sample_evaluations": [
+                        {
+                            "sample_id": "01",
+                            "cer": 0.6984,
+                            "wer": 0.9412,
+                            "exact_match": false,
+                            "latency_ms": 233.79,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "WATE BSACD 00> the Hopes Tor | bor! | AND ( heve borey we Ete by honk IN ERS Se a"
+                        },
+                        {
+                            "sample_id": "02",
+                            "cer": 0.6185,
+                            "wer": 1.0345,
+                            "exact_match": false,
+                            "latency_ms": 258.69,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "n\u00a2 omE Clues Ti os _ i. Con you Lair w nsroe OY ONE Mo lal oa a fow repre eps cf et Lee Gee e a a\u201d ot pgbrerto\u20aclers like of fe with?"
+                        },
+                        {
+                            "sample_id": "03",
+                            "cer": 0.5866,
+                            "wer": 1.0408,
+                            "exact_match": false,
+                            "latency_ms": 280.58,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "Nome Ques rns \u2014 4 ee. % DY a tf Bad aw usroe moll Wh rule neleal oe lel a few Re focrre inva w/ pAtwel Sacngen - wtics Lntes ? an (one Tale pgbrvtotions (ha Vf fa wit? foal / get Al cet ~ wstore 71\u00a2 flat a rl Se ows mevche Fe0i\u201d o"
+                        },
+                        {
+                            "sample_id": "04",
+                            "cer": 0.6535,
+                            "wer": 0.9592,
+                            "exact_match": false,
+                            "latency_ms": 283.38,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "Bee Bees rs . ad Phair wa nuyrot YE tte lel a few Re focwre ira w/ phwel faenscatptIrs - ton aye ~/ VA Jroweee Whe Bot \u201cein BED ON AEN . Corll / get Al cet nator 71t fat a r\u00e9Se"
+                        },
+                        {
+                            "sample_id": "05",
+                            "cer": 0.6227,
+                            "wer": 1.0732,
+                            "exact_match": false,
+                            "latency_ms": 258.88,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "why Vy fp Pll Cat (AS Qo php t3 ork wee hflore - Zi ber tS core +4 cleaned vp fee Al vytom [rade pawn). Nee fo be Sle 72 PAESR A_ ck ROT tet. OR Sec Hive | vn ang .hoey- ~~ v psuntotext"
+                        },
+                        {
+                            "sample_id": "07",
+                            "cer": 0.6797,
+                            "wer": 0.8095,
+                            "exact_match": false,
+                            "latency_ms": 207.53,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "few Shot Leni -2 D yb her [bard Was hiogtew DC USA"
+                        },
+                        {
+                            "sample_id": "08",
+                            "cer": 0.7785,
+                            "wer": 0.9643,
+                            "exact_match": false,
+                            "latency_ms": 214.19,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "ee ceeeety \u2014 > Loon Mutg [rer Cr : /s ay hair \u00abeed ? \u2014\u2014e \u00a5 Nv yO"
+                        },
+                        {
+                            "sample_id": "09",
+                            "cer": 0.5823,
+                            "wer": 0.9767,
+                            "exact_match": false,
+                            "latency_ms": 298.52,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "Fae Shot Leareiyy - > tii | phot Bout verre tO hoy we wail Lem eed? an [Lot ix. Sorotrnes 1 Gore fpaforsigp mF porn true: C Lote suite Seer e \u00a9 4 Sonctrnes, / waite (L' fhe Aaloon + sere T7023 les Cur? 10!)"
+                        },
+                        {
+                            "sample_id": "10",
+                            "cer": 0.6565,
+                            "wer": 1.0,
+                            "exact_match": false,
+                            "latency_ms": 234.69,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "Pie? [enue - phot ret 107 [ike speee\u00ae / \u00e9 reo ( eet (ELE on coo! ns @ os a jacpRnet \u201cin Psa ore cool (LO i, \""
+                        },
+                        {
+                            "sample_id": "11",
+                            "cer": 0.6612,
+                            "wer": 1.0,
+                            "exact_match": false,
+                            "latency_ms": 335.34,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "PERSe MAUS id A 4 645 (PEA bS = Case? Hunan wants te wen aa ee a Tek \u00a7 a 5 A front look tere peche Al agent : Tere Letate A agent fe latevitas\u201d You ey ey EP ree ets Ea) ch intak tO wen ee wheat 'S mun = Cacase AEN\u00ae RY Leeza CF canes fac \\ : lz 2 224 | L, ia yero\u00ae bo"
+                        },
+                        {
+                            "sample_id": "17",
+                            "cer": 0.6436,
+                            "wer": 1.25,
+                            "exact_match": false,
+                            "latency_ms": 234.42,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "other (2 otYM 0 4 le P ttf ec x ow sta be FAO \u2014 _ Heats 4 C0 OA pe (dens Some"
+                        }
+                    ]
+                },
+                {
+                    "run_index": 2,
+                    "run_type": "warm_run_2",
+                    "mean_cer": 0.6529,
+                    "mean_wer": 1.0045,
+                    "mean_latency_ms": 258.12,
+                    "median_latency_ms": 260.4,
+                    "total_run_time_ms": 5057.23,
+                    "sample_evaluations": [
+                        {
+                            "sample_id": "01",
+                            "cer": 0.6984,
+                            "wer": 0.9412,
+                            "exact_match": false,
+                            "latency_ms": 231.76,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "WATE BSACD 00> the Hopes Tor | bor! | AND ( heve borey we Ete by honk IN ERS Se a"
+                        },
+                        {
+                            "sample_id": "02",
+                            "cer": 0.6185,
+                            "wer": 1.0345,
+                            "exact_match": false,
+                            "latency_ms": 262.68,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "n\u00a2 omE Clues Ti os _ i. Con you Lair w nsroe OY ONE Mo lal oa a fow repre eps cf et Lee Gee e a a\u201d ot pgbrerto\u20aclers like of fe with?"
+                        },
+                        {
+                            "sample_id": "03",
+                            "cer": 0.5866,
+                            "wer": 1.0408,
+                            "exact_match": false,
+                            "latency_ms": 287.95,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "Nome Ques rns \u2014 4 ee. % DY a tf Bad aw usroe moll Wh rule neleal oe lel a few Re focrre inva w/ pAtwel Sacngen - wtics Lntes ? an (one Tale pgbrvtotions (ha Vf fa wit? foal / get Al cet ~ wstore 71\u00a2 flat a rl Se ows mevche Fe0i\u201d o"
+                        },
+                        {
+                            "sample_id": "04",
+                            "cer": 0.6535,
+                            "wer": 0.9592,
+                            "exact_match": false,
+                            "latency_ms": 284.52,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "Bee Bees rs . ad Phair wa nuyrot YE tte lel a few Re focwre ira w/ phwel faenscatptIrs - ton aye ~/ VA Jroweee Whe Bot \u201cein BED ON AEN . Corll / get Al cet nator 71t fat a r\u00e9Se"
+                        },
+                        {
+                            "sample_id": "05",
+                            "cer": 0.6227,
+                            "wer": 1.0732,
+                            "exact_match": false,
+                            "latency_ms": 260.4,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "why Vy fp Pll Cat (AS Qo php t3 ork wee hflore - Zi ber tS core +4 cleaned vp fee Al vytom [rade pawn). Nee fo be Sle 72 PAESR A_ ck ROT tet. OR Sec Hive | vn ang .hoey- ~~ v psuntotext"
+                        },
+                        {
+                            "sample_id": "07",
+                            "cer": 0.6797,
+                            "wer": 0.8095,
+                            "exact_match": false,
+                            "latency_ms": 199.67,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "few Shot Leni -2 D yb her [bard Was hiogtew DC USA"
+                        },
+                        {
+                            "sample_id": "08",
+                            "cer": 0.7785,
+                            "wer": 0.9643,
+                            "exact_match": false,
+                            "latency_ms": 209.27,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "ee ceeeety \u2014 > Loon Mutg [rer Cr : /s ay hair \u00abeed ? \u2014\u2014e \u00a5 Nv yO"
+                        },
+                        {
+                            "sample_id": "09",
+                            "cer": 0.5823,
+                            "wer": 0.9767,
+                            "exact_match": false,
+                            "latency_ms": 297.17,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "Fae Shot Leareiyy - > tii | phot Bout verre tO hoy we wail Lem eed? an [Lot ix. Sorotrnes 1 Gore fpaforsigp mF porn true: C Lote suite Seer e \u00a9 4 Sonctrnes, / waite (L' fhe Aaloon + sere T7023 les Cur? 10!)"
+                        },
+                        {
+                            "sample_id": "10",
+                            "cer": 0.6565,
+                            "wer": 1.0,
+                            "exact_match": false,
+                            "latency_ms": 235.05,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "Pie? [enue - phot ret 107 [ike speee\u00ae / \u00e9 reo ( eet (ELE on coo! ns @ os a jacpRnet \u201cin Psa ore cool (LO i, \""
+                        },
+                        {
+                            "sample_id": "11",
+                            "cer": 0.6612,
+                            "wer": 1.0,
+                            "exact_match": false,
+                            "latency_ms": 335.67,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "PERSe MAUS id A 4 645 (PEA bS = Case? Hunan wants te wen aa ee a Tek \u00a7 a 5 A front look tere peche Al agent : Tere Letate A agent fe latevitas\u201d You ey ey EP ree ets Ea) ch intak tO wen ee wheat 'S mun = Cacase AEN\u00ae RY Leeza CF canes fac \\ : lz 2 224 | L, ia yero\u00ae bo"
+                        },
+                        {
+                            "sample_id": "17",
+                            "cer": 0.6436,
+                            "wer": 1.25,
+                            "exact_match": false,
+                            "latency_ms": 235.21,
+                            "dimensions": [
+                                2048,
+                                1536
+                            ],
+                            "prediction": "other (2 otYM 0 4 le P ttf ec x ow sta be FAO \u2014 _ Heats 4 C0 OA pe (dens Some"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "heldout_candidate_evaluation": {
+        "sample_count": 10,
+        "mean_cer": 0.7104,
+        "mean_wer": 1.0222,
+        "mean_latency_ms": 1075.06,
+        "median_latency_ms": 1068.48,
+        "evaluations": [
+            {
+                "sample_id": "06",
+                "cer": 0.6778,
+                "wer": 0.9524,
+                "latency_ms": 911.89,
+                "prediction": "Shot Leaniay \u2014/ =e p Aepp tee Kiwi? Se ett on LRVAWAS ices ler-eas"
+            },
+            {
+                "sample_id": "12",
+                "cer": 0.8373,
+                "wer": 1.0,
+                "latency_ms": 984.76,
+                "prediction": "= het 'S ta Ss CACATE neneey cancers FAK 7 feol= 22a up"
+            },
+            {
+                "sample_id": "13",
+                "cer": 0.7339,
+                "wer": 0.9841,
+                "latency_ms": 1212.92,
+                "prediction": "PENS \u00a9 MALIS\u00e9D Al ~ Ven Flou/n \u2014 o~ Hey bet! Lets bu ry > context aay wilh OF VY food a Ani Fly Sane! Let me Jee whet 9 Ap we Awe... fea? ew LEX tae, rot hy See heen Pel\u201cr~ mc\u2019 s \\"
+            },
+            {
+                "sample_id": "14",
+                "cer": 0.7366,
+                "wer": 0.9524,
+                "latency_ms": 1078.69,
+                "prediction": "User GOUA) ae ov? apU / Promets a ae toe pao? T (2) pewastzcare WIXI pp OP reoreT \u201c18 Viste tT revensTs \u00a9"
+            },
+            {
+                "sample_id": "15",
+                "cer": 0.7363,
+                "wer": 1.1053,
+                "latency_ms": 1140.67,
+                "prediction": "Les ot ee q Z we\u2019 \u201ca ae STLE \u2018 7 ASS ee ex v peoers 75 or E pocs \u2014eaaee"
+            },
+            {
+                "sample_id": "16",
+                "cer": 0.7059,
+                "wer": 1.0,
+                "latency_ms": 965.67,
+                "prediction": "= a me USe kh Pron?ts MIS TORS (22) ma \u00bb | r her Hg Con TEx T Pou:"
+            },
+            {
+                "sample_id": "18",
+                "cer": 0.8315,
+                "wer": 1.0,
+                "latency_ms": 914.03,
+                "prediction": "7p hk: Wil(7eS{cotk- \u2014-> \u2014\u2014\u2014 ny ay ae Lavewoard : g{o9 per CUT Sa (VOY 50? oexet pry wo\u201d a 2! gJ 79"
+            },
+            {
+                "sample_id": "19",
+                "cer": 0.683,
+                "wer": 1.1389,
+                "latency_ms": 1058.27,
+                "prediction": "TASh : WHI Te 8cnth \u2014> - fy (xE\u20acD = | yhiteScoad 5 Yaadveal THA Coa yes UNI | bathe fanp les ee peteem \u00a9 paontt\u00a9> moNey gascnseks * Zz Ionute Bm hme ON fre \u00a9? Dev OT m bion meade"
+            },
+            {
+                "sample_id": "20",
+                "cer": 0.6564,
+                "wer": 1.0462,
+                "latency_ms": 1301.77,
+                "prediction": "(c0opoe Pre oF CTS * Gear ot Ne e-( mS so KM . Seq ema | fi, 3e\u00b0 gsh Exe eal a a avvrs Seal Gon L Se qe iD 0 (este, La tener aor | 2 el > - She geass SITY set! ot | crash , keueed om fa, avarys' 5, CHRETS, comparison \u00bb/ Ron X-\\ pe, Cenere, Reroct Crves x) : Pan Choy am PDT |"
+            },
+            {
+                "sample_id": "21",
+                "cer": 0.5055,
+                "wer": 1.0426,
+                "latency_ms": 1181.93,
+                "prediction": "Wh TEBCReD \u2014 DEV Spt Bn gee Wy HAITERoe@DC3) \u2014\u2014\u2014A Genin AP\\ Genin \u2014 | Llen wed Teer DiAGeANS (nave 2 ree) | AGNe + waanativ\u00e9 of pees (rane , 7) A jeal ConvetT Test. Tunes 2 Oe Se me eper as) Hee a Geneaanve TASS, DEFIVaR Son asety Chect-peiars ET"
+            }
+        ]
+    }
+}
