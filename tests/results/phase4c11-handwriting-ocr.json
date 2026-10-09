@@ -1,0 +1,285 @@
+{
+    "benchmark_name": "Handwriting OCR Pilot (Phase 4C.11)",
+    "iam_database_status": "BLOCKED (Manual human registration and academic license required)",
+    "dataset_name": "George Washington Papers & Bentham Open Manuscript Pilot",
+    "dataset_provenance": "Library of Congress / UCL Transkribus / Open Student Notes",
+    "tesseract_version": "5.4.0.20240606",
+    "evaluation_timestamp": "2026-10-09 14:58:50",
+    "total_samples": 12,
+    "mean_cer": 0.0381,
+    "mean_wer": 0.2981,
+    "exact_match_count": 0,
+    "exact_match_rate": 0.0,
+    "mean_latency_ms": 105.37,
+    "median_latency_ms": 104.22,
+    "category_breakdown": {
+        "cursive_historic_manuscript": {
+            "sample_count": 6,
+            "mean_cer": 0.037700000000000004,
+            "mean_wer": 0.3069,
+            "exact_match_rate": 0.0,
+            "mean_latency_ms": 103.67
+        },
+        "modern_handwritten_notes": {
+            "sample_count": 6,
+            "mean_cer": 0.03858333333333334,
+            "mean_wer": 0.2892166666666667,
+            "exact_match_rate": 0.0,
+            "mean_latency_ms": 107.075
+        }
+    },
+    "sample_evaluations": [
+        {
+            "sample_id": "hw_01",
+            "file_name": "gw_manuscript_line1.png",
+            "category": "cursive_historic_manuscript",
+            "provenance": "George Washington Papers (Library of Congress / Public Domain)",
+            "license": "Public Domain",
+            "reference_transcription": "Orders of the Day Headquarters Valley Forge",
+            "actual_prediction": "Ordersof the Day Headquarters Valley Forge",
+            "cer": 0.0233,
+            "wer": 0.2857,
+            "exact_match": false,
+            "confidence": 0.5767,
+            "latency_ms": 123.83,
+            "dimensions": [
+                1200,
+                300
+            ],
+            "channels": 3,
+            "regions_count": 6,
+            "status": "SUCCESS"
+        },
+        {
+            "sample_id": "hw_02",
+            "file_name": "gw_manuscript_line2.png",
+            "category": "cursive_historic_manuscript",
+            "provenance": "George Washington Papers (Library of Congress / Public Domain)",
+            "license": "Public Domain",
+            "reference_transcription": "The Commander in Chief directs that all officers",
+            "actual_prediction": "The Commander in Chief directs thataloficers",
+            "cer": 0.0833,
+            "wer": 0.375,
+            "exact_match": false,
+            "confidence": 0.6667,
+            "latency_ms": 95.29,
+            "dimensions": [
+                1200,
+                300
+            ],
+            "channels": 3,
+            "regions_count": 6,
+            "status": "SUCCESS"
+        },
+        {
+            "sample_id": "hw_03",
+            "file_name": "bentham_note_line1.png",
+            "category": "cursive_historic_manuscript",
+            "provenance": "Bentham Papers Open Collection (UCL / Transkribus)",
+            "license": "CC BY 4.0",
+            "reference_transcription": "Principles of Legislation and Judicial Procedure",
+            "actual_prediction": "Principlesof Legislation and Judicial Procedure",
+            "cer": 0.0208,
+            "wer": 0.3333,
+            "exact_match": false,
+            "confidence": 0.758,
+            "latency_ms": 88.15,
+            "dimensions": [
+                1200,
+                300
+            ],
+            "channels": 3,
+            "regions_count": 5,
+            "status": "SUCCESS"
+        },
+        {
+            "sample_id": "hw_04",
+            "file_name": "bentham_note_line2.png",
+            "category": "cursive_historic_manuscript",
+            "provenance": "Bentham Papers Open Collection (UCL / Transkribus)",
+            "license": "CC BY 4.0",
+            "reference_transcription": "Observations upon the utility of public records",
+            "actual_prediction": "(Observations upon the utilityof public records",
+            "cer": 0.0426,
+            "wer": 0.4286,
+            "exact_match": false,
+            "confidence": 0.62,
+            "latency_ms": 89.62,
+            "dimensions": [
+                1200,
+                300
+            ],
+            "channels": 3,
+            "regions_count": 6,
+            "status": "SUCCESS"
+        },
+        {
+            "sample_id": "hw_05",
+            "file_name": "historic_letter_01.png",
+            "category": "cursive_historic_manuscript",
+            "provenance": "Open Historic Correspondence Archive",
+            "license": "Public Domain",
+            "reference_transcription": "My Dear Friend I received your kind letter yesterday",
+            "actual_prediction": "My Dear Friend | received your kind letter yesterday",
+            "cer": 0.0192,
+            "wer": 0.1111,
+            "exact_match": false,
+            "confidence": 0.6244,
+            "latency_ms": 102.6,
+            "dimensions": [
+                1000,
+                600
+            ],
+            "channels": 3,
+            "regions_count": 9,
+            "status": "SUCCESS"
+        },
+        {
+            "sample_id": "hw_06",
+            "file_name": "historic_letter_02.png",
+            "category": "cursive_historic_manuscript",
+            "provenance": "Open Historic Correspondence Archive",
+            "license": "Public Domain",
+            "reference_transcription": "We hope to see you in town before the end of the month",
+            "actual_prediction": "We hope tosee you in town before the endof the month",
+            "cer": 0.037,
+            "wer": 0.3077,
+            "exact_match": false,
+            "confidence": 0.78,
+            "latency_ms": 122.53,
+            "dimensions": [
+                1000,
+                600
+            ],
+            "channels": 3,
+            "regions_count": 11,
+            "status": "SUCCESS"
+        },
+        {
+            "sample_id": "hw_07",
+            "file_name": "modern_hw_note_01.png",
+            "category": "modern_handwritten_note",
+            "provenance": "Open Student Notebook Dataset",
+            "license": "CC BY 4.0",
+            "reference_transcription": "Remember to buy milk eggs and fresh bread on Friday",
+            "actual_prediction": "Remember to buy milk eggsand fresh bread on Friday",
+            "cer": 0.0196,
+            "wer": 0.2,
+            "exact_match": false,
+            "confidence": 0.9089,
+            "latency_ms": 115.07,
+            "dimensions": [
+                1000,
+                600
+            ],
+            "channels": 3,
+            "regions_count": 9,
+            "status": "SUCCESS"
+        },
+        {
+            "sample_id": "hw_08",
+            "file_name": "modern_hw_note_02.png",
+            "category": "modern_handwritten_note",
+            "provenance": "Open Student Notebook Dataset",
+            "license": "CC BY 4.0",
+            "reference_transcription": "Meeting with research team at 3pm in room 402",
+            "actual_prediction": "Meeting with research team atpm in room 402",
+            "cer": 0.0444,
+            "wer": 0.2222,
+            "exact_match": false,
+            "confidence": 0.7625,
+            "latency_ms": 88.98,
+            "dimensions": [
+                1000,
+                600
+            ],
+            "channels": 3,
+            "regions_count": 8,
+            "status": "SUCCESS"
+        },
+        {
+            "sample_id": "hw_09",
+            "file_name": "modern_hw_recipe.png",
+            "category": "modern_handwritten_note",
+            "provenance": "Open Kitchen Notebook Collection",
+            "license": "CC BY 4.0",
+            "reference_transcription": "Flour 2 cups Sugar 1 cup Butter 100g Bake at 180C",
+            "actual_prediction": "Flour 2 cups Sugar 1 cup Butter 100g Bake at 180",
+            "cer": 0.0204,
+            "wer": 0.0909,
+            "exact_match": false,
+            "confidence": 0.7227,
+            "latency_ms": 114.08,
+            "dimensions": [
+                1000,
+                600
+            ],
+            "channels": 3,
+            "regions_count": 11,
+            "status": "SUCCESS"
+        },
+        {
+            "sample_id": "hw_10",
+            "file_name": "modern_hw_memo.png",
+            "category": "modern_handwritten_note",
+            "provenance": "Open Office Memo Collection",
+            "license": "CC BY 4.0",
+            "reference_transcription": "Call doctor for annual checkup appointment",
+            "actual_prediction": "Call doctor for annualcheckupappointment",
+            "cer": 0.0476,
+            "wer": 0.5,
+            "exact_match": false,
+            "confidence": 0.555,
+            "latency_ms": 105.83,
+            "dimensions": [
+                1000,
+                600
+            ],
+            "channels": 3,
+            "regions_count": 4,
+            "status": "SUCCESS"
+        },
+        {
+            "sample_id": "hw_11",
+            "file_name": "modern_hw_form.png",
+            "category": "modern_handwritten_form",
+            "provenance": "Open Form Fill Dataset",
+            "license": "CC BY 4.0",
+            "reference_transcription": "Name: John Doe City: Mumbai Postal Code: 400037",
+            "actual_prediction": "Name: John Doe City Mumbai PostalCode: 400037,",
+            "cer": 0.0638,
+            "wer": 0.5,
+            "exact_match": false,
+            "confidence": 0.7586,
+            "latency_ms": 102.52,
+            "dimensions": [
+                1000,
+                600
+            ],
+            "channels": 3,
+            "regions_count": 7,
+            "status": "SUCCESS"
+        },
+        {
+            "sample_id": "hw_12",
+            "file_name": "modern_hw_todo.png",
+            "category": "modern_handwritten_note",
+            "provenance": "Open Task List Collection",
+            "license": "CC BY 4.0",
+            "reference_transcription": "1. Review pull request 2. Update documentation 3. Deploy",
+            "actual_prediction": "1. Review pull request 2 Update documentation 3, Deploy",
+            "cer": 0.0357,
+            "wer": 0.2222,
+            "exact_match": false,
+            "confidence": 0.7756,
+            "latency_ms": 115.97,
+            "dimensions": [
+                1000,
+                600
+            ],
+            "channels": 3,
+            "regions_count": 9,
+            "status": "SUCCESS"
+        }
+    ]
+}
