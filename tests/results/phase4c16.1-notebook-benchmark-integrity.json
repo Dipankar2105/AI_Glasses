@@ -1,0 +1,497 @@
+{
+    "audit_name": "Phase 4C.16.1 Notebook OCR Benchmark Integrity Audit",
+    "audit_timestamp": "2026-10-09 17:36:56",
+    "dataset_verification": {
+        "total_images": 30,
+        "readable_images": 30,
+        "license": "CC BY 4.0 (NoTeS-Bank ICDAR 2025 Challenge)",
+        "image_checksums": [
+            {
+                "sample_id": "nb_01",
+                "file_name": "nb_01_ds_stack.jpg",
+                "sha256": "aa13d4d6b8902e9a95f5ff7496f33af1c2f8f3ab60e4ce3df322041d8ff50540",
+                "dimensions": [
+                    1240,
+                    1755
+                ],
+                "format": "JPEG",
+                "channels": 3,
+                "readable": true
+            },
+            {
+                "sample_id": "nb_02",
+                "file_name": "nb_02_ds_queue.jpg",
+                "sha256": "03631ea2c1ef3bf522c03fb96b0e72ac1a44a594621ca830734c8f5e3e98fa4e",
+                "dimensions": [
+                    1240,
+                    1755
+                ],
+                "format": "JPEG",
+                "channels": 3,
+                "readable": true
+            },
+            {
+                "sample_id": "nb_03",
+                "file_name": "nb_03_ds_linkedlist.jpg",
+                "sha256": "1a7d2f2663d799119700ad9eb94a6acd9ed64661897b9d2d078a05eb8794d3cf",
+                "dimensions": [
+                    1240,
+                    1755
+                ],
+                "format": "JPEG",
+                "channels": 3,
+                "readable": true
+            },
+            {
+                "sample_id": "nb_04",
+                "file_name": "nb_04_ds_trees.jpg",
+                "sha256": "5a7783c9c2726c70a40c466c48f86a4ad3a033de96f4f9ac08a51158497fffff",
+                "dimensions": [
+                    1240,
+                    1755
+                ],
+                "format": "JPEG",
+                "channels": 3,
+                "readable": true
+            },
+            {
+                "sample_id": "nb_05",
+                "file_name": "nb_05_algo_recurrence.jpg",
+                "sha256": "a15c305918f83aaf2dd51d2303d3db137b1ada6a27e0c05657d5a18396e41d78",
+                "dimensions": [
+                    2550,
+                    3636
+                ],
+                "format": "JPEG",
+                "channels": 3,
+                "readable": true
+            },
+            {
+                "sample_id": "nb_06",
+                "file_name": "nb_06_algo_greedy.jpg",
+                "sha256": "fa218b4e13dc84a35b5e886b26d6c7c3d2d435d5b257733be9bde858ad1a2005",
+                "dimensions": [
+                    2550,
+                    3633
+                ],
+                "format": "JPEG",
+                "channels": 3,
+                "readable": true
+            },
+            {
+                "sample_id": "nb_07",
+                "file_name": "nb_07_dbms_er.jpg",
+                "sha256": "16c8b3192e79946872c34c5f600c4396bde4b9017a214b41773f78cd018ad2e7",
+                "dimensions": [
+                    2480,
+                    3509
+                ],
+                "format": "JPEG",
+                "channels": 3,
+                "readable": true
+            },
+            {
+                "sample_id": "nb_08",
+                "file_name": "nb_08_dbms_normalization.jpg",
+                "sha256": "16722c6dd79665c381c596b7b2b80f9db84d88d05d7fa86f70dac00eef13beda",
+                "dimensions": [
+                    2480,
+                    3509
+                ],
+                "format": "JPEG",
+                "channels": 3,
+                "readable": true
+            },
+            {
+                "sample_id": "nb_09",
+                "file_name": "nb_09_math_ode.jpg",
+                "sha256": "74a3a86076b5f8e49363ccf186ef85de734f6002eaa981e1f45860995eaecb3c",
+                "dimensions": [
+                    1240,
+                    1754
+                ],
+                "format": "JPEG",
+                "channels": 3,
+                "readable": true
+            },
+            {
+                "sample_id": "nb_10",
+                "file_name": "nb_10_math_exact.jpg",
+                "sha256": "c479c2031d230d895afd450c35b5da2afd90e3405eb2c6edf9e86b3ef1889590",
+                "dimensions": [
+                    1240,
+                    1754
+                ],
+                "format": "JPEG",
+                "channels": 3,
+                "readable": true
+            },
+            {
+                "sample_id": "nb_11",
+                "file_name": "nb_11_physics_torque.jpg",
+                "sha256": "b49b59fd639dcc0db07ae0d8dd6df7fbc73a1aedbff5e40a7494716602ebf3c6",
+                "dimensions": [
+                    1275,
+                    900
+                ],
+                "format": "JPEG",
+                "channels": 3,
+                "readable": true
+            },
+            {
+                "sample_id": "nb_12",
+                "file_name": "nb_12_physics_inertia.jpg",
+                "sha256": "e4a3dcd475031909b0c172a89acf93602e8f2a8a94a3ec0c0fbb98b648c8e04b",
+                "dimensions": [
+                    1275,
+                    815
+                ],
+                "format": "JPEG",
+                "channels": 3,
+                "readable": true
+            },
+            {
+                "sample_id": "nb_13",
+                "file_name": "nb_13_chem_ph.jpg",
+                "sha256": "35173a6c4241c449e5c49080fee3f10daaad74a056b707d3c5e5369a46ca9ba3",
+                "dimensions": [
+                    6338,
+                    9434
+                ],
+                "format": "JPEG",
+                "channels": 3,
+                "readable": true
+            },
+            {
+                "sample_id": "nb_14",
+                "file_name": "nb_14_chem_buffers.jpg",
+                "sha256": "9fce1e8caafa6c346d41de4fe61f60ed899feb03699d70f6a7469fd7270e17f1",
+                "dimensions": [
+                    6338,
+                    8742
+                ],
+                "format": "JPEG",
+                "channels": 3,
+                "readable": true
+            },
+            {
+                "sample_id": "nb_15",
+                "file_name": "nb_15_digital_logic.jpg",
+                "sha256": "248c448fdbc9993d082046c047c2d7e5939c314a2cc30c54d8984b72f4170e5c",
+                "dimensions": [
+                    2480,
+                    3509
+                ],
+                "format": "JPEG",
+                "channels": 3,
+                "readable": true
+            },
+            {
+                "sample_id": "nb_16",
+                "file_name": "nb_16_ds_graph.jpg",
+                "sha256": "496907556f8122033a8ff5c2558e35760dc33b5654264ae2b2ae2fe304f272cd",
+                "dimensions": [
+                    1240,
+                    1755
+                ],
+                "format": "JPEG",
+                "channels": 3,
+                "readable": true
+            },
+            {
+                "sample_id": "nb_17",
+                "file_name": "nb_17_ds_hashing.jpg",
+                "sha256": "5b91722430f4976f2c44254d4765f74bd4fd2ae9eb16c017e654183b0e18025e",
+                "dimensions": [
+                    1240,
+                    1755
+                ],
+                "format": "JPEG",
+                "channels": 3,
+                "readable": true
+            },
+            {
+                "sample_id": "nb_18",
+                "file_name": "nb_18_algo_dynamic.jpg",
+                "sha256": "6e669306b2add510a04bdca0e7b0b57319ddc6267cda4b7f523b0aac58182852",
+                "dimensions": [
+                    2550,
+                    3659
+                ],
+                "format": "JPEG",
+                "channels": 3,
+                "readable": true
+            },
+            {
+                "sample_id": "nb_19",
+                "file_name": "nb_19_algo_mst.jpg",
+                "sha256": "15ebad5dc0b74ad5ef03bb4293235f8514b7da2300b44521219a9b102addd14e",
+                "dimensions": [
+                    2550,
+                    3718
+                ],
+                "format": "JPEG",
+                "channels": 3,
+                "readable": true
+            },
+            {
+                "sample_id": "nb_20",
+                "file_name": "nb_20_dbms_transactions.jpg",
+                "sha256": "f6dca44e8b4a05e93eae8e96969cbf41ca3375399546ecf0f14f810f63de3ebe",
+                "dimensions": [
+                    2480,
+                    3509
+                ],
+                "format": "JPEG",
+                "channels": 3,
+                "readable": true
+            },
+            {
+                "sample_id": "nb_21",
+                "file_name": "nb_21_dbms_indexing.jpg",
+                "sha256": "717c87d7542442b7e9c2c6d245b14eb3a45c956150fdd40cfff97e35d205f851",
+                "dimensions": [
+                    2480,
+                    3509
+                ],
+                "format": "JPEG",
+                "channels": 3,
+                "readable": true
+            },
+            {
+                "sample_id": "nb_22",
+                "file_name": "nb_22_math_laplace.jpg",
+                "sha256": "be87be13020984a03c5b0c44236434c73d99640eb3d9071da5194a01d53077b2",
+                "dimensions": [
+                    1240,
+                    1754
+                ],
+                "format": "JPEG",
+                "channels": 3,
+                "readable": true
+            },
+            {
+                "sample_id": "nb_23",
+                "file_name": "nb_23_math_series.jpg",
+                "sha256": "2dd7be433fcb4027aee3ba6c9f502e2e57cbe5bdc9ae5a81f707ea15ae0604d3",
+                "dimensions": [
+                    1240,
+                    1754
+                ],
+                "format": "JPEG",
+                "channels": 3,
+                "readable": true
+            },
+            {
+                "sample_id": "nb_24",
+                "file_name": "nb_24_physics_rolling.jpg",
+                "sha256": "fb763710aefb5884efc654637160622a2725f51536799266257b0f9cc1c1993b",
+                "dimensions": [
+                    1275,
+                    749
+                ],
+                "format": "JPEG",
+                "channels": 3,
+                "readable": true
+            },
+            {
+                "sample_id": "nb_25",
+                "file_name": "nb_25_physics_precession.jpg",
+                "sha256": "21a9d3134d8da1aba62f1402dbf8a85a65ea066b113d838d08da1fc3667d77bf",
+                "dimensions": [
+                    1275,
+                    1222
+                ],
+                "format": "JPEG",
+                "channels": 3,
+                "readable": true
+            },
+            {
+                "sample_id": "nb_26",
+                "file_name": "nb_26_chem_titration.jpg",
+                "sha256": "d3da25e943f4209e3b9e1a727b7400abb0e584b3509590292c264f2fc7a5dd12",
+                "dimensions": [
+                    6338,
+                    8496
+                ],
+                "format": "JPEG",
+                "channels": 3,
+                "readable": true
+            },
+            {
+                "sample_id": "nb_27",
+                "file_name": "nb_27_chem_hydrolysis.jpg",
+                "sha256": "3bff6a798c6e34619cc1827c5ee13fefce5851aecb35bd3a306e696c9e9f4669",
+                "dimensions": [
+                    6338,
+                    9238
+                ],
+                "format": "JPEG",
+                "channels": 3,
+                "readable": true
+            },
+            {
+                "sample_id": "nb_28",
+                "file_name": "nb_28_digital_kmap.jpg",
+                "sha256": "5f541d96582191cd65618cd57f0cea5c1d5d7ff0315c135a3075f309585a3048",
+                "dimensions": [
+                    2480,
+                    3509
+                ],
+                "format": "JPEG",
+                "channels": 3,
+                "readable": true
+            },
+            {
+                "sample_id": "nb_29",
+                "file_name": "nb_29_digital_flipflops.jpg",
+                "sha256": "94f6f50711395be88bb5a0b0e0b214eab29703efafac6cefcf67a9551d4fad9e",
+                "dimensions": [
+                    2480,
+                    3509
+                ],
+                "format": "JPEG",
+                "channels": 3,
+                "readable": true
+            },
+            {
+                "sample_id": "nb_30",
+                "file_name": "nb_30_digital_counters.jpg",
+                "sha256": "84de08a18fbadd105d3f6fb258f0841a75fa83e9eef0bfe6931653f81ddd82c4",
+                "dimensions": [
+                    2480,
+                    3509
+                ],
+                "format": "JPEG",
+                "channels": 3,
+                "readable": true
+            }
+        ]
+    },
+    "recomputed_summaries": {
+        "full_dataset": {
+            "tesseract": {
+                "sample_count": 30,
+                "macro_cer": 3.4584,
+                "macro_wer": 6.1131,
+                "micro_cer": 3.4301,
+                "micro_wer": 5.5365,
+                "exact_match_count": 0,
+                "exact_match_rate": 0.0,
+                "mean_latency_ms": 1531.91,
+                "median_latency_ms": 919.45
+            },
+            "rapidocr": {
+                "sample_count": 30,
+                "macro_cer": 2.4361,
+                "macro_wer": 3.5659,
+                "micro_cer": 2.4009,
+                "micro_wer": 3.1515,
+                "exact_match_count": 0,
+                "exact_match_rate": 0.0,
+                "mean_latency_ms": 8983.69,
+                "median_latency_ms": 6215.51
+            }
+        },
+        "dev_split": {
+            "tesseract": {
+                "sample_count": 15,
+                "macro_cer": 3.4484,
+                "macro_wer": 5.975,
+                "micro_cer": 3.4217,
+                "micro_wer": 5.43,
+                "exact_match_count": 0,
+                "exact_match_rate": 0.0,
+                "mean_latency_ms": 1543.12,
+                "median_latency_ms": 601.68
+            },
+            "rapidocr": {
+                "sample_count": 15,
+                "macro_cer": 2.3717,
+                "macro_wer": 3.2917,
+                "micro_cer": 2.3266,
+                "micro_wer": 2.9147,
+                "exact_match_count": 0,
+                "exact_match_rate": 0.0,
+                "mean_latency_ms": 8890.31,
+                "median_latency_ms": 5408.04
+            }
+        },
+        "heldout_split": {
+            "tesseract": {
+                "sample_count": 15,
+                "macro_cer": 3.4683,
+                "macro_wer": 6.2512,
+                "micro_cer": 3.4384,
+                "micro_wer": 5.653,
+                "exact_match_count": 0,
+                "exact_match_rate": 0.0,
+                "mean_latency_ms": 1520.71,
+                "median_latency_ms": 955.94
+            },
+            "rapidocr": {
+                "sample_count": 15,
+                "macro_cer": 2.5005,
+                "macro_wer": 3.8402,
+                "micro_cer": 2.4734,
+                "micro_wer": 3.4104,
+                "exact_match_count": 0,
+                "exact_match_rate": 0.0,
+                "mean_latency_ms": 9077.07,
+                "median_latency_ms": 6267.12
+            }
+        }
+    },
+    "spot_checks": [
+        {
+            "sample_id": "nb_01",
+            "topic": "Stack Operations & LIFO Structure",
+            "split": "Dev",
+            "reference_text": "Stack is a linear data structure that follows LIFO principle. The operations are Push and Pop. Top points to top element.",
+            "tesseract_prediction": ": pes tog 1 . ar ba 1 bor ne gr HRA: as a+b xd[e-ftgrb has. : 3 H \u201cap Eo Let assouahie - oe Leh assoualwe . oF AH \u201cfxd by | oa . -) \u201ccd \u00e9 +qh aS or) Jecde | 14a 1@D [cde | . rea \u00abi | \" = a: yoa+\u2014+\u2014blgedet",
+            "tesseract_cer": 1.2893,
+            "rapidocr_prediction": "pos t 00 Q8.A.QO&. Same Tevel a=-b+cxdl 501 preledance table Raht / ip Left assoualwe Left assocacthwe 1gh [*cde \u4e2agh 7*cde 7=a+-t-bleederf+ gh \u00d7ij .1",
+            "rapidocr_cer": 0.9917
+        },
+        {
+            "sample_id": "nb_05",
+            "topic": "Recurrence Relations & Time Complexity",
+            "split": "Dev",
+            "reference_text": "Divide and Conquer Recurrence T(n) = 2T(n/2) + O(n). By Master Theorem Case 2, T(n) = O(n log n).",
+            "tesseract_prediction": "Al orithms . Rate of _ grow te of Junctions : 1, tgtqn, Ign, An, (dan) end, n\u00a9 eceeci \u00bb = 26\u201d yl mig tn ) nang = G. \u2019 m? , n\u00b0 @ra, o\u2122 cod, m, 2 . Note. Ig\u00a2*w = O ns r) Asymptotic Notatow. | iz nm I\u201d (1g) ny! Analesy oo Joy O(gry PL armas te {ln > 2 (4%) Z| tane ot fortee than doml fo) = w Gen) A me te [Oa a Ok ayer > Ut re Leer Ho) 8 OD) u 1%) . \"ae fol I OQ aes BGM KE goo % OM) 7 flm)~ 0 (aor) f(m) AMER ee sepa gey & gregon & fore gy u 1) vec ae Pia pees K poy 2G | &) - OGY > (nm) ~ \u00a9 (gem) + {(n) = 6 (g\u2122) oft a) ~ O (fim). | + 0 (f4g)~ Olmax Cg) \u2014y man ({0),g) - 6 ( +g) | -4en)- 0 (gen) fe gine Ctly) > flme O(ge) . Fm * (him) => fim= OCH). (fo 942. alse) + Oo (fly) +0 (9) = 0 (mam C$ 1 gry ) J O@ee ade mo lo @ _ arth y n a, do = mo Ob | Z. n= ali cor) | pa log k = mlgn k=J . n - i i ae \u2014 = 3 k K=1 pri",
+            "tesseract_cer": 7.6495,
+            "rapidocr_prediction": "A1gorithms C71. *n ,.nlgn gn!$ <i Note. Asymbtotic NotaHion. Analogy (a)B) O - (a)f () ( )0 ) - 0 (g(n)) muitpie of g (h0 U= (u) 2 (9(0m2) + grov? fastet than mumpf\u5b50 (f(n) ()) > if grows faster trom cny Cg(m) 1(n) muiple of 8 a+ (u)F ZCER =ER\u2192t n-00 (b)0 - (0+ ((u) ) f(m) 2 ( (m) (=0(g))(g))  0(+) 8\u4e2am (u)b) 0 - (af.\u2190 (cu)b) @ +(u)/ (cuh)(a)  (aub-(uF (n) (wb) (u)f 9(max (f-9) (a))(a \u2192 \u03b8(f+f)= (g(m)) = (u) (() +g(a). . 1m)=(gm)  )=((m) (1(0,g(a)- 0 0(h(m).(f 8+ alo) *f(m)- 0(g() +g() = 0(h(m) 0 (s) ((cu)B+ (a) +) vow) (g (m) 6(f(m) . 0 f= 0(g) 1+4 (\u03b141) k=mign p+1 P= 1+2b+g$+..+nt 2:1++++# pti",
+            "rapidocr_cer": 5.5361
+        },
+        {
+            "sample_id": "nb_11",
+            "topic": "Torque & Angular Momentum Equations",
+            "split": "Dev",
+            "reference_text": "Torque tau = r x F = I alpha. Angular momentum L = I omega. Conservation of angular momentum holds when external torque is zero.",
+            "tesseract_prediction": "aateieetien ana ee ee ee ee ee a 7. mens eabody iA pDwduck @&. jinta This sb pics = f Me Ma : = L= Pn on",
+            "tesseract_cer": 0.7891,
+            "rapidocr_prediction": "ddisbonce utahon. L=Pn&in\u4e2d =rLeaing)Sciphy.in L-nPL S.I Onit  Arngwa Momeruim Geometrical Meaning of Angudan Momentun",
+            "rapidocr_cer": 0.8125
+        },
+        {
+            "sample_id": "nb_16",
+            "topic": "Graph Representation (Matrix vs Adjacency List)",
+            "split": "HeldOut",
+            "reference_text": "Graph representation: Adjacency Matrix requires O(V^2) space. Adjacency List requires O(V + E) space.",
+            "tesseract_prediction": "ii Head Reosysion, ov olher \u201cThan tut) ip Tout Keaars00 (900 Toul) poe 0) 000) oc) fleet! 7\u201d Mia Cues 6 \u201cDein roninber previauly , ai jndivect Reauxsi0d a 5 \u2018w Ohtected! values: fs, hl iten| vty is 2 ES Ei > a * opal\u2019 iy Base ( Terraion Gadi (on Brcko ote. x Pepe sey co) Raise Sep \u00a9 -(08) \u201cie clep \u201cB_ Nd=O | poche ov Bone fact WY [oi hi wd y Ta oem we, pele elep ( Poca )",
+            "tesseract_cer": 3.1287,
+            "rapidocr_prediction": "Reaursion Head Cox semoy lban (ost) o% hey (non Ta'l) Docc) Doc () Do) yExessive ix indivect Reaursion Deesndt vemembe? AC) waluated values Terminahon Base Reasstve Step peated inductwes Anchos Re pealed",
+            "rapidocr_cer": 1.5347
+        },
+        {
+            "sample_id": "nb_24",
+            "topic": "Pure Rolling on Incline without Slipping",
+            "split": "HeldOut",
+            "reference_text": "Pure rolling condition: v_cm = R omega. Total kinetic energy in rolling = 1/2 M v_cm^2 (1 + k^2/R^2).",
+            "tesseract_prediction": "7 uD kde beth ag,",
+            "tesseract_cer": 0.9109,
+            "rapidocr_prediction": "Date1 33 Divid bath side by dt Sciphy.in [(a] ] be Unit tim bouhue abousd a given axis s tuice th pnodut  man y bonhule",
+            "rapidocr_cer": 0.9505
+        }
+    ]
+}
