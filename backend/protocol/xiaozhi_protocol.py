@@ -24,14 +24,14 @@ from typing import Optional, Tuple, Union, Dict, Any
 import json
 
 
-# BinaryProtocol2 format: <H H I I I (16 bytes)
+# BinaryProtocol2 format: >H H I I I (16 bytes, network big-endian matching htons/htonl in C++)
 # uint16 version, uint16 type, uint32 reserved, uint32 timestamp, uint32 payload_size
-BP2_HEADER_FORMAT = "<HHIII"
+BP2_HEADER_FORMAT = ">HHIII"
 BP2_HEADER_SIZE = struct.calcsize(BP2_HEADER_FORMAT)  # 16 bytes
 
-# BinaryProtocol3 format: <B B H (4 bytes)
+# BinaryProtocol3 format: >B B H (4 bytes, network big-endian matching htons in C++)
 # uint8 type, uint8 reserved, uint16 payload_size
-BP3_HEADER_FORMAT = "<BBH"
+BP3_HEADER_FORMAT = ">BBH"
 BP3_HEADER_SIZE = struct.calcsize(BP3_HEADER_FORMAT)  # 4 bytes
 
 

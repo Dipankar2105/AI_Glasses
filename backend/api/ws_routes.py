@@ -124,56 +124,90 @@ async def websocket_device_endpoint(
 
                         # Process accumulated audio
                         if len(audio_buffer) > 0:
-                            transcribe_res = await audio_service.process_and_transcribe(
-                                audio_bytes=bytes(audio_buffer),
-                                sample_rate=16000,
-                                run_dsp=True
-                            )
-                            audio_buffer.clear()
-
-                            if transcribe_res.success and transcribe_res.transcript:
-                                transcript_text = transcribe_res.transcript
-                                await websocket.send_text(json.dumps({
-                                    "type": "stt",
-                                    "text": transcript_text,
-                                    "confidence": transcribe_res.confidence
-                                }))
-
-                                # Orchestrate Conversation
-                                conv_req = ConversationMessageRequest(
-                                    session_id=session_id,
-                                    message=transcript_text
+                            try:
+                                transcribe_res = await audio_service.process_and_transcribe(
+                                    audio_bytes=bytes(audio_buffer),
+                                    sample_rate=16000,
+                                    run_dsp=True
                                 )
-                                conv_res = await conversation_service.process_user_message(conv_req)
+                                audio_buffer.clear()
 
-                                await websocket.send_text(json.dumps({
-                                    "type": "llm",
-                                    "text": conv_res.response,
-                                    "status": conv_res.llm_status
-                                }))
-
-                                # Synthesize TTS audio response
-                                tts_res = await audio_service.synthesize_speech(text=conv_res.response)
-                                if tts_res.success and tts_res.audio_bytes:
-                                    # Send binary audio frame
-                                    bp2_audio = XiaozhiProtocol.encode_bp2(
-                                        payload=tts_res.audio_bytes,
-                                        message_type=XiaozhiMessageType.AUDIO_STREAM,
-                                        timestamp_ms=int(time.time() * 1000)
-                                    )
-                                    await websocket.send_bytes(bp2_audio)
+                                if transcribe_res.success and transcribe_res.transcript:
+                                    transcript_text = transcribe_res.transcript
                                     await websocket.send_text(json.dumps({
-                                        "type": "tts",
-                                        "state": "stop",
-                                        "sample_rate": tts_res.sample_rate
+                                        "type": "stt",
+                                        "text": transcript_text,
+                                        "confidence": transcribe_res.confidence
                                     }))
-                            else:
+
+                                    # Orchestrate Conversation
+                                    conv_req = ConversationMessageRequest(
+                                        session_id=session_id,
+                                        message=transcript_text
+                                    )
+                                    conv_res = await conversation_service.process_user_message(conv_req)
+
+                                    await websocket.send_text(json.dumps({
+                                        "type": "llm",
+                                        "text": conv_res.response,
+                                        "status": conv_res.llm_status
+                                    }))
+
+                                    # Synthesize TTS audio response
+                                    tts_res = await audio_service.synthesize_speech(text=conv_res.response)
+                                    if tts_res.success and tts_res.audio_bytes:
+                                        # Notify device TTS playback start
+                                        await websocket.send_text(json.dumps({
+                                            "type": "tts",
+                                            "state": "start"
+                                        }))
+                                        await websocket.send_text(json.dumps({
+                                            "type": "tts",
+                                            "state": "sentence_start",
+                                            "text": conv_res.response
+                                        }))
+                                        # Send binary audio frame in network byte order
+                                        bp2_audio = XiaozhiProtocol.encode_bp2(
+                                            payload=tts_res.audio_bytes,
+                                            message_type=XiaozhiMessageType.AUDIO_STREAM,
+                                            timestamp_ms=int(time.time() * 1000)
+                                        )
+                                        await websocket.send_bytes(bp2_audio)
+                                        # Notify device TTS playback completion
+                                        await websocket.send_text(json.dumps({
+                                            "type": "tts",
+                                            "state": "stop",
+                                            "sample_rate": tts_res.sample_rate
+                                        }))
+                                    else:
+                                        await websocket.send_text(json.dumps({
+                                            "type": "tts",
+                                            "state": "stop",
+                                            "error": tts_res.error or "TTS synthesis failed"
+                                        }))
+                                else:
+                                    await websocket.send_text(json.dumps({
+                                        "type": "stt",
+                                        "text": "",
+                                        "error": transcribe_res.error or "No speech detected"
+                                    }))
+                                    await websocket.send_text(json.dumps({"type": "state", "state": "idle"}))
+                            except Exception as e:
+                                logger.error(f"Error processing voice turn: {e}", exc_info=True)
+                                audio_buffer.clear()
                                 await websocket.send_text(json.dumps({
-                                    "type": "stt",
-                                    "text": "",
-                                    "error": transcribe_res.error or "No speech detected"
+                                    "type": "error",
+                                    "code": "PROCESSING_ERROR",
+                                    "message": f"Provider error: {str(e)}"
                                 }))
                                 await websocket.send_text(json.dumps({"type": "state", "state": "idle"}))
+                        else:
+                            await websocket.send_text(json.dumps({
+                                "type": "stt",
+                                "text": "",
+                                "error": "No audio received"
+                            }))
+                            await websocket.send_text(json.dumps({"type": "state", "state": "idle"}))
 
                 elif msg_type == "abort":
                     # Immediate cancellation of speech/playback

@@ -1,5 +1,5 @@
 {
-    "timestamp": 1791612285.65994,
+    "timestamp": 1791613048.2850294,
     "environment": {
         "python_version": "3.14.6 | packaged by Anaconda, Inc. | (main, Jul  9 2026, 14:29:05) [MSC v.1942 64 bit (AMD64)]",
         "platform": "win32"
@@ -7,58 +7,58 @@
     "benchmarks": {
         "protocol_framing": {
             "iterations": 1000,
-            "cold_start_ms": 0.0028,
-            "mean_ms": 0.0032,
+            "cold_start_ms": 0.0027,
+            "mean_ms": 0.0031,
             "median_ms": 0.0029,
-            "p95_ms": 0.0031,
-            "p99_ms": 0.0039,
-            "min_ms": 0.0028,
-            "max_ms": 0.1943,
-            "throughput_ops_per_sec": 316005.7
+            "p95_ms": 0.003,
+            "p99_ms": 0.0038,
+            "min_ms": 0.0027,
+            "max_ms": 0.2003,
+            "throughput_ops_per_sec": 318867.4
         },
         "motion_processing": {
             "iterations": 1000,
-            "cold_start_ms": 0.003,
-            "mean_ms": 0.021,
-            "median_ms": 0.0217,
-            "p95_ms": 0.0225,
-            "p99_ms": 0.0243,
-            "min_ms": 0.003,
-            "max_ms": 0.0291,
-            "throughput_samples_per_sec": 47719.9
+            "cold_start_ms": 0.0032,
+            "mean_ms": 0.0223,
+            "median_ms": 0.0224,
+            "p95_ms": 0.0254,
+            "p99_ms": 0.032,
+            "min_ms": 0.0032,
+            "max_ms": 0.1342,
+            "throughput_samples_per_sec": 44877.1
         },
         "power_policy": {
             "iterations": 1000,
             "cold_start_ms": 0.0038,
-            "mean_ms": 0.004,
-            "median_ms": 0.004,
-            "p95_ms": 0.0041,
-            "p99_ms": 0.0048,
+            "mean_ms": 0.0045,
+            "median_ms": 0.0041,
+            "p95_ms": 0.0042,
+            "p99_ms": 0.0156,
             "min_ms": 0.0038,
-            "max_ms": 0.0171,
-            "throughput_cycles_per_sec": 247402.3
+            "max_ms": 0.0992,
+            "throughput_cycles_per_sec": 220974.9
         },
         "conversation_session": {
             "iterations": 1000,
-            "cold_start_ms": 0.0036,
-            "mean_ms": 0.0044,
-            "median_ms": 0.0044,
-            "p95_ms": 0.0046,
-            "p99_ms": 0.0056,
-            "min_ms": 0.0036,
-            "max_ms": 0.0582,
-            "throughput_ops_per_sec": 225179.6
+            "cold_start_ms": 0.0037,
+            "mean_ms": 0.0046,
+            "median_ms": 0.0045,
+            "p95_ms": 0.0049,
+            "p99_ms": 0.0076,
+            "min_ms": 0.0037,
+            "max_ms": 0.077,
+            "throughput_ops_per_sec": 216971.5
         },
         "end_to_end_orchestrator": {
             "iterations": 1000,
-            "cold_start_ms": 0.4848,
-            "mean_ms": 0.57,
-            "median_ms": 0.5094,
-            "p95_ms": 0.5931,
-            "p99_ms": 1.0316,
-            "min_ms": 0.4848,
-            "max_ms": 16.1738,
-            "throughput_events_per_sec": 1754.3
+            "cold_start_ms": 0.4823,
+            "mean_ms": 0.6002,
+            "median_ms": 0.5193,
+            "p95_ms": 0.7237,
+            "p99_ms": 1.0009,
+            "min_ms": 0.4823,
+            "max_ms": 25.2257,
+            "throughput_events_per_sec": 1666.2
         }
     }
 }
