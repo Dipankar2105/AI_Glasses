@@ -305,5 +305,62 @@ class TestDeploymentSafetyGate:
         reset_vision_service(None)
         reset_power_policy_manager(None)
 
+    @pytest.mark.anyio
+    async def test_unauthorized_request_does_not_invoke_vision_orchestrator(self):
+        """Verify that when power/thermal policy denies authorization, orchestrator.process is never invoked."""
+        from unittest.mock import MagicMock
+        import numpy as np
+        from backend.services.vision_service import VisionService
+        from backend.vision.frame import VisionFrame
+
+        strict_policy = PowerThermalPolicyManager(require_verified_telemetry=True)
+        service = VisionService(power_manager=strict_policy)
+        
+        # Attach spy to orchestrator.process
+        mock_process = MagicMock(side_effect=RuntimeError("Orchestrator should not be called when denied!"))
+        service.orchestrator.process = mock_process
+
+        frame = VisionFrame(
+            data=np.zeros((30, 30, 3), dtype=np.uint8),
+            width=30,
+            height=30,
+            channels=3,
+            pixel_format="RGB",
+            numerical_range=(0, 255),
+            timestamp=1000,
+            seq_num=1,
+        )
+
+        # Uninitialized request -> denied before reaching orchestrator
+        res = await service.process_frame_async(frame)
+        assert len(res.errors) > 0
+        assert res.errors[0]["error"] == "BLOCKED_BY_POWER_POLICY"
+        mock_process.assert_not_called()
+
+    def test_explicit_simulation_configuration_allows_execution(self):
+        """Explicit development/simulation configuration allows software-only testing without strict hardware telemetry."""
+        from fastapi.testclient import TestClient
+        from backend.app import create_app
+        from backend.config.settings import AppSettings
+        from backend.services.vision_service import reset_vision_service
+        from backend.power.policy import reset_power_policy_manager
+
+        reset_vision_service(None)
+        reset_power_policy_manager(None)
+
+        dev_settings = AppSettings(environment="development", require_verified_telemetry=False)
+        app = create_app(settings=dev_settings)
+        client = TestClient(app)
+
+        resp = client.post("/api/v1/vision/process", json={"use_mock_frame": True})
+        assert resp.status_code == 200
+        data = resp.json()
+        assert data["success"] is True
+        assert len(data["errors"]) == 0
+
+        reset_vision_service(None)
+        reset_power_policy_manager(None)
+
+
 
 
