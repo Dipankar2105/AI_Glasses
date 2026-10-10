@@ -45,3 +45,8 @@ class AIEngineRegistry:
     def load_production_ocr(self, set_active: bool = True):
         from backend.ai.tesseract_ocr import TesseractOCREngine
         self.register_ocr("tesseract", TesseractOCREngine(), set_active=set_active)
+
+    def load_pixel_detectors(self, set_active: bool = False):
+        from backend.ai.detectors import SalientRegionObjectDetector, HeuristicSceneAnalyzer
+        self.register_detector("salient_region", SalientRegionObjectDetector(), set_active=set_active)
+        self.register_scene_analyzer("heuristic", HeuristicSceneAnalyzer(), set_active=set_active)
