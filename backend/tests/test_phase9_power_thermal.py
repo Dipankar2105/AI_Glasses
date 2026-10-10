@@ -620,3 +620,29 @@ def test_out_of_order_telemetry_rejection():
     assert manager.last_thermal.timestamp == 100.0
 
 
+def test_hardware_readiness_strict_telemetry_gate():
+    """Verify that with require_verified_telemetry=True, high-power workloads require live fresh telemetry."""
+    hw_manager = PowerThermalPolicyManager(require_verified_telemetry=True)
+
+    # 1. Uninitialized policy: physical vision capture blocked
+    assert hw_manager.can_execute_workload(WorkloadPriority.VISION_CAPTURE)[0] is False
+    assert hw_manager.request_state(OperatingState.CAPTURE)[0] is False
+
+    # 2. Only battery telemetry provided: still blocked pending thermal telemetry
+    hw_manager.update_battery_telemetry(BatteryTelemetry(voltage_volts=3.9, percentage=80.0, timestamp=10.0), current_time=10.0)
+    assert hw_manager.can_execute_workload(WorkloadPriority.VISION_CAPTURE)[0] is False
+
+    # 3. Both telemetry streams valid and fresh: vision capture allowed
+    hw_manager.update_thermal_telemetry(ThermalTelemetry(temperature_celsius=32.0, timestamp=10.0), current_time=10.0)
+    assert hw_manager.can_execute_workload(WorkloadPriority.VISION_CAPTURE)[0] is True
+    assert hw_manager.request_state(OperatingState.CAPTURE)[0] is True
+    # Return to IDLE
+    assert hw_manager.request_state(OperatingState.IDLE)[0] is True
+
+    # 4. Telemetry goes stale: physical capture blocked
+    assert hw_manager.can_execute_workload(WorkloadPriority.VISION_CAPTURE, current_time=60.0)[0] is False
+    assert hw_manager.request_state(OperatingState.CAPTURE, current_time=60.0)[0] is False
+
+
+
+

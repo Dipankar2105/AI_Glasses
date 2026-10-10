@@ -84,8 +84,11 @@ class PowerThermalPolicyManager:
         # Staleness thresholds (seconds)
         battery_stale_timeout_s: float = 30.0,
         thermal_stale_timeout_s: float = 15.0,
+        # Strict hardware-readiness telemetry verification gate
+        require_verified_telemetry: bool = False,
     ) -> None:
         self.power_model = power_model or PowerModel()
+        self.require_verified_telemetry = require_verified_telemetry
 
         self.low_battery_entry_pct = low_battery_entry_pct
         self.low_battery_exit_pct = low_battery_exit_pct
@@ -283,6 +286,15 @@ class PowerThermalPolicyManager:
             if self.thermal_status in (ThermalStatus.CRITICAL, ThermalStatus.HOT_THROTTLED, ThermalStatus.STALE, ThermalStatus.UNKNOWN):
                 return False, f"Cannot exit LOW_POWER to IDLE while thermal status is {self.thermal_status.value}"
 
+        # 6. Hardware telemetry verification gate
+        if self.require_verified_telemetry and target_state in (OperatingState.CAPTURE, OperatingState.PROCESSING):
+            if self.last_battery is None or self.last_thermal is None:
+                return False, "Hardware telemetry uninitialized; physical state transition blocked"
+            if self.battery_status in (BatteryStatus.UNKNOWN, BatteryStatus.STALE):
+                return False, f"Battery telemetry is {self.battery_status.value}; physical state transition blocked"
+            if self.thermal_status in (ThermalStatus.UNKNOWN, ThermalStatus.STALE):
+                return False, f"Thermal telemetry is {self.thermal_status.value}; physical state transition blocked"
+
         self.requested_state = target_state
         # In software simulation, confirmed state updates immediately upon policy approval
         self.confirmed_state = target_state
@@ -296,6 +308,14 @@ class PowerThermalPolicyManager:
         """Check whether a given workload is permitted under current power/thermal constraints."""
         if current_time is not None:
             self._evaluate_staleness(current_time)
+
+        if self.require_verified_telemetry and priority in (WorkloadPriority.VISION_CAPTURE, WorkloadPriority.BACKGROUND_SYNC):
+            if self.last_battery is None or self.last_thermal is None:
+                return False, "Hardware telemetry uninitialized; physical high-power workload blocked"
+            if self.battery_status in (BatteryStatus.UNKNOWN, BatteryStatus.STALE):
+                return False, f"Battery telemetry is {self.battery_status.value}; physical high-power workload blocked"
+            if self.thermal_status in (ThermalStatus.UNKNOWN, ThermalStatus.STALE):
+                return False, f"Thermal telemetry is {self.thermal_status.value}; physical high-power workload blocked"
 
         if self.battery_status == BatteryStatus.CRITICAL or self.thermal_status == ThermalStatus.CRITICAL:
             if priority == WorkloadPriority.SAFETY_CRITICAL:
