@@ -1,9 +1,12 @@
 """Large Language Model (LLM) provider adapters and abstractions."""
 
-import asyncio
+import json
 import time
+import asyncio
 from abc import ABC, abstractmethod
 from typing import List, Dict, Optional, Any
+
+import httpx
 
 from backend.conversation.models import ConversationMessage, MessageRole
 from backend.providers.contracts import LLMResult, LLMToolCall, ProviderStatus
@@ -134,24 +137,88 @@ class MockLLMProvider(BaseLLMProvider):
 
 class APILLMAdapter(BaseLLMProvider):
     """
-    Standardized adapter for cloud LLM APIs (e.g. Gemini, OpenAI, Claude).
-    Validates API credentials, enforces request limits, and handles errors cleanly.
+    Standardized adapter for OpenAI and OpenAI-compatible cloud LLM APIs (e.g. Gemini, OpenAI, Claude).
+    Validates API credentials, serializes conversation history, parses tool calls, and handles errors cleanly.
     """
 
     def __init__(
         self,
-        provider_name: str = "gemini",
+        provider_name: str = "openai",
         api_key: Optional[str] = None,
-        model_name: str = "gemini-1.5-flash",
-        api_base_url: Optional[str] = None
+        model_name: str = "gpt-4o-mini",
+        api_base_url: Optional[str] = None,
+        http_client: Optional[httpx.AsyncClient] = None,
+        temperature: float = 0.7,
+        max_tokens: int = 1024
     ):
         self.provider_name = provider_name
         self._api_key = api_key
         self.model_name = model_name
-        self.api_base_url = api_base_url
+        self.api_base_url = (api_base_url or "https://api.openai.com/v1").rstrip("/")
+        self._custom_client = http_client
+        self.temperature = temperature
+        self.max_tokens = max_tokens
 
     def is_available(self) -> bool:
         return bool(self._api_key and self._api_key.strip())
+
+    def _format_messages(
+        self,
+        messages: List[ConversationMessage],
+        context_metadata: Optional[Dict[str, Any]] = None
+    ) -> List[Dict[str, Any]]:
+        """Formats conversation messages into standard OpenAI chat completion schema."""
+        formatted: List[Dict[str, Any]] = []
+
+        # If visual context metadata is present, inject system context prompt
+        if context_metadata:
+            ctx_summary = []
+            if "scene_description" in context_metadata:
+                ctx_summary.append(f"Visual Scene: {context_metadata['scene_description']}")
+            if "detected_objects" in context_metadata:
+                ctx_summary.append(f"Detected Objects: {', '.join(context_metadata['detected_objects'])}")
+            if ctx_summary:
+                formatted.append({
+                    "role": "system",
+                    "content": "NextSight Smart Glasses Context:\n" + "\n".join(ctx_summary)
+                })
+
+        for m in messages:
+            if m.role == MessageRole.USER:
+                formatted.append({"role": "user", "content": m.content})
+            elif m.role == MessageRole.ASSISTANT:
+                formatted.append({"role": "assistant", "content": m.content})
+            elif m.role == MessageRole.SYSTEM:
+                formatted.append({"role": "system", "content": m.content})
+            elif m.role == MessageRole.TOOL_RESULT:
+                formatted.append({
+                    "role": "tool",
+                    "tool_call_id": m.tool_call_id or f"call_{m.tool_name or 'tool'}",
+                    "content": m.content
+                })
+
+        return formatted
+
+    def _format_tools(self, available_tools: Optional[List[dict]]) -> Optional[List[Dict[str, Any]]]:
+        """Converts internal tool definitions into OpenAI function tool schemas."""
+        if not available_tools:
+            return None
+        tools = []
+        for t in available_tools:
+            name = t.get("name")
+            if not name:
+                continue
+            desc = t.get("description", "")
+            schema = t.get("input_schema", {"type": "object", "properties": {}})
+            tools.append({
+                "type": "function",
+                "function": {
+                    "name": name,
+                    "description": desc,
+                    "parameters": schema
+                }
+            })
+        return tools if tools else None
 
     async def generate_response(
         self,
@@ -170,10 +237,114 @@ class APILLMAdapter(BaseLLMProvider):
                 errors=[f"{self.provider_name.capitalize()} LLM requires a valid API key"]
             )
 
-        # In offline software test harness without live network endpoints
-        return LLMResult(
-            content="",
-            status=ProviderStatus.PROVIDER_UNAVAILABLE,
-            latency_ms=(time.time() - t0) * 1000.0,
-            errors=[f"{self.provider_name.capitalize()} endpoint connection not configured in software runtime"]
-        )
+        url = f"{self.api_base_url}/chat/completions"
+        headers = {
+            "Authorization": f"Bearer {self._api_key}",
+            "Content-Type": "application/json"
+        }
+
+        payload: Dict[str, Any] = {
+            "model": self.model_name,
+            "messages": self._format_messages(messages, context_metadata),
+            "temperature": self.temperature,
+            "max_tokens": self.max_tokens
+        }
+
+        tools_schema = self._format_tools(available_tools)
+        if tools_schema:
+            payload["tools"] = tools_schema
+            payload["tool_choice"] = "auto"
+
+        try:
+            client = self._custom_client or httpx.AsyncClient(timeout=timeout_seconds)
+            try:
+                response = await client.post(url, headers=headers, json=payload)
+            finally:
+                if self._custom_client is None:
+                    await client.aclose()
+
+            elapsed = (time.time() - t0) * 1000.0
+
+            if response.status_code in (401, 403):
+                return LLMResult(
+                    content="",
+                    status=ProviderStatus.AUTH_FAILED,
+                    latency_ms=elapsed,
+                    errors=[f"Authentication failed: HTTP {response.status_code}"]
+                )
+            elif response.status_code == 429:
+                return LLMResult(
+                    content="",
+                    status=ProviderStatus.RATE_LIMITED,
+                    latency_ms=elapsed,
+                    errors=["Rate limit exceeded (HTTP 429)"]
+                )
+            elif response.status_code >= 400:
+                return LLMResult(
+                    content="",
+                    status=ProviderStatus.ERROR,
+                    latency_ms=elapsed,
+                    errors=[f"API error HTTP {response.status_code}: {response.text[:200]}"]
+                )
+
+            res_json = response.json()
+            choices = res_json.get("choices", [])
+            if not choices:
+                return LLMResult(
+                    content="",
+                    status=ProviderStatus.ERROR,
+                    latency_ms=elapsed,
+                    errors=["Empty choices array in API response"]
+                )
+
+            msg_obj = choices[0].get("message", {})
+            content = msg_obj.get("content") or ""
+
+            # Parse requested tool calls
+            tool_calls: List[LLMToolCall] = []
+            raw_tcs = msg_obj.get("tool_calls", [])
+            for tc in raw_tcs:
+                fn = tc.get("function", {})
+                fn_name = fn.get("name")
+                raw_args = fn.get("arguments", "{}")
+                try:
+                    args = json.loads(raw_args) if isinstance(raw_args, str) else raw_args
+                except Exception:
+                    args = {}
+                if fn_name:
+                    tool_calls.append(LLMToolCall(
+                        tool_name=fn_name,
+                        arguments=args,
+                        call_id=tc.get("id")
+                    ))
+
+            usage = res_json.get("usage", {})
+            token_usage = {
+                "prompt_tokens": usage.get("prompt_tokens", 0),
+                "completion_tokens": usage.get("completion_tokens", 0),
+                "total_tokens": usage.get("total_tokens", 0)
+            }
+
+            return LLMResult(
+                content=content,
+                status=ProviderStatus.OPERATIONAL,
+                tool_calls=tool_calls,
+                model_name=self.model_name,
+                token_usage=token_usage,
+                latency_ms=elapsed
+            )
+
+        except (httpx.TimeoutException, asyncio.TimeoutError):
+            return LLMResult(
+                content="",
+                status=ProviderStatus.TIMEOUT,
+                latency_ms=(time.time() - t0) * 1000.0,
+                errors=[f"LLM request timed out after {timeout_seconds:.1f}s"]
+            )
+        except Exception as e:
+            return LLMResult(
+                content="",
+                status=ProviderStatus.ERROR,
+                latency_ms=(time.time() - t0) * 1000.0,
+                errors=[f"LLM API connection failed: {str(e)}"]
+            )

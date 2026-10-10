@@ -1,10 +1,12 @@
 """Text-to-Speech (TTS) provider adapters and abstractions."""
 
-import asyncio
 import time
+import asyncio
 import numpy as np
 from abc import ABC, abstractmethod
-from typing import Optional
+from typing import Optional, Dict, Any
+
+import httpx
 
 from backend.providers.contracts import TTSResult, ProviderStatus
 
@@ -129,19 +131,23 @@ class MockTTSProvider(BaseTTSProvider):
 
 class APITTSAdapter(BaseTTSProvider):
     """
-    Adapter for remote TTS APIs (e.g. OpenAI TTS, ElevenLabs, Edge-TTS).
-    Fails closed if credentials or network are unconfigured.
+    Real API Adapter for OpenAI-compatible Text-to-Speech endpoints (/v1/audio/speech).
+    Requests raw PCM audio output stream.
     """
 
     def __init__(
         self,
         api_key: Optional[str] = None,
-        voice_id: str = "default_voice",
-        api_base_url: Optional[str] = None
+        model_name: str = "tts-1",
+        voice_id: str = "alloy",
+        api_base_url: Optional[str] = None,
+        http_client: Optional[httpx.AsyncClient] = None
     ):
         self._api_key = api_key
+        self.model_name = model_name
         self.voice_id = voice_id
-        self.api_base_url = api_base_url
+        self.api_base_url = (api_base_url or "https://api.openai.com/v1").rstrip("/")
+        self._custom_client = http_client
 
     def is_available(self) -> bool:
         return bool(self._api_key and self._api_key.strip())
@@ -151,8 +157,8 @@ class APITTSAdapter(BaseTTSProvider):
         text: str,
         voice: Optional[str] = None,
         speed: float = 1.0,
-        sample_rate: int = 16000,
-        timeout_seconds: float = 10.0
+        sample_rate: int = 24000,
+        timeout_seconds: float = 15.0
     ) -> TTSResult:
         t0 = time.time()
         if not self.is_available():
@@ -173,10 +179,87 @@ class APITTSAdapter(BaseTTSProvider):
                 errors=["Empty text provided for TTS synthesis"]
             )
 
-        return TTSResult(
-            audio_bytes=b"",
-            sample_rate=sample_rate,
-            status=ProviderStatus.PROVIDER_UNAVAILABLE,
-            duration_ms=(time.time() - t0) * 1000.0,
-            errors=["TTS API endpoint connection not configured in software runtime"]
-        )
+        if len(text) > 4096:
+            return TTSResult(
+                audio_bytes=b"",
+                sample_rate=sample_rate,
+                status=ProviderStatus.ERROR,
+                duration_ms=(time.time() - t0) * 1000.0,
+                errors=["Text exceeds maximum allowed length of 4096 characters"]
+            )
+
+        url = f"{self.api_base_url}/audio/speech"
+        headers = {
+            "Authorization": f"Bearer {self._api_key}",
+            "Content-Type": "application/json"
+        }
+
+        payload: Dict[str, Any] = {
+            "model": self.model_name,
+            "input": text.strip(),
+            "voice": voice or self.voice_id,
+            "response_format": "pcm",
+            "speed": max(0.25, min(4.0, speed))
+        }
+
+        try:
+            client = self._custom_client or httpx.AsyncClient(timeout=timeout_seconds)
+            try:
+                response = await client.post(url, headers=headers, json=payload)
+            finally:
+                if self._custom_client is None:
+                    await client.aclose()
+
+            elapsed = (time.time() - t0) * 1000.0
+
+            if response.status_code in (401, 403):
+                return TTSResult(
+                    audio_bytes=b"",
+                    sample_rate=sample_rate,
+                    status=ProviderStatus.AUTH_FAILED,
+                    duration_ms=elapsed,
+                    errors=[f"Authentication failed: HTTP {response.status_code}"]
+                )
+            elif response.status_code == 429:
+                return TTSResult(
+                    audio_bytes=b"",
+                    sample_rate=sample_rate,
+                    status=ProviderStatus.RATE_LIMITED,
+                    duration_ms=elapsed,
+                    errors=["Rate limit exceeded (HTTP 429)"]
+                )
+            elif response.status_code >= 400:
+                return TTSResult(
+                    audio_bytes=b"",
+                    sample_rate=sample_rate,
+                    status=ProviderStatus.ERROR,
+                    duration_ms=elapsed,
+                    errors=[f"API error HTTP {response.status_code}: {response.text[:200]}"]
+                )
+
+            raw_audio = response.content
+            return TTSResult(
+                audio_bytes=raw_audio,
+                sample_rate=sample_rate,
+                channels=1,
+                audio_format="pcm_s16le",
+                duration_ms=elapsed,
+                status=ProviderStatus.OPERATIONAL
+            )
+
+        except (httpx.TimeoutException, asyncio.TimeoutError):
+            return TTSResult(
+                audio_bytes=b"",
+                sample_rate=sample_rate,
+                status=ProviderStatus.TIMEOUT,
+                duration_ms=(time.time() - t0) * 1000.0,
+                errors=[f"TTS request timed out after {timeout_seconds:.1f}s"]
+            )
+        except Exception as e:
+            return TTSResult(
+                audio_bytes=b"",
+                sample_rate=sample_rate,
+                status=ProviderStatus.ERROR,
+                duration_ms=(time.time() - t0) * 1000.0,
+                errors=[f"TTS API connection failed: {str(e)}"]
+            )
