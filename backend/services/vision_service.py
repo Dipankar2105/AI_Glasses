@@ -10,14 +10,23 @@ from backend.ai.contracts import UnifiedVisionResult
 from backend.vision.frame import VisionFrame
 from backend.config.settings import AppSettings, get_settings
 
+from backend.power.policy import PowerThermalPolicyManager
+from backend.power.contracts import WorkloadPriority
+
 class VisionService:
     """
     Service layer coordinating vision orchestration, engine registration,
-    and async thread-pool execution with timeout handling.
+    power/thermal authorization, and async thread-pool execution with timeout handling.
     """
-    def __init__(self, settings: Optional[AppSettings] = None, registry: Optional[AIEngineRegistry] = None):
+    def __init__(
+        self,
+        settings: Optional[AppSettings] = None,
+        registry: Optional[AIEngineRegistry] = None,
+        power_manager: Optional[PowerThermalPolicyManager] = None,
+    ):
         self.settings = settings or get_settings()
         self.registry = registry or self._create_default_registry()
+        self.power_manager = power_manager
         self.orchestrator = VisionOrchestrator(self.registry)
         self.start_time = time.time()
 
@@ -38,8 +47,22 @@ class VisionService:
     ) -> UnifiedVisionResult:
         """
         Executes vision pipeline and AI engines asynchronously in a thread pool
-        with strict timeout enforcement.
+        with strict power/thermal authorization and timeout enforcement.
         """
+        if self.power_manager is not None:
+            ts = (vframe.timestamp / 1000.0) if (vframe and vframe.timestamp > 0) else time.time()
+            can_run, reason = self.power_manager.can_execute_workload(WorkloadPriority.VISION_CAPTURE, current_time=ts)
+            if not can_run:
+                res = UnifiedVisionResult()
+                res.timestamp = vframe.timestamp if vframe else 0
+                res.seq_num = vframe.seq_num if vframe else 0
+                res.errors.append({
+                    "stage": "power_policy",
+                    "error": "BLOCKED_BY_POWER_POLICY",
+                    "msg": f"Vision processing prohibited by power/thermal policy: {reason}"
+                })
+                return res
+
         timeout = timeout_seconds if timeout_seconds is not None else self.settings.request_timeout_seconds
         try:
             result = await asyncio.wait_for(

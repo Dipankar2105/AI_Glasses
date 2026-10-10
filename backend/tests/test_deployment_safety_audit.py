@@ -188,3 +188,47 @@ class TestDeploymentSafetyGate:
         assert strict_policy.battery_status == BatteryStatus.NORMAL
         assert strict_policy.thermal_status == ThermalStatus.NORMAL
         assert strict_policy.can_execute_workload(WorkloadPriority.VISION_CAPTURE)[0] is True
+
+    @pytest.mark.anyio
+    async def test_vision_service_direct_power_authorization_gate(self):
+        """Direct invocation of VisionService.process_frame_async is intercepted when power manager is attached."""
+        import numpy as np
+        from backend.services.vision_service import VisionService
+        from backend.vision.frame import VisionFrame
+
+        policy = PowerThermalPolicyManager(require_verified_telemetry=True)
+        service = VisionService(power_manager=policy)
+
+        frame = VisionFrame(
+            data=np.zeros((50, 50, 3), dtype=np.uint8),
+            width=50,
+            height=50,
+            channels=3,
+            pixel_format="RGB",
+            numerical_range=(0, 255),
+            timestamp=1000,
+            seq_num=1,
+        )
+
+        # 1. Uninitialized telemetry -> Blocked directly at service boundary
+        res1 = await service.process_frame_async(frame)
+        assert len(res1.errors) > 0
+        assert res1.errors[0]["error"] == "BLOCKED_BY_POWER_POLICY"
+        assert "uninitialized" in res1.errors[0]["msg"].lower()
+
+        # 2. Ingest valid telemetry at t=1.0s
+        policy.update_battery_telemetry(BatteryTelemetry(voltage_volts=3.9, percentage=80.0, timestamp=1.0), current_time=1.0)
+        policy.update_thermal_telemetry(ThermalTelemetry(temperature_celsius=32.0, timestamp=1.0), current_time=1.0)
+
+        # Authorized frame execution at t=1.0s (1000ms)
+        res2 = await service.process_frame_async(frame)
+        assert len(res2.errors) == 0
+        assert res2.detection_result is not None
+
+        # 3. Enter LOW_POWER state -> Blocked directly at service boundary
+        policy.update_battery_telemetry(BatteryTelemetry(voltage_volts=3.5, percentage=12.0, timestamp=2.0), current_time=2.0)
+        res3 = await service.process_frame_async(frame)
+        assert len(res3.errors) > 0
+        assert res3.errors[0]["error"] == "BLOCKED_BY_POWER_POLICY"
+        assert "low battery" in res3.errors[0]["msg"].lower()
+
