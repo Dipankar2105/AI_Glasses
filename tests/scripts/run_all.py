@@ -15,7 +15,8 @@ def main():
         "python firmware/audio/tests/test_aec.py",
         "python firmware/audio/tests/test_aec_dtd.py",
         "python firmware/audio/tests/test_aec_dtd_interface.py",
-        "python firmware/audio/tests/test_audio_e2e.py"
+        "python firmware/audio/tests/test_audio_e2e.py",
+        "python firmware/audio/tests/test_integrated_pipeline.py"
     ]
     phase3_tests = [
         "python firmware/hal/tests/test_hal_audio.py",

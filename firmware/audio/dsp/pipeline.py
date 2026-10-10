@@ -1,4 +1,9 @@
 from .buffer import AudioBuffer, DSPStage
+from .integrated_pipeline import (
+    IntegratedAudioPipeline,
+    AudioProcessingMetrics,
+    AudioPipelineConfig,
+)
 
 class DSPPipeline:
     """A chain of DSP stages executed sequentially."""
@@ -13,3 +18,10 @@ class DSPPipeline:
         for stage in self.stages:
             current_buffer = stage.process(current_buffer)
         return current_buffer
+
+__all__ = [
+    "DSPPipeline",
+    "IntegratedAudioPipeline",
+    "AudioProcessingMetrics",
+    "AudioPipelineConfig",
+]
