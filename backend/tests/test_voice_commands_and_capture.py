@@ -207,7 +207,14 @@ def test_websocket_voice_command_dispatch_and_spoken_response(ws_test_client):
         assert cmd_msg["intent"] == "CAPTURE_IMAGE"
         assert cmd_msg["success"] is True
 
-        # Camera trigger sent to device
+        # MCP JSON-RPC 2.0 tools/call sent to firmware McpServer
+        mcp_msg = json.loads(ws.receive_text())
+        assert mcp_msg["type"] == "mcp"
+        assert mcp_msg["payload"]["jsonrpc"] == "2.0"
+        assert mcp_msg["payload"]["method"] == "tools/call"
+        assert mcp_msg["payload"]["params"]["name"] == "self.camera.take_photo"
+
+        # High-level camera trigger sent to device
         cam_msg = json.loads(ws.receive_text())
         assert cam_msg["type"] == "camera"
         assert cam_msg["command"] == "capture"

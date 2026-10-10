@@ -160,6 +160,24 @@ async def websocket_device_endpoint(
                                             "action_data": cmd_res.action_data
                                         }))
                                         if cmd_match.intent == VoiceCommandIntent.CAPTURE_IMAGE:
+                                            # Send MCP JSON-RPC 2.0 tool invocation matching firmware mcp_server.cc
+                                            mcp_payload = {
+                                                "jsonrpc": "2.0",
+                                                "id": 1,
+                                                "method": "tools/call",
+                                                "params": {
+                                                    "name": "self.camera.take_photo",
+                                                    "arguments": {
+                                                        "question": "What is in front of me?"
+                                                    }
+                                                }
+                                            }
+                                            await websocket.send_text(json.dumps({
+                                                "type": "mcp",
+                                                "payload": mcp_payload,
+                                                "session_id": session_id
+                                            }))
+                                            # Also emit high-level camera command for simple clients
                                             await websocket.send_text(json.dumps({
                                                 "type": "camera",
                                                 "command": "capture",
