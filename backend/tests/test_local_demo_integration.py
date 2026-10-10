@@ -175,3 +175,50 @@ def test_demo_stage6_fault_tolerance(orchestrator):
     cb.record_failure(1.0)
     assert cb.state == CircuitState.OPEN
     assert cb.can_execute(1.0) is False
+
+
+def test_demo_stage7_voice_ai_pipeline(api_client):
+    """Verify Stage 7: Full Audio DSP, STT, LLM, and TTS orchestration loop."""
+    import base64
+    import struct
+    from backend.providers.stt import MockSTTProvider
+    from backend.providers.tts import MockTTSProvider
+    from backend.providers.llm import MockLLMProvider
+    from backend.services.audio_service import AudioService
+    from backend.services.conversation_service import ConversationService
+
+    app.state.audio_service = AudioService(stt_provider=MockSTTProvider(), tts_provider=MockTTSProvider())
+    app.state.conversation_service = ConversationService(llm_provider=MockLLMProvider())
+
+    # 1. Provider status
+    res_p = api_client.get("/api/v1/providers/status")
+    assert res_p.status_code == 200
+
+    # 2. Audio transcribe
+    pcm_samples = [int(1000 * ((i % 50) - 25)) for i in range(1600)]
+    pcm_bytes = struct.pack(f"<{len(pcm_samples)}h", *pcm_samples)
+    b64_audio = base64.b64encode(pcm_bytes).decode("ascii")
+
+    res_t = api_client.post("/api/v1/audio/transcribe", json={
+        "audio_base64": b64_audio,
+        "sample_rate": 16000,
+        "run_dsp": True
+    })
+    assert res_t.status_code == 200
+    assert res_t.json()["success"] is True
+
+    # 3. Conversation
+    res_c = api_client.post("/api/v1/conversation/message", json={
+        "session_id": "test-voice-demo",
+        "message": "Status update",
+        "tool_to_invoke": "get_system_status"
+    })
+    assert res_c.status_code == 200
+
+    # 4. Speech synthesize
+    res_s = api_client.post("/api/v1/speech/synthesize", json={
+        "text": "Status check completed",
+        "voice": "alloy"
+    })
+    assert res_s.status_code == 200
+    assert res_s.json()["success"] is True

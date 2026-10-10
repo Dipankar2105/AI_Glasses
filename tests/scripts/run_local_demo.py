@@ -195,9 +195,76 @@ def run_demo() -> bool:
     print(f"[Circuit Breaker] Tripped to State: {cb.state.value} | can_execute: {cb.can_execute(current_time=1.0)}")
     assert cb.state.value == "OPEN"
 
+    # -------------------------------------------------------------------------
+    # STEP 7: End-to-End Voice AI Pipeline (Audio -> DSP -> STT -> LLM -> TTS)
+    # -------------------------------------------------------------------------
+    print_section("Step 7: End-to-End Voice AI Pipeline & Providers")
+
+    import base64
+    import struct
+    from backend.providers.stt import MockSTTProvider
+    from backend.providers.tts import MockTTSProvider
+    from backend.providers.llm import MockLLMProvider
+    from backend.services.audio_service import AudioService
+    from backend.services.conversation_service import ConversationService
+
+    # Configure mock providers for deterministic offline demonstration
+    mock_app_stt = MockSTTProvider()
+    mock_app_tts = MockTTSProvider()
+    mock_app_llm = MockLLMProvider()
+    app.state.audio_service = AudioService(stt_provider=mock_app_stt, tts_provider=mock_app_tts)
+    app.state.conversation_service = ConversationService(llm_provider=mock_app_llm)
+
+    # Check Provider Status
+    prov_res = client.get("/api/v1/providers/status")
+    assert prov_res.status_code == 200
+    prov_data = prov_res.json()
+    print(f"[Provider Status] STT Configured: {prov_data['stt']['configured']} | Model: {prov_data['stt']['model']}")
+    print(f"[Provider Status] LLM Configured: {prov_data['llm']['configured']} | Model: {prov_data['llm']['model']}")
+    print(f"[Provider Status] TTS Configured: {prov_data['tts']['configured']} | Model: {prov_data['tts']['model']}")
+    print("Mode Declaration: Using deterministic mock/offline providers for reproducible host testing.\n")
+
+    # 7.1 Generate synthetic speech PCM audio (200ms @ 16kHz)
+    pcm_samples = [int(800 * ((i % 40) - 20)) for i in range(3200)]
+    pcm_bytes = struct.pack(f"<{len(pcm_samples)}h", *pcm_samples)
+    b64_audio = base64.b64encode(pcm_bytes).decode("ascii")
+
+    # 7.2 Post to Audio Transcribe API (Runs DSP + STT)
+    audio_transcribe_res = client.post("/api/v1/audio/transcribe", json={
+        "audio_base64": b64_audio,
+        "sample_rate": 16000,
+        "run_dsp": True
+    })
+    assert audio_transcribe_res.status_code == 200
+    trans_data = audio_transcribe_res.json()
+    print(f"[Audio Ingest & DSP] Transcribed: '{trans_data['transcript']}' (Confidence: {trans_data['confidence']})")
+    print(f"  DSP Pipeline Stages Executed: {', '.join(trans_data['dsp_metrics']['stages_executed'])}")
+    print(f"  DSP Input RMS: {trans_data['dsp_metrics']['input_rms']} -> Output RMS: {trans_data['dsp_metrics']['output_rms']}")
+
+    # 7.3 Post conversation query
+    conv_voice_res = client.post("/api/v1/conversation/message", json={
+        "session_id": "demo-voice-session",
+        "message": "What is the status of the device?",
+        "tool_to_invoke": "get_system_status"
+    })
+    assert conv_voice_res.status_code == 200
+    conv_voice_data = conv_voice_res.json()
+    print(f"[Conversation & LLM] Assistant: '{conv_voice_data['response']}'")
+    print(f"  Tool Execution: {conv_voice_data['tool_executions'][0]['tool_name']} -> Success: {conv_voice_data['tool_executions'][0]['success']}")
+
+    # 7.4 Synthesize speech response with TTS API
+    synth_res = client.post("/api/v1/speech/synthesize", json={
+        "text": conv_voice_data['response'] or "NextSight system is operational.",
+        "voice": "alloy"
+    })
+    assert synth_res.status_code == 200
+    synth_data = synth_res.json()
+    synth_bytes = base64.b64decode(synth_data["audio_base64"])
+    print(f"[TTS Synthesis] Synthesized {len(synth_bytes)} bytes audio PCM ({synth_data['sample_rate']}Hz, {synth_data['encoding']}) in {synth_data['latency_ms']}ms")
+
     print_section("Local System Demonstration Summary")
-    print("All 6 integration stages executed cleanly without errors!")
-    print("All contracts, dispatchers, and fault-tolerance mechanisms verified successfully.\n")
+    print("All 7 integration stages executed cleanly without errors!")
+    print("All contracts, dispatchers, DSP pipeline, and AI providers verified successfully.\n")
     return True
 
 
