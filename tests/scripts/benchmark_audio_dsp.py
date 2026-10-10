@@ -17,7 +17,10 @@ from firmware.audio.dsp.integrated_pipeline import (
     IntegratedAudioPipeline,
     AudioStreamAdapter,
 )
+from firmware.audio.dsp import metrics
+from firmware.audio.dsp.buffer import AudioBuffer
 from firmware.audio.tests.test_vad import generate_noise, generate_speech_like, SAMPLE_RATE
+from firmware.audio.tests.test_aec import delayed_signal
 
 
 def compute_latency_stats(latencies_ms: List[float]) -> Dict[str, float]:
@@ -60,6 +63,11 @@ def benchmark_audio_dsp(iterations: int = 1000, frame_size: int = 256) -> Dict[s
     speech_1s = generate_speech_like(1.0)
     noise_1s = generate_noise(300.0, 1.0)
     mixed_1s = [s + n for s, n in zip(speech_1s, noise_1s)]
+
+    # Ground-truth SNR calculation
+    clean_speech_buf = AudioBuffer(speech_1s, SAMPLE_RATE)
+    noise_buf = AudioBuffer(noise_1s, SAMPLE_RATE)
+    input_snr_db = metrics.calculate_snr(clean_speech_buf, noise_buf)
 
     # Slice mixed audio into fixed frames of `frame_size`
     frames: List[List[float]] = []
@@ -117,7 +125,21 @@ def benchmark_audio_dsp(iterations: int = 1000, frame_size: int = 256) -> Dict[s
 
     mean_in_rms = round(statistics.mean(in_rms_list), 2)
     mean_out_rms = round(statistics.mean(out_rms_list), 2)
-    snr_improvement_db = round(20.0 * math.log10(max(mean_out_rms, 1e-6) / max(mean_in_rms, 1e-6)), 2)
+    dynamic_rms_gain_db = round(20.0 * math.log10(max(mean_out_rms, 1e-6) / max(mean_in_rms, 1e-6)), 2)
+
+    # 3. Acoustic Echo Cancellation (AEC) Evaluation
+    pipeline.reset()
+    ref_speech = generate_speech_like(1.0)
+    echo_signal = delayed_signal(ref_speech, delay_samples=50, attenuation=0.5)
+    echo_frame = AudioFrame(pcm_data=echo_signal, sample_rate=SAMPLE_RATE)
+    ref_frame = AudioFrame(pcm_data=ref_speech, sample_rate=SAMPLE_RATE)
+
+    # Process through pipeline with reference frame
+    res_aec = pipeline.process_frame(echo_frame, ref_frame)
+    skip = int(SAMPLE_RATE * 0.2)  # skip 200ms adaptation period
+    echo_orig_buf = AudioBuffer(echo_signal[skip:], SAMPLE_RATE)
+    echo_res_buf = AudioBuffer(res_aec.output_frame.pcm_data[skip:], SAMPLE_RATE)
+    erle_db = round(metrics.calculate_erle(echo_orig_buf, echo_res_buf), 2)
 
     return {
         "benchmark_config": {
@@ -139,10 +161,16 @@ def benchmark_audio_dsp(iterations: int = 1000, frame_size: int = 256) -> Dict[s
         "signal_quality_summary": {
             "mean_input_rms": mean_in_rms,
             "mean_output_rms": mean_out_rms,
-            "snr_shift_db": snr_improvement_db,
+            "dynamic_rms_gain_db": dynamic_rms_gain_db,
+            "input_snr_db": round(input_snr_db, 2),
             "vad_speech_active_frames": vad_active_count,
             "vad_speech_active_percentage": round((vad_active_count / iterations) * 100.0, 2),
             "clipping_detected": False,
+        },
+        "aec_performance": {
+            "aec_status": res_aec.metrics.aec_status,
+            "echo_return_loss_enhancement_erle_db": erle_db,
+            "double_talk_frames_detected": res_aec.metrics.dt_detected_frames,
         },
         "environment": {
             "python_version": sys.version,

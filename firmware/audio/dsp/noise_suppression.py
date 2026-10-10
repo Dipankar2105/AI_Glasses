@@ -49,6 +49,8 @@ class SpectralNoiseSuppression(DSPStage):
     def _process_impl(self, buffer: AudioBuffer) -> AudioBuffer:
         data = list(buffer.data)
         N = len(data)
+        if N < self.frame_size:
+            return buffer
         out_data = [0.0] * N
         
         frames_processed = 0

@@ -110,6 +110,7 @@ class AudioProcessingMetrics:
     output_dc_offset: float = 0.0
     clipping_detected: bool = False
     clipping_percentage: float = 0.0
+    rms_gain_db: Optional[float] = None
     snr_estimate_db: Optional[float] = None
     vad_speech_active: bool = False
     vad_active_frames: int = 0
@@ -379,6 +380,11 @@ class IntegratedAudioPipeline:
         if self.aec.enabled and ref_frame is not None and len(ref_frame.pcm_data) > 0:
             ts0 = time.perf_counter()
             ref_sanitized, _, _ = self._validate_samples(ref_frame.pcm_data)
+            # Ensure exact length alignment with mic samples to prevent truncation
+            if len(ref_sanitized) < len(sanitized):
+                ref_sanitized = ref_sanitized + [0.0] * (len(sanitized) - len(ref_sanitized))
+            elif len(ref_sanitized) > len(sanitized):
+                ref_sanitized = ref_sanitized[:len(sanitized)]
             ref_buf_clean = AudioBuffer(ref_sanitized, self.config.sample_rate)
             current_buf = self.aec.process_aec(current_buf, ref_buf_clean)
             per_stage_timings["NLMSAECWithDTD"] = round((time.perf_counter() - ts0) * 1000.0, 4)
@@ -433,9 +439,9 @@ class IntegratedAudioPipeline:
         clip_pct = metrics.calculate_clipping_percentage(current_buf, self.config.limiter_threshold)
         clip_detected = clip_pct > 0.0 or out_peak >= self.config.limiter_threshold
 
-        snr_est = None
+        rms_gain = None
         if in_rms > 0 and out_rms > 0:
-            snr_est = round(20.0 * math.log10(max(out_rms, 1e-6) / max(in_rms, 1e-6)), 2)
+            rms_gain = round(20.0 * math.log10(max(out_rms, 1e-6) / max(in_rms, 1e-6)), 2)
 
         out_frame = AudioFrame(
             pcm_data=list(current_buf.data),
@@ -462,7 +468,8 @@ class IntegratedAudioPipeline:
             output_dc_offset=round(out_dc, 2),
             clipping_detected=clip_detected,
             clipping_percentage=round(clip_pct, 2),
-            snr_estimate_db=snr_est,
+            rms_gain_db=rms_gain,
+            snr_estimate_db=rms_gain,
             vad_speech_active=vad_active,
             vad_active_frames=vad_active_count,
             vad_total_frames=vad_total_count,

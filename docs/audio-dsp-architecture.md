@@ -36,10 +36,12 @@ The NextSight integrated audio processing pipeline (`IntegratedAudioPipeline` in
    - Normalized Least Mean Squares (NLMS) filter with Geigel Double-Talk Detector (`NLMSAECWithDTD`).
    - Filter length: 256 samples ($16\text{ ms}$ tail), step size $\mu = 0.5$, regularization $\epsilon = 10^6$.
    - Geigel DTD threshold: 0.5, hold time: 800 samples ($50\text{ ms}$).
-   - **Conditional Integration**: AEC operates when a valid far-end speaker playback reference frame is provided. When no reference is provided, AEC is safely bypassed and reported as `BYPASS_NO_REFERENCE`.
+   - **Sample Alignment**: Strict length alignment ensures reference frames are padded/truncated to match near-end capture lengths.
+   - **Conditional Integration**: AEC operates when a valid far-end speaker playback reference frame is provided (`aec_status = "ACTIVE"`, ERLE $\approx 38.9\text{ dB}$). When no reference is provided, AEC is safely bypassed without fabricating reference audio and reported as `BYPASS_NO_REFERENCE`.
 5. **Spectral Noise Suppression (NS)**:
    - Classical spectral subtraction with pure-Python FFT / IFFT and Hann windowing.
    - FFT size: 256, 50% overlap (hop size 128), $\alpha = 2.0$, spectral floor $= 0.05$.
+   - Sub-frames smaller than 256 samples pass through transparently without zeroing.
 6. **Voice Activity Detection (VAD)**:
    - Energy-based Voice Activity Detector operating on 10ms sub-frames (160 samples).
    - Energy threshold: 500.0, attack frames: 1, hangover frames: 15 (150ms).
@@ -89,7 +91,7 @@ The pipeline is implemented in `firmware/audio/dsp/integrated_pipeline.py` and e
 | `input_dc_offset` / `output_dc_offset` | `float` | Mean DC offset before and after filtering |
 | `clipping_detected` | `bool` | True if output samples hit the ceiling threshold |
 | `clipping_percentage` | `float` | Percentage of samples clamped by the limiter |
-| `snr_estimate_db` | `Optional[float]` | Approximate signal-to-noise ratio / energy shift in dB |
+| `rms_gain_db` | `Optional[float]` | Dynamic RMS energy ratio in dB ($20 \log_{10}(\text{output\_rms} / \text{input\_rms})$) |
 | `vad_speech_active` | `bool` | Voice activity detection status for the frame |
 | `vad_active_frames` / `vad_total_frames` | `int` | Count of active speech sub-frames vs total evaluated |
 | `aec_status` | `str` | `"ACTIVE"`, `"BYPASS_NO_REFERENCE"`, or `"DISABLED"` |
@@ -107,21 +109,24 @@ From host-side benchmarking across 1,000 consecutive 256-sample frames ($16\text
 |---|---|
 | **Iterations** | 1,000 frames |
 | **Total Audio Duration** | 16.00 seconds |
-| **Total Wall-Clock Time** | 0.950 seconds |
-| **Mean Processing Latency** | $0.948\text{ ms}$ / frame |
-| **Median Processing Latency** | $0.952\text{ ms}$ / frame |
-| **p95 Latency** | $0.995\text{ ms}$ / frame |
-| **p99 Latency** | $1.090\text{ ms}$ / frame |
-| **Throughput** | $16.84\text{ audio-seconds / sec}$ |
-| **Mean Real-Time Factor (RTF)** | $0.0592$ ($\approx 16.8\times$ faster than real-time playback) |
+| **Total Wall-Clock Time** | 0.957 seconds |
+| **Mean Processing Latency** | $0.955\text{ ms}$ / frame |
+| **Median Processing Latency** | $0.930\text{ ms}$ / frame |
+| **p95 Latency** | $1.099\text{ ms}$ / frame |
+| **p99 Latency** | $1.364\text{ ms}$ / frame |
+| **Throughput** | $16.72\text{ audio-seconds / sec}$ |
+| **Mean Real-Time Factor (RTF)** | $0.0597$ ($\approx 16.7\times$ faster than real-time playback) |
+| **Dynamic RMS Gain (AGC)** | $+7.33\text{ dB}$ |
+| **Input Signal-to-Noise Ratio (SNR)** | $+20.46\text{ dB}$ |
+| **AEC Echo Return Loss (ERLE)** | $+38.91\text{ dB}$ (when speaker reference is provided) |
 
-### Per-Stage Latency Breakdown:
-- `DCBlocker`: $0.023\text{ ms}$
-- `HighPassFilter`: $0.024\text{ ms}$
-- `SpectralNoiseSuppression`: $0.600\text{ ms}$
-- `VAD`: $0.010\text{ ms}$
-- `AGC`: $0.093\text{ ms}$
-- `Limiter`: $0.018\text{ ms}$
+### Per-Stage Latency Breakdown (Mean):
+- `DCBlocker`: $0.0233\text{ ms}$
+- `HighPassFilter`: $0.0245\text{ ms}$
+- `SpectralNoiseSuppression`: $0.6043\text{ ms}$
+- `VAD`: $0.0105\text{ ms}$
+- `AGC`: $0.0934\text{ ms}$
+- `Limiter`: $0.0175\text{ ms}$
 
 ---
 
@@ -129,6 +134,7 @@ From host-side benchmarking across 1,000 consecutive 256-sample frames ($16\text
 
 - **Bounded Stream Queues**: Ingestion and egress FIFO queues enforce `max_queue_size = 50` chunks (default) to strictly prevent memory leaks or unbounded growth during network/buffer delays.
 - **Stateful History Bounds**: All filter histories, DTD buffers, and AEC weights use fixed-length ring buffers or lists proportional to filter length ($N \le 256$ samples, $\sim 3\text{ KB}$ RAM total).
+- **Stream Reconstruction Oracle**: `AudioStreamAdapter` guarantees exact sample count and sample ordering across irregular and odd-byte stream chunks without loss or duplication.
 - **Idempotent Reset**: The `reset()` method clears all queues and re-initializes all stages deterministically.
 
 ---

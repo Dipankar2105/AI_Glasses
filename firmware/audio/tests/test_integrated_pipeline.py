@@ -14,6 +14,9 @@ Tests:
 11. AudioFrame and AudioProcessingResult contracts and explicit rejection paths.
 12. AudioStreamAdapter continuous stream slicing, partial buffering, and dropped counters.
 13. Per-stage performance profiling and latency measurement separation.
+14. AEC reference length mismatch handling, echo reduction enhancement (ERLE), and DTD safety.
+15. Stream arbitrary byte chunking oracle equality (no sample loss or duplication).
+16. Mathematical correctness of SNR and ERLE metric calculations under silence/signals.
 """
 
 import math
@@ -33,8 +36,10 @@ from dsp.integrated_pipeline import (
     IntegratedAudioPipeline,
     AudioStreamAdapter,
 )
+from dsp import metrics
 from tests.test_vad import generate_noise, generate_speech_like, SAMPLE_RATE
 from tests.test_dsp import generate_sine
+from tests.test_aec import delayed_signal
 
 
 def test_silence_and_low_amplitude():
@@ -43,15 +48,15 @@ def test_silence_and_low_amplitude():
     silence = [0.0] * int(SAMPLE_RATE * 0.5)
     
     # Pure silence
-    out_samples, metrics = pipeline.process_pcm_samples(silence)
+    out_samples, m = pipeline.process_pcm_samples(silence)
     assert len(out_samples) == len(silence)
-    assert metrics.input_rms == 0.0
-    assert metrics.output_rms < 1.0
-    assert not metrics.clipping_detected
-    assert metrics.clipping_percentage == 0.0
-    assert not metrics.vad_speech_active
-    assert metrics.vad_active_frames == 0
-    assert metrics.error is None
+    assert m.input_rms == 0.0
+    assert m.output_rms < 1.0
+    assert not m.clipping_detected
+    assert m.clipping_percentage == 0.0
+    assert not m.vad_speech_active
+    assert m.vad_active_frames == 0
+    assert m.error is None
     
     # Low-amplitude signal (below VAD 500.0 threshold - known quiet-speech limitation)
     quiet_speech = [s * 0.05 for s in generate_speech_like(0.5)]
@@ -75,20 +80,20 @@ def test_speech_mixed_with_noise():
     noise = generate_noise(300.0, 1.0)
     mixed = [s + n for s, n in zip(speech, noise)]
     
-    out_samples, metrics = pipeline.process_pcm_samples(mixed)
+    out_samples, m = pipeline.process_pcm_samples(mixed)
     assert len(out_samples) == len(mixed)
-    assert metrics.input_rms > 0.0
-    assert metrics.output_rms > 0.0
-    assert metrics.vad_active_frames > 0
-    assert metrics.vad_speech_active
+    assert m.input_rms > 0.0
+    assert m.output_rms > 0.0
+    assert m.vad_active_frames > 0
+    assert m.vad_speech_active
     # Peak limiter enforces max output ceiling <= 32767.0
-    assert metrics.output_peak <= 32767.0
+    assert m.output_peak <= 32767.0
     assert max(out_samples) <= 32767.0
     assert min(out_samples) >= -32768.0
-    assert "SpectralNoiseSuppression" in metrics.stages_executed
-    assert "VAD" in metrics.stages_executed
-    assert "AGC" in metrics.stages_executed
-    assert "Limiter" in metrics.stages_executed
+    assert "SpectralNoiseSuppression" in m.stages_executed
+    assert "VAD" in m.stages_executed
+    assert "AGC" in m.stages_executed
+    assert "Limiter" in m.stages_executed
 
 
 def test_high_amplitude_and_clipped_input():
@@ -97,12 +102,12 @@ def test_high_amplitude_and_clipped_input():
     
     # Signal that far exceeds 16-bit range
     loud_sine = [60000.0 * math.sin(2 * math.pi * 440 * i / SAMPLE_RATE) for i in range(1600)]
-    out_samples, metrics = pipeline.process_pcm_samples(loud_sine)
+    out_samples, m = pipeline.process_pcm_samples(loud_sine)
     
     assert max(out_samples) <= 32767.0
     assert min(out_samples) >= -32768.0
-    assert metrics.clipping_detected or metrics.output_peak >= 32767.0
-    assert metrics.output_peak <= 32767.0
+    assert m.clipping_detected or m.output_peak >= 32767.0
+    assert m.output_peak <= 32767.0
 
 
 def test_malformed_input_and_invalid_frame_sizes():
@@ -215,10 +220,10 @@ def test_noise_suppression_known_clean_noisy_pair():
     speech = generate_speech_like(0.8)
     noisy_speech = [s + n for s, n in zip(speech, noise)]
     
-    out_samples, metrics = pipeline.process_pcm_samples(noisy_speech)
+    out_samples, m = pipeline.process_pcm_samples(noisy_speech)
     assert len(out_samples) == len(noisy_speech)
-    assert "SpectralNoiseSuppression" in metrics.stages_executed
-    assert metrics.output_rms > 0.0
+    assert "SpectralNoiseSuppression" in m.stages_executed
+    assert m.output_rms > 0.0
 
 
 def test_repeated_frames_and_resets():
@@ -295,6 +300,44 @@ def test_audio_stream_adapter_slicing_and_buffering():
     assert adapter.buffered_bytes_count == 64  # 32 samples * 2 bytes
 
 
+def test_stream_adapter_arbitrary_byte_chunking_oracle():
+    """Verify that slicing arbitrary and odd-byte stream chunks reconstructs exact samples without loss or duplication."""
+    frame_size = 256
+    adapter = AudioStreamAdapter(frame_size=frame_size)
+    
+    # Generate 1,024 test samples with unique sequential values
+    total_samples = 1024
+    original_samples = [float((i % 1000) * 10) for i in range(total_samples)]
+    full_bytes = struct.pack(f"<{total_samples}h", *[int(s) for s in original_samples])
+    
+    # Split full_bytes into irregular chunks (including odd-byte lengths)
+    chunk_sizes = [1, 3, 511, 7, 513, 15, 256, 17, 33, 499, 2, 191]
+    byte_chunks = []
+    idx = 0
+    c_idx = 0
+    while idx < len(full_bytes):
+        sz = chunk_sizes[c_idx % len(chunk_sizes)]
+        c_idx += 1
+        chunk = full_bytes[idx : idx + sz]
+        byte_chunks.append(chunk)
+        idx += sz
+        
+    # Stream chunks through adapter
+    all_output_samples = []
+    for chunk in byte_chunks:
+        results = adapter.push_raw_stream(chunk)
+        for r in results:
+            all_output_samples.extend(r.output_frame.pcm_data)
+            
+    # Exactly 4 full 256-sample frames (1024 samples) should be produced
+    assert len(all_output_samples) == total_samples
+    assert adapter.buffered_bytes_count == 0
+    assert adapter.accepted_frames == 4
+    assert adapter.processed_frames == 4
+    assert adapter.rejected_frames == 0
+    assert adapter.dropped_frames == 0
+
+
 def test_aec_conditional_integration():
     """Verify AEC operates when reference buffer is supplied and safely bypasses when absent."""
     pipeline = IntegratedAudioPipeline()
@@ -311,6 +354,81 @@ def test_aec_conditional_integration():
     out_no_ref, m_no_ref = pipeline.process_pcm_samples(mic, None)
     assert m_no_ref.aec_status == "BYPASS_NO_REFERENCE"
     assert "NLMSAECWithDTD" not in m_no_ref.stages_executed
+
+
+def test_aec_mismatched_reference_lengths_and_cancellation():
+    """Verify AEC handles reference length mismatches safely and enhances echo return loss (ERLE)."""
+    pipeline = IntegratedAudioPipeline()
+    
+    # 1. Shorter reference (100 samples vs 256 mic samples) -> padded safely, no sample loss
+    mic_256 = [1000.0] * 256
+    ref_100 = [500.0] * 100
+    frame_mic = AudioFrame(pcm_data=mic_256, sample_rate=16000)
+    frame_ref = AudioFrame(pcm_data=ref_100, sample_rate=16000)
+    res_short = pipeline.process_frame(frame_mic, frame_ref)
+    assert res_short.accepted
+    assert res_short.output_frame.sample_count == 256  # No mic samples lost!
+    
+    # 2. Longer reference (400 samples vs 256 mic samples) -> truncated safely
+    ref_400 = [500.0] * 400
+    frame_ref400 = AudioFrame(pcm_data=ref_400, sample_rate=16000)
+    res_long = pipeline.process_frame(frame_mic, frame_ref400)
+    assert res_long.accepted
+    assert res_long.output_frame.sample_count == 256
+    
+    # 3. Echo Cancellation ERLE Test
+    pipeline.reset()
+    ref_speech = generate_speech_like(1.0)
+    echo = delayed_signal(ref_speech, delay_samples=50, attenuation=0.5)
+    f_echo = AudioFrame(pcm_data=echo, sample_rate=16000)
+    f_ref = AudioFrame(pcm_data=ref_speech, sample_rate=16000)
+    res_echo = pipeline.process_frame(f_echo, f_ref)
+    
+    skip = int(SAMPLE_RATE * 0.2)
+    echo_buf = AudioBuffer(echo[skip:], 16000)
+    resid_buf = AudioBuffer(res_echo.output_frame.pcm_data[skip:], 16000)
+    erle = metrics.calculate_erle(echo_buf, resid_buf)
+    assert erle > 10.0  # Demonstrates > 10 dB Echo Return Loss Enhancement
+
+
+def test_aec_double_talk_detector_freezes_adaptation():
+    """Verify Geigel DTD detects near-end speech burst and increments double-talk counter."""
+    pipeline = IntegratedAudioPipeline()
+    
+    ref_speech = generate_speech_like(1.0)
+    echo = delayed_signal(ref_speech, delay_samples=30, attenuation=0.4)
+    near_speech = generate_speech_like(1.0)[500:] + [0.0]*500
+    mic_double_talk = [n + e for n, e in zip(near_speech, echo)]
+    
+    f_mic = AudioFrame(pcm_data=mic_double_talk, sample_rate=16000)
+    f_ref = AudioFrame(pcm_data=ref_speech, sample_rate=16000)
+    
+    res = pipeline.process_frame(f_mic, f_ref)
+    assert res.accepted
+    assert res.metrics.aec_status == "ACTIVE"
+    assert res.metrics.dt_detected_frames > 0  # DTD detected double-talk
+
+
+def test_metrics_snr_and_erle_mathematical_soundness():
+    """Verify metrics calculate_snr and calculate_erle handle normal, silence, and boundary conditions."""
+    # 1. Clean signal + noise
+    clean_buf = AudioBuffer([1000.0] * 100, 16000)
+    noise_buf = AudioBuffer([100.0] * 100, 16000)
+    snr = metrics.calculate_snr(clean_buf, noise_buf)
+    # 20 * log10(1000 / 100) = 20.0 dB
+    assert math.isclose(snr, 20.0, rel_tol=1e-3)
+    
+    # 2. Silence noise -> infinite / 999.0 dB
+    silence_noise = AudioBuffer([0.0] * 100, 16000)
+    snr_clean = metrics.calculate_snr(clean_buf, silence_noise)
+    assert snr_clean == 999.0
+    
+    # 3. Echo reduction calculation
+    echo_buf = AudioBuffer([2000.0] * 100, 16000)
+    resid_buf = AudioBuffer([200.0] * 100, 16000)
+    erle = metrics.calculate_erle(echo_buf, resid_buf)
+    # 20 * log10(2000 / 200) = 20.0 dB
+    assert math.isclose(erle, 20.0, rel_tol=1e-3)
 
 
 def test_latency_measurement_separation_and_per_stage_timings():
