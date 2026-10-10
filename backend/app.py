@@ -7,7 +7,7 @@ from backend.config.settings import AppSettings, get_settings
 from backend.api.routes import router as api_router
 from backend.api.conversation_routes import router as conversation_router
 from backend.api.audio_routes import router as audio_router
-from backend.api.middleware import RequestCorrelationMiddleware
+from backend.api.middleware import RequestCorrelationMiddleware, SecurityAndRateLimitMiddleware
 from backend.services.vision_service import get_vision_service
 from backend.services.conversation_service import get_conversation_service
 from backend.services.audio_service import get_audio_service
@@ -66,6 +66,7 @@ def create_app(settings: Optional[AppSettings] = None) -> FastAPI:
 
     # Add middleware
     app.add_middleware(RequestCorrelationMiddleware)
+    app.add_middleware(SecurityAndRateLimitMiddleware)
 
     # Include routes
     app.include_router(api_router)

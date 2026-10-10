@@ -46,7 +46,12 @@ class AppSettings(BaseModel):
     llm_model: str = Field(default="gpt-4o-mini", description="LLM Model name")
     llm_base_url: Optional[str] = Field(default=None, description="LLM API base URL")
 
-    # Optional API Keys (Never log or leak in errors)
+    # Security and Rate Limiting
+    api_key: Optional[str] = Field(default=None, description="Client API Key required for authenticated endpoints")
+    max_request_body_bytes: int = Field(default=15 * 1024 * 1024, description="Max request payload size (default 15MB)")
+    rate_limit_per_minute: int = Field(default=300, description="Max requests per minute per client IP")
+
+    # Optional AI API Keys (Never log or leak in errors)
     openai_api_key: Optional[str] = Field(default=None, description="OpenAI API Key")
     gemini_api_key: Optional[str] = Field(default=None, description="Google Gemini API Key")
     anthropic_api_key: Optional[str] = Field(default=None, description="Anthropic API Key")
