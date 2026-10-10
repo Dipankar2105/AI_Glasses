@@ -159,6 +159,12 @@ async def websocket_device_endpoint(
                                             "success": cmd_res.success,
                                             "action_data": cmd_res.action_data
                                         }))
+                                        if cmd_match.intent == VoiceCommandIntent.CAPTURE_IMAGE:
+                                            await websocket.send_text(json.dumps({
+                                                "type": "camera",
+                                                "command": "capture",
+                                                "session_id": session_id
+                                            }))
                                         await websocket.send_text(json.dumps({
                                             "type": "llm",
                                             "text": response_text,

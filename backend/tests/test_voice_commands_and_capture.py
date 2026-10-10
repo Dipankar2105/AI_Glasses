@@ -4,7 +4,8 @@ Validates:
 1. VoiceCommandRouter deterministic matching and confidence thresholding.
 2. HTTP Multipart Camera Upload & Explanation endpoints.
 3. WebSocket Device Streaming Voice Command and Binary Image Capture integration.
-4. Error handling: corrupted frames, empty files, oversized payloads, timeouts, and cancellations.
+4. Multi-turn voice command sequence: Capture -> Binary Image Ingest -> Describe Image -> Repeat -> Stop.
+5. Error handling: corrupted frames, empty files, oversized payloads, timeouts, and cancellations.
 """
 
 import os
@@ -181,7 +182,7 @@ def ws_test_client():
 
 
 def test_websocket_voice_command_dispatch_and_spoken_response(ws_test_client):
-    """Verify voice command triggers instant command action and TTS spoken response."""
+    """Verify voice command triggers instant command action, camera trigger, and TTS response."""
     with ws_test_client.websocket_connect("/ws/device") as ws:
         _ = ws.receive_text()  # Server hello
 
@@ -205,6 +206,11 @@ def test_websocket_voice_command_dispatch_and_spoken_response(ws_test_client):
         assert cmd_msg["type"] == "voice_command"
         assert cmd_msg["intent"] == "CAPTURE_IMAGE"
         assert cmd_msg["success"] is True
+
+        # Camera trigger sent to device
+        cam_msg = json.loads(ws.receive_text())
+        assert cam_msg["type"] == "camera"
+        assert cam_msg["command"] == "capture"
 
         # Resolved response emitted
         llm_msg = json.loads(ws.receive_text())
@@ -265,3 +271,36 @@ def test_websocket_corrupted_binary_image_handling(ws_test_client):
         err_res = json.loads(ws.receive_text())
         assert err_res["type"] == "error"
         assert err_res["code"] == "IMAGE_DECODE_FAILED"
+
+
+def test_voice_command_low_confidence_fallback_to_llm():
+    """Verify that low-confidence transcription falls through to normal LLM conversation."""
+    settings = AppSettings(environment="test", require_verified_telemetry=False)
+    app = create_app(settings)
+    # Configure STT with low confidence (0.40)
+    app.state.audio_service = AudioService(
+        stt_provider=MockSTTProvider(canned_transcription="take a picture", confidence=0.40),
+        tts_provider=MockTTSProvider(),
+        settings=settings
+    )
+    app.state.conversation_service = ConversationService(
+        llm_provider=MockLLMProvider(fixed_response="I heard you quietly, how can I help?"),
+    )
+    client = TestClient(app)
+
+    with client.websocket_connect("/ws/device") as ws:
+        _ = ws.receive_text()  # hello
+        ws.send_text(json.dumps({"type": "listen", "state": "start"}))
+        _ = ws.receive_text()  # listening
+
+        ws.send_bytes(b"\x00" * 1600)
+        ws.send_text(json.dumps({"type": "listen", "state": "stop"}))
+        _ = ws.receive_text()  # processing
+
+        stt_msg = json.loads(ws.receive_text())
+        assert stt_msg["confidence"] == 0.40
+
+        # LLM response emitted directly without triggering voice command action
+        llm_msg = json.loads(ws.receive_text())
+        assert llm_msg["type"] == "llm"
+        assert "I heard you quietly" in llm_msg["text"]
