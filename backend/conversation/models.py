@@ -32,6 +32,8 @@ class ImageQualityAssessment(BaseModel):
 
 class VisionContextMetadata(BaseModel):
     """Explicit strongly-typed schema for multimodal vision context."""
+    model_config = {"extra": "allow"}
+
     scene_description: Optional[str] = Field(default=None, description="Semantic summary of the visual scene")
     objects: List[str] = Field(default_factory=list, description="Detected object labels")
     hazards: List[str] = Field(default_factory=list, description="Detected environmental hazards")
