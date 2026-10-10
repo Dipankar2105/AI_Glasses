@@ -120,6 +120,24 @@ class AppSettings(BaseModel):
         llm_mod = os.getenv("NEXTSIGHT_LLM_MODEL", "gpt-4o-mini")
         llm_url = os.getenv("NEXTSIGHT_LLM_BASE_URL", None)
 
+        # Security and Rate Limiting
+        api_k = os.getenv("NEXTSIGHT_API_KEY", None)
+        max_bytes_str = os.getenv("NEXTSIGHT_MAX_REQUEST_BODY_BYTES", "15728640")
+        try:
+            max_bytes = int(max_bytes_str)
+        except ValueError:
+            raise ValueError(f"NEXTSIGHT_MAX_REQUEST_BODY_BYTES must be an integer, got '{max_bytes_str}'")
+
+        rate_limit_str = os.getenv("NEXTSIGHT_RATE_LIMIT_PER_MINUTE", "300")
+        try:
+            rate_limit = int(rate_limit_str)
+        except ValueError:
+            raise ValueError(f"NEXTSIGHT_RATE_LIMIT_PER_MINUTE must be an integer, got '{rate_limit_str}'")
+
+        # Feature flags
+        enable_obj = os.getenv("NEXTSIGHT_ENABLE_OBJECT_DETECTION", "true").lower() in ("1", "true", "yes", "on")
+        enable_scene = os.getenv("NEXTSIGHT_ENABLE_SCENE_ANALYSIS", "true").lower() in ("1", "true", "yes", "on")
+
         # Credentials
         oai_key = os.getenv("OPENAI_API_KEY", None)
         gem_key = os.getenv("GEMINI_API_KEY", None)
@@ -133,6 +151,8 @@ class AppSettings(BaseModel):
             environment=env_name,
             request_timeout_seconds=env_timeout,
             require_verified_telemetry=strict_bool,
+            enable_object_detection=enable_obj,
+            enable_scene_analysis=enable_scene,
             stt_provider=stt_prov,
             stt_model=stt_mod,
             stt_base_url=stt_url,
@@ -143,6 +163,9 @@ class AppSettings(BaseModel):
             llm_provider=llm_prov,
             llm_model=llm_mod,
             llm_base_url=llm_url,
+            api_key=api_k,
+            max_request_body_bytes=max_bytes,
+            rate_limit_per_minute=rate_limit,
             openai_api_key=oai_key,
             gemini_api_key=gem_key,
             anthropic_api_key=ant_key,

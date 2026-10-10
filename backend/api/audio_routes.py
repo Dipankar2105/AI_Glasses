@@ -62,7 +62,7 @@ async def transcribe_audio(
 
     if len(audio_bytes) > MAX_AUDIO_BYTES_LIMIT:
         raise HTTPException(
-            status_code=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE,
+            status_code=status.HTTP_413_CONTENT_TOO_LARGE if hasattr(status, "HTTP_413_CONTENT_TOO_LARGE") else 413,
             detail=f"Audio payload size ({len(audio_bytes)} bytes) exceeds maximum limit of {MAX_AUDIO_BYTES_LIMIT} bytes"
         )
 

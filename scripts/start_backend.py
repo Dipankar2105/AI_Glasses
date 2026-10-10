@@ -32,6 +32,8 @@ def main():
         os.environ["NEXTSIGHT_STT_PROVIDER"] = "mock"
         os.environ["NEXTSIGHT_LLM_PROVIDER"] = "mock"
         os.environ["NEXTSIGHT_TTS_PROVIDER"] = "mock"
+        from backend.config.settings import reset_settings
+        reset_settings()
 
     cfg = get_settings()
 

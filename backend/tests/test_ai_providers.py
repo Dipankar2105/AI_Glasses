@@ -464,3 +464,34 @@ def test_provider_factory_unrecognized_or_disabled_names():
         llm = ProviderFactory.create_llm_provider(provider_name=name)
         assert isinstance(llm, NullLLMProvider)
         assert llm.is_available() is False
+
+
+def test_app_settings_from_env_all_fields(monkeypatch):
+    from backend.config.settings import AppSettings
+
+    monkeypatch.setenv("NEXTSIGHT_HOST", "0.0.0.0")
+    monkeypatch.setenv("NEXTSIGHT_PORT", "9000")
+    monkeypatch.setenv("NEXTSIGHT_LOG_LEVEL", "DEBUG")
+    monkeypatch.setenv("NEXTSIGHT_ENV", "staging")
+    monkeypatch.setenv("NEXTSIGHT_TIMEOUT_SEC", "20.0")
+    monkeypatch.setenv("NEXTSIGHT_API_KEY", "secret-key-xyz")
+    monkeypatch.setenv("NEXTSIGHT_MAX_REQUEST_BODY_BYTES", "20971520")
+    monkeypatch.setenv("NEXTSIGHT_RATE_LIMIT_PER_MINUTE", "500")
+    monkeypatch.setenv("NEXTSIGHT_ENABLE_OBJECT_DETECTION", "false")
+    monkeypatch.setenv("NEXTSIGHT_ENABLE_SCENE_ANALYSIS", "true")
+    monkeypatch.setenv("NEXTSIGHT_STT_PROVIDER", "mock")
+    monkeypatch.setenv("NEXTSIGHT_TTS_PROVIDER", "mock")
+    monkeypatch.setenv("NEXTSIGHT_LLM_PROVIDER", "mock")
+
+    cfg = AppSettings.from_env()
+    assert cfg.host == "0.0.0.0"
+    assert cfg.port == 9000
+    assert cfg.log_level == "DEBUG"
+    assert cfg.environment == "staging"
+    assert cfg.request_timeout_seconds == 20.0
+    assert cfg.api_key == "secret-key-xyz"
+    assert cfg.max_request_body_bytes == 20971520
+    assert cfg.rate_limit_per_minute == 500
+    assert cfg.enable_object_detection is False
+    assert cfg.enable_scene_analysis is True
+    assert cfg.is_strict_telemetry_required is True
