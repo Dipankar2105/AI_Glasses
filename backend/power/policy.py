@@ -111,9 +111,29 @@ class PowerThermalPolicyManager:
         self.last_battery: Optional[BatteryTelemetry] = None
         self.last_thermal: Optional[ThermalTelemetry] = None
 
+    def _evaluate_staleness(self, current_time: Optional[float] = None) -> None:
+        """Evaluate age of last telemetry against staleness timeouts."""
+        now = current_time if current_time is not None else time.time()
+        if self.last_battery is not None:
+            if not self.last_battery.is_valid:
+                self.battery_status = BatteryStatus.UNKNOWN
+            elif self.last_battery.timestamp > 0.0 and (now - self.last_battery.timestamp) > self.battery_stale_timeout_s:
+                self.battery_status = BatteryStatus.STALE
+        if self.last_thermal is not None:
+            if not self.last_thermal.is_valid:
+                self.thermal_status = ThermalStatus.UNKNOWN
+            elif self.last_thermal.timestamp > 0.0 and (now - self.last_thermal.timestamp) > self.thermal_stale_timeout_s:
+                self.thermal_status = ThermalStatus.STALE
+
     def update_battery_telemetry(self, telemetry: BatteryTelemetry, current_time: Optional[float] = None) -> BatteryStatus:
         """Process incoming battery telemetry with hysteresis and staleness checking."""
         now = current_time if current_time is not None else time.time()
+
+        # Reject out-of-order older telemetry if newer telemetry is already recorded
+        if self.last_battery is not None and telemetry.timestamp > 0.0 and self.last_battery.timestamp > 0.0:
+            if telemetry.timestamp < self.last_battery.timestamp:
+                return self.battery_status
+
         self.last_battery = telemetry
 
         if not telemetry.is_valid:
@@ -152,18 +172,24 @@ class PowerThermalPolicyManager:
 
         # Auto-enforce low power or shutdown on critical status
         if self.battery_status == BatteryStatus.CRITICAL:
-            self.request_state(OperatingState.CRITICAL_SHUTDOWN, reason="Critical battery discharge")
+            self.request_state(OperatingState.CRITICAL_SHUTDOWN, reason="Critical battery discharge", current_time=now)
         elif self.battery_status == BatteryStatus.LOW and self.requested_state not in (OperatingState.LOW_POWER, OperatingState.CRITICAL_SHUTDOWN):
-            self.request_state(OperatingState.LOW_POWER, reason="Low battery conservation")
+            self.request_state(OperatingState.LOW_POWER, reason="Low battery conservation", current_time=now)
         elif self.battery_status in (BatteryStatus.NORMAL, BatteryStatus.FULL, BatteryStatus.CHARGING) and self.requested_state in (OperatingState.LOW_POWER, OperatingState.CRITICAL_SHUTDOWN):
             if self.thermal_status not in (ThermalStatus.CRITICAL, ThermalStatus.HOT_THROTTLED):
-                self.request_state(OperatingState.IDLE, reason="Battery recovered to normal operating level")
+                self.request_state(OperatingState.IDLE, reason="Battery recovered to normal operating level", current_time=now)
 
         return self.battery_status
 
     def update_thermal_telemetry(self, telemetry: ThermalTelemetry, current_time: Optional[float] = None) -> ThermalStatus:
         """Process incoming thermal telemetry with hysteresis and emergency safeguards."""
         now = current_time if current_time is not None else time.time()
+
+        # Reject out-of-order older telemetry if newer telemetry is already recorded
+        if self.last_thermal is not None and telemetry.timestamp > 0.0 and self.last_thermal.timestamp > 0.0:
+            if telemetry.timestamp < self.last_thermal.timestamp:
+                return self.thermal_status
+
         self.last_thermal = telemetry
 
         if not telemetry.is_valid:
@@ -210,17 +236,20 @@ class PowerThermalPolicyManager:
 
         # Emergency cutoff if critical thermal condition or recovery handling
         if self.thermal_status == ThermalStatus.CRITICAL:
-            self.request_state(OperatingState.CRITICAL_SHUTDOWN, reason=f"Critical die temperature: {temp:.1f}°C")
+            self.request_state(OperatingState.CRITICAL_SHUTDOWN, reason=f"Critical die temperature: {temp:.1f}°C", current_time=now)
         elif self.thermal_status in (ThermalStatus.NORMAL, ThermalStatus.WARM) and self.requested_state == OperatingState.CRITICAL_SHUTDOWN:
             if self.battery_status in (BatteryStatus.NORMAL, BatteryStatus.FULL, BatteryStatus.CHARGING):
-                self.request_state(OperatingState.IDLE, reason="Thermal conditions normalized")
+                self.request_state(OperatingState.IDLE, reason="Thermal conditions normalized", current_time=now)
             elif self.battery_status == BatteryStatus.LOW:
-                self.request_state(OperatingState.LOW_POWER, reason="Thermal conditions normalized while battery is low")
+                self.request_state(OperatingState.LOW_POWER, reason="Thermal conditions normalized while battery is low", current_time=now)
 
         return self.thermal_status
 
-    def request_state(self, target_state: OperatingState, reason: str = "") -> Tuple[bool, str]:
+    def request_state(self, target_state: OperatingState, reason: str = "", current_time: Optional[float] = None) -> Tuple[bool, str]:
         """Request a transition to target operating state with precondition and safety checks."""
+        if current_time is not None:
+            self._evaluate_staleness(current_time)
+
         # 1. Check if already in target state
         if self.requested_state == target_state:
             return True, f"Already in requested state {target_state}"
@@ -231,16 +260,28 @@ class PowerThermalPolicyManager:
         if self.thermal_status == ThermalStatus.CRITICAL and target_state != OperatingState.CRITICAL_SHUTDOWN:
             return False, f"Cannot enter {target_state}: Thermal status is CRITICAL"
 
-        # 3. Check valid transition graph
+        # 3. Block recovery from emergency shutdown without verified fresh healthy telemetry
+        if self.requested_state == OperatingState.CRITICAL_SHUTDOWN and target_state != OperatingState.CRITICAL_SHUTDOWN:
+            if self.battery_status in (BatteryStatus.CRITICAL, BatteryStatus.STALE, BatteryStatus.UNKNOWN):
+                return False, f"Cannot exit CRITICAL_SHUTDOWN without fresh valid battery telemetry (status: {self.battery_status.value})"
+            if self.thermal_status in (ThermalStatus.CRITICAL, ThermalStatus.STALE, ThermalStatus.UNKNOWN):
+                return False, f"Cannot exit CRITICAL_SHUTDOWN without fresh valid thermal telemetry (status: {self.thermal_status.value})"
+
+        # 4. Check valid transition graph
         allowed_transitions = self.VALID_TRANSITIONS.get(self.requested_state, set())
         if target_state not in allowed_transitions:
             return False, f"Invalid transition from {self.requested_state} to {target_state}"
 
-        # 4. Low-power and thermal throttling restrictions
+        # 5. Low-power and thermal throttling restrictions
         if self.battery_status == BatteryStatus.LOW and target_state in (OperatingState.CAPTURE, OperatingState.PROCESSING):
             return False, f"Cannot enter heavy workload state {target_state} during LOW battery"
         if self.thermal_status == ThermalStatus.HOT_THROTTLED and target_state == OperatingState.CAPTURE:
             return False, f"Cannot enter heavy workload state {target_state} during HOT_THROTTLED thermal status"
+        if self.requested_state == OperatingState.LOW_POWER and target_state == OperatingState.IDLE:
+            if self.battery_status in (BatteryStatus.LOW, BatteryStatus.CRITICAL, BatteryStatus.STALE, BatteryStatus.UNKNOWN):
+                return False, f"Cannot exit LOW_POWER to IDLE while battery status is {self.battery_status.value}"
+            if self.thermal_status in (ThermalStatus.CRITICAL, ThermalStatus.HOT_THROTTLED, ThermalStatus.STALE, ThermalStatus.UNKNOWN):
+                return False, f"Cannot exit LOW_POWER to IDLE while thermal status is {self.thermal_status.value}"
 
         self.requested_state = target_state
         # In software simulation, confirmed state updates immediately upon policy approval
@@ -251,12 +292,20 @@ class PowerThermalPolicyManager:
         """Acknowledge hardware-confirmed operating state."""
         self.confirmed_state = hardware_state
 
-    def can_execute_workload(self, priority: WorkloadPriority) -> Tuple[bool, str]:
+    def can_execute_workload(self, priority: WorkloadPriority, current_time: Optional[float] = None) -> Tuple[bool, str]:
         """Check whether a given workload is permitted under current power/thermal constraints."""
+        if current_time is not None:
+            self._evaluate_staleness(current_time)
+
         if self.battery_status == BatteryStatus.CRITICAL or self.thermal_status == ThermalStatus.CRITICAL:
             if priority == WorkloadPriority.SAFETY_CRITICAL:
                 return True, "Safety critical operation permitted during emergency"
             return False, "System in critical condition; non-essential workloads suspended"
+
+        if self.requested_state == OperatingState.CRITICAL_SHUTDOWN:
+            if priority == WorkloadPriority.SAFETY_CRITICAL:
+                return True, "Safety critical operation permitted during emergency"
+            return False, "System in CRITICAL_SHUTDOWN state; non-essential workloads suspended"
 
         if priority == WorkloadPriority.SAFETY_CRITICAL:
             return True, "Permitted"

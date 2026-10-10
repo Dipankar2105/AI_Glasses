@@ -492,3 +492,131 @@ def test_thermal_boundary_threshold_precision():
     assert manager.update_thermal_telemetry(ThermalTelemetry(temperature_celsius=60.0, timestamp=14.0), current_time=14.0) == ThermalStatus.CRITICAL
     assert manager.update_thermal_telemetry(ThermalTelemetry(temperature_celsius=59.9, timestamp=15.0), current_time=15.0) == ThermalStatus.HOT_THROTTLED
 
+
+def test_authorization_under_missing_stale_and_recovering_telemetry():
+    """Verify workload authorization across all 12 missing, stale, invalid, and recovering telemetry scenarios."""
+
+    # Scenario 1: A newly initialized policy with no real telemetry
+    m1 = PowerThermalPolicyManager()
+    assert m1.battery_status == BatteryStatus.NORMAL
+    assert m1.thermal_status == ThermalStatus.NORMAL
+    assert m1.requested_state == OperatingState.IDLE
+    assert m1.can_execute_workload(WorkloadPriority.VISION_CAPTURE)[0] is True
+    assert m1.request_state(OperatingState.CAPTURE)[0] is True
+
+    # Scenario 2: Battery telemetry missing while temperature telemetry is valid
+    m2 = PowerThermalPolicyManager()
+    m2.update_thermal_telemetry(ThermalTelemetry(temperature_celsius=34.0, timestamp=10.0), current_time=10.0)
+    assert m2.last_battery is None
+    assert m2.last_thermal is not None
+    assert m2.thermal_status == ThermalStatus.NORMAL
+    assert m2.can_execute_workload(WorkloadPriority.VISION_CAPTURE)[0] is True
+
+    # Scenario 3: Temperature telemetry missing while battery telemetry is valid
+    m3 = PowerThermalPolicyManager()
+    m3.update_battery_telemetry(BatteryTelemetry(voltage_volts=3.9, percentage=80.0, timestamp=10.0), current_time=10.0)
+    assert m3.last_thermal is None
+    assert m3.last_battery is not None
+    assert m3.battery_status == BatteryStatus.NORMAL
+    assert m3.can_execute_workload(WorkloadPriority.VISION_CAPTURE)[0] is True
+
+    # Scenario 4: Both telemetry streams missing
+    m4 = PowerThermalPolicyManager()
+    snap = m4.get_snapshot(current_time=10.0)
+    assert snap.battery_status == BatteryStatus.NORMAL
+    assert snap.thermal_status == ThermalStatus.NORMAL
+    assert m4.can_execute_workload(WorkloadPriority.VISION_CAPTURE)[0] is True
+
+    # Scenario 5: Invalid battery readings
+    m5 = PowerThermalPolicyManager()
+    inv_bat = BatteryTelemetry(voltage_volts=3.7, percentage=50.0, is_valid=False, timestamp=10.0)
+    assert m5.update_battery_telemetry(inv_bat, current_time=10.0) == BatteryStatus.UNKNOWN
+
+    # Scenario 6: Invalid temperature readings
+    m6 = PowerThermalPolicyManager()
+    inv_therm = ThermalTelemetry(temperature_celsius=35.0, is_valid=False, timestamp=10.0)
+    assert m6.update_thermal_telemetry(inv_therm, current_time=10.0) == ThermalStatus.UNKNOWN
+
+    # Scenario 7: Battery telemetry becoming stale while a vision request is pending
+    m7 = PowerThermalPolicyManager(battery_stale_timeout_s=30.0)
+    m7.update_battery_telemetry(BatteryTelemetry(voltage_volts=3.9, percentage=80.0, timestamp=100.0), current_time=100.0)
+    assert m7.battery_status == BatteryStatus.NORMAL
+    # Evaluating staleness at t=140.0s (>30s) during workload check
+    assert m7.can_execute_workload(WorkloadPriority.VISION_CAPTURE, current_time=140.0)[0] is True
+    assert m7.battery_status == BatteryStatus.STALE
+
+    # Scenario 8: Temperature telemetry becoming stale while a vision request is pending
+    m8 = PowerThermalPolicyManager(thermal_stale_timeout_s=15.0)
+    m8.update_thermal_telemetry(ThermalTelemetry(temperature_celsius=35.0, timestamp=100.0), current_time=100.0)
+    assert m8.thermal_status == ThermalStatus.NORMAL
+    # Evaluating staleness at t=120.0s (>15s) during workload check
+    assert m8.can_execute_workload(WorkloadPriority.VISION_CAPTURE, current_time=120.0)[0] is True
+    assert m8.thermal_status == ThermalStatus.STALE
+
+    # Scenario 9: Both readings becoming stale
+    m9 = PowerThermalPolicyManager(battery_stale_timeout_s=30.0, thermal_stale_timeout_s=15.0)
+    m9.update_battery_telemetry(BatteryTelemetry(voltage_volts=3.9, percentage=80.0, timestamp=100.0), current_time=100.0)
+    m9.update_thermal_telemetry(ThermalTelemetry(temperature_celsius=35.0, timestamp=100.0), current_time=100.0)
+    m9.can_execute_workload(WorkloadPriority.VISION_CAPTURE, current_time=150.0)
+    assert m9.battery_status == BatteryStatus.STALE
+    assert m9.thermal_status == ThermalStatus.STALE
+
+    # Scenario 10: Fresh valid readings arriving after stale telemetry
+    m10 = PowerThermalPolicyManager(battery_stale_timeout_s=30.0, thermal_stale_timeout_s=15.0)
+    m10.update_battery_telemetry(BatteryTelemetry(voltage_volts=3.9, percentage=80.0, timestamp=100.0), current_time=100.0)
+    m10.can_execute_workload(WorkloadPriority.VISION_CAPTURE, current_time=140.0)
+    assert m10.battery_status == BatteryStatus.STALE
+    # Fresh telemetry arrives at t=150.0
+    m10.update_battery_telemetry(BatteryTelemetry(voltage_volts=3.95, percentage=82.0, timestamp=150.0), current_time=150.0)
+    assert m10.battery_status == BatteryStatus.NORMAL
+    assert m10.can_execute_workload(WorkloadPriority.VISION_CAPTURE)[0] is True
+
+    # Scenario 11: A stale reading following a previously critical reading
+    m11 = PowerThermalPolicyManager(battery_stale_timeout_s=30.0)
+    # Critical battery event
+    m11.update_battery_telemetry(BatteryTelemetry(voltage_volts=3.3, percentage=4.0, timestamp=100.0), current_time=100.0)
+    assert m11.battery_status == BatteryStatus.CRITICAL
+    assert m11.requested_state == OperatingState.CRITICAL_SHUTDOWN
+    # Time elapses to t=140.0s without fresh telemetry
+    m11.can_execute_workload(WorkloadPriority.VISION_CAPTURE, current_time=140.0)
+    assert m11.battery_status == BatteryStatus.STALE
+    # Invariant: State MUST remain in CRITICAL_SHUTDOWN and vision blocked
+    assert m11.requested_state == OperatingState.CRITICAL_SHUTDOWN
+    assert m11.can_execute_workload(WorkloadPriority.VISION_CAPTURE)[0] is False
+    assert m11.request_state(OperatingState.IDLE, current_time=140.0)[0] is False
+
+    # Scenario 12: Fresh but critical telemetry arriving after stale telemetry
+    m12 = PowerThermalPolicyManager(thermal_stale_timeout_s=15.0)
+    m12.update_thermal_telemetry(ThermalTelemetry(temperature_celsius=35.0, timestamp=100.0), current_time=100.0)
+    m12.can_execute_workload(WorkloadPriority.VISION_CAPTURE, current_time=120.0)
+    assert m12.thermal_status == ThermalStatus.STALE
+    # Fresh critical telemetry arrives at t=130.0s
+    m12.update_thermal_telemetry(ThermalTelemetry(temperature_celsius=72.0, timestamp=130.0), current_time=130.0)
+    assert m12.thermal_status == ThermalStatus.CRITICAL
+    assert m12.requested_state == OperatingState.CRITICAL_SHUTDOWN
+    assert m12.can_execute_workload(WorkloadPriority.VISION_CAPTURE)[0] is False
+
+
+def test_out_of_order_telemetry_rejection():
+    """Verify that out-of-order older telemetry packets cannot overwrite newer state."""
+    manager = PowerThermalPolicyManager()
+
+    # Newer packet arrives at t=100.0 (Battery=80%, Temp=35°C)
+    manager.update_battery_telemetry(BatteryTelemetry(voltage_volts=3.9, percentage=80.0, timestamp=100.0), current_time=100.0)
+    manager.update_thermal_telemetry(ThermalTelemetry(temperature_celsius=35.0, timestamp=100.0), current_time=100.0)
+    assert manager.battery_status == BatteryStatus.NORMAL
+    assert manager.thermal_status == ThermalStatus.NORMAL
+
+    # Out-of-order older packet arrives with timestamp t=90.0 (e.g. low battery 14%)
+    manager.update_battery_telemetry(BatteryTelemetry(voltage_volts=3.5, percentage=14.0, timestamp=90.0), current_time=100.0)
+    # MUST reject the older packet and retain the newer 80% NORMAL status
+    assert manager.battery_status == BatteryStatus.NORMAL
+    assert manager.last_battery.timestamp == 100.0
+
+    # Out-of-order older thermal packet arrives with timestamp t=80.0 (e.g. critical 75°C)
+    manager.update_thermal_telemetry(ThermalTelemetry(temperature_celsius=75.0, timestamp=80.0), current_time=100.0)
+    # MUST reject the older packet and retain the newer 35°C NORMAL status
+    assert manager.thermal_status == ThermalStatus.NORMAL
+    assert manager.last_thermal.timestamp == 100.0
+
+
