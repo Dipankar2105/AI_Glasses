@@ -180,7 +180,12 @@ class PowerThermalPolicyManager:
         # Hysteresis state machine for thermal tracking
         if self.thermal_status == ThermalStatus.CRITICAL:
             if temp < self.critical_thermal_exit_c:
-                self.thermal_status = ThermalStatus.HOT_THROTTLED if temp >= self.throttle_entry_temp_c else ThermalStatus.NORMAL
+                if temp >= self.throttle_entry_temp_c:
+                    self.thermal_status = ThermalStatus.HOT_THROTTLED
+                elif temp >= self.warm_entry_temp_c:
+                    self.thermal_status = ThermalStatus.WARM
+                else:
+                    self.thermal_status = ThermalStatus.NORMAL
         elif self.thermal_status == ThermalStatus.HOT_THROTTLED:
             if temp >= self.critical_thermal_entry_c:
                 self.thermal_status = ThermalStatus.CRITICAL

@@ -330,3 +330,165 @@ def test_power_thermal_matrix_interactions(bat_pct, temp_c, expected_bat, expect
     assert manager.thermal_status == expected_therm
     assert manager.requested_state == expected_state
     assert manager.can_execute_workload(WorkloadPriority.VISION_CAPTURE)[0] is vision_allowed
+
+
+def test_missing_and_invalid_telemetry_handling():
+    """Verify system safety when telemetry is missing or marked invalid."""
+    manager = PowerThermalPolicyManager()
+
+    # Initial snapshot without any telemetry received
+    snap = manager.get_snapshot(current_time=50.0)
+    assert snap.battery_status == BatteryStatus.NORMAL
+    assert snap.thermal_status == ThermalStatus.NORMAL
+    assert snap.battery.percentage == 75.0  # Safe default fallback
+
+    # Invalid battery reading
+    invalid_bat = BatteryTelemetry(voltage_volts=3.7, percentage=50.0, is_valid=False, timestamp=51.0)
+    assert manager.update_battery_telemetry(invalid_bat, current_time=51.0) == BatteryStatus.UNKNOWN
+
+    # Invalid thermal reading
+    invalid_therm = ThermalTelemetry(temperature_celsius=35.0, is_valid=False, timestamp=51.0)
+    assert manager.update_thermal_telemetry(invalid_therm, current_time=51.0) == ThermalStatus.UNKNOWN
+
+
+def test_telemetry_staleness_and_recovery_flow():
+    """Test telemetry staleness transitions during pending workloads and recovery when fresh telemetry resumes."""
+    manager = PowerThermalPolicyManager(battery_stale_timeout_s=30.0, thermal_stale_timeout_s=15.0)
+
+    # Initial healthy telemetry at t=100.0
+    manager.update_battery_telemetry(BatteryTelemetry(voltage_volts=4.0, percentage=80.0, timestamp=100.0), current_time=100.0)
+    manager.update_thermal_telemetry(ThermalTelemetry(temperature_celsius=35.0, timestamp=100.0), current_time=100.0)
+    assert manager.battery_status == BatteryStatus.NORMAL
+    assert manager.thermal_status == ThermalStatus.NORMAL
+    assert manager.can_execute_workload(WorkloadPriority.VISION_CAPTURE)[0] is True
+
+    # Thermal becomes stale at t=120.0 (>15s elapsed)
+    therm_stale = ThermalTelemetry(temperature_celsius=35.0, timestamp=100.0)
+    assert manager.update_thermal_telemetry(therm_stale, current_time=120.0) == ThermalStatus.STALE
+
+    # Battery becomes stale at t=140.0 (>30s elapsed)
+    bat_stale = BatteryTelemetry(voltage_volts=4.0, percentage=80.0, timestamp=100.0)
+    assert manager.update_battery_telemetry(bat_stale, current_time=140.0) == BatteryStatus.STALE
+
+    # Fresh thermal telemetry arrives at t=150.0 with critical spike -> triggers CRITICAL_SHUTDOWN
+    manager.update_thermal_telemetry(ThermalTelemetry(temperature_celsius=72.0, timestamp=150.0), current_time=150.0)
+    assert manager.thermal_status == ThermalStatus.CRITICAL
+    assert manager.requested_state == OperatingState.CRITICAL_SHUTDOWN
+    assert manager.can_execute_workload(WorkloadPriority.VISION_CAPTURE)[0] is False
+
+    # Fresh thermal normalizes at t=160.0 & fresh battery confirms healthy -> full recovery to IDLE
+    manager.update_thermal_telemetry(ThermalTelemetry(temperature_celsius=35.0, timestamp=160.0), current_time=160.0)
+    manager.update_battery_telemetry(BatteryTelemetry(voltage_volts=3.9, percentage=75.0, timestamp=160.0), current_time=160.0)
+    assert manager.thermal_status == ThermalStatus.NORMAL
+    assert manager.battery_status == BatteryStatus.NORMAL
+    assert manager.requested_state == OperatingState.IDLE
+    assert manager.can_execute_workload(WorkloadPriority.VISION_CAPTURE)[0] is True
+
+
+def test_repeated_low_and_recovered_battery_cycles():
+    """Verify repeated oscillation between low battery and recovery does not leave inconsistent state."""
+    manager = PowerThermalPolicyManager(low_battery_entry_pct=15.0, low_battery_exit_pct=20.0)
+
+    # Cycle 1: Discharges to 14% -> LOW_POWER
+    manager.update_battery_telemetry(BatteryTelemetry(voltage_volts=3.58, percentage=14.0, timestamp=1.0), current_time=1.0)
+    assert manager.battery_status == BatteryStatus.LOW
+    assert manager.requested_state == OperatingState.LOW_POWER
+    assert manager.can_execute_workload(WorkloadPriority.VISION_CAPTURE)[0] is False
+
+    # Cycle 1: Recharges to 25% -> IDLE
+    manager.update_battery_telemetry(BatteryTelemetry(voltage_volts=3.75, percentage=25.0, timestamp=2.0), current_time=2.0)
+    assert manager.battery_status == BatteryStatus.NORMAL
+    assert manager.requested_state == OperatingState.IDLE
+    assert manager.can_execute_workload(WorkloadPriority.VISION_CAPTURE)[0] is True
+
+    # Cycle 2: Discharges to 13% -> LOW_POWER
+    manager.update_battery_telemetry(BatteryTelemetry(voltage_volts=3.56, percentage=13.0, timestamp=3.0), current_time=3.0)
+    assert manager.battery_status == BatteryStatus.LOW
+    assert manager.requested_state == OperatingState.LOW_POWER
+    assert manager.can_execute_workload(WorkloadPriority.VISION_CAPTURE)[0] is False
+
+    # Cycle 2: Recharges to 80% -> IDLE
+    manager.update_battery_telemetry(BatteryTelemetry(voltage_volts=4.0, percentage=80.0, timestamp=4.0), current_time=4.0)
+    assert manager.battery_status == BatteryStatus.NORMAL
+    assert manager.requested_state == OperatingState.IDLE
+    assert manager.can_execute_workload(WorkloadPriority.VISION_CAPTURE)[0] is True
+
+    # Cycle 3: Critical discharge to 4% -> CRITICAL_SHUTDOWN
+    manager.update_battery_telemetry(BatteryTelemetry(voltage_volts=3.35, percentage=4.0, timestamp=5.0), current_time=5.0)
+    assert manager.battery_status == BatteryStatus.CRITICAL
+    assert manager.requested_state == OperatingState.CRITICAL_SHUTDOWN
+
+    # Cycle 3: Partial recharge to 12% (above critical exit >10%, but <=20% low exit) -> LOW status, stays in shutdown until normal recovery
+    manager.update_battery_telemetry(BatteryTelemetry(voltage_volts=3.55, percentage=12.0, timestamp=6.0), current_time=6.0)
+    assert manager.battery_status == BatteryStatus.LOW
+
+    # Cycle 3: Full recharge to 85% -> returns to IDLE
+    manager.update_battery_telemetry(BatteryTelemetry(voltage_volts=4.05, percentage=85.0, timestamp=7.0), current_time=7.0)
+    assert manager.battery_status == BatteryStatus.NORMAL
+    assert manager.requested_state == OperatingState.IDLE
+    assert manager.can_execute_workload(WorkloadPriority.VISION_CAPTURE)[0] is True
+
+
+def test_battery_boundary_threshold_precision():
+    """Verify precise behavior exactly at, immediately above, and immediately below battery thresholds."""
+    manager = PowerThermalPolicyManager(
+        low_battery_entry_pct=15.0,
+        low_battery_exit_pct=20.0,
+        critical_battery_entry_pct=5.0,
+        critical_battery_exit_pct=10.0,
+    )
+
+    # 1. Low entry threshold (15.0%)
+    assert manager.update_battery_telemetry(BatteryTelemetry(voltage_volts=3.61, percentage=15.1, timestamp=1.0), current_time=1.0) == BatteryStatus.NORMAL
+    assert manager.update_battery_telemetry(BatteryTelemetry(voltage_volts=3.60, percentage=15.0, timestamp=2.0), current_time=2.0) == BatteryStatus.LOW
+    assert manager.update_battery_telemetry(BatteryTelemetry(voltage_volts=3.59, percentage=14.9, timestamp=3.0), current_time=3.0) == BatteryStatus.LOW
+
+    # 2. Low recovery threshold (20.0%, requires >20.0% to exit)
+    assert manager.update_battery_telemetry(BatteryTelemetry(voltage_volts=3.69, percentage=19.9, timestamp=4.0), current_time=4.0) == BatteryStatus.LOW
+    assert manager.update_battery_telemetry(BatteryTelemetry(voltage_volts=3.70, percentage=20.0, timestamp=5.0), current_time=5.0) == BatteryStatus.LOW
+    assert manager.update_battery_telemetry(BatteryTelemetry(voltage_volts=3.71, percentage=20.1, timestamp=6.0), current_time=6.0) == BatteryStatus.NORMAL
+
+    # 3. Critical entry threshold (5.0%)
+    manager.update_battery_telemetry(BatteryTelemetry(voltage_volts=3.55, percentage=12.0, timestamp=7.0), current_time=7.0)
+    assert manager.battery_status == BatteryStatus.LOW
+    assert manager.update_battery_telemetry(BatteryTelemetry(voltage_volts=3.41, percentage=5.1, timestamp=8.0), current_time=8.0) == BatteryStatus.LOW
+    assert manager.update_battery_telemetry(BatteryTelemetry(voltage_volts=3.40, percentage=5.0, timestamp=9.0), current_time=9.0) == BatteryStatus.CRITICAL
+
+    # 4. Critical recovery threshold (10.0%, requires >10.0% to exit)
+    assert manager.update_battery_telemetry(BatteryTelemetry(voltage_volts=3.49, percentage=9.9, timestamp=10.0), current_time=10.0) == BatteryStatus.CRITICAL
+    assert manager.update_battery_telemetry(BatteryTelemetry(voltage_volts=3.50, percentage=10.0, timestamp=11.0), current_time=11.0) == BatteryStatus.CRITICAL
+    assert manager.update_battery_telemetry(BatteryTelemetry(voltage_volts=3.51, percentage=10.1, timestamp=12.0), current_time=12.0) == BatteryStatus.LOW
+
+
+def test_thermal_boundary_threshold_precision():
+    """Verify precise behavior exactly at, immediately above, and immediately below thermal thresholds."""
+    manager = PowerThermalPolicyManager(
+        warm_entry_temp_c=45.0,
+        warm_exit_temp_c=40.0,
+        throttle_entry_temp_c=55.0,
+        throttle_exit_temp_c=48.0,
+        critical_thermal_entry_c=70.0,
+        critical_thermal_exit_c=60.0,
+    )
+
+    # 1. Warm entry (45.0°C) and recovery (40.0°C)
+    assert manager.update_thermal_telemetry(ThermalTelemetry(temperature_celsius=44.9, timestamp=1.0), current_time=1.0) == ThermalStatus.NORMAL
+    assert manager.update_thermal_telemetry(ThermalTelemetry(temperature_celsius=45.0, timestamp=2.0), current_time=2.0) == ThermalStatus.WARM
+    assert manager.update_thermal_telemetry(ThermalTelemetry(temperature_celsius=40.1, timestamp=3.0), current_time=3.0) == ThermalStatus.WARM
+    assert manager.update_thermal_telemetry(ThermalTelemetry(temperature_celsius=40.0, timestamp=4.0), current_time=4.0) == ThermalStatus.WARM
+    assert manager.update_thermal_telemetry(ThermalTelemetry(temperature_celsius=39.9, timestamp=5.0), current_time=5.0) == ThermalStatus.NORMAL
+
+    # 2. Throttle entry (55.0°C) and recovery (48.0°C)
+    assert manager.update_thermal_telemetry(ThermalTelemetry(temperature_celsius=54.9, timestamp=6.0), current_time=6.0) == ThermalStatus.WARM
+    assert manager.update_thermal_telemetry(ThermalTelemetry(temperature_celsius=55.0, timestamp=7.0), current_time=7.0) == ThermalStatus.HOT_THROTTLED
+    assert manager.update_thermal_telemetry(ThermalTelemetry(temperature_celsius=48.1, timestamp=8.0), current_time=8.0) == ThermalStatus.HOT_THROTTLED
+    assert manager.update_thermal_telemetry(ThermalTelemetry(temperature_celsius=48.0, timestamp=9.0), current_time=9.0) == ThermalStatus.HOT_THROTTLED
+    assert manager.update_thermal_telemetry(ThermalTelemetry(temperature_celsius=47.9, timestamp=10.0), current_time=10.0) == ThermalStatus.WARM
+
+    # 3. Critical entry (70.0°C) and recovery (60.0°C)
+    assert manager.update_thermal_telemetry(ThermalTelemetry(temperature_celsius=69.9, timestamp=11.0), current_time=11.0) == ThermalStatus.HOT_THROTTLED
+    assert manager.update_thermal_telemetry(ThermalTelemetry(temperature_celsius=70.0, timestamp=12.0), current_time=12.0) == ThermalStatus.CRITICAL
+    assert manager.update_thermal_telemetry(ThermalTelemetry(temperature_celsius=60.1, timestamp=13.0), current_time=13.0) == ThermalStatus.CRITICAL
+    assert manager.update_thermal_telemetry(ThermalTelemetry(temperature_celsius=60.0, timestamp=14.0), current_time=14.0) == ThermalStatus.CRITICAL
+    assert manager.update_thermal_telemetry(ThermalTelemetry(temperature_celsius=59.9, timestamp=15.0), current_time=15.0) == ThermalStatus.HOT_THROTTLED
+
