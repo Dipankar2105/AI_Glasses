@@ -26,7 +26,13 @@ class VisionService:
     ):
         self.settings = settings or get_settings()
         self.registry = registry or self._create_default_registry()
-        self.power_manager = power_manager
+        if power_manager is not None:
+            self.power_manager = power_manager
+        elif self.settings.is_strict_telemetry_required:
+            from backend.power.policy import get_power_policy_manager
+            self.power_manager = get_power_policy_manager(require_verified_telemetry=True)
+        else:
+            self.power_manager = None
         self.orchestrator = VisionOrchestrator(self.registry)
         self.start_time = time.time()
 
@@ -124,11 +130,14 @@ class VisionService:
 
 _vision_service_instance: Optional[VisionService] = None
 
-def get_vision_service() -> VisionService:
+def get_vision_service(
+    settings: Optional[AppSettings] = None,
+    power_manager: Optional[PowerThermalPolicyManager] = None,
+) -> VisionService:
     """Singleton getter for VisionService (used in FastAPI Dependency Injection)."""
     global _vision_service_instance
     if _vision_service_instance is None:
-        _vision_service_instance = VisionService()
+        _vision_service_instance = VisionService(settings=settings, power_manager=power_manager)
     return _vision_service_instance
 
 def reset_vision_service(service: Optional[VisionService] = None) -> None:

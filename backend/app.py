@@ -32,7 +32,7 @@ async def lifespan(app: FastAPI):
     logger.info(f"Starting {settings.app_name} v{settings.version} in '{settings.environment}' mode")
     logger.info("Initializing software vision service and AI engine registry...")
     # Pre-initialize vision service
-    service = get_vision_service()
+    service = getattr(app.state, "vision_service", None) or get_vision_service(settings=settings)
     readiness = service.check_readiness()
     logger.info(f"Subsystem readiness check: {readiness}")
     logger.info("NextSight AI Backend started successfully on software runtime.")
@@ -56,6 +56,9 @@ def create_app(settings: Optional[AppSettings] = None) -> FastAPI:
         lifespan=lifespan
     )
     app.state.settings = cfg
+    from backend.power.policy import get_power_policy_manager
+    app.state.power_manager = get_power_policy_manager(require_verified_telemetry=cfg.is_strict_telemetry_required)
+    app.state.vision_service = get_vision_service(settings=cfg, power_manager=app.state.power_manager)
 
     # Add middleware
     app.add_middleware(RequestCorrelationMiddleware)

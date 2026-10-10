@@ -387,3 +387,28 @@ class PowerThermalPolicyManager:
             active_peripherals=active_peripherals,
             timestamp=now,
         )
+
+
+_power_policy_instance: Optional[PowerThermalPolicyManager] = None
+
+def get_power_policy_manager(require_verified_telemetry: Optional[bool] = None) -> PowerThermalPolicyManager:
+    """Singleton getter for PowerThermalPolicyManager, resolving telemetry strictness from settings if unset."""
+    global _power_policy_instance
+    if _power_policy_instance is None:
+        strict = False
+        if require_verified_telemetry is not None:
+            strict = require_verified_telemetry
+        else:
+            try:
+                from backend.config.settings import get_settings
+                strict = get_settings().is_strict_telemetry_required
+            except Exception:
+                strict = False
+        _power_policy_instance = PowerThermalPolicyManager(require_verified_telemetry=strict)
+    return _power_policy_instance
+
+def reset_power_policy_manager(manager: Optional[PowerThermalPolicyManager] = None) -> None:
+    """Resets or overrides the PowerThermalPolicyManager singleton."""
+    global _power_policy_instance
+    _power_policy_instance = manager
+

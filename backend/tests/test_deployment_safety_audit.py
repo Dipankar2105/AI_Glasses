@@ -4,6 +4,7 @@ Verifies that unauthorized vision capture is strictly blocked under all telemetr
 (uninitialized, invalid, missing, stale, critical, out-of-order, direct capture, and legacy wrappers).
 """
 
+import time
 import json
 import pytest
 from backend.power.contracts import (
@@ -231,4 +232,78 @@ class TestDeploymentSafetyGate:
         assert len(res3.errors) > 0
         assert res3.errors[0]["error"] == "BLOCKED_BY_POWER_POLICY"
         assert "low battery" in res3.errors[0]["msg"].lower()
+
+    def test_production_fastapi_app_wiring_fails_closed(self):
+        """FastAPI app in production mode wires strict power manager to vision endpoint, failing closed when uninitialized."""
+        from fastapi.testclient import TestClient
+        from backend.app import create_app
+        from backend.config.settings import AppSettings
+        from backend.services.vision_service import reset_vision_service
+        from backend.power.policy import reset_power_policy_manager
+
+        reset_vision_service(None)
+        reset_power_policy_manager(None)
+
+        prod_settings = AppSettings(environment="production")
+        app = create_app(settings=prod_settings)
+        client = TestClient(app)
+
+        # 1. Uninitialized telemetry -> POST /api/v1/vision/process fails closed
+        resp = client.post("/api/v1/vision/process", json={"use_mock_frame": True})
+        assert resp.status_code == 200
+        data = resp.json()
+        assert data["success"] is False
+        assert len(data["errors"]) > 0
+        assert data["errors"][0]["error"] == "BLOCKED_BY_POWER_POLICY"
+        assert "uninitialized" in data["errors"][0]["msg"].lower()
+
+        # 2. Ingest valid telemetry into app.state.power_manager
+        app.state.power_manager.update_battery_telemetry(
+            BatteryTelemetry(voltage_volts=3.9, percentage=80.0, timestamp=time.time()),
+            current_time=time.time()
+        )
+        app.state.power_manager.update_thermal_telemetry(
+            ThermalTelemetry(temperature_celsius=32.0, timestamp=time.time()),
+            current_time=time.time()
+        )
+
+        # Authorized vision processing
+        resp2 = client.post("/api/v1/vision/process", json={"use_mock_frame": True})
+        assert resp2.status_code == 200
+        data2 = resp2.json()
+        assert data2["success"] is True
+        assert len(data2["errors"]) == 0
+
+        reset_vision_service(None)
+        reset_power_policy_manager(None)
+
+    @pytest.mark.anyio
+    async def test_mcp_tool_with_strict_power_wiring(self):
+        """MCP analyze_vision_frame tool fails closed when strict power policy is active."""
+        from backend.mcp.registry import MCPToolRegistry
+        from backend.services.vision_service import VisionService, reset_vision_service
+        from backend.power.policy import PowerThermalPolicyManager, reset_power_policy_manager
+
+        reset_vision_service(None)
+        reset_power_policy_manager(None)
+
+        strict_policy = PowerThermalPolicyManager(require_verified_telemetry=True)
+        strict_service = VisionService(power_manager=strict_policy)
+        reset_vision_service(strict_service)
+
+        registry = MCPToolRegistry()
+
+        # 1. Uninitialized -> Error reported in tool result payload
+        call_res = await registry.execute_tool("analyze_vision_frame", arguments={"use_synthetic_frame": True})
+        assert call_res.is_error is False
+        payload = call_res.content[0]["data"]
+        assert len(payload["errors"]) > 0
+        assert payload["errors"][0]["error"] == "BLOCKED_BY_POWER_POLICY"
+        assert "uninitialized" in payload["errors"][0]["msg"].lower()
+
+        # Clean up
+        reset_vision_service(None)
+        reset_power_policy_manager(None)
+
+
 

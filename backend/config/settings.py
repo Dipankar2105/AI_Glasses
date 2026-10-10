@@ -19,12 +19,26 @@ class AppSettings(BaseModel):
     enable_object_detection: bool = Field(default=True, description="Enable local object detection")
     enable_scene_analysis: bool = Field(default=True, description="Enable local scene analysis")
     
+    # Power / Thermal Telemetry Safety Gate
+    require_verified_telemetry: Optional[bool] = Field(
+        default=None,
+        description="Enforce verified telemetry before high-power vision. Defaults to True in production/staging, False in dev/test."
+    )
+
     # Honest Capability Status Declarations
     ocr_status: str = Field(default="DEFERRED", description="OCR status: ON_HOLD / DEFERRED in Phase 5")
     llm_reasoning_status: str = Field(default="DEFERRED", description="LLM Reasoning status in Phase 5")
     tts_status: str = Field(default="DEFERRED", description="TTS Speech synthesis status in Phase 5")
     hardware_camera_status: str = Field(default="UNAVAILABLE", description="Physical camera status")
     hardware_audio_status: str = Field(default="UNAVAILABLE", description="Physical microphone status")
+
+    @property
+    def is_strict_telemetry_required(self) -> bool:
+        """Determines whether strict telemetry gating is enforced."""
+        if self.require_verified_telemetry is not None:
+            return self.require_verified_telemetry
+        return self.environment in ("production", "staging")
+
 
     @field_validator("log_level")
     @classmethod
@@ -62,12 +76,18 @@ class AppSettings(BaseModel):
         except ValueError:
             raise ValueError(f"NEXTSIGHT_TIMEOUT_SEC must be a float, got '{env_timeout_str}'")
 
+        env_strict_telemetry = os.getenv("NEXTSIGHT_REQUIRE_VERIFIED_TELEMETRY", None)
+        strict_bool = None
+        if env_strict_telemetry is not None:
+            strict_bool = env_strict_telemetry.strip().lower() in ("1", "true", "yes", "on")
+
         return cls(
             host=env_host,
             port=env_port,
             log_level=env_log_level,
             environment=env_name,
-            request_timeout_seconds=env_timeout
+            request_timeout_seconds=env_timeout,
+            require_verified_telemetry=strict_bool,
         )
 
 _settings_instance: Optional[AppSettings] = None
