@@ -8,6 +8,7 @@ import time
 import uuid
 from typing import Optional, Dict, Any
 
+import cv2
 import numpy as np
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect, Depends, status
 
@@ -15,6 +16,7 @@ from backend.config.settings import AppSettings, get_settings
 from backend.services.audio_service import AudioService, get_audio_service
 from backend.services.conversation_service import ConversationService, get_conversation_service
 from backend.services.vision_service import VisionService, get_vision_service
+from backend.conversation.commands import VoiceCommandRouter, get_voice_command_router, VoiceCommandIntent
 from backend.conversation.models import ConversationMessageRequest
 from backend.protocol.contracts import PacketType
 from backend.protocol.framing import ProtocolFraming, HEADER_SIZE, MAGIC_BYTES
@@ -46,6 +48,7 @@ async def websocket_device_endpoint(
     audio_service: AudioService = getattr(websocket.app.state, "audio_service", None) or get_audio_service()
     conversation_service: ConversationService = getattr(websocket.app.state, "conversation_service", None) or get_conversation_service()
     vision_service: VisionService = getattr(websocket.app.state, "vision_service", None) or get_vision_service()
+    command_router: VoiceCommandRouter = get_voice_command_router()
 
     # 1. Send Server Hello
     server_hello = {
@@ -140,21 +143,44 @@ async def websocket_device_endpoint(
                                         "confidence": transcribe_res.confidence
                                     }))
 
-                                    # Orchestrate Conversation
-                                    conv_req = ConversationMessageRequest(
-                                        session_id=session_id,
-                                        message=transcript_text
-                                    )
-                                    conv_res = await conversation_service.process_user_message(conv_req)
+                                    # 1. Check Voice Command Registry
+                                    cmd_match = command_router.match(transcript_text, confidence=transcribe_res.confidence)
+                                    if cmd_match.matched:
+                                        cmd_res = command_router.execute_command(
+                                            match=cmd_match,
+                                            session_id=session_id,
+                                            session_manager=conversation_service.session_manager,
+                                            vision_service=vision_service
+                                        )
+                                        response_text = cmd_res.spoken_response
+                                        await websocket.send_text(json.dumps({
+                                            "type": "voice_command",
+                                            "intent": cmd_match.intent.value,
+                                            "success": cmd_res.success,
+                                            "action_data": cmd_res.action_data
+                                        }))
+                                        await websocket.send_text(json.dumps({
+                                            "type": "llm",
+                                            "text": response_text,
+                                            "status": "VOICE_COMMAND_RESOLVED"
+                                        }))
+                                    else:
+                                        # 2. Orchestrate Normal LLM Conversation
+                                        conv_req = ConversationMessageRequest(
+                                            session_id=session_id,
+                                            message=transcript_text
+                                        )
+                                        conv_res = await conversation_service.process_user_message(conv_req)
+                                        response_text = conv_res.response
 
-                                    await websocket.send_text(json.dumps({
-                                        "type": "llm",
-                                        "text": conv_res.response,
-                                        "status": conv_res.llm_status
-                                    }))
+                                        await websocket.send_text(json.dumps({
+                                            "type": "llm",
+                                            "text": response_text,
+                                            "status": conv_res.llm_status
+                                        }))
 
-                                    # Synthesize TTS audio response
-                                    tts_res = await audio_service.synthesize_speech(text=conv_res.response)
+                                    # 3. Synthesize TTS audio response
+                                    tts_res = await audio_service.synthesize_speech(text=response_text)
                                     if tts_res.success and tts_res.audio_bytes:
                                         # Notify device TTS playback start
                                         await websocket.send_text(json.dumps({
@@ -164,7 +190,7 @@ async def websocket_device_endpoint(
                                         await websocket.send_text(json.dumps({
                                             "type": "tts",
                                             "state": "sentence_start",
-                                            "text": conv_res.response
+                                            "text": response_text
                                         }))
                                         # Send binary audio frame in network byte order
                                         bp2_audio = XiaozhiProtocol.encode_bp2(
@@ -215,14 +241,29 @@ async def websocket_device_endpoint(
                     audio_buffer.clear()
                     await websocket.send_text(json.dumps({"type": "state", "state": "idle", "reason": "aborted"}))
 
-                elif msg_type == "vision":
-                    # Vision request with optional Base64 or synthetic frame
-                    use_synthetic = payload.get("use_mock_frame", True)
-                    vdata = np.full((100, 100, 3), 128, dtype=np.uint8)
+                elif msg_type in ("vision", "capture"):
+                    # Vision request with optional Base64, JPEG, or synthetic frame
+                    raw_b64 = payload.get("image_base64")
+                    vdata = None
+                    if raw_b64:
+                        try:
+                            img_b = base64.b64decode(raw_b64)
+                            nparr = np.frombuffer(img_b, np.uint8)
+                            img_bgr = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+                            if img_bgr is not None:
+                                vdata = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
+                        except Exception:
+                            pass
+
+                    if vdata is None:
+                        # Fallback to deterministic synthetic frame for simulation
+                        vdata = np.full((100, 100, 3), 128, dtype=np.uint8)
+
+                    h, w, _ = vdata.shape
                     vframe = VisionFrame(
                         data=vdata,
-                        width=100,
-                        height=100,
+                        width=w,
+                        height=h,
                         channels=3,
                         pixel_format="RGB",
                         numerical_range=(0, 255),
@@ -230,10 +271,15 @@ async def websocket_device_endpoint(
                         seq_num=1
                     )
                     vres = await vision_service.process_frame_async(vframe)
+                    scene_desc = vres.scene_result.description if vres.scene_result else None
+                    if scene_desc:
+                        conversation_service.session_manager.update_context(session_id, {"last_scene_description": scene_desc})
+
                     await websocket.send_text(json.dumps({
                         "type": "vision_result",
                         "success": len(vres.errors) == 0,
-                        "scene": vres.scene_result.description if vres.scene_result else None,
+                        "scene": scene_desc,
+                        "detections": [d.label for d in (vres.detection_result.detections if vres.detection_result else [])],
                         "errors": vres.errors
                     }))
 
@@ -268,6 +314,45 @@ async def websocket_device_endpoint(
                         if decoded_xz.message_type == XiaozhiMessageType.AUDIO_STREAM:
                             if len(audio_buffer) + len(decoded_xz.payload) <= MAX_INCOMING_BUFFER_BYTES:
                                 audio_buffer.extend(decoded_xz.payload)
+                        elif decoded_xz.message_type == XiaozhiMessageType.IMAGE_DATA:
+                            # Direct binary camera image frame
+                            try:
+                                nparr = np.frombuffer(decoded_xz.payload, np.uint8)
+                                img_bgr = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+                                if img_bgr is not None:
+                                    vdata = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
+                                    h, w, _ = vdata.shape
+                                    vframe = VisionFrame(
+                                        data=vdata,
+                                        width=w,
+                                        height=h,
+                                        channels=3,
+                                        pixel_format="RGB",
+                                        numerical_range=(0, 255),
+                                        timestamp=int(time.time() * 1000),
+                                        seq_num=1
+                                    )
+                                    vres = await vision_service.process_frame_async(vframe)
+                                    scene_desc = vres.scene_result.description if vres.scene_result else "Image frame processed."
+                                    conversation_service.session_manager.update_context(session_id, {"last_scene_description": scene_desc})
+                                    await websocket.send_text(json.dumps({
+                                        "type": "vision_result",
+                                        "success": len(vres.errors) == 0,
+                                        "scene": scene_desc,
+                                        "errors": vres.errors
+                                    }))
+                                else:
+                                    await websocket.send_text(json.dumps({
+                                        "type": "error",
+                                        "code": "IMAGE_DECODE_FAILED",
+                                        "message": "Failed to decode binary image frame bytes"
+                                    }))
+                            except Exception as img_err:
+                                await websocket.send_text(json.dumps({
+                                    "type": "error",
+                                    "code": "IMAGE_PROCESSING_ERROR",
+                                    "message": str(img_err)
+                                }))
                         elif decoded_xz.message_type == XiaozhiMessageType.JSON_CONTROL and decoded_xz.json_data:
                             # Forward JSON control packet
                             pass
@@ -282,3 +367,4 @@ async def websocket_device_endpoint(
         logger.error(f"WebSocket session {session_id} error: {str(exc)}")
     finally:
         audio_buffer.clear()
+

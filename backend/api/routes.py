@@ -219,3 +219,91 @@ async def process_vision_frame(
         latency_ms=round(elapsed_ms, 2),
         request_id=req_id
     )
+
+
+@router.post("/api/v1/vision/explain", tags=["Vision"])
+@router.post("/api/v1/camera/explain", tags=["Vision"])
+async def explain_camera_image(
+    request: Request,
+    service: VisionService = Depends(get_app_vision_service)
+):
+    """
+    Accepts on-demand multipart/form-data image uploads from ESP32-S3 camera firmware (esp32_camera.cc).
+    Processes image frame through vision pipeline and returns scene analysis answer.
+    """
+    t0 = time.time()
+    try:
+        form = await request.form()
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Failed to parse multipart form data: {str(e)}"
+        )
+
+    question = form.get("question", "What do you see?")
+    if not isinstance(question, str):
+        question = str(question)
+
+    file_item = form.get("file")
+    if file_item is None:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Missing 'file' field in multipart payload"
+        )
+
+    try:
+        img_bytes = await file_item.read()
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Failed to read image bytes: {str(e)}"
+        )
+
+    if not img_bytes:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Uploaded image file is empty (0 bytes)"
+        )
+
+    if len(img_bytes) > 10 * 1024 * 1024:
+        raise HTTPException(
+            status_code=status.HTTP_413_REQUEST_ENTITY_TOO_LARGE,
+            detail="Uploaded image exceeds 10MB limit"
+        )
+
+    nparr = np.frombuffer(img_bytes, np.uint8)
+    img_bgr = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+    if img_bgr is None:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Corrupted or unrecognized image format (must be valid JPEG/PNG)"
+        )
+
+    data = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
+    h, w, _ = data.shape
+
+    vframe = VisionFrame(
+        data=data,
+        width=w,
+        height=h,
+        channels=3,
+        pixel_format="RGB",
+        numerical_range=(0, 255),
+        timestamp=int(time.time() * 1000),
+        seq_num=1
+    )
+
+    result = await service.process_frame_async(vframe)
+    elapsed_ms = (time.time() - t0) * 1000.0
+
+    scene_desc = result.scene_result.description if result.scene_result else "Field of view captured."
+    salient_count = len(result.detection_result.detections) if result.detection_result and result.detection_result.detections else 0
+
+    return {
+        "success": len(result.errors) == 0,
+        "question": question,
+        "explanation": f"{scene_desc} Detected {salient_count} salient regions.",
+        "dimensions": {"width": w, "height": h},
+        "errors": result.errors,
+        "latency_ms": round(elapsed_ms, 2)
+    }
