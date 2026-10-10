@@ -58,6 +58,54 @@ class VisionProcessResponse(BaseModel):
     latency_ms: float
     request_id: Optional[str] = None
 
+class AudioTranscribeRequest(BaseModel):
+    audio_base64: Optional[str] = Field(default=None, description="Base64 encoded PCM/WAV audio bytes")
+    sample_rate: int = Field(default=16000, description="Audio sample rate (Hz), default 16000")
+    channels: int = Field(default=1, description="Audio channels (1=mono)")
+    reference_audio_base64: Optional[str] = Field(default=None, description="Optional reference audio for AEC")
+    run_dsp: bool = Field(default=True, description="Whether to run integrated DSP pipeline before transcription")
+
+class AudioTranscribeResponse(BaseModel):
+    success: bool
+    transcript: str = ""
+    confidence: float = 0.0
+    vad_speech_active: bool = False
+    dsp_metrics: Optional[Dict[str, Any]] = None
+    latency_ms: float = 0.0
+    error: Optional[str] = None
+    request_id: Optional[str] = None
+
+class SpeechSynthesizeRequest(BaseModel):
+    text: str = Field(..., min_length=1, max_length=4096, description="Text string to synthesize")
+    voice: Optional[str] = Field(default=None, description="Optional voice identifier")
+    format: Optional[str] = Field(default="pcm", description="Output audio format (pcm, wav)")
+
+class SpeechSynthesizeResponse(BaseModel):
+    success: bool
+    audio_base64: str = Field(default="", description="Base64 encoded synthesized audio bytes")
+    sample_rate: int = 24000
+    encoding: str = "pcm_s16le"
+    channels: int = 1
+    latency_ms: float = 0.0
+    error: Optional[str] = None
+    request_id: Optional[str] = None
+
+class ProviderStatusInfo(BaseModel):
+    provider_type: str
+    model: Optional[str] = None
+    configured: bool
+    available: bool
+    status: str
+    offline_mode: bool
+    api_key_configured: bool
+
+class ProvidersStatusResponse(BaseModel):
+    stt: ProviderStatusInfo
+    llm: ProviderStatusInfo
+    tts: ProviderStatusInfo
+    environment: str
+    timestamp: float
+
 class ErrorResponse(BaseModel):
     error: str
     detail: str

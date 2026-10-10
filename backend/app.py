@@ -6,9 +6,11 @@ from fastapi import FastAPI
 from backend.config.settings import AppSettings, get_settings
 from backend.api.routes import router as api_router
 from backend.api.conversation_routes import router as conversation_router
+from backend.api.audio_routes import router as audio_router
 from backend.api.middleware import RequestCorrelationMiddleware
 from backend.services.vision_service import get_vision_service
 from backend.services.conversation_service import get_conversation_service
+from backend.services.audio_service import get_audio_service
 
 def setup_logging(log_level: str = "INFO") -> None:
     """Configures structured application logging."""
@@ -30,7 +32,7 @@ async def lifespan(app: FastAPI):
     logger = logging.getLogger("nextsight.lifecycle")
     
     logger.info(f"Starting {settings.app_name} v{settings.version} in '{settings.environment}' mode")
-    logger.info("Initializing software vision service and AI engine registry...")
+    logger.info("Initializing software services (vision, conversation, audio DSP)...")
     # Pre-initialize vision service
     service = getattr(app.state, "vision_service", None) or get_vision_service(settings=settings)
     readiness = service.check_readiness()
@@ -52,13 +54,15 @@ def create_app(settings: Optional[AppSettings] = None) -> FastAPI:
     app = FastAPI(
         title=cfg.app_name,
         version=cfg.version,
-        description="NextSight Smart Glasses Python AI Backend Foundation (Phase 5)",
+        description="NextSight Smart Glasses Python AI Backend Foundation",
         lifespan=lifespan
     )
     app.state.settings = cfg
     from backend.power.policy import get_power_policy_manager
     app.state.power_manager = get_power_policy_manager(require_verified_telemetry=cfg.is_strict_telemetry_required)
     app.state.vision_service = get_vision_service(settings=cfg, power_manager=app.state.power_manager)
+    app.state.conversation_service = get_conversation_service()
+    app.state.audio_service = get_audio_service(settings=cfg)
 
     # Add middleware
     app.add_middleware(RequestCorrelationMiddleware)
@@ -66,6 +70,7 @@ def create_app(settings: Optional[AppSettings] = None) -> FastAPI:
     # Include routes
     app.include_router(api_router)
     app.include_router(conversation_router)
+    app.include_router(audio_router)
 
     return app
 

@@ -107,7 +107,7 @@ def test_capabilities_endpoint(client):
     
     assert "deferred" in data
     assert any("ocr" in s.lower() for s in data["deferred"])
-    assert any("llm" in s.lower() for s in data["deferred"])
+    assert any("llm" in s.lower() for s in data["implemented"])
     
     assert data["hardware_status"]["camera"] == "UNAVAILABLE"
     assert "MOCKABLE" in data["hardware_status"]["hal_driver"]

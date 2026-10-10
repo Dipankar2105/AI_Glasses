@@ -82,7 +82,12 @@ async def get_capabilities(settings: AppSettings = Depends(get_app_settings)):
             "vision_pipeline_resize_contrast",
             "ai_engine_registry",
             "vision_orchestrator",
-            "async_threadpool_orchestration_with_timeout"
+            "async_threadpool_orchestration_with_timeout",
+            "integrated_audio_dsp_pipeline",
+            "stt_speech_transcription",
+            "llm_reasoning_and_conversation",
+            "tts_speech_audio_output",
+            "mcp_tool_protocol"
         ],
         unavailable=[
             "physical_camera_sensor",
@@ -93,8 +98,6 @@ async def get_capabilities(settings: AppSettings = Depends(get_app_settings)):
         ],
         deferred=[
             "ocr_production_routing (ON_HOLD in Phase 5)",
-            "llm_reasoning_and_conversation (Phase 7)",
-            "tts_speech_audio_output (Phase 6)",
             "cloud_gemini_multimodal_api (Future Phase)"
         ],
         hardware_status={
@@ -106,7 +109,9 @@ async def get_capabilities(settings: AppSettings = Depends(get_app_settings)):
             "object_detector": "OPERATIONAL (Mock/Deterministic)",
             "scene_analyzer": "OPERATIONAL (Mock/Deterministic)",
             "ocr_pipeline": settings.ocr_status,
-            "llm_assistant": settings.llm_reasoning_status
+            "stt_transcriber": f"OPERATIONAL ({settings.stt_provider})",
+            "llm_assistant": f"OPERATIONAL ({settings.llm_provider})",
+            "tts_synthesizer": f"OPERATIONAL ({settings.tts_provider})"
         }
     )
 
