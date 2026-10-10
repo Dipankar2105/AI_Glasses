@@ -9,9 +9,12 @@ from .noise_suppression import SpectralNoiseSuppression
 from .vad import VAD
 from .agc import AGC
 from .integrated_pipeline import (
-    IntegratedAudioPipeline,
+    AudioFrame,
+    AudioProcessingResult,
     AudioProcessingMetrics,
     AudioPipelineConfig,
+    IntegratedAudioPipeline,
+    AudioStreamAdapter,
 )
 from .pipeline import DSPPipeline
 from . import metrics
@@ -29,9 +32,12 @@ __all__ = [
     "SpectralNoiseSuppression",
     "VAD",
     "AGC",
-    "IntegratedAudioPipeline",
+    "AudioFrame",
+    "AudioProcessingResult",
     "AudioProcessingMetrics",
     "AudioPipelineConfig",
+    "IntegratedAudioPipeline",
+    "AudioStreamAdapter",
     "DSPPipeline",
     "metrics",
 ]

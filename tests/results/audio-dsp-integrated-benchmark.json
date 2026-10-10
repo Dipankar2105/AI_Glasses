@@ -1,0 +1,45 @@
+{
+    "benchmark_config": {
+        "iterations": 1000,
+        "sample_rate_hz": 16000,
+        "frame_size_samples": 256,
+        "nominal_frame_duration_ms": 16.0,
+        "audio_contract": "16kHz / 16-bit signed PCM / mono",
+        "total_audio_duration_sec": 16.0,
+        "wall_clock_time_sec": 0.9502
+    },
+    "latency_metrics_ms": {
+        "iterations": 1000,
+        "mean_ms": 0.9479,
+        "median_ms": 0.9522,
+        "p95_ms": 0.9945,
+        "p99_ms": 1.0903,
+        "min_ms": 0.8939,
+        "max_ms": 1.3764
+    },
+    "per_stage_mean_latency_ms": {
+        "DCBlocker": 0.0233,
+        "HighPassFilter": 0.0244,
+        "SpectralNoiseSuppression": 0.6002,
+        "VAD": 0.0101,
+        "AGC": 0.0927,
+        "Limiter": 0.0175
+    },
+    "throughput": {
+        "audio_seconds_per_wall_sec": 16.84,
+        "mean_realtime_factor_rtf": 0.0592,
+        "frames_processed_per_sec": 1052.4
+    },
+    "signal_quality_summary": {
+        "mean_input_rms": 1106.45,
+        "mean_output_rms": 2572.58,
+        "snr_shift_db": 7.33,
+        "vad_speech_active_frames": 903,
+        "vad_speech_active_percentage": 90.3,
+        "clipping_detected": false
+    },
+    "environment": {
+        "python_version": "3.14.6 | packaged by Anaconda, Inc. | (main, Jul  9 2026, 14:29:05) [MSC v.1942 64 bit (AMD64)]",
+        "platform": "win32"
+    }
+}

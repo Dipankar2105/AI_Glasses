@@ -1,8 +1,11 @@
 from .buffer import AudioBuffer, DSPStage
 from .integrated_pipeline import (
-    IntegratedAudioPipeline,
+    AudioFrame,
+    AudioProcessingResult,
     AudioProcessingMetrics,
     AudioPipelineConfig,
+    IntegratedAudioPipeline,
+    AudioStreamAdapter,
 )
 
 class DSPPipeline:
@@ -21,7 +24,10 @@ class DSPPipeline:
 
 __all__ = [
     "DSPPipeline",
-    "IntegratedAudioPipeline",
+    "AudioFrame",
+    "AudioProcessingResult",
     "AudioProcessingMetrics",
     "AudioPipelineConfig",
+    "IntegratedAudioPipeline",
+    "AudioStreamAdapter",
 ]
