@@ -12,6 +12,11 @@ from backend.protocol.framing import (
     MAGIC_BYTES,
 )
 from backend.protocol.device_sim import SimulatedESP32Device
+from backend.protocol.xiaozhi_protocol import (
+    XiaozhiProtocol,
+    XiaozhiMessageType,
+    DecodedXiaozhiPacket,
+)
 
 __all__ = [
     "PacketType",
@@ -22,4 +27,7 @@ __all__ = [
     "HEADER_SIZE",
     "MAGIC_BYTES",
     "SimulatedESP32Device",
+    "XiaozhiProtocol",
+    "XiaozhiMessageType",
+    "DecodedXiaozhiPacket",
 ]
