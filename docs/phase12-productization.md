@@ -23,7 +23,8 @@ All physical hardware dependencies have been isolated behind clean HAL and simul
 | **Vision Foundation & Orchestrator**| Implemented & Frozen ([`backend/vision/`](file:///c:/Users/Routewise/AI_Glasses/backend/vision/))| Software Tested (Deterministic Frames) | OV3660 Camera Sensor |
 | **OCR Research & Benchmarking** | Evaluated (30 notebook pages) | Research Benchmark Saved | **ON HOLD** (Accuracy on notes < 25%) |
 | **Python AI Backend (FastAPI)** | Implemented ([`backend/app.py`](file:///c:/Users/Routewise/AI_Glasses/backend/app.py)) | Software Tested (Endpoints, Lifespan) | None (Host Python 3.14) |
-| **Conversational Intelligence & MCP**| Implemented ([`backend/conversation/`](file:///c:/Users/Routewise/AI_Glasses/backend/conversation/)) | Software Tested (Sessions, Tools) | Cloud LLM/TTS (Local Mocks Default)|
+| **AI Provider Adapters (STT/TTS/LLM)**| Implemented ([`backend/providers/`](file:///c:/Users/Routewise/AI_Glasses/backend/providers/)) | Software Tested (Mocks, Adapters, Factory) | Cloud Provider API Keys (Mocks Default) |
+| **Conversational Intelligence & MCP**| Implemented ([`backend/conversation/`](file:///c:/Users/Routewise/AI_Glasses/backend/conversation/)) | Software Tested (Sessions, Tool Loops)| Cloud LLM/TTS (Local Mocks Default)|
 | **Motion Processing & Gestures** | Implemented ([`backend/motion/`](file:///c:/Users/Routewise/AI_Glasses/backend/motion/)) | Software Tested (Nod, Shake, Tilt) | MPU-6050 I2C Sensor |
 | **Capacitive Touch Interaction** | Implemented ([`backend/motion/touch.py`](file:///c:/Users/Routewise/AI_Glasses/backend/motion/touch.py)) | Software Tested (Tap, Dbl-Tap, Long) | ESP32 Touch ADC Pin |
 | **Power & Thermal Policy** | Implemented ([`backend/power/`](file:///c:/Users/Routewise/AI_Glasses/backend/power/)) | Software Tested (Hysteresis, Limits) | ADC Fuel Gauge / Die Temp Sensor |

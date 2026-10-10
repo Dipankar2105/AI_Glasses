@@ -1,12 +1,12 @@
 # NextSight Smart Glasses — AI Glasses Framework
 
-[![CI / Regression Tests](https://img.shields.io/badge/Tests-198%20Passed-brightgreen)](https://github.com/Dipankar2105/AI_Glasses)
+[![CI / Regression Tests](https://img.shields.io/badge/Tests-261%20Passed-brightgreen)](https://github.com/Dipankar2105/AI_Glasses)
 [![Platform](https://img.shields.io/badge/Platform-ESP32--S3%20%7C%20FastAPI-blue)](https://github.com/Dipankar2105/AI_Glasses)
 [![Hardware Readiness](https://img.shields.io/badge/Hardware-Ready%20for%20Physical%20Bringup-orange)](docs/phase10-hardware-integration-readiness.md)
 
-NextSight is an open, modular software and firmware architecture for AI-powered smart glasses. Designed around the **Seeed Studio XIAO ESP32-S3 Sense**, NextSight provides real-time head motion gesture recognition, silent capacitive touch interaction, power and thermal management, conversational orchestration, Model Context Protocol (MCP) tool execution, and local vision processing.
+NextSight is an open, modular software and firmware architecture for AI-powered smart glasses. Designed around the **Seeed Studio XIAO ESP32-S3 Sense**, NextSight provides real-time head motion gesture recognition, silent capacitive touch interaction, power and thermal management, speech-to-text (STT), text-to-speech (TTS), AI provider adapters (LLM), conversational orchestration, Model Context Protocol (MCP) tool execution, and local vision processing.
 
-> **Hardware Notice**: The entire software stack is fully validated on the host system using deterministic synthetic sensor traces and device simulation. Physical sensor and hardware validation is prepared and ready for prototype bench testing upon hardware arrival.
+> **Hardware Notice**: The entire software stack is fully validated on the host system using deterministic synthetic sensor traces, simulated audio streams, and device simulation. Physical sensor and hardware validation is prepared and ready for prototype bench testing upon hardware arrival.
 
 ---
 
@@ -28,6 +28,7 @@ NextSight is an open, modular software and firmware architecture for AI-powered 
 |  [ Python AI Backend (FastAPI / Asynchronous Orchestrator) ]                      |
 |  ├── Protocol Engine    ──> CRC Validation & Packet Sequence Tracking             |
 |  ├── Power & Thermals   ──> Discharge Hysteresis & Workload Gating                |
+|  ├── AI Providers Layer ──> Provider-Neutral STT, TTS, and LLM Adapters           |
 |  ├── Interaction Router ──> Safe Gesture-to-Intent Dispatcher                     |
 |  ├── Conversation / MCP ──> Bounded Session History & Sandboxed Tool Execution    |
 |  └── Vision Pipeline    ──> Object Detection & Scene Understanding                |
