@@ -60,11 +60,17 @@ class SessionManager:
 
             return msg
 
-    def update_context(self, session_id: str, context: Dict[str, Any]) -> None:
+    def update_context(self, session_id: str, context: Any) -> None:
         """Updates context metadata (e.g. vision objects, location) for a session."""
         with self._lock:
             session = self.get_or_create_session(session_id)
-            session.context_metadata.update(context)
+            if hasattr(context, "model_dump"):
+                data = context.model_dump(exclude_none=True)
+            elif isinstance(context, dict):
+                data = context
+            else:
+                data = {"context": str(context)}
+            session.context_metadata.update(data)
             session.updated_at = time.time()
 
     def delete_session(self, session_id: str) -> bool:
