@@ -76,12 +76,14 @@ class MockLLMProvider(BaseLLMProvider):
         fixed_response: str = "This is a deterministic mock assistant response for testing.",
         simulated_tool_calls: Optional[List[LLMToolCall]] = None,
         simulated_delay_s: float = 0.0,
-        model_name: str = "mock-gpt-4o"
+        model_name: str = "mock-gpt-4o",
+        consume_tool_calls: bool = True
     ):
         self.fixed_response = fixed_response
-        self.simulated_tool_calls = simulated_tool_calls or []
+        self.simulated_tool_calls = list(simulated_tool_calls) if simulated_tool_calls else []
         self.simulated_delay_s = simulated_delay_s
         self.model_name = model_name
+        self.consume_tool_calls = consume_tool_calls
 
     def is_available(self) -> bool:
         return True
@@ -107,7 +109,11 @@ class MockLLMProvider(BaseLLMProvider):
             await asyncio.sleep(self.simulated_delay_s)
 
         elapsed = (time.time() - t0) * 1000.0
-        
+
+        current_tool_calls = list(self.simulated_tool_calls)
+        if self.consume_tool_calls and self.simulated_tool_calls:
+            self.simulated_tool_calls.clear()
+
         # Calculate mock token count based on input + output text
         prompt_chars = sum(len(m.content) for m in messages)
         usage = {
@@ -119,7 +125,7 @@ class MockLLMProvider(BaseLLMProvider):
         return LLMResult(
             content=self.fixed_response,
             status=ProviderStatus.MOCK_DEVELOPMENT,
-            tool_calls=self.simulated_tool_calls,
+            tool_calls=current_tool_calls,
             model_name=self.model_name,
             token_usage=usage,
             latency_ms=elapsed

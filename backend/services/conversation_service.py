@@ -1,6 +1,7 @@
+"""Conversation orchestration service integrating Session History, MCP Tools, and AI Providers."""
+
 import time
-from abc import ABC, abstractmethod
-from typing import List, Dict, Optional, Any
+from typing import List, Dict, Optional, Any, Union
 
 from backend.conversation.models import (
     MessageRole,
@@ -12,91 +13,28 @@ from backend.conversation.models import (
 )
 from backend.conversation.session import SessionManager, get_session_manager
 from backend.mcp.registry import MCPToolRegistry, get_tool_registry
-
-class LLMProviderResponse:
-    def __init__(
-        self,
-        content: str,
-        status: str = "OPERATIONAL",
-        tool_calls: Optional[List[dict]] = None
-    ):
-        self.content = content
-        self.status = status
-        self.tool_calls = tool_calls or []
-
-class BaseLLMProvider(ABC):
-    """Provider-neutral LLM abstraction for future Gemini/Claude/Local integrations."""
-    @abstractmethod
-    def is_available(self) -> bool:
-        pass
-
-    @abstractmethod
-    async def generate_response(
-        self,
-        messages: List[ConversationMessage],
-        context_metadata: Dict[str, Any],
-        available_tools: List[dict]
-    ) -> LLMProviderResponse:
-        pass
-
-
-class NullLLMProvider(BaseLLMProvider):
-    """
-    Default provider in Phase 7.
-    Honestly reports that no external or local LLM reasoning model is configured yet.
-    """
-    def is_available(self) -> bool:
-        return False
-
-    async def generate_response(
-        self,
-        messages: List[ConversationMessage],
-        context_metadata: Dict[str, Any],
-        available_tools: List[dict]
-    ) -> LLMProviderResponse:
-        return LLMProviderResponse(
-            content="[LLM Unavailable] Conversation orchestration and tool execution are active, but no LLM reasoning provider is currently configured.",
-            status="PROVIDER_UNAVAILABLE"
-        )
-
-
-class MockLLMProvider(BaseLLMProvider):
-    """
-    Deterministic test double for unit and integration testing only.
-    Clearly marked as TEST_DOUBLE.
-    """
-    def __init__(self, fixed_response: str = "This is a deterministic mock assistant response for testing."):
-        self.fixed_response = fixed_response
-
-    def is_available(self) -> bool:
-        return True
-
-    async def generate_response(
-        self,
-        messages: List[ConversationMessage],
-        context_metadata: Dict[str, Any],
-        available_tools: List[dict]
-    ) -> LLMProviderResponse:
-        return LLMProviderResponse(
-            content=self.fixed_response,
-            status="MOCK_DEVELOPMENT"
-        )
+from backend.providers.contracts import ProviderStatus, LLMResult, LLMToolCall
+from backend.providers.llm import BaseLLMProvider, NullLLMProvider, MockLLMProvider, LLMProviderResponse
+from backend.providers.factory import get_llm_provider
 
 
 class ConversationService:
     """
     Orchestrates contextual conversations for NextSight.
     Coordinates: Session History <-> Context Enrichment <-> MCP Tool Execution <-> LLM Reasoning.
+    Enforces bounded tool recursion loops (max 3 iterations) and timeout protection.
     """
     def __init__(
         self,
         session_manager: Optional[SessionManager] = None,
         tool_registry: Optional[MCPToolRegistry] = None,
-        llm_provider: Optional[BaseLLMProvider] = None
+        llm_provider: Optional[BaseLLMProvider] = None,
+        max_tool_iterations: int = 3
     ):
         self.session_manager = session_manager or get_session_manager()
         self.tool_registry = tool_registry or get_tool_registry()
-        self.llm_provider = llm_provider or NullLLMProvider()
+        self.llm_provider = llm_provider or get_llm_provider()
+        self.max_tool_iterations = max_tool_iterations
 
     async def process_user_message(
         self,
@@ -123,7 +61,7 @@ class ConversationService:
             metadata={"vision_context_present": request.vision_context is not None}
         )
 
-        # 4. Execute tool if requested or triggered
+        # 4. Execute explicit tool if requested by client
         tool_summaries: List[ToolExecutionSummary] = []
         if request.tool_to_invoke:
             tool_res = await self.tool_registry.execute_tool(
@@ -132,7 +70,7 @@ class ConversationService:
             )
             
             # Record tool result in session history
-            tool_content_str = str(tool_res.content) if not tool_res.is_error else tool_res.error_message
+            tool_content_str = str(tool_res.content) if not tool_res.is_error else str(tool_res.error_message)
             self.session_manager.add_message(
                 session_id=session_id,
                 role=MessageRole.TOOL_RESULT,
@@ -150,20 +88,63 @@ class ConversationService:
                 latency_ms=tool_res.latency_ms
             ))
 
-        # 5. Invoke LLM Provider
+        # 5. Invoke LLM Provider with tool recursion guard
         available_tools = [t.model_dump() for t in self.tool_registry.list_tools()]
-        llm_res = await self.llm_provider.generate_response(
-            messages=session.messages,
-            context_metadata=session.context_metadata,
-            available_tools=available_tools
-        )
+        iteration = 0
+        final_content = ""
+        final_status = "PROVIDER_UNAVAILABLE"
+
+        while iteration < self.max_tool_iterations:
+            iteration += 1
+            llm_res = await self.llm_provider.generate_response(
+                messages=session.messages,
+                context_metadata=session.context_metadata,
+                available_tools=available_tools
+            )
+
+            # Handle both legacy LLMProviderResponse and modern LLMResult
+            if isinstance(llm_res, LLMResult):
+                final_content = llm_res.content
+                final_status = llm_res.status.value if hasattr(llm_res.status, "value") else str(llm_res.status)
+                tool_calls = llm_res.tool_calls
+            else:
+                final_content = llm_res.content
+                final_status = llm_res.status
+                tool_calls = getattr(llm_res, "tool_calls", [])
+
+            # Check if LLM requested additional tool calls and we have remaining iterations
+            if tool_calls and iteration < self.max_tool_iterations:
+                for tc in tool_calls:
+                    tc_name = tc.tool_name if hasattr(tc, "tool_name") else tc.get("name")
+                    tc_args = tc.arguments if hasattr(tc, "arguments") else tc.get("arguments", {})
+                    if tc_name:
+                        t_res = await self.tool_registry.execute_tool(name=tc_name, arguments=tc_args)
+                        t_content_str = str(t_res.content) if not t_res.is_error else str(t_res.error_message)
+                        self.session_manager.add_message(
+                            session_id=session_id,
+                            role=MessageRole.TOOL_RESULT,
+                            content=t_content_str,
+                            tool_name=tc_name,
+                            metadata={"is_error": t_res.is_error}
+                        )
+                        tool_summaries.append(ToolExecutionSummary(
+                            tool_name=tc_name,
+                            arguments=tc_args,
+                            success=not t_res.is_error,
+                            result=t_res.content if not t_res.is_error else None,
+                            error=t_res.error_message if t_res.is_error else None,
+                            latency_ms=t_res.latency_ms
+                        ))
+                continue
+            else:
+                break
 
         # 6. Record assistant response in session history
         assistant_msg = self.session_manager.add_message(
             session_id=session_id,
             role=MessageRole.ASSISTANT,
-            content=llm_res.content,
-            metadata={"llm_status": llm_res.status}
+            content=final_content,
+            metadata={"llm_status": final_status}
         )
 
         latency_ms = (time.time() - t0) * 1000.0
@@ -171,8 +152,8 @@ class ConversationService:
         return ConversationMessageResponse(
             session_id=session_id,
             message_id=assistant_msg.id,
-            response=llm_res.content,
-            llm_status=llm_res.status,
+            response=final_content,
+            llm_status=final_status,
             tool_executions=tool_summaries,
             session_message_count=len(session.messages),
             latency_ms=round(latency_ms, 2),
