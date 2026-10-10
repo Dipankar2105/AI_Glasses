@@ -107,7 +107,7 @@ class SystemIntegrationOrchestrator:
 
                 # Check power permission for vision triggering
                 if g_name == "DOUBLE_TAP":
-                    can_vision, reason = self.power_manager.can_execute_workload(WorkloadPriority.VISION_CAPTURE)
+                    can_vision, reason = self.power_manager.can_execute_workload(WorkloadPriority.VISION_CAPTURE, current_time=ts)
                     if not can_vision:
                         return {
                             "status": "BLOCKED_BY_POWER_POLICY",

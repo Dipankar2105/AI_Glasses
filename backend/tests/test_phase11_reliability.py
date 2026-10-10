@@ -168,3 +168,59 @@ def test_firmware_reliability_wrapper_compatibility():
     r = FirmwareRetryPolicy()
     f = lambda: True
     assert r.execute(f) is True
+
+
+def test_orchestrator_strict_telemetry_gate_scenario():
+    """Verify that SystemIntegrationOrchestrator with require_verified_telemetry=True enforces the strict safety gate."""
+    from backend.power.policy import PowerThermalPolicyManager
+
+    strict_power = PowerThermalPolicyManager(require_verified_telemetry=True)
+    orchestrator = SystemIntegrationOrchestrator(power_manager=strict_power)
+
+    dt_payload = json.dumps({"gesture": "DOUBLE_TAP", "confidence": 0.98}).encode("utf-8")
+    dt_packet_uninit = ProtocolFraming.encode_message(
+        packet_type=PacketType.TOUCH_EVENT,
+        payload=dt_payload,
+        sequence_number=1,
+        timestamp_ms=1000,
+    )
+
+    # 1. Uninitialized telemetry -> Double tap blocked by policy
+    res1 = orchestrator.process_incoming_device_packet(dt_packet_uninit)
+    assert res1["status"] == "BLOCKED_BY_POWER_POLICY"
+    assert "uninitialized" in res1["reason"].lower()
+
+    # 2. Ingest fresh valid telemetry at t=2000ms
+    telem_payload = json.dumps({"battery_pct": 85.0, "temp_c": 32.0}).encode("utf-8")
+    telem_packet = ProtocolFraming.encode_message(
+        packet_type=PacketType.TELEMETRY,
+        payload=telem_payload,
+        sequence_number=2,
+        timestamp_ms=2000,
+    )
+    res_telem = orchestrator.process_incoming_device_packet(telem_packet)
+    assert res_telem["status"] == "PROCESSED"
+    assert res_telem["battery_status"] == "NORMAL"
+
+    # 3. Double tap at t=2100ms -> Vision capture permitted & dispatched
+    dt_packet_fresh = ProtocolFraming.encode_message(
+        packet_type=PacketType.TOUCH_EVENT,
+        payload=dt_payload,
+        sequence_number=3,
+        timestamp_ms=2100,
+    )
+    res2 = orchestrator.process_incoming_device_packet(dt_packet_fresh)
+    assert res2["status"] == "DISPATCHED"
+    assert res2["intent"] == "TRIGGER_SCENE_ANALYSIS"
+
+    # 4. Double tap at t=60000ms (>30s later without new telemetry) -> Stale telemetry blocks capture
+    dt_packet_stale = ProtocolFraming.encode_message(
+        packet_type=PacketType.TOUCH_EVENT,
+        payload=dt_payload,
+        sequence_number=4,
+        timestamp_ms=60000,
+    )
+    res3 = orchestrator.process_incoming_device_packet(dt_packet_stale)
+    assert res3["status"] == "BLOCKED_BY_POWER_POLICY"
+    assert "stale" in res3["reason"].lower()
+
