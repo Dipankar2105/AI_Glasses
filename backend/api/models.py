@@ -56,6 +56,7 @@ class VisionProcessResponse(BaseModel):
     ocr_notice: str = "OCR is explicitly DEFERRED in Phase 5"
     errors: List[Dict[str, Any]]
     latency_ms: float
+    request_id: Optional[str] = None
 
 class ErrorResponse(BaseModel):
     error: str

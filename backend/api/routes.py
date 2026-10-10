@@ -114,32 +114,54 @@ async def get_capabilities(settings: AppSettings = Depends(get_app_settings)):
 @router.post("/api/v1/vision/process", response_model=VisionProcessResponse, tags=["Vision"])
 async def process_vision_frame(
     request: VisionProcessRequest,
+    raw_request: Request,
     service: VisionService = Depends(get_app_vision_service)
 ):
     """
     Processes an incoming vision frame through the pipeline and registered AI engines.
-    Accepts Base64 image payload or synthetic mock frame request.
+    Accepts Base64 image payload or explicit synthetic mock frame request.
     """
     t0 = time.time()
     
-    if request.use_mock_frame or not request.image_base64:
-        # Create deterministic synthetic test frame
+    if request.use_mock_frame:
+        # Explicit deterministic synthetic test frame requested for simulation/testing
         data = np.full((100, 100, 3), 128, dtype=np.uint8)
         w, h = 100, 100
-    else:
+    elif request.image_base64 is not None:
+        raw_b64 = request.image_base64.strip()
+        if not raw_b64:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Malformed image payload: Empty image_base64 payload string"
+            )
         try:
-            img_bytes = base64.b64decode(request.image_base64)
+            try:
+                img_bytes = base64.b64decode(raw_b64, validate=True)
+            except Exception as b64_err:
+                raise ValueError(f"Invalid base64 encoding: {b64_err}")
+            if len(img_bytes) == 0:
+                raise ValueError("Decoded image bytes are empty")
             nparr = np.frombuffer(img_bytes, np.uint8)
             img_bgr = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
             if img_bgr is None:
-                raise ValueError("Failed to decode image from base64 buffer")
+                raise ValueError("Failed to decode image from buffer (unsupported format or corrupted data)")
             data = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
             h, w, _ = data.shape
+
+            if w <= 0 or h <= 0:
+                raise ValueError(f"Invalid image dimensions ({w}x{h})")
+            if w > 4096 or h > 4096:
+                raise ValueError(f"Image dimensions {w}x{h} exceed maximum permitted limit of 4096x4096")
         except Exception as e:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail=f"Malformed image payload: {str(e)}"
             )
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Missing image payload: image_base64 is required when use_mock_frame is False"
+        )
 
     vframe = VisionFrame(
         data=data,
@@ -179,6 +201,8 @@ async def process_vision_frame(
             confidence=result.scene_result.confidence
         )
 
+    req_id = getattr(raw_request.state, "request_id", None) if hasattr(raw_request, "state") else None
+
     return VisionProcessResponse(
         success=len(result.errors) == 0,
         seq_num=result.seq_num,
@@ -187,5 +211,6 @@ async def process_vision_frame(
         scene=scene_out,
         ocr_notice="OCR is explicitly DEFERRED in Phase 5",
         errors=result.errors,
-        latency_ms=round(elapsed_ms, 2)
+        latency_ms=round(elapsed_ms, 2),
+        request_id=req_id
     )
