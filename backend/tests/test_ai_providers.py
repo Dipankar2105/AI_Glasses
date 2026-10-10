@@ -416,3 +416,51 @@ def test_provider_factory_mock_resolution(monkeypatch):
     llm = get_llm_provider()
     assert isinstance(llm, MockLLMProvider)
     assert llm.is_available() is True
+
+
+def test_provider_factory_settings_driven_resolution():
+    from backend.config.settings import AppSettings
+
+    custom_settings = AppSettings(
+        stt_provider="whisper",
+        stt_model="whisper-custom",
+        openai_api_key="sk-test-openai-123",
+        tts_provider="openai",
+        tts_model="tts-hd-custom",
+        tts_voice="nova",
+        llm_provider="gemini",
+        llm_model="gemini-custom",
+        gemini_api_key="gm-test-key-456"
+    )
+
+    stt = ProviderFactory.create_stt_provider(settings=custom_settings)
+    assert isinstance(stt, WhisperSTTAdapter)
+    assert stt.is_available() is True
+    assert stt.model_name == "whisper-custom"
+
+    tts = ProviderFactory.create_tts_provider(settings=custom_settings)
+    assert isinstance(tts, APITTSAdapter)
+    assert tts.is_available() is True
+    assert tts.model_name == "tts-hd-custom"
+    assert tts.voice_id == "nova"
+
+    llm = ProviderFactory.create_llm_provider(settings=custom_settings)
+    assert isinstance(llm, APILLMAdapter)
+    assert llm.is_available() is True
+    assert llm.model_name == "gemini-custom"
+
+
+def test_provider_factory_unrecognized_or_disabled_names():
+    # Disabled or unknown provider names should fail closed to Null providers
+    for name in ("none", "disabled", "null", "invalid_provider_xyz"):
+        stt = ProviderFactory.create_stt_provider(provider_name=name)
+        assert isinstance(stt, NullSTTProvider)
+        assert stt.is_available() is False
+
+        tts = ProviderFactory.create_tts_provider(provider_name=name)
+        assert isinstance(tts, NullTTSProvider)
+        assert tts.is_available() is False
+
+        llm = ProviderFactory.create_llm_provider(provider_name=name)
+        assert isinstance(llm, NullLLMProvider)
+        assert llm.is_available() is False
