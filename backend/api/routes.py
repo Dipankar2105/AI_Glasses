@@ -336,6 +336,13 @@ async def extract_image_ocr(
     content_type = request.headers.get("content-type", "")
     data = None
 
+    if engine is not None and hasattr(service, "registry") and hasattr(service.registry, "ocrs"):
+        if engine not in service.registry.ocrs:
+            raise HTTPException(
+                status_code=400,
+                detail=f"Invalid OCR engine '{engine}'. Available engines: {list(service.registry.ocrs.keys())}"
+            )
+
     if "multipart/form-data" in content_type:
         try:
             form = await request.form()

@@ -346,6 +346,12 @@ def test_ocr_endpoint_explicit_engine_selection(app_with_services):
     assert r_rapid.status_code == 200
     assert r_rapid.json()["engine"] == "rapidocr"
 
+    # Test invalid engine selection returns 400 Bad Request
+    files_bad = {"file": ("test.png", io.BytesIO(enc.tobytes()), "image/png")}
+    r_bad = client.post("/api/v1/vision/ocr?engine=unsupported_engine_xyz", files=files_bad)
+    assert r_bad.status_code == 400
+    assert "Invalid OCR engine" in r_bad.json()["detail"]
+
 
 def test_websocket_missing_image_and_stale_invalidation(app_with_services):
     client, _ = app_with_services

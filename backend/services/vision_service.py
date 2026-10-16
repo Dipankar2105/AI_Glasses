@@ -148,8 +148,19 @@ class VisionService:
         )
 
         try:
-            if engine_name and engine_name in self.registry.ocrs:
-                engine = self.registry.ocrs[engine_name]
+            if engine_name:
+                if engine_name in self.registry.ocrs:
+                    engine = self.registry.ocrs[engine_name]
+                else:
+                    return {
+                        "success": False,
+                        "text": "",
+                        "lines": [],
+                        "paragraphs": [],
+                        "confidence": 0.0,
+                        "error": f"Unknown OCR engine '{engine_name}'. Available: {list(self.registry.ocrs.keys())}",
+                        "latency_ms": 0.0
+                    }
             else:
                 engine = self.registry.get_ocr()
 
