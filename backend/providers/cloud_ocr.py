@@ -159,7 +159,11 @@ class CloudVisionOCRAdapter(OCREngine):
             if resp.status_code != 200:
                 raise RuntimeError(f"OpenAI API error HTTP {resp.status_code}: {resp.text[:200]}")
             data = resp.json()
-            return data["choices"][0]["message"]["content"].strip()
+            choices = data.get("choices", [])
+            if not choices:
+                return ""
+            content = choices[0].get("message", {}).get("content", "")
+            return content.strip() if content else ""
 
     def _call_gemini(self, b64_jpeg: str) -> str:
         prompt = "Transcribe all text from this image exactly as written. Return only the recognized text without markdown formatting or preamble."
@@ -193,4 +197,4 @@ class CloudVisionOCRAdapter(OCREngine):
             if not candidates:
                 return ""
             parts = candidates[0].get("content", {}).get("parts", [])
-            return "".join(p.get("text", "") for p in parts).strip()
+            return "".join(p.get("text", "") for p in parts if isinstance(p, dict)).strip()

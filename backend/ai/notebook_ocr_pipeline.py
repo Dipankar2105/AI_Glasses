@@ -1,6 +1,7 @@
 import os
 import re
 import time
+import math
 from typing import List, Dict, Tuple, Optional
 import numpy as np
 import cv2
@@ -101,6 +102,8 @@ class NotebookOCRPipeline:
         blur_threshold: float = 40.0,
         min_confidence: float = 0.30,
         enable_clahe: bool = True,
+        enable_deskew: bool = False,
+        max_dimension: int = 3840,
         filter_cjk: bool = False,
         tag_anomalies: bool = False
     ):
@@ -108,6 +111,8 @@ class NotebookOCRPipeline:
         self.blur_threshold = blur_threshold
         self.min_confidence = min_confidence
         self.enable_clahe = enable_clahe
+        self.enable_deskew = enable_deskew
+        self.max_dimension = max_dimension
         self.filter_cjk = filter_cjk
         self.tag_anomalies = tag_anomalies
         self._cjk_regex = re.compile(r'[\u4e00-\u9fff\u3400-\u4dbf\uff00-\uffef\u2e80-\u2fd5]+')
@@ -158,9 +163,67 @@ class NotebookOCRPipeline:
             warnings=warnings
         )
 
+    def _bound_image_dimensions(self, image: np.ndarray, max_dim: int = 3840) -> np.ndarray:
+        """Proportionally bounds image dimensions to prevent memory exhaustion on giant images."""
+        if image is None or image.size == 0:
+            return image
+        h, w = image.shape[:2]
+        largest = max(h, w)
+        if largest > max_dim:
+            scale = max_dim / float(largest)
+            new_w, new_h = max(1, int(w * scale)), max(1, int(h * scale))
+            return cv2.resize(image, (new_w, new_h), interpolation=cv2.INTER_AREA)
+        return image
+
+    def _deskew_image(self, image: np.ndarray) -> np.ndarray:
+        """Estimates and corrects page skew within safe ±15° bounds."""
+        if image is None or image.size == 0:
+            return image
+        h, w = image.shape[:2]
+        gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY) if image.ndim == 3 else image
+        edges = cv2.Canny(gray, 50, 150)
+        lines = cv2.HoughLinesP(edges, 1, np.pi / 180, threshold=40, minLineLength=30, maxLineGap=5)
+        if lines is None or len(lines) < 3:
+            return image
+
+        angles = []
+        for l in lines:
+            x1, y1, x2, y2 = l.reshape(-1)
+            deg = math.degrees(math.atan2(float(y2 - y1), float(x2 - x1)))
+            if abs(deg) <= 15.0:
+                angles.append(deg)
+
+        if not angles:
+            return image
+
+        med_angle = float(np.median(angles))
+        if 0.5 <= abs(med_angle) <= 15.0:
+            center = (w / 2.0, h / 2.0)
+            M = cv2.getRotationMatrix2D(center, med_angle, 1.0)
+            pad_val = (255, 255, 255) if image.ndim == 3 else 255
+            return cv2.warpAffine(image, M, (w, h), borderMode=cv2.BORDER_CONSTANT, borderValue=pad_val)
+        return image
+
     def preprocess_image(self, image: np.ndarray) -> np.ndarray:
-        """Gentle contrast enhancement using CLAHE in LAB color space."""
-        if not self.enable_clahe or image is None or image.size == 0:
+        """Safe preprocessing: dimension bounding, optional safe deskew, and adaptive CLAHE."""
+        if image is None or image.size == 0:
+            return image
+
+        # 1. Dimension bounding
+        image = self._bound_image_dimensions(image, max_dim=self.max_dimension)
+
+        # 2. Skew correction if enabled
+        if self.enable_deskew:
+            image = self._deskew_image(image)
+
+        # 3. Safe adaptive contrast enhancement
+        if not self.enable_clahe:
+            return image
+
+        gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY) if (image.ndim == 3 and image.shape[2] == 3) else image
+        contrast_std = float(np.std(gray))
+        # Skip CLAHE if contrast is already strong to prevent blowing out delicate strokes
+        if contrast_std > 65.0:
             return image
 
         if len(image.shape) == 3 and image.shape[2] == 3:
@@ -409,6 +472,12 @@ class NotebookOCRPipeline:
             raw_ocr_result.regions
         )
 
+        # Fallback: if layout clustering produced no lines but recognizer found text, recover raw text
+        if not lines and raw_ocr_result.full_text and raw_ocr_result.full_text.strip():
+            full_text = raw_ocr_result.full_text.strip()
+            lines = [l.strip() for l in full_text.splitlines() if l.strip()]
+            paragraphs = [full_text]
+
         avg_conf = 0.0
         if raw_ocr_result.regions:
             avg_conf = float(np.mean([r.confidence for r in raw_ocr_result.regions]))
@@ -417,7 +486,12 @@ class NotebookOCRPipeline:
         t1 = time.perf_counter()
         latency_ms = (t1 - t0) * 1000.0
 
-        status = "SUCCESS" if lines else "EMPTY_OUTPUT"
+        if not lines:
+            status = "EMPTY_OUTPUT"
+        elif avg_conf < self.min_confidence:
+            status = "LOW_CONFIDENCE_WARNING"
+        else:
+            status = "SUCCESS"
 
         return NotebookOCRResult(
             full_text=full_text,
@@ -435,6 +509,8 @@ class NotebookOCRPipeline:
             metadata={
                 "engine": self.recognizer.__class__.__name__,
                 "input_dimensions": [w, h],
-                "clahe_applied": self.enable_clahe
+                "clahe_applied": self.enable_clahe,
+                "deskew_applied": self.enable_deskew,
+                "max_dimension": self.max_dimension
             }
         )

@@ -132,13 +132,23 @@ def evaluate_dataset_with_engines(
             wers.append(wer)
             latencies.append(lat_ms)
 
+            char_dist = levenshtein_distance(list(norm_r), list(norm_h))
+            word_dist = levenshtein_distance(norm_r.split(), norm_h.split())
+
             sample_evals.append({
                 "sample_id": r["id"],
                 "file_name": r["file_name"],
+                "engine": eng_name,
                 "cer": round(cer, 4),
                 "wer": round(wer, 4),
+                "char_errors": char_dist,
+                "word_errors": word_dist,
+                "ref_chars": len(norm_r),
+                "ref_words": len(norm_r.split()),
                 "exact_match": is_exact,
                 "latency_ms": round(lat_ms, 2),
+                "reference_normalized": norm_r,
+                "prediction_normalized": norm_h,
                 "hypothesis_excerpt": hyp[:60].replace("\n", " ") if hyp else ""
             })
 
@@ -179,7 +189,7 @@ def run_reproducibility_audit():
     engines = {
         "Tesseract (PSM 3)": TesseractOCREngine(config="--psm 3"),
         "RapidOCR (PP-OCRv4)": RapidOCREngine(),
-        "NotebookOCRPipeline": NotebookOCRPipeline(filter_cjk=True, tag_anomalies=False)
+        "NotebookOCRPipeline": NotebookOCRPipeline(filter_cjk=False, tag_anomalies=False)
     }
 
     # 3. Evaluate Printed Scene Dataset
