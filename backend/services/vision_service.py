@@ -60,6 +60,12 @@ class VisionService:
         except Exception:
             pass
 
+        try:
+            from backend.providers.cloud_ocr import CloudVisionOCRAdapter
+            r.register_ocr("cloud_vision", CloudVisionOCRAdapter(), set_active=False)
+        except Exception:
+            pass
+
         if not r.ocrs:
             r.register_ocr("placeholder", MockOCREngine(), set_active=True)
 
