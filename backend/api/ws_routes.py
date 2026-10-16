@@ -333,6 +333,8 @@ async def websocket_device_endpoint(
                         ocr_res = vision_service.process_image_ocr(ocr_data)
                         if ocr_res.get("text"):
                             conversation_service.session_manager.update_context(session_id, {"last_ocr_text": ocr_res["text"]})
+                        else:
+                            conversation_service.session_manager.update_context(session_id, {"last_ocr_text": None})
                         await websocket.send_text(json.dumps({
                             "type": "ocr_result",
                             "success": ocr_res.get("success", False),

@@ -183,7 +183,7 @@ def run_reproducibility_audit():
 
     print(f"Printed Scene: {ps_audit['sample_count']} samples | Mean ref len: {ps_audit['mean_ref_chars']} chars | Target Type: VERBATIM EXACT")
     print(f"Handwriting:   {hw_audit['sample_count']} samples | Mean ref len: {hw_audit['mean_ref_chars']} chars | Target Type: VERBATIM EXACT")
-    print(f"Notebooks:     {nb_audit['sample_count']} samples | Mean ref len: {nb_audit['mean_ref_chars']} chars | Target Type: CONCEPTUAL SUMMARY (INCOMPATIBLE)")
+    print(f"Notebooks:     {nb_audit['sample_count']} samples | Mean ref len: {nb_audit['mean_ref_chars']} chars | Status: NOT QUANTITATIVELY VALIDATED — VERBATIM DENSE-NOTEBOOK ACCURACY")
 
     # 2. Instantiate local engines
     engines = {
@@ -225,7 +225,8 @@ def run_reproducibility_audit():
                 "sample_count": 30,
                 "target_type": "conceptual_summary",
                 "suitable_for_cer_wer": False,
-                "notes": "Single-sentence topic summaries evaluated against dense full-page notes. Spurious insertions cause mathematical CER > 100%."
+                "status": "NOT QUANTITATIVELY VALIDATED — VERBATIM DENSE-NOTEBOOK ACCURACY",
+                "notes": "Single-sentence topic summaries evaluated against dense full-page notes. Spurious insertions cause mathematical CER > 100%. Verbatim full-page accuracy is not quantitatively validated."
             }
         },
         "benchmarks": {

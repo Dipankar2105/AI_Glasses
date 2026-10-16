@@ -396,5 +396,6 @@ async def extract_image_ocr(
         "paragraphs": ocr_res.get("paragraphs", []),
         "confidence": ocr_res.get("confidence", 0.0),
         "regions_count": ocr_res.get("regions_count", 0),
+        "error": ocr_res.get("error"),
         "latency_ms": round(elapsed_ms, 2)
     }

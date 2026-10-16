@@ -388,3 +388,45 @@ def test_websocket_missing_image_and_stale_invalidation(app_with_services):
         ws.send_text(json.dumps({"type": "ocr"}))
         res2 = json.loads(ws.receive_text())
         assert res2["type"] == "ocr_result"
+
+
+def test_ocr_failure_does_not_leave_stale_text(app_with_services):
+    client, app = app_with_services
+    session_mgr = app.state.conversation_service.session_manager
+    session_id = "test-stale-invalidation-session"
+    session_mgr.get_or_create_session(session_id)
+
+    # 1. Ingest Frame 1 and set valid OCR text
+    img1 = np.full((50, 100, 3), 255, dtype=np.uint8)
+    session_mgr.update_context(session_id, {"last_image": img1, "last_ocr_text": "VALID_TEXT_1"})
+    assert session_mgr.get_session(session_id).context_metadata.get("last_ocr_text") == "VALID_TEXT_1"
+
+    # 2. Ingest Frame 2 -> context clears last_ocr_text to None
+    img2 = np.full((50, 100, 3), 0, dtype=np.uint8)  # Empty/black image with no text
+    session_mgr.update_context(session_id, {"last_image": img2, "last_ocr_text": None})
+    assert session_mgr.get_session(session_id).context_metadata.get("last_ocr_text") is None
+
+    # 3. Execute READ_TEXT_OCR command on Frame 2
+    router = VoiceCommandRouter()
+    match = router.match("read text", confidence=0.95)
+    res = router.execute_command(match, session_id=session_id, session_manager=session_mgr, vision_service=app.state.vision_service)
+
+    # Context must NOT revert to Frame 1's text
+    assert session_mgr.get_session(session_id).context_metadata.get("last_ocr_text") is None
+    assert "VALID_TEXT_1" not in res.spoken_response
+    assert "No readable text was found" in res.spoken_response
+
+
+def test_cloud_ocr_endpoint_failure_returns_safe_error(app_with_services):
+    client, _ = app_with_services
+    img = np.full((50, 50, 3), 255, dtype=np.uint8)
+    _, enc = cv2.imencode(".png", img)
+    files = {"file": ("test.png", io.BytesIO(enc.tobytes()), "image/png")}
+
+    # Query cloud_vision without opt-in/credentials -> returns safe structured error with success=False
+    resp = client.post("/api/v1/vision/ocr?engine=cloud_vision", files=files)
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["success"] is False
+    assert data["engine"] == "cloud_vision"
+    assert "unavailable" in str(data).lower()

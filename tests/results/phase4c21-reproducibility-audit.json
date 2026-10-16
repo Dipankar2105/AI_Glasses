@@ -18,7 +18,8 @@
             "sample_count": 30,
             "target_type": "conceptual_summary",
             "suitable_for_cer_wer": false,
-            "notes": "Single-sentence topic summaries evaluated against dense full-page notes. Spurious insertions cause mathematical CER > 100%."
+            "status": "NOT QUANTITATIVELY VALIDATED — VERBATIM DENSE-NOTEBOOK ACCURACY",
+            "notes": "Single-sentence topic summaries evaluated against dense full-page notes. Spurious insertions cause mathematical CER > 100%. Verbatim full-page accuracy is not quantitatively validated."
         }
     },
     "benchmarks": {

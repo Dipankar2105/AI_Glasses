@@ -133,10 +133,12 @@ python run_full_validation.py
 | :--- | :--- | :--- | :---: | :---: | :---: |
 | **Printed & Scene Text** (15 samples) | Verbatim Line/Document Scan | **RapidOCR / NotebookOCRPipeline**<br>Tesseract (PSM 3) | **1.73%**<br>6.39% | **14.10%**<br>30.07% | **53.33%** (8/15)<br>33.33% (5/15) |
 | **Genuine Handwriting** (12 samples) | Verbatim Historic/Modern Note | **NotebookOCRPipeline**<br>RapidOCR (PP-OCRv4)<br>Tesseract (PSM 3) | **1.96%**<br>2.43%<br>3.82% | **18.21%**<br>22.95%<br>29.81% | **50.00%** (6/12)<br>41.67% (5/12)<br>0.00% (0/12) |
-| **Dense Notebooks** (30 samples) | Conceptual Textbook Summaries | Unconstrained Local OCR | *Incompatible* | *Incompatible* | 0.00% (0/30) |
+| **Dense Notebooks** (30 samples) | Conceptual Textbook Summaries | Unconstrained Local OCR | **NOT QUANTITATIVELY VALIDATED — VERBATIM DENSE-NOTEBOOK ACCURACY** | N/A | 0.00% (0/30) |
 
 ### Known Limitations
-- **Dense Classroom Notebooks:** Full-page student notes containing diagrams, non-linear margin notes, and multi-step derivations cannot be evaluated for verbatim accuracy against `data/external/notebooks/metadata.jsonl` because the references represent single-sentence conceptual summaries. Full-page verbatim transcription accuracy for this category is classified as **not yet quantitatively validated**.
+- **Dense Classroom Notebooks:** Full-page student notes containing diagrams, non-linear margin notes, and multi-step derivations cannot be evaluated for verbatim accuracy against `data/external/notebooks/metadata.jsonl` because the references represent single-sentence conceptual summaries. Full-page verbatim transcription accuracy for this category is formally classified as:
+  **NOT QUANTITATIVELY VALIDATED — VERBATIM DENSE-NOTEBOOK ACCURACY**.
+  While preprocessing and layout heuristics (such as aspect-ratio bounding, Hough-line deskewing, and adaptive CLAHE) have been implemented to handle heterogeneous page structures safely, no claim of increased transcription accuracy is made in the absence of verified verbatim full-page ground truth.
 - **Cursive Stroke Merging:** Natural handwriting connections frequently merge prepositions and conjunctions (`Orders of` $\rightarrow$ `Ordersof`), which elevates Word Error Rate (WER) despite near-zero Character Error Rate (CER).
 - **Mathematical Formulations:** Complex fraction bars, multi-line integral bounds, and custom matrices are preserved in plain text without LaTeX wrapping to maintain clean screen-reader synthesis.
 

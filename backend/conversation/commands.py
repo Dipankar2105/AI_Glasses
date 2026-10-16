@@ -196,8 +196,10 @@ class VoiceCommandRouter:
                         session.context_metadata["last_ocr_text"] = txt
                         response_text = f"The text reads: {txt}"
                     else:
+                        session.context_metadata["last_ocr_text"] = None
                         response_text = "No readable text was found in the current image."
                 except Exception:
+                    session.context_metadata["last_ocr_text"] = None
                     response_text = "Failed to extract text from the current image."
             else:
                 response_text = "No image has been captured yet. Please capture an image first."
