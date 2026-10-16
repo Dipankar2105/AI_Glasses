@@ -39,10 +39,30 @@ class VisionService:
     def _create_default_registry(self) -> AIEngineRegistry:
         """Initializes default engine registry."""
         r = AIEngineRegistry()
-        # In Phase 5 software foundation, register deterministic baseline engines
         r.register_detector("default", MockObjectDetector())
-        # Note: OCR is explicitly ON HOLD in Phase 5; register lightweight placeholder
-        r.register_ocr("placeholder", MockOCREngine())
+        
+        # Load production OCR engines
+        try:
+            from backend.ai.tesseract_ocr import TesseractOCREngine
+            r.register_ocr("tesseract", TesseractOCREngine(), set_active=True)
+        except Exception:
+            pass
+
+        try:
+            from backend.ai.rapid_ocr import RapidOCREngine
+            r.register_ocr("rapidocr", RapidOCREngine(), set_active=False)
+        except Exception:
+            pass
+
+        try:
+            from backend.ai.notebook_ocr_pipeline import NotebookOCRPipeline
+            r.register_ocr("notebook_pipeline", NotebookOCRPipeline(), set_active=False)
+        except Exception:
+            pass
+
+        if not r.ocrs:
+            r.register_ocr("placeholder", MockOCREngine(), set_active=True)
+
         r.register_scene_analyzer("default", MockSceneAnalyzer())
         return r
 
@@ -86,6 +106,73 @@ class VisionService:
                 "msg": f"Vision processing timed out after {timeout:.1f}s"
             })
             return res
+
+    def process_image_ocr(
+        self,
+        image: np.ndarray,
+        engine_name: Optional[str] = None
+    ) -> Dict[str, Any]:
+        """
+        Executes OCR explicitly on a supplied RGB image frame.
+        Uses active or requested OCR engine (NotebookOCRPipeline, RapidOCR, or Tesseract).
+        """
+        t0 = time.perf_counter()
+        if image is None or not isinstance(image, np.ndarray) or image.size == 0:
+            return {
+                "success": False,
+                "text": "",
+                "lines": [],
+                "paragraphs": [],
+                "confidence": 0.0,
+                "error": "Empty or invalid image frame",
+                "latency_ms": 0.0
+            }
+
+        h, w = image.shape[:2]
+        channels = image.shape[2] if image.ndim == 3 else 1
+        from backend.vision.frame import OCRInput
+        ocr_inp = OCRInput(
+            image=image,
+            width=w,
+            height=h,
+            channels=channels,
+            numerical_range=(0, 255),
+            timestamp=int(time.time() * 1000),
+            seq_num=1
+        )
+
+        try:
+            if engine_name and engine_name in self.registry.ocrs:
+                engine = self.registry.ocrs[engine_name]
+            else:
+                engine = self.registry.get_ocr()
+
+            res = engine.process(ocr_inp)
+            elapsed_ms = (time.perf_counter() - t0) * 1000.0
+
+            paragraphs = getattr(res, "paragraphs", [res.full_text] if res.full_text else [])
+            lines = getattr(res, "lines", res.full_text.splitlines() if res.full_text else [])
+            conf = getattr(res, "confidence", 1.0 if res.full_text else 0.0)
+
+            return {
+                "success": bool(res.full_text),
+                "text": res.full_text,
+                "paragraphs": paragraphs,
+                "lines": lines,
+                "confidence": conf,
+                "regions_count": len(res.regions) if hasattr(res, "regions") else 0,
+                "latency_ms": round(elapsed_ms, 2)
+            }
+        except Exception as e:
+            return {
+                "success": False,
+                "text": "",
+                "lines": [],
+                "paragraphs": [],
+                "confidence": 0.0,
+                "error": str(e),
+                "latency_ms": round((time.perf_counter() - t0) * 1000.0, 2)
+            }
 
     def check_readiness(self) -> Dict[str, str]:
         """Evaluates readiness of all internal vision and AI components."""

@@ -59,7 +59,7 @@ def test_layout_reconstruction_and_ordering():
 
 
 def test_low_confidence_and_formula_tagging():
-    pipeline = NotebookOCRPipeline(recognizer_engine=MockRecognizer(), min_confidence=0.40)
+    pipeline = NotebookOCRPipeline(recognizer_engine=MockRecognizer(), min_confidence=0.40, tag_anomalies=True)
 
     r_low = OCRTextRegion("scribble", 0.20, BoundingBox(0.1, 0.1, 0.1, 0.05))
     r_math = OCRTextRegion("x = 2 + y / 4", 0.85, BoundingBox(0.1, 0.2, 0.2, 0.05))

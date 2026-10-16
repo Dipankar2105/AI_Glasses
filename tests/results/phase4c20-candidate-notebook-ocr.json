@@ -1,0 +1,1005 @@
+{
+    "benchmark_name": "Phase 4C.20 Candidate Notebook OCR Pipeline Final Evaluation",
+    "timestamp": "2026-10-16 11:30:41",
+    "provenance_summary": {
+        "dataset_name": "NoTeS-Bank / ICDAR 2025 Handwritten Notes Understanding Challenge",
+        "sample_count": 30,
+        "dev_samples": 15,
+        "heldout_samples": 15,
+        "license": "CC BY 4.0 / Open Access Research Dataset"
+    },
+    "system_environment": {
+        "pipeline": "NotebookOCRPipeline",
+        "recognizer": "RapidOCREngine (PP-OCRv3/v4 ONNX)",
+        "clahe_enabled": true,
+        "filter_cjk": true,
+        "tag_anomalies": false,
+        "cold_start_ms": 562.08
+    },
+    "dataset_summaries": {
+        "dev_split": {
+            "sample_count": 15,
+            "macro_cer": 2.2959,
+            "macro_wer": 3.1056,
+            "micro_cer": 2.244,
+            "micro_wer": 2.7474,
+            "exact_match_count": 0,
+            "exact_match_rate": 0.0,
+            "mean_latency_ms": 4072.2,
+            "median_latency_ms": 2333.83
+        },
+        "heldout_split": {
+            "sample_count": 15,
+            "macro_cer": 2.5702,
+            "macro_wer": 3.8619,
+            "micro_cer": 2.5429,
+            "micro_wer": 3.4216,
+            "exact_match_count": 0,
+            "exact_match_rate": 0.0,
+            "mean_latency_ms": 3851.66,
+            "median_latency_ms": 2611.41
+        },
+        "full_dataset": {
+            "sample_count": 30,
+            "macro_cer": 2.4331,
+            "macro_wer": 3.4837,
+            "micro_cer": 2.3953,
+            "micro_wer": 3.0695,
+            "exact_match_count": 0,
+            "exact_match_rate": 0.0,
+            "mean_latency_ms": 3961.93,
+            "median_latency_ms": 2486.0
+        }
+    },
+    "per_sample_evaluations": [
+        {
+            "sample_id": "nb_01",
+            "split": "Dev",
+            "category": "data_structures",
+            "subject": "Computer Science",
+            "topic": "Stack Operations & LIFO Structure",
+            "file_name": "nb_01_ds_stack.jpg",
+            "dimensions": [
+                1240,
+                1755
+            ],
+            "reference_text": "Stack is a linear data structure that follows LIFO principle. The operations are Push and Pop. Top points to top element.",
+            "prediction": "00\n21\n\nQ8.A.O1&.\nome ! Iwel\n\na=-b+cxdle-f+g1\n501\npreted ance fable.\n\nRaht\n*/ ipLeft ass ouatwe\n\n1gh\n\n*cde\n*.cde\n7=a+-t-bleederft gh ×ij",
+            "cer": 0.8843,
+            "wer": 1.0476,
+            "exact_match": false,
+            "latency_ms": 2333.83,
+            "num_lines": 13,
+            "num_paragraphs": 6,
+            "quality_report": {
+                "is_valid": true,
+                "is_blurry": false,
+                "blur_score": 2694.62,
+                "contrast_score": 26.94,
+                "warnings": []
+            },
+            "unreadable_regions": 0,
+            "formula_regions": 2,
+            "error_categories": []
+        },
+        {
+            "sample_id": "nb_02",
+            "split": "Dev",
+            "category": "data_structures",
+            "subject": "Computer Science",
+            "topic": "Queue Operations & FIFO Principle",
+            "file_name": "nb_02_ds_queue.jpg",
+            "dimensions": [
+                1240,
+                1755
+            ],
+            "reference_text": "Queue follows First In First Out (FIFO) order. Enqueue inserts at rear and Dequeue removes from front.",
+            "prediction": "ab-cd*e+fah*+\n\nb+c*d/ef'tgt h. +\n\nab-icd *e/+fgh -i\n\nGiue thei stack first * Is eluaded\n\nWhatshehnal reepress1on ev alaated\n13\nWhich of theFotlawing poss tble Shack Conjent",
+            "cer": 1.3039,
+            "wer": 1.4706,
+            "exact_match": false,
+            "latency_ms": 2084.6,
+            "num_lines": 7,
+            "num_paragraphs": 5,
+            "quality_report": {
+                "is_valid": true,
+                "is_blurry": false,
+                "blur_score": 3858.47,
+                "contrast_score": 32.91,
+                "warnings": []
+            },
+            "unreadable_regions": 0,
+            "formula_regions": 0,
+            "error_categories": [
+                "insertion_word_density_exceeds_reference"
+            ]
+        },
+        {
+            "sample_id": "nb_03",
+            "split": "Dev",
+            "category": "data_structures",
+            "subject": "Computer Science",
+            "topic": "Linked List Node & Pointer Traversals",
+            "file_name": "nb_03_ds_linkedlist.jpg",
+            "dimensions": [
+                1240,
+                1755
+            ],
+            "reference_text": "Singly Linked List node contains data and next pointer. Head points to first node and tail points to NULL.",
+            "prediction": "waluaton\n\nConce pt\noperand  push\nOperato\ndod\niy Coaltho\nnsae ysd\n\n12\nQn3.. /8\n\n*Q3\n\n+123.\n\n23A",
+            "cer": 0.7736,
+            "wer": 1.0,
+            "exact_match": false,
+            "latency_ms": 1944.9,
+            "num_lines": 12,
+            "num_paragraphs": 6,
+            "quality_report": {
+                "is_valid": true,
+                "is_blurry": false,
+                "blur_score": 3144.75,
+                "contrast_score": 31.15,
+                "warnings": []
+            },
+            "unreadable_regions": 0,
+            "formula_regions": 0,
+            "error_categories": []
+        },
+        {
+            "sample_id": "nb_04",
+            "split": "Dev",
+            "category": "data_structures",
+            "subject": "Computer Science",
+            "topic": "Binary Search Tree Properties",
+            "file_name": "nb_04_ds_trees.jpg",
+            "dimensions": [
+                1240,
+                1755
+            ],
+            "reference_text": "Binary Search Tree property: left child < root < right child. Inorder traversal of BST gives sorted keys.",
+            "prediction": "waluatwn\n\n121\n\nRECURSIOU\n\ndeisemay:pao0\nay Tarl Rearston tactoa]: :\nby bead Ex!. Towu df Hanoi ( ies)\ndivect Reasop En rees\ned Rearston !Ackermann's funchao\n(JTo) (DrDo)\nExressive bonacct.",
+            "cer": 1.3524,
+            "wer": 1.6111,
+            "exact_match": false,
+            "latency_ms": 2263.26,
+            "num_lines": 10,
+            "num_paragraphs": 4,
+            "quality_report": {
+                "is_valid": true,
+                "is_blurry": false,
+                "blur_score": 2971.81,
+                "contrast_score": 27.95,
+                "warnings": []
+            },
+            "unreadable_regions": 0,
+            "formula_regions": 0,
+            "error_categories": [
+                "insertion_word_density_exceeds_reference"
+            ]
+        },
+        {
+            "sample_id": "nb_05",
+            "split": "Dev",
+            "category": "algorithms",
+            "subject": "Algorithms",
+            "topic": "Recurrence Relations & Time Complexity",
+            "file_name": "nb_05_algo_recurrence.jpg",
+            "dimensions": [
+                2550,
+                3636
+            ],
+            "reference_text": "Divide and Conquer Recurrence T(n) = 2T(n/2) + O(n). By Master Theorem Case 2, T(n) = O(n log n).",
+            "prediction": "1gorithms\n\nC71.\nmbyu* mbiw gn!↓\nNote.\nAsymbtotic NotaHon.\n(aD)O = (a)F muitipleoff (t)0 (f(m)\n) - 0 (g(0) + grous slowir tham any mupe of g\n(cb)  = (u)t (f(n) ())\n1(n) (u) >if grows faster thom cny muipleof8\n(cube - ()F\n=ERt→t CER\nm700 n-00\n1()= 8 (g02) (ab)0- (t ) -(a) f ((u) )\n(a)+)0 + (u)P+(b) +(a)++(abo-(a)F\n(u)b) 0 - (F\n→ (au)h)(a) (ab-(u)F (au)b) @+(u)]\n(g(2)\n(cu)b)  = (u) (a)})(a( + 0(f++)= 9 O(max (f-g)\nma (f(,g()- 0 ()+)=(aB () -(/ ()+()e\n+f(m)- 0(g(0)  g() = 0(h(m) 0(h(w).(fo 8+ also) 10 (s)\n6(f(m) .4 0 0 (g(m) ((cu)β+Ca) +) voww) F=0(g)\n1+4\n(af1)\nK0\np+i\n:1+±+++=+n1#",
+            "cer": 5.3299,
+            "wer": 5.6316,
+            "exact_match": false,
+            "latency_ms": 4801.89,
+            "num_lines": 26,
+            "num_paragraphs": 2,
+            "quality_report": {
+                "is_valid": true,
+                "is_blurry": false,
+                "blur_score": 372.79,
+                "contrast_score": 48.65,
+                "warnings": []
+            },
+            "unreadable_regions": 0,
+            "formula_regions": 4,
+            "error_categories": [
+                "insertion_word_density_exceeds_reference"
+            ]
+        },
+        {
+            "sample_id": "nb_06",
+            "split": "Dev",
+            "category": "algorithms",
+            "subject": "Algorithms",
+            "topic": "Greedy Knapsack & Optimal Substructure",
+            "file_name": "nb_06_algo_greedy.jpg",
+            "dimensions": [
+                2550,
+                3633
+            ],
+            "reference_text": "Fractional Knapsack problem is solved by Greedy method. Sort items by value to weight ratio in descending order.",
+            "prediction": "f- 0(h). f (or both) brg-oh\nAs a XitHe-oh.them fo().Smiat\namy one (but\nmot neplaco d by nmto natation\nthon Conclwn'on uses that Xame, ( the veplacod one) notaon.\n= 9(b) 0(h)\n()()f ( =()\nbut :(f) m++*().+F\nExtended Master's T(g) - at(%)\np realt mumbery\n1. 9f α >b*, T(m) - o(mgb*)\n2、 34 α=b,-1\n)  =- T(o) (n\"\n)<~1 (u)1 8(m\n(m*\nT(m) O(n\")\nMaster's for Xubtract T(w) = at(n-b)+ o(m*)\ni.a>l o(nka n/b a>0,bl≥0\na=1. O(n*++) (n*).\ni) Insertion Sort insert keysone ha one nnto subasray\nthat, the wy is blaced at the. CoTTeC+ PRace uy\nSubarray . i) Herge sost divicles the array smto posg ts unti\"1 elem in\nTemaining\npivot,plaes Hha pivet a+ tty cmrect\npontiow in Komted.anmay lacs almallen elaus (tham pivot)\npivet Jreafet to Hie calt. Qs on Hhe left R\n+yby\nSaorching Lineat, Bimary\n0(n) oClam)",
+            "cer": 6.2768,
+            "wer": 7.8333,
+            "exact_match": false,
+            "latency_ms": 4623.62,
+            "num_lines": 29,
+            "num_paragraphs": 1,
+            "quality_report": {
+                "is_valid": true,
+                "is_blurry": false,
+                "blur_score": 356.78,
+                "contrast_score": 49.63,
+                "warnings": []
+            },
+            "unreadable_regions": 0,
+            "formula_regions": 1,
+            "error_categories": [
+                "insertion_word_density_exceeds_reference"
+            ]
+        },
+        {
+            "sample_id": "nb_07",
+            "split": "Dev",
+            "category": "database_systems",
+            "subject": "Database Systems",
+            "topic": "Entity-Relationship Model & Primary Keys",
+            "file_name": "nb_07_dbms_er.jpg",
+            "dimensions": [
+                2480,
+                3509
+            ],
+            "reference_text": "Entity Relationship Diagram: Entity represented by rectangle, attribute by oval, and relationship by diamond.",
+            "prediction": "8tep 5:. Conveuion J : many-many ahonhy\nsncludeo key? M'gide and\"N side as\"Poruiqn\nth\" mew-tabl.\nDed combinahon osutqn\nkeuy or new table.\nkuatinhp coni t! att  indud thm alp\nth mew tokle\n&tep 6: Conveutom multi vao! ot :\na) Fon eah meltivalued aty , cuate a sepaate\nJable and. include. to kuy of patent lable o!\nRoruqn key\nb) Dedlou tnt combination of . gouign kuy 4 Muti\nvalwed attot s 1° key.\n84ep Convesion m-ay l ationshipy\na) For eah m-axy sulatomhp, creat a separate\nenhhy ay\nkey?\nb) Dedare th combnatim J. goreign kuys a",
+            "cer": 4.1193,
+            "wer": 7.0,
+            "exact_match": false,
+            "latency_ms": 3927.25,
+            "num_lines": 18,
+            "num_paragraphs": 1,
+            "quality_report": {
+                "is_valid": true,
+                "is_blurry": false,
+                "blur_score": 3768.52,
+                "contrast_score": 47.03,
+                "warnings": []
+            },
+            "unreadable_regions": 0,
+            "formula_regions": 0,
+            "error_categories": [
+                "insertion_word_density_exceeds_reference"
+            ]
+        },
+        {
+            "sample_id": "nb_08",
+            "split": "Dev",
+            "category": "database_systems",
+            "subject": "Database Systems",
+            "topic": "Functional Dependencies & 3NF Normalization",
+            "file_name": "nb_08_dbms_normalization.jpg",
+            "dimensions": [
+                2480,
+                3509
+            ],
+            "reference_text": "Normalization reduces data redundancy. 1NF eliminates repeating groups, 2NF removes partial dependency.",
+            "prediction": "but . ib. m I--l and 1--M wlahon Can alup be sepctated a Jableg aduable eatu.tspeyormancl\nHeaon.\n\nmn dable = g\nmar\n\nay at ds.bi\nb) bi b Ci\na a Ci\nd) ai α2 b2\nThap\nDPAN rap\n) CHASm hap.\nFAN hap\nB Diy 37\nbt.\nb2. ceue Cauntsa culnw\nEj. belong h\nd.. bt or b..\ngine d, ha bimu !\nQ.this.E-Rdiagm convehd inb tablu, lle e au sle\nlo.\" jubuwi t du ingo. exapt .er, buonge\"h ihich branehlbrlig\nThu y'dueh PAN hap:\nHow ho'ridinkly FAN hap?.\nhwo",
+            "cer": 3.5825,
+            "wer": 7.5833,
+            "exact_match": false,
+            "latency_ms": 3362.31,
+            "num_lines": 23,
+            "num_paragraphs": 3,
+            "quality_report": {
+                "is_valid": true,
+                "is_blurry": false,
+                "blur_score": 3720.73,
+                "contrast_score": 45.79,
+                "warnings": []
+            },
+            "unreadable_regions": 0,
+            "formula_regions": 1,
+            "error_categories": [
+                "insertion_word_density_exceeds_reference"
+            ]
+        },
+        {
+            "sample_id": "nb_09",
+            "split": "Dev",
+            "category": "mathematics",
+            "subject": "Calculus",
+            "topic": "First Order Linear Differential Equations",
+            "file_name": "nb_09_math_ode.jpg",
+            "dimensions": [
+                1240,
+                1754
+            ],
+            "reference_text": "First order linear differential equation dy/dx + P(x)y = Q(x). Integrating Factor IF = exp(integral P(x) dx).",
+            "prediction": "3+851361-6\ny =$gt?+ cbtc\nd Nove.\nFirst *ordey Rrst degree dittogns\nNofaion MdatNdyeo\n\nVariabje Sepayablemefhod\n\nptkpoo",
+            "cer": 0.9174,
+            "wer": 1.0,
+            "exact_match": false,
+            "latency_ms": 1829.69,
+            "num_lines": 7,
+            "num_paragraphs": 3,
+            "quality_report": {
+                "is_valid": true,
+                "is_blurry": false,
+                "blur_score": 4425.27,
+                "contrast_score": 38.08,
+                "warnings": []
+            },
+            "unreadable_regions": 0,
+            "formula_regions": 1,
+            "error_categories": [
+                "mathematical_notation_substitution"
+            ]
+        },
+        {
+            "sample_id": "nb_10",
+            "split": "Dev",
+            "category": "mathematics",
+            "subject": "Calculus",
+            "topic": "Exact Equations & Integrating Factors",
+            "file_name": "nb_10_math_exact.jpg",
+            "dimensions": [
+                1240,
+                1754
+            ],
+            "reference_text": "Exact Differential Equation M dx + N dy = 0 where dM/dy = dN/dx. Solution is integral M dx + integral N(free of x) dy = C.",
+            "prediction": "Y2\nI-ry\n\nhpkx +ophp\n\n(P =)\n\ntp(h3\n\n1ty2\n\ntably.\nJ-tantxto",
+            "cer": 0.8279,
+            "wer": 1.0,
+            "exact_match": false,
+            "latency_ms": 1950.25,
+            "num_lines": 8,
+            "num_paragraphs": 6,
+            "quality_report": {
+                "is_valid": true,
+                "is_blurry": false,
+                "blur_score": 5005.61,
+                "contrast_score": 49.39,
+                "warnings": []
+            },
+            "unreadable_regions": 0,
+            "formula_regions": 0,
+            "error_categories": [
+                "mathematical_notation_substitution"
+            ]
+        },
+        {
+            "sample_id": "nb_11",
+            "split": "Dev",
+            "category": "physics",
+            "subject": "Physics",
+            "topic": "Torque & Angular Momentum Equations",
+            "file_name": "nb_11_physics_torque.jpg",
+            "dimensions": [
+                1275,
+                900
+            ],
+            "reference_text": "Torque tau = r x F = I alpha. Angular momentum L = I omega. Conservation of angular momentum holds when external torque is zero.",
+            "prediction": "Odisbane\nutahomn.\n\nL=Pn&ing\nrpzingSciphy.in\nS.I Onit  Argwan Momewhim\n\nGeometrical Meaning of Angulan Momenta",
+            "cer": 0.7891,
+            "wer": 0.96,
+            "exact_match": false,
+            "latency_ms": 2151.18,
+            "num_lines": 6,
+            "num_paragraphs": 3,
+            "quality_report": {
+                "is_valid": true,
+                "is_blurry": false,
+                "blur_score": 499.7,
+                "contrast_score": 50.57,
+                "warnings": []
+            },
+            "unreadable_regions": 0,
+            "formula_regions": 0,
+            "error_categories": []
+        },
+        {
+            "sample_id": "nb_12",
+            "split": "Dev",
+            "category": "physics",
+            "subject": "Physics",
+            "topic": "Parallel Axis Theorem & Kinetic Energy",
+            "file_name": "nb_12_physics_inertia.jpg",
+            "dimensions": [
+                1275,
+                815
+            ],
+            "reference_text": "Moment of Inertia I = sum m_i r_i^2. Parallel axis theorem I = I_cm + M d^2. Rotational Kinetic Energy K = 1/2 I omega^2.",
+            "prediction": "in Xyplane\naboutanaxisoz.\nSciphy.in\nin a bmalu tim dt pahicieat K yuaunL\nAnAOKL OR+KZL\n2=0L-0F\n\n[da]",
+            "cer": 0.8017,
+            "wer": 1.0,
+            "exact_match": false,
+            "latency_ms": 1876.43,
+            "num_lines": 7,
+            "num_paragraphs": 2,
+            "quality_report": {
+                "is_valid": true,
+                "is_blurry": false,
+                "blur_score": 1333.76,
+                "contrast_score": 61.01,
+                "warnings": []
+            },
+            "unreadable_regions": 0,
+            "formula_regions": 1,
+            "error_categories": [
+                "mathematical_notation_substitution"
+            ]
+        },
+        {
+            "sample_id": "nb_13",
+            "split": "Dev",
+            "category": "chemistry",
+            "subject": "Chemistry",
+            "topic": "Acid-Base Equilibrium & pH Calculations",
+            "file_name": "nb_13_chem_ph.jpg",
+            "dimensions": [
+                6338,
+                9434
+            ],
+            "reference_text": "Arrhenius acid produces H+ ions in aqueous solution. pH is defined as negative logarithm of hydrogen ion concentration: pH = -log[H+].",
+            "prediction": "Con> +Tr bu tn (tho)\n>.kc1+09N03 in (Nh) (precipitahon)\nreaHon\n(En +  nbuz\nc(con)na. + n bu e Bau2AgN0 in@ng) NultoreduuHon t'nto -ve o's\n\ntntoasc soluhiufy\nwarer.\ncompocm in ascompat\nMorte Solithi'y\norcganic)\n\nH20\nNaci +H20. Nuurai bchon neauhon)\nDe aud. Sal\nThnon.+ uahiin.\nBane\nHN'+ nhhne NH) CαCn +3NH3\nI+Bin\n\n+a-12 0\n\nct y + Hz0'cl- H2 6 → + 1136++I+D CI.\n\nU2 + 2NHg\nboth soivolyrs OGoinoenpdoud si\n2-\n55g + 16 nHg sht",
+            "cer": 2.5746,
+            "wer": 3.5714,
+            "exact_match": false,
+            "latency_ms": 13188.67,
+            "num_lines": 23,
+            "num_paragraphs": 6,
+            "quality_report": {
+                "is_valid": true,
+                "is_blurry": false,
+                "blur_score": 274.44,
+                "contrast_score": 39.94,
+                "warnings": []
+            },
+            "unreadable_regions": 0,
+            "formula_regions": 4,
+            "error_categories": [
+                "insertion_word_density_exceeds_reference"
+            ]
+        },
+        {
+            "sample_id": "nb_14",
+            "split": "Dev",
+            "category": "chemistry",
+            "subject": "Chemistry",
+            "topic": "Henderson-Hasselbalch Equation & Buffer Action",
+            "file_name": "nb_14_chem_buffers.jpg",
+            "dimensions": [
+                6338,
+                8742
+            ],
+            "reference_text": "Henderson-Hasselbalch equation: pH = pKa + log([Conjugate Base] / [Weak Acid]). Buffer resists changes in pH.",
+            "prediction": "Amphoteruic Xehcwiart.\nZDOH): 28H\nK2\n+2KNH2 comoler\n\n→ Those hgdrtoide behcive eacumpbofertt'c cn twtuen cind thun\namidu henawe c cmhoterr I'n Uqlu'd Ntis .\nMercuoide (bue) and metcu hydrude Chcve) c alo hehare as\nban Liq Nrl3.\n+ NHS HO+ (HN (\n+H2\nNH +N113\nQ. Amany bumolot reauro those Ja arte feasible qtid\narte'\nKNIDg tA9U > k + AgNU3\nQ. +Nhybr+ knt? +kg + 2NHg\n3. F + 9(0) te (c0)9]",
+            "cer": 2.9908,
+            "wer": 4.5,
+            "exact_match": false,
+            "latency_ms": 11732.61,
+            "num_lines": 16,
+            "num_paragraphs": 2,
+            "quality_report": {
+                "is_valid": true,
+                "is_blurry": false,
+                "blur_score": 158.61,
+                "contrast_score": 31.31,
+                "warnings": []
+            },
+            "unreadable_regions": 0,
+            "formula_regions": 2,
+            "error_categories": [
+                "insertion_word_density_exceeds_reference"
+            ]
+        },
+        {
+            "sample_id": "nb_15",
+            "split": "Dev",
+            "category": "electronics",
+            "subject": "Digital Electronics",
+            "topic": "Boolean Algebra & Logic Gate Truth Tables",
+            "file_name": "nb_15_digital_logic.jpg",
+            "dimensions": [
+                2480,
+                3509
+            ],
+            "reference_text": "De Morgan's Laws: (A + B)' = A' . B' and (A . B)' = A' + B'. NAND and NOR are universal gates.",
+            "prediction": "i = d1+ = (AI+B)7CA+ 98-1\n\nFoe8 Even mo. 0 Var table,lEx-dR\nSx -NoRfolliisiweomplementaoy\n&ah.n.\nfogfodd\nex-NoRhde Mows.\n\nXample :.- CEAOROCN\nAR\n\ndCA Bte rAtB2SQBFO:C.+A\n(BAACOCA+A)\nBE.AR4BC+C\n218\n\nSCAIe)' A tBb\n\niRsedind Foi",
+            "cer": 1.9149,
+            "wer": 1.375,
+            "exact_match": false,
+            "latency_ms": 3012.46,
+            "num_lines": 14,
+            "num_paragraphs": 6,
+            "quality_report": {
+                "is_valid": true,
+                "is_blurry": false,
+                "blur_score": 7823.5,
+                "contrast_score": 65.56,
+                "warnings": []
+            },
+            "unreadable_regions": 0,
+            "formula_regions": 1,
+            "error_categories": [
+                "insertion_word_density_exceeds_reference"
+            ]
+        },
+        {
+            "sample_id": "nb_16",
+            "split": "HeldOut",
+            "category": "data_structures",
+            "subject": "Computer Science",
+            "topic": "Graph Representation (Matrix vs Adjacency List)",
+            "file_name": "nb_16_ds_graph.jpg",
+            "dimensions": [
+                1240,
+                1755
+            ],
+            "reference_text": "Graph representation: Adjacency Matrix requires O(V^2) space. Adjacency List requires O(V + E) space.",
+            "prediction": "Head Reaursion bao\n(pon Ta't)\nDocd) Doct)\nDOC\n\noC()\n\niy indivect Recursion rExessive\nDeesnd vemembe\nAC) Waluated values\n\nSoneadosd\nase Teminaon\n(or) \"Reasssiue inductwe step\nAnchos\nRepealed",
+            "cer": 1.3762,
+            "wer": 1.9286,
+            "exact_match": false,
+            "latency_ms": 2106.42,
+            "num_lines": 13,
+            "num_paragraphs": 4,
+            "quality_report": {
+                "is_valid": true,
+                "is_blurry": false,
+                "blur_score": 3734.21,
+                "contrast_score": 32.54,
+                "warnings": []
+            },
+            "unreadable_regions": 0,
+            "formula_regions": 0,
+            "error_categories": [
+                "insertion_word_density_exceeds_reference"
+            ]
+        },
+        {
+            "sample_id": "nb_17",
+            "split": "HeldOut",
+            "category": "data_structures",
+            "subject": "Computer Science",
+            "topic": "Hash Functions & Collision Resolution",
+            "file_name": "nb_17_ds_hashing.jpg",
+            "dimensions": [
+                1240,
+                1755
+            ],
+            "reference_text": "Hash collisions are resolved by Chaining or Open Addressing (Linear Probing, Quadratic Probing, Double Hashing).",
+            "prediction": "H*31\n\nVoid\n(o)\n(-n) ?\n\n00.\n2.",
+            "cer": 0.875,
+            "wer": 1.0,
+            "exact_match": false,
+            "latency_ms": 1828.58,
+            "num_lines": 6,
+            "num_paragraphs": 3,
+            "quality_report": {
+                "is_valid": true,
+                "is_blurry": false,
+                "blur_score": 2116.53,
+                "contrast_score": 22.59,
+                "warnings": [
+                    "Low contrast detected (std 22.6 < 25.0)"
+                ]
+            },
+            "unreadable_regions": 0,
+            "formula_regions": 0,
+            "error_categories": []
+        },
+        {
+            "sample_id": "nb_18",
+            "split": "HeldOut",
+            "category": "algorithms",
+            "subject": "Algorithms",
+            "topic": "Longest Common Subsequence (LCS)",
+            "file_name": "nb_18_algo_dynamic.jpg",
+            "dimensions": [
+                2550,
+                3659
+            ],
+            "reference_text": "Dynamic Programming characteristics: Overlapping Subproblems and Optimal Substructure. LCS table computed in O(m*n) time.",
+            "prediction": "Algorith ms\nDivde Conguen : Min-man, s Strassen's mat multw\nAoot, Buick Xut, Bimary Search\nXlgoithmu. : Fractional Ks ula)a Bunpo woun'(ulruyo\nJob &upwom'by deadlines 0(nlgm) ,\nKirelhoff's toee theorem Cfpmd # mb spanningtae?\nConnectfed Gphck mem Weight pe - every Hme\n*dg MST Ipo mouf matoin,, Kruskal's algasithm\nedges at last, firs+ all Peaot\nMST)- add\nneight edges MST. (Disjoint. Se+ -Kouskal's Algo) ,\nFanding conmected companont &uyn Disjoist Se+ DS (if for each\nHhe: adj. vertices are not an the.xame s se+ th in uniom)\nShortest Path Simgle Sougce shortest path : Relaxatiow\n( Shortes+ path as+igate), Dijkstoa'say algo hpnel\nminpolo set veahces s Whose imal\nshogtes+ path known) dlvl) , Bellman Fond\nAfgoithmw ( relax each edg Ivi Himes) O(IEllvi) Lrelaxing\nedges 1v/-1 Hmes means Ne fmding shootes+ path weight\npath leng th. at max Ivi th gelaxatom\nWhew\nas to defect -ve syclke), Tope log fcal (fo+ DAGs).\nDy namic Trogammng l. Matn chain muHipicatiow\nparenthesizations mtij! be\nnecded co mp ute matria Aij\nO (n3) (tu)0\nm[ij\nmem m[s,KI+ m[K+i,j] + +i- j\n# unigyue Xubpoo ble posstble m[iin]\nn(n+1)\nh+ (n-1) +.. +\nci2e 2 s52e n",
+            "cer": 8.5785,
+            "wer": 13.7143,
+            "exact_match": false,
+            "latency_ms": 4200.22,
+            "num_lines": 32,
+            "num_paragraphs": 1,
+            "quality_report": {
+                "is_valid": true,
+                "is_blurry": false,
+                "blur_score": 359.95,
+                "contrast_score": 49.33,
+                "warnings": []
+            },
+            "unreadable_regions": 0,
+            "formula_regions": 2,
+            "error_categories": [
+                "insertion_word_density_exceeds_reference"
+            ]
+        },
+        {
+            "sample_id": "nb_19",
+            "split": "HeldOut",
+            "category": "algorithms",
+            "subject": "Algorithms",
+            "topic": "Kruskal's & Prim's Minimum Spanning Tree",
+            "file_name": "nb_19_algo_mst.jpg",
+            "dimensions": [
+                2550,
+                3718
+            ],
+            "reference_text": "Minimum Spanning Tree connects all vertices with minimum edge weight. Kruskal uses Disjoint Set Union O(E log V).",
+            "prediction": "2.. Longes+ Common Xubdegino (Boute to 8(n2m) Xm,Yn\ndp: Ics (ij)\n0 (nm I+ Res (^-1, j-1)\nsc 0(nm) man Ics (i-i, j), 1j70\ns(j-))\n3: Shortest bath inmu Histage rap h.\nVerhes\nco+(ij) ccj.+) co+(+,) hmto 'v;'s. 1zizk\nedge (u,u) 'st.\nte V+\nVerter 1 Vt. 4j,/>EE V;-/m=i\n[Yk/ = 1\nto. varter t (us) wsght + edg\n0(E) %0 ()\nBsnary Kmapxack C pseudo-pa ly nomial Ime)\nI,, amd max\nvalu optf mak\nWenght 0 =M.10 Capauty\nMAM\nC[i-l, w] O (nc)\nXubproble m\ntree = (#objs) × (capaeiy)\" n×c O (nc)\n5. Subset Suw E pseuao - palynomiel me\nTC O (n . sum\nis SS n, suw) Falso m=0 R sum >0 O (m.sum\nTrue sum=0\nLisss(m-1, sum) 1l is ss (m-1, 8um - ge+[nl),\n6. Travelng Salesmam Pootlem V Cheld. Karp Algo)\n()Ci i n,s-d C(2\"n*\n0(2\"h) by storms\ng(i,s) ) = min Icix++(k, S-iny) f nize s-1 sat\nKes amy y pont of alyo",
+            "cer": 6.2301,
+            "wer": 8.8333,
+            "exact_match": false,
+            "latency_ms": 5083.48,
+            "num_lines": 32,
+            "num_paragraphs": 1,
+            "quality_report": {
+                "is_valid": true,
+                "is_blurry": false,
+                "blur_score": 276.39,
+                "contrast_score": 41.93,
+                "warnings": []
+            },
+            "unreadable_regions": 0,
+            "formula_regions": 5,
+            "error_categories": [
+                "insertion_word_density_exceeds_reference"
+            ]
+        },
+        {
+            "sample_id": "nb_20",
+            "split": "HeldOut",
+            "category": "database_systems",
+            "subject": "Database Systems",
+            "topic": "ACID Properties & Two-Phase Locking",
+            "file_name": "nb_20_dbms_transactions.jpg",
+            "dimensions": [
+                2480,
+                3509
+            ],
+            "reference_text": "ACID properties: Atomicity, Consistency, Isolation, Durability. 2PL ensures conflict serializability.",
+            "prediction": "Ki dtawn a:\nDiv. &me\ner\nb3\nCHi ASM ha?\nFaug p? PP Lab\nC2\nthi. ER iagm inbo fallu thu Q probs:e\nunabl to t\na) it shoc! Labl belonge ho branthi. sinu.fi t opeamg\nMi. (ab -- mayl mayx\nThi i due ho. CHAsm 'hap.\nHow ho idnnh?\n'dtly wuated entie Qe. commtd fhu\namotnen enhhy wth' parti'a paticipam fuun'theu i aα\nCH ASM map.\nmoH fo \"\"limunate ?\nCwate a dnct. Jelatiomuhe. blw Mese & enhh\nAdvantagel dl.R diagramu.\ndalabae Quighvt ,domain enpeu . 4 - stakeholdurs.\nay. St: t'- stio tighty integrated. wh relahomaj\ndB mod.L.\n3) t wn doutamd",
+            "cer": 4.6139,
+            "wer": 10.4,
+            "exact_match": false,
+            "latency_ms": 3354.61,
+            "num_lines": 23,
+            "num_paragraphs": 1,
+            "quality_report": {
+                "is_valid": true,
+                "is_blurry": false,
+                "blur_score": 5024.53,
+                "contrast_score": 54.15,
+                "warnings": []
+            },
+            "unreadable_regions": 0,
+            "formula_regions": 0,
+            "error_categories": [
+                "insertion_word_density_exceeds_reference"
+            ]
+        },
+        {
+            "sample_id": "nb_21",
+            "split": "HeldOut",
+            "category": "database_systems",
+            "subject": "Database Systems",
+            "topic": "B+ Tree Indexing & File Organization",
+            "file_name": "nb_21_dbms_indexing.jpg",
+            "dimensions": [
+                2480,
+                3509
+            ],
+            "reference_text": "B+ Tree index stores all keys at leaf level linked in sequential order. Search complexity is O(log_B N).",
+            "prediction": "Uuiaavaitage:\n'ngaumation contont .\ns) Jlimited conshaint Xopsientahon.\nov otly. complex grr smal I pxojeser:\nYaiow dB dxign comcn t :\nTap olowon duign\nBotom up duxign\nMixed eign\nImdde -Outide dexign\ntop down Bottom ap Mined in[out\nall at\nRelaom ul alion blw altr. I:M Itibuteg\nTEnhhe M:n.\nER' FO, noamatigahon\nER\ntables. table.\ntable!\nthd biq -- 8mall pinjt\nmhmd -. Fo,norm\n6807\n-dilic. +ables.\nDean: Funchonad Dypendancy:\ngi dym aocatim ama enhhe.\nRNoiname , Cauno, v Crcrt capdit(ce)\nRNo -→mame\nmam'I Rno .\nRNo>CNo\n39\nQ.2\nAB 1.01\n.B5c RNo- BrNo\nAtc Bno'yBrNo.\nAC-8 fhdt\nABC agnee mst alo\nttd f3\nmaul nst awel.",
+            "cer": 5.2019,
+            "wer": 5.8889,
+            "exact_match": false,
+            "latency_ms": 3301.83,
+            "num_lines": 36,
+            "num_paragraphs": 1,
+            "quality_report": {
+                "is_valid": true,
+                "is_blurry": false,
+                "blur_score": 3812.05,
+                "contrast_score": 46.87,
+                "warnings": []
+            },
+            "unreadable_regions": 0,
+            "formula_regions": 1,
+            "error_categories": [
+                "insertion_word_density_exceeds_reference"
+            ]
+        },
+        {
+            "sample_id": "nb_22",
+            "split": "HeldOut",
+            "category": "mathematics",
+            "subject": "Calculus",
+            "topic": "Laplace Transforms & Shifting Theorems",
+            "file_name": "nb_22_math_laplace.jpg",
+            "dimensions": [
+                1240,
+                1754
+            ],
+            "reference_text": "Laplace Transform L{f(t)} = integral from 0 to inf exp(-st) f(t) dt. First Shifting Theorem L{exp(at) f(t)} = F(s-a).",
+            "prediction": "Hnd cune passing\nSHsHrg\n\n136b.gm\nnsinlb tc\n\nYeasinbtl\ndx\n2- 3t3\n\ndx\n\nHhen hnd 'y' csben xa\neldyCed",
+            "cer": 0.8034,
+            "wer": 1.0,
+            "exact_match": false,
+            "latency_ms": 1489.11,
+            "num_lines": 10,
+            "num_paragraphs": 5,
+            "quality_report": {
+                "is_valid": true,
+                "is_blurry": false,
+                "blur_score": 4693.49,
+                "contrast_score": 32.56,
+                "warnings": []
+            },
+            "unreadable_regions": 0,
+            "formula_regions": 0,
+            "error_categories": [
+                "mathematical_notation_substitution"
+            ]
+        },
+        {
+            "sample_id": "nb_23",
+            "split": "HeldOut",
+            "category": "mathematics",
+            "subject": "Calculus",
+            "topic": "Power Series Solutions of ODEs",
+            "file_name": "nb_23_math_series.jpg",
+            "dimensions": [
+                1240,
+                1754
+            ],
+            "reference_text": "Frobenius method for differential equation with regular singular point: assume solution y = sum a_n x^(n+r).",
+            "prediction": "z 3-21 d X=1, 4-1 2 sinn h eel\nHhenFindY()s?\nSin1\n\n4(3) = 8+ -1+ I\n61= (s)h\nthe equaHon coniains Hhe\"Jermy\nCo(My) Ch+wois Can tbyt ?, eh.\nbe yeduced Vqriable separcble\nswbstifuHom antbyrc-v\nd (41+4+02\n\nttan atc\ntanlQnt2 hnc2x20)",
+            "cer": 1.713,
+            "wer": 2.4375,
+            "exact_match": false,
+            "latency_ms": 2113.47,
+            "num_lines": 12,
+            "num_paragraphs": 3,
+            "quality_report": {
+                "is_valid": true,
+                "is_blurry": false,
+                "blur_score": 5606.14,
+                "contrast_score": 51.87,
+                "warnings": []
+            },
+            "unreadable_regions": 0,
+            "formula_regions": 3,
+            "error_categories": [
+                "insertion_word_density_exceeds_reference",
+                "mathematical_notation_substitution"
+            ]
+        },
+        {
+            "sample_id": "nb_24",
+            "split": "HeldOut",
+            "category": "physics",
+            "subject": "Physics",
+            "topic": "Pure Rolling on Incline without Slipping",
+            "file_name": "nb_24_physics_rolling.jpg",
+            "dimensions": [
+                1275,
+                749
+            ],
+            "reference_text": "Pure rolling condition: v_cm = R omega. Total kinetic energy in rolling = 1/2 M v_cm^2 (1 + k^2/R^2).",
+            "prediction": "Date\n\nSciphy.in\nmldA\nPenUnittim\n\nbonhue aboud a given axin l tuica\nthepredut  man y ponhule",
+            "cer": 0.802,
+            "wer": 1.0,
+            "exact_match": false,
+            "latency_ms": 1673.16,
+            "num_lines": 6,
+            "num_paragraphs": 3,
+            "quality_report": {
+                "is_valid": true,
+                "is_blurry": false,
+                "blur_score": 3778.51,
+                "contrast_score": 67.87,
+                "warnings": []
+            },
+            "unreadable_regions": 0,
+            "formula_regions": 0,
+            "error_categories": []
+        },
+        {
+            "sample_id": "nb_25",
+            "split": "HeldOut",
+            "category": "physics",
+            "subject": "Physics",
+            "topic": "Angular Momentum Vector & Gyroscopic Precession",
+            "file_name": "nb_25_physics_precession.jpg",
+            "dimensions": [
+                1275,
+                1222
+            ],
+            "reference_text": "Precession angular velocity Omega_p = tau / L = M g r / (I omega). Direction of angular momentum vector follows right hand thumb rule.",
+            "prediction": "Sciphy.i\nbahitu woud bu Cortant\nRelation blu Angulon Momentun Tony\nweknow\ndd(rxp)\n\nSEnomf ndludtot\nPoalld vutor is",
+            "cer": 0.791,
+            "wer": 1.0,
+            "exact_match": false,
+            "latency_ms": 2120.16,
+            "num_lines": 7,
+            "num_paragraphs": 2,
+            "quality_report": {
+                "is_valid": true,
+                "is_blurry": false,
+                "blur_score": 906.89,
+                "contrast_score": 57.89,
+                "warnings": []
+            },
+            "unreadable_regions": 0,
+            "formula_regions": 0,
+            "error_categories": []
+        },
+        {
+            "sample_id": "nb_26",
+            "split": "HeldOut",
+            "category": "chemistry",
+            "subject": "Chemistry",
+            "topic": "Strong Acid Strong Base Titration Curve",
+            "file_name": "nb_26_chem_titration.jpg",
+            "dimensions": [
+                6338,
+                8496
+            ],
+            "reference_text": "Equivalence point in strong acid strong base titration is at pH 7.0. Phenolphthalein indicator changes color in pH range 8.2 to 10.0.",
+            "prediction": "Liquid HF at solvend\nHE gtrcomaid\nhelto iornusaron of HF,\n3HF\n50lVo\nanion caion.\nCHSCOH\nHePou\nHy Poy + HF2\nHN03 2HF H2 N03\nHgSOy +HF2\nTauking strcong in\n- HI reh Po\n+2-1 F Cloy + H2F (ard)\nlaie honh. +2HF Hacloy +HF2 (a)\nAF5 +2HF (Qund)\nSbiAs.P] L( buos\nGtve Htwxih\nbfo+ &HF [efui + H2F (a'd)\nBrtf2 (pane )",
+            "cer": 1.7895,
+            "wer": 2.7727,
+            "exact_match": false,
+            "latency_ms": 10633.06,
+            "num_lines": 20,
+            "num_paragraphs": 1,
+            "quality_report": {
+                "is_valid": true,
+                "is_blurry": false,
+                "blur_score": 188.98,
+                "contrast_score": 34.63,
+                "warnings": []
+            },
+            "unreadable_regions": 0,
+            "formula_regions": 1,
+            "error_categories": [
+                "insertion_word_density_exceeds_reference"
+            ]
+        },
+        {
+            "sample_id": "nb_27",
+            "split": "HeldOut",
+            "category": "chemistry",
+            "subject": "Chemistry",
+            "topic": "Salt Hydrolysis Constant & Degree of Hydrolysis",
+            "file_name": "nb_27_chem_hydrolysis.jpg",
+            "dimensions": [
+                6338,
+                9238
+            ],
+            "reference_text": "Salt of weak acid and strong base undergoes anionic hydrolysis: pH = 7 + 1/2 pKa + 1/2 log C. Solution is basic.",
+            "prediction": "Liquid Hasoy\nfusronizaon ohsoy\nHeso y\nasoy\nwithwoak alid\nCHgtoOH+ H2SDy\nhouht\nH2N3\n-5irtong id!.\nasn. HUOy +-thiDy card\nad H2m07 + Hosoy hogon+ tosH\n\nOH\nH S03 F\n\nOH\nortead.\ntece aidrc\nAwo ronis aho n,-\nα He S03 f [Ha S0af+[B03] ]\nSolVo SOIVD\ncarn anron.\nSbF5 + 24$0F + [F5 Sbos03 F]\nMagit aud\ndisolvn wux",
+            "cer": 2.1518,
+            "wer": 2.4783,
+            "exact_match": false,
+            "latency_ms": 12049.95,
+            "num_lines": 23,
+            "num_paragraphs": 3,
+            "quality_report": {
+                "is_valid": true,
+                "is_blurry": false,
+                "blur_score": 129.26,
+                "contrast_score": 30.75,
+                "warnings": []
+            },
+            "unreadable_regions": 0,
+            "formula_regions": 0,
+            "error_categories": [
+                "insertion_word_density_exceeds_reference"
+            ]
+        },
+        {
+            "sample_id": "nb_28",
+            "split": "HeldOut",
+            "category": "electronics",
+            "subject": "Digital Electronics",
+            "topic": "4-Variable Karnaugh Map Simplification",
+            "file_name": "nb_28_digital_kmap.jpg",
+            "dimensions": [
+                2480,
+                3509
+            ],
+            "reference_text": "Karnaugh Map (K-map) minimizes Boolean expressions by grouping adjacent 1s in powers of 2 (pairs, quads, octets).",
+            "prediction": "t euerarra: dn'd.-Ne\nmas Elvd\nbiitgge is\n\ne h e tve liae bes.ts. s.-ve le.\n\nAT+BAc\n+ver Jog? sysleo\nVre\n+ ve \" \"AND become\nhecome lst Nor m tve Teic.\n\nNANO Nor",
+            "cer": 1.0885,
+            "wer": 1.9412,
+            "exact_match": false,
+            "latency_ms": 2360.59,
+            "num_lines": 10,
+            "num_paragraphs": 4,
+            "quality_report": {
+                "is_valid": true,
+                "is_blurry": false,
+                "blur_score": 5462.0,
+                "contrast_score": 56.3,
+                "warnings": []
+            },
+            "unreadable_regions": 0,
+            "formula_regions": 0,
+            "error_categories": [
+                "insertion_word_density_exceeds_reference"
+            ]
+        },
+        {
+            "sample_id": "nb_29",
+            "split": "HeldOut",
+            "category": "electronics",
+            "subject": "Digital Electronics",
+            "topic": "JK & D Flip Flop State Transitions",
+            "file_name": "nb_29_digital_flipflops.jpg",
+            "dimensions": [
+                2480,
+                3509
+            ],
+            "reference_text": "JK Flip-Flop characteristic equation: Q(next) = J Q' + K' Q. Race around condition occurs when J=1, K=1 and pulse width is large.",
+            "prediction": "til+\n\nsele Dyailyp*+\n\nHhe! idaal  funchon\n\nSohon\n\nNotet A bool\n\nmumbea.o\nHhses\nmu\nThepeesenko,o+. mu\n\nHis\n\nTeredual\n\nfezm and.maxer",
+            "cer": 0.8372,
+            "wer": 1.0,
+            "exact_match": false,
+            "latency_ms": 2611.41,
+            "num_lines": 12,
+            "num_paragraphs": 9,
+            "quality_report": {
+                "is_valid": true,
+                "is_blurry": false,
+                "blur_score": 6141.17,
+                "contrast_score": 59.68,
+                "warnings": []
+            },
+            "unreadable_regions": 0,
+            "formula_regions": 0,
+            "error_categories": []
+        },
+        {
+            "sample_id": "nb_30",
+            "split": "HeldOut",
+            "category": "electronics",
+            "subject": "Digital Electronics",
+            "topic": "Synchronous vs Asynchronous Counters",
+            "file_name": "nb_30_digital_counters.jpg",
+            "dimensions": [
+                2480,
+                3509
+            ],
+            "reference_text": "Mod-N counter has N distinct states. Synchronous counter triggers all flip-flops simultaneously with common clock.",
+            "prediction": "TT mar\n\nCABIC)EZG Gelti3u2i eh a sele dua funch\nMoipom  1alr -so]\n\nf.Cal =\n\nm&x\nThe.-.Eun? bshSele tal\naeemuua Hexclussrue\nHence tit can n.h beSelp duaJ\n+(34)\neo-hey areMuhual\nBx clysive.\npresemi-iphen\"mese. is no 1\nPi iscouledaseledul\n\nseitdul",
+            "cer": 1.7018,
+            "wer": 2.5333,
+            "exact_match": false,
+            "latency_ms": 2848.8,
+            "num_lines": 14,
+            "num_paragraphs": 5,
+            "quality_report": {
+                "is_valid": true,
+                "is_blurry": false,
+                "blur_score": 5732.0,
+                "contrast_score": 57.42,
+                "warnings": []
+            },
+            "unreadable_regions": 0,
+            "formula_regions": 0,
+            "error_categories": [
+                "insertion_word_density_exceeds_reference"
+            ]
+        }
+    ]
+}

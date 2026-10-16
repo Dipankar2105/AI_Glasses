@@ -296,8 +296,12 @@ async def websocket_device_endpoint(
                     )
                     vres = await vision_service.process_frame_async(vframe)
                     scene_desc = vres.scene_result.description if vres.scene_result else None
-                    if scene_desc:
-                        conversation_service.session_manager.update_context(session_id, {"last_scene_description": scene_desc})
+                    conversation_service.session_manager.update_context(session_id, {
+                        "last_scene_description": scene_desc,
+                        "last_image": vdata,
+                        "last_image_time": time.time(),
+                        "last_ocr_text": None
+                    })
 
                     await websocket.send_text(json.dumps({
                         "type": "vision_result",
@@ -306,6 +310,45 @@ async def websocket_device_endpoint(
                         "detections": [d.label for d in (vres.detection_result.detections if vres.detection_result else [])],
                         "errors": vres.errors
                     }))
+
+                elif msg_type == "ocr":
+                    # Explicit OCR request on supplied Base64 or last captured frame
+                    raw_b64 = payload.get("image_base64")
+                    ocr_data = None
+                    if raw_b64:
+                        try:
+                            img_b = base64.b64decode(raw_b64)
+                            nparr = np.frombuffer(img_b, np.uint8)
+                            img_bgr = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+                            if img_bgr is not None:
+                                ocr_data = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
+                        except Exception:
+                            pass
+                    if ocr_data is None:
+                        sess = conversation_service.session_manager.get_session(session_id)
+                        if sess:
+                            ocr_data = sess.context_metadata.get("last_image")
+
+                    if ocr_data is not None:
+                        ocr_res = vision_service.process_image_ocr(ocr_data)
+                        if ocr_res.get("text"):
+                            conversation_service.session_manager.update_context(session_id, {"last_ocr_text": ocr_res["text"]})
+                        await websocket.send_text(json.dumps({
+                            "type": "ocr_result",
+                            "success": ocr_res.get("success", False),
+                            "text": ocr_res.get("text", ""),
+                            "lines": ocr_res.get("lines", []),
+                            "paragraphs": ocr_res.get("paragraphs", []),
+                            "confidence": ocr_res.get("confidence", 0.0),
+                            "latency_ms": ocr_res.get("latency_ms", 0.0),
+                            "error": ocr_res.get("error")
+                        }))
+                    else:
+                        await websocket.send_text(json.dumps({
+                            "type": "error",
+                            "code": "NO_IMAGE_AVAILABLE",
+                            "message": "No image frame supplied or available in session"
+                        }))
 
             # ----------------------------------------------------
             # Handle Binary Messages (Audio / Camera / Framed Packets)
@@ -358,7 +401,12 @@ async def websocket_device_endpoint(
                                     )
                                     vres = await vision_service.process_frame_async(vframe)
                                     scene_desc = vres.scene_result.description if vres.scene_result else "Image frame processed."
-                                    conversation_service.session_manager.update_context(session_id, {"last_scene_description": scene_desc})
+                                    conversation_service.session_manager.update_context(session_id, {
+                                        "last_scene_description": scene_desc,
+                                        "last_image": vdata,
+                                        "last_image_time": time.time(),
+                                        "last_ocr_text": None
+                                    })
                                     await websocket.send_text(json.dumps({
                                         "type": "vision_result",
                                         "success": len(vres.errors) == 0,

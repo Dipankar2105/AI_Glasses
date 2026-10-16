@@ -23,6 +23,7 @@ from backend.conversation.session import SessionManager, get_session_manager
 class VoiceCommandIntent(str, Enum):
     CAPTURE_IMAGE = "CAPTURE_IMAGE"
     DESCRIBE_IMAGE = "DESCRIBE_IMAGE"
+    READ_TEXT_OCR = "READ_TEXT_OCR"
     REPEAT_RESPONSE = "REPEAT_RESPONSE"
     STOP_CANCEL = "STOP_CANCEL"
     UNKNOWN = "UNKNOWN"
@@ -67,6 +68,14 @@ class VoiceCommandRouter:
             r"\bwhat\s+do\s+you\s+see\b",
             r"\bwhat\s+is\s+in\s+front\s+of\s+me\b",
             r"\blook\s+at\s+this\b",
+        ],
+        VoiceCommandIntent.READ_TEXT_OCR: [
+            r"\b(read|ocr)\s+(the\s+|current\s+)?(text|image|photo|picture|notes|page|board)\b",
+            r"\bwhat\s+does\s+it\s+say\b",
+            r"\bread\s+(this|it)\s+aloud\b",
+            r"\bread\s+text\b",
+            r"\bread\s+notes\b",
+            r"\bread\s+page\b",
         ],
         VoiceCommandIntent.REPEAT_RESPONSE: [
             r"\b(repeat|say)\s+(that|again|response|last)\b",
@@ -170,6 +179,35 @@ class VoiceCommandRouter:
                 success=True,
                 spoken_response=response_text,
                 action_data={"description": response_text}
+            )
+
+        elif match.intent == VoiceCommandIntent.READ_TEXT_OCR:
+            mgr.add_message(session_id, MessageRole.USER, match.command_text)
+            last_image = session.context_metadata.get("last_image")
+            last_ocr_text = session.context_metadata.get("last_ocr_text")
+
+            if last_ocr_text:
+                response_text = f"The text reads: {last_ocr_text}"
+            elif last_image is not None and vision_service is not None:
+                try:
+                    ocr_res = vision_service.process_image_ocr(last_image)
+                    if ocr_res.get("success") and ocr_res.get("text"):
+                        txt = ocr_res["text"].strip()
+                        session.context_metadata["last_ocr_text"] = txt
+                        response_text = f"The text reads: {txt}"
+                    else:
+                        response_text = "No readable text was found in the current image."
+                except Exception:
+                    response_text = "Failed to extract text from the current image."
+            else:
+                response_text = "No image has been captured yet. Please capture an image first."
+
+            mgr.add_message(session_id, MessageRole.ASSISTANT, response_text, metadata={"command": "READ_TEXT_OCR"})
+            return VoiceCommandExecutionResult(
+                intent=VoiceCommandIntent.READ_TEXT_OCR,
+                success=True,
+                spoken_response=response_text,
+                action_data={"text": session.context_metadata.get("last_ocr_text")}
             )
 
         elif match.intent == VoiceCommandIntent.REPEAT_RESPONSE:

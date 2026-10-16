@@ -311,3 +311,96 @@ def test_voice_command_low_confidence_fallback_to_llm():
         llm_msg = json.loads(ws.receive_text())
         assert llm_msg["type"] == "llm"
         assert "I heard you quietly" in llm_msg["text"]
+
+
+# ============================================================================
+# 4. OCR Voice Command & API Integration Tests
+# ============================================================================
+
+def test_voice_command_read_text_matching():
+    router = VoiceCommandRouter(min_confidence=0.60)
+    for phrase in ["read text", "read the text", "read notes", "what does it say", "read this aloud", "ocr current image"]:
+        m = router.match(phrase, confidence=0.92)
+        assert m.matched is True
+        assert m.intent == VoiceCommandIntent.READ_TEXT_OCR
+
+
+def test_voice_command_read_text_execution_lifecycle():
+    router = VoiceCommandRouter()
+    session_mgr = SessionManager()
+    session_id = "test-session-ocr-cmd"
+
+    # Case 1: No image captured yet
+    m = router.match("read text", confidence=0.90)
+    res_no_img = router.execute_command(m, session_id=session_id, session_manager=session_mgr)
+    assert res_no_img.success is True
+    assert "No image has been captured yet" in res_no_img.spoken_response
+
+    # Case 2: Image present in session context
+    test_img = np.full((100, 100, 3), 255, dtype=np.uint8)
+    session_mgr.update_context(session_id, {"last_image": test_img, "last_ocr_text": "NextSight Smart Glasses"})
+    res_with_img = router.execute_command(m, session_id=session_id, session_manager=session_mgr)
+    assert res_with_img.success is True
+    assert "NextSight Smart Glasses" in res_with_img.spoken_response
+
+
+def test_http_vision_ocr_multipart_endpoint(app_client):
+    """Test /api/v1/vision/ocr multipart upload with valid JPEG."""
+    img = np.full((100, 100, 3), 240, dtype=np.uint8)
+    _, enc = cv2.imencode(".jpg", img)
+    files = {"file": ("test.jpg", io.BytesIO(enc.tobytes()), "image/jpeg")}
+
+    resp = app_client.post("/api/v1/vision/ocr", files=files)
+    assert resp.status_code == 200
+    data = resp.json()
+    assert "text" in data
+    assert "lines" in data
+    assert "latency_ms" in data
+
+
+def test_http_vision_ocr_base64_endpoint(app_client):
+    """Test /api/v1/vision/ocr JSON body with base64 encoded image."""
+    img = np.full((80, 80, 3), 200, dtype=np.uint8)
+    _, enc = cv2.imencode(".jpg", img)
+    b64_str = base64.b64encode(enc.tobytes()).decode("ascii")
+
+    resp = app_client.post("/api/v1/vision/ocr", json={"image_base64": b64_str})
+    assert resp.status_code == 200
+    data = resp.json()
+    assert "text" in data
+
+
+def test_http_vision_ocr_error_handling(app_client):
+    """Test error handling for empty files and corrupted bytes on /api/v1/vision/ocr."""
+    # Empty multipart
+    r_empty = app_client.post("/api/v1/vision/ocr", files={"file": ("empty.jpg", io.BytesIO(b""), "image/jpeg")})
+    assert r_empty.status_code == 400
+
+    # Corrupt multipart
+    r_corrupt = app_client.post("/api/v1/vision/ocr", files={"file": ("c.jpg", io.BytesIO(b"BAD"), "image/jpeg")})
+    assert r_corrupt.status_code == 400
+
+    # Missing base64
+    r_nob64 = app_client.post("/api/v1/vision/ocr", json={})
+    assert r_nob64.status_code == 400
+
+
+def test_websocket_ocr_message_handling(ws_test_client):
+    """Test WebSocket 'ocr' message processing on current image context."""
+    img = np.full((80, 80, 3), 150, dtype=np.uint8)
+    _, enc = cv2.imencode(".jpg", img)
+    b64_str = base64.b64encode(enc.tobytes()).decode("ascii")
+
+    with ws_test_client.websocket_connect("/ws/device") as ws:
+        _ = ws.receive_text()  # hello
+
+        # First ingest vision frame
+        ws.send_text(json.dumps({"type": "vision", "image_base64": b64_str}))
+        _ = json.loads(ws.receive_text())  # vision_result
+
+        # Now query OCR over WebSocket
+        ws.send_text(json.dumps({"type": "ocr"}))
+        ocr_msg = json.loads(ws.receive_text())
+        assert ocr_msg["type"] == "ocr_result"
+        assert "text" in ocr_msg
+

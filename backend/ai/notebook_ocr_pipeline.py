@@ -1,4 +1,5 @@
 import os
+import re
 import time
 from typing import List, Dict, Tuple, Optional
 import numpy as np
@@ -99,12 +100,17 @@ class NotebookOCRPipeline:
         recognizer_engine=None,
         blur_threshold: float = 40.0,
         min_confidence: float = 0.30,
-        enable_clahe: bool = True
+        enable_clahe: bool = True,
+        filter_cjk: bool = True,
+        tag_anomalies: bool = False
     ):
         self.recognizer = recognizer_engine if recognizer_engine is not None else RapidOCREngine()
         self.blur_threshold = blur_threshold
         self.min_confidence = min_confidence
         self.enable_clahe = enable_clahe
+        self.filter_cjk = filter_cjk
+        self.tag_anomalies = tag_anomalies
+        self._cjk_regex = re.compile(r'[\u4e00-\u9fff\u3400-\u4dbf\uff00-\uffef\u2e80-\u2fd5]+')
 
     def assess_quality(self, image: np.ndarray) -> ImageQualityReport:
         """Evaluates image validity, blurriness, and contrast."""
@@ -202,7 +208,8 @@ class NotebookOCRPipeline:
         self,
         regions: List[OCRTextRegion],
         line_overlap_ratio: float = 0.55,
-        para_gap_ratio: float = 1.6
+        para_gap_ratio: float = 1.6,
+        tag_anomalies: Optional[bool] = None
     ) -> Tuple[str, List[str], List[str], int, int]:
         """
         Reconstructs reading order, lines, and paragraphs from detected OCR regions.
@@ -210,32 +217,37 @@ class NotebookOCRPipeline:
           - Line clustering by vertical overlap.
           - Multi-column separation.
           - Paragraph grouping.
-          - Low-confidence tagging.
-          - Math formula heuristic flagging.
+          - Low-confidence tagging (optional; preserves structured metrics).
+          - Math formula heuristic flagging (optional; preserves structured metrics).
         """
         if not regions:
             return "", [], [], 0, 0
 
+        should_tag = self.tag_anomalies if tag_anomalies is None else tag_anomalies
         raw_boxes = []
         unreadable_count = 0
         formula_count = 0
 
         for r in regions:
             text = r.text.strip()
+            if self.filter_cjk and text:
+                text = self._cjk_regex.sub('', text).strip()
             if not text:
                 continue
 
             # Check low confidence
             if r.confidence < self.min_confidence:
                 unreadable_count += 1
-                text = f"[Unreadable: {text}]"
+                if should_tag:
+                    text = f"[Unreadable: {text}]"
 
             # Check formula / math heuristic
             math_symbols = {'=', '+', '-', '*', '/', '^', '\\sqrt', '\\int', '\\Sigma', '<', '>', '\u00b1'}
             symbol_hits = sum(1 for ch in text if ch in math_symbols)
             if symbol_hits >= 2 and any(ch.isdigit() for ch in text):
                 formula_count += 1
-                text = f"[Formula: {text}]"
+                if should_tag:
+                    text = f"[Formula: {text}]"
 
             xmin = r.box.x
             ymin = r.box.y

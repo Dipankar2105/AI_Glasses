@@ -299,11 +299,92 @@ async def explain_camera_image(
     scene_desc = result.scene_result.description if result.scene_result else "Field of view captured."
     salient_count = len(result.detection_result.detections) if result.detection_result and result.detection_result.detections else 0
 
+    is_ocr_query = any(k in question.lower() for k in ("read", "text", "ocr", "words", "what does it say", "notes"))
+    ocr_text = ""
+    if is_ocr_query:
+        ocr_res = service.process_image_ocr(data)
+        if ocr_res.get("success") and ocr_res.get("text"):
+            ocr_text = ocr_res["text"].strip()
+
+    if ocr_text:
+        explanation = f'The text in the image reads: "{ocr_text}". Scene context: {scene_desc}'
+    else:
+        explanation = f"{scene_desc} Detected {salient_count} salient regions."
+
     return {
         "success": len(result.errors) == 0,
         "question": question,
-        "explanation": f"{scene_desc} Detected {salient_count} salient regions.",
+        "explanation": explanation,
         "dimensions": {"width": w, "height": h},
         "errors": result.errors,
+        "latency_ms": round(elapsed_ms, 2)
+    }
+
+
+@router.post("/api/v1/vision/ocr", tags=["Vision"])
+async def extract_image_ocr(
+    request: Request,
+    service: VisionService = Depends(get_app_vision_service)
+):
+    """
+    Explicit OCR extraction on uploaded image frame (multipart/form-data or JSON base64).
+    Validates payload bounds, decodes JPEG/PNG, executes registered OCR engine, and returns recognized text.
+    """
+    t0 = time.time()
+    content_type = request.headers.get("content-type", "")
+    data = None
+
+    if "multipart/form-data" in content_type:
+        try:
+            form = await request.form()
+            file_item = form.get("file")
+            if file_item is None:
+                raise HTTPException(status_code=400, detail="Missing 'file' field in multipart payload")
+            img_bytes = await file_item.read()
+            if not img_bytes:
+                raise HTTPException(status_code=400, detail="Uploaded image file is empty (0 bytes)")
+            if len(img_bytes) > 10 * 1024 * 1024:
+                raise HTTPException(status_code=413, detail="Uploaded image exceeds 10MB limit")
+            nparr = np.frombuffer(img_bytes, np.uint8)
+            img_bgr = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+            if img_bgr is None:
+                raise HTTPException(status_code=400, detail="Corrupted or unrecognized image format (must be valid JPEG/PNG)")
+            data = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
+        except HTTPException:
+            raise
+        except Exception as e:
+            raise HTTPException(status_code=400, detail=f"Failed to process multipart image: {str(e)}")
+
+    else:
+        try:
+            body = await request.json()
+            raw_b64 = body.get("image_base64", "")
+            if not raw_b64 or not raw_b64.strip():
+                raise HTTPException(status_code=400, detail="Missing or empty 'image_base64' field")
+            img_bytes = base64.b64decode(raw_b64.strip())
+            if not img_bytes:
+                raise HTTPException(status_code=400, detail="Decoded image buffer is empty (0 bytes)")
+            if len(img_bytes) > 10 * 1024 * 1024:
+                raise HTTPException(status_code=413, detail="Base64 image exceeds 10MB limit")
+            nparr = np.frombuffer(img_bytes, np.uint8)
+            img_bgr = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+            if img_bgr is None:
+                raise HTTPException(status_code=400, detail="Corrupted or unrecognized base64 image data")
+            data = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
+        except HTTPException:
+            raise
+        except Exception as e:
+            raise HTTPException(status_code=400, detail=f"Failed to parse JSON body: {str(e)}")
+
+    ocr_res = service.process_image_ocr(data)
+    elapsed_ms = (time.time() - t0) * 1000.0
+
+    return {
+        "success": ocr_res.get("success", False),
+        "text": ocr_res.get("text", ""),
+        "lines": ocr_res.get("lines", []),
+        "paragraphs": ocr_res.get("paragraphs", []),
+        "confidence": ocr_res.get("confidence", 0.0),
+        "regions_count": ocr_res.get("regions_count", 0),
         "latency_ms": round(elapsed_ms, 2)
     }
