@@ -3,6 +3,7 @@ import time
 import base64
 import numpy as np
 import cv2
+from typing import Optional, List, Dict, Any
 from fastapi import APIRouter, Depends, HTTPException, status, Request
 from fastapi.responses import JSONResponse
 
@@ -324,6 +325,7 @@ async def explain_camera_image(
 @router.post("/api/v1/vision/ocr", tags=["Vision"])
 async def extract_image_ocr(
     request: Request,
+    engine: Optional[str] = None,
     service: VisionService = Depends(get_app_vision_service)
 ):
     """
@@ -376,11 +378,12 @@ async def extract_image_ocr(
         except Exception as e:
             raise HTTPException(status_code=400, detail=f"Failed to parse JSON body: {str(e)}")
 
-    ocr_res = service.process_image_ocr(data)
+    ocr_res = service.process_image_ocr(data, engine_name=engine)
     elapsed_ms = (time.time() - t0) * 1000.0
 
     return {
         "success": ocr_res.get("success", False),
+        "engine": engine or getattr(service.registry, "active_ocr", "default"),
         "text": ocr_res.get("text", ""),
         "lines": ocr_res.get("lines", []),
         "paragraphs": ocr_res.get("paragraphs", []),

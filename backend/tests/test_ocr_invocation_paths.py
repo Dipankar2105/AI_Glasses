@@ -326,3 +326,59 @@ def test_provider_status_disclosure(app_with_services):
     assert "mock" in data["ai_models_status"]["tts_synthesizer"].lower()
     assert "camera" in data["hardware_status"]
     assert "audio_mic" in data["hardware_status"]
+
+
+def test_ocr_endpoint_explicit_engine_selection(app_with_services):
+    client, _ = app_with_services
+    img = np.full((100, 200, 3), 255, dtype=np.uint8)
+    cv2.putText(img, "ENGINE TEST", (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 0, 0), 2)
+    _, enc = cv2.imencode(".png", img)
+    files = {"file": ("test.png", io.BytesIO(enc.tobytes()), "image/png")}
+
+    # Test explicit Tesseract selection
+    r_tess = client.post("/api/v1/vision/ocr?engine=tesseract", files=files)
+    assert r_tess.status_code == 200
+    assert r_tess.json()["engine"] == "tesseract"
+
+    # Test explicit RapidOCR selection
+    files_rapid = {"file": ("test.png", io.BytesIO(enc.tobytes()), "image/png")}
+    r_rapid = client.post("/api/v1/vision/ocr?engine=rapidocr", files=files_rapid)
+    assert r_rapid.status_code == 200
+    assert r_rapid.json()["engine"] == "rapidocr"
+
+
+def test_websocket_missing_image_and_stale_invalidation(app_with_services):
+    client, _ = app_with_services
+
+    with client.websocket_connect("/ws/device") as ws:
+        _ = ws.receive_text()  # hello
+
+        # 1. Query OCR without any image captured yet -> returns NO_IMAGE_AVAILABLE error
+        ws.send_text(json.dumps({"type": "ocr"}))
+        err_msg = json.loads(ws.receive_text())
+        assert err_msg["type"] == "error"
+        assert err_msg["code"] == "NO_IMAGE_AVAILABLE"
+
+        # 2. Ingest first image
+        img1 = np.full((60, 150, 3), 255, dtype=np.uint8)
+        cv2.putText(img1, "FRAME1", (10, 40), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 0, 0), 2)
+        _, enc1 = cv2.imencode(".jpg", img1)
+        ws.send_text(json.dumps({"type": "vision", "image_base64": base64.b64encode(enc1.tobytes()).decode("ascii")}))
+        _ = json.loads(ws.receive_text())  # vision_result
+
+        # Query OCR on frame 1
+        ws.send_text(json.dumps({"type": "ocr"}))
+        res1 = json.loads(ws.receive_text())
+        assert res1["type"] == "ocr_result"
+
+        # 3. Ingest second image -> replaces frame and invalidates cached text
+        img2 = np.full((60, 150, 3), 255, dtype=np.uint8)
+        cv2.putText(img2, "FRAME2", (10, 40), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 0, 0), 2)
+        _, enc2 = cv2.imencode(".jpg", img2)
+        ws.send_text(json.dumps({"type": "vision", "image_base64": base64.b64encode(enc2.tobytes()).decode("ascii")}))
+        _ = json.loads(ws.receive_text())  # vision_result
+
+        # Query OCR on frame 2
+        ws.send_text(json.dumps({"type": "ocr"}))
+        res2 = json.loads(ws.receive_text())
+        assert res2["type"] == "ocr_result"

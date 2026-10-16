@@ -101,7 +101,7 @@ class NotebookOCRPipeline:
         blur_threshold: float = 40.0,
         min_confidence: float = 0.30,
         enable_clahe: bool = True,
-        filter_cjk: bool = True,
+        filter_cjk: bool = False,
         tag_anomalies: bool = False
     ):
         self.recognizer = recognizer_engine if recognizer_engine is not None else RapidOCREngine()

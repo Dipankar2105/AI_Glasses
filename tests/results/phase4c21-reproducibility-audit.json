@@ -1,0 +1,819 @@
+{
+    "audit_name": "NextSight OCR Reproducibility Gate (Phase 4C.21)",
+    "timestamp": "2026-10-16 12:08:02",
+    "dataset_target_classifications": {
+        "printed_scene": {
+            "sample_count": 15,
+            "target_type": "verbatim_exact_transcription",
+            "suitable_for_cer_wer": true,
+            "notes": "Exact match ground truth for road signs, receipts, book scans, code."
+        },
+        "handwriting": {
+            "sample_count": 12,
+            "target_type": "verbatim_exact_transcription",
+            "suitable_for_cer_wer": true,
+            "notes": "Exact line-level transcription for historic and modern handwritten notes."
+        },
+        "notebooks": {
+            "sample_count": 30,
+            "target_type": "conceptual_summary",
+            "suitable_for_cer_wer": false,
+            "notes": "Single-sentence topic summaries evaluated against dense full-page notes. Spurious insertions cause mathematical CER > 100%."
+        }
+    },
+    "benchmarks": {
+        "printed_scene": {
+            "Tesseract (PSM 3)": {
+                "macro_cer": 0.0639,
+                "macro_wer": 0.3007,
+                "exact_match_count": 5,
+                "exact_match_rate": 0.3333,
+                "mean_latency_ms": 189.31,
+                "median_latency_ms": 112.01,
+                "samples": [
+                    {
+                        "sample_id": "print_01",
+                        "file_name": "phototest.tif",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 1035.2,
+                        "hypothesis_excerpt": "This is a lot of 12 point text to test the ocr code and see "
+                    },
+                    {
+                        "sample_id": "print_02",
+                        "file_name": "eurotext.tif",
+                        "cer": 0.0218,
+                        "wer": 0.1212,
+                        "exact_match": false,
+                        "latency_ms": 234.08,
+                        "hypothesis_excerpt": "The (quick) [brown] {fox} jumps! Over the $43,456.78 <lazy> "
+                    },
+                    {
+                        "sample_id": "print_03",
+                        "file_name": "scanned_receipt.png",
+                        "cer": 0.1235,
+                        "wer": 0.4286,
+                        "exact_match": false,
+                        "latency_ms": 112.01,
+                        "hypothesis_excerpt": "COFFEE SHOP “ESPRESSO $3.50 ‘OROISSANT$.400, TOTAL $750 THAN"
+                    },
+                    {
+                        "sample_id": "print_04",
+                        "file_name": "code_snippet_print.png",
+                        "cer": 0.2182,
+                        "wer": 0.8333,
+                        "exact_match": false,
+                        "latency_ms": 113.26,
+                        "hypothesis_excerpt": "defcalculate_metrics(rat pred retumcertret pred)"
+                    },
+                    {
+                        "sample_id": "print_05",
+                        "file_name": "book_page_scan.png",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 108.78,
+                        "hypothesis_excerpt": "Chapter 1: The Foundations of Optical Character Recognition "
+                    },
+                    {
+                        "sample_id": "print_06",
+                        "file_name": "table_document.png",
+                        "cer": 0.0781,
+                        "wer": 0.5,
+                        "exact_match": false,
+                        "latency_ms": 114.04,
+                        "hypothesis_excerpt": "tem Qty Price Total Sensor 2 $16.00 $30.00 Lens1 $46.00 $45."
+                    },
+                    {
+                        "sample_id": "print_07",
+                        "file_name": "invoice_sample.png",
+                        "cer": 0.0462,
+                        "wer": 0.3,
+                        "exact_match": false,
+                        "latency_ms": 108.21,
+                        "hypothesis_excerpt": "INVOICE #1042 BILL TO: ROUTEWISEAL DATE: 2026-10-09 STATUS P"
+                    },
+                    {
+                        "sample_id": "scene_01",
+                        "file_name": "street_sign_stop.png",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 101.87,
+                        "hypothesis_excerpt": "STOP"
+                    },
+                    {
+                        "sample_id": "scene_02",
+                        "file_name": "speed_limit_sign.png",
+                        "cer": 0.2143,
+                        "wer": 1.0,
+                        "exact_match": false,
+                        "latency_ms": 107.78,
+                        "hypothesis_excerpt": "SPEEDLIMITS0"
+                    },
+                    {
+                        "sample_id": "scene_03",
+                        "file_name": "storefront_open.png",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 102.26,
+                        "hypothesis_excerpt": "OPEN 24 HOURS"
+                    },
+                    {
+                        "sample_id": "scene_04",
+                        "file_name": "digital_monitor_display.png",
+                        "cer": 0.0645,
+                        "wer": 0.3333,
+                        "exact_match": false,
+                        "latency_ms": 174.32,
+                        "hypothesis_excerpt": "‘stem Status Online Frame Rate: 30 FPS Fesolution: 1920x1080"
+                    },
+                    {
+                        "sample_id": "scene_05",
+                        "file_name": "projected_slide.png",
+                        "cer": 0.0577,
+                        "wer": 0.375,
+                        "exact_match": false,
+                        "latency_ms": 161.46,
+                        "hypothesis_excerpt": "AlGlasses Project Vision & Audio Pipeline Overview"
+                    },
+                    {
+                        "sample_id": "scene_06",
+                        "file_name": "warning_placard.png",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 103.39,
+                        "hypothesis_excerpt": "CAUTION HIGH VOLTAGE"
+                    },
+                    {
+                        "sample_id": "scene_07",
+                        "file_name": "airport_gate_display.png",
+                        "cer": 0.0811,
+                        "wer": 0.2857,
+                        "exact_match": false,
+                        "latency_ms": 158.86,
+                        "hypothesis_excerpt": "GATEBIZ FLIGHT 408 TO TOKYO BOARDING"
+                    },
+                    {
+                        "sample_id": "scene_08",
+                        "file_name": "bus_destination_sign.png",
+                        "cer": 0.0526,
+                        "wer": 0.3333,
+                        "exact_match": false,
+                        "latency_ms": 104.11,
+                        "hypothesis_excerpt": "172 DOWNTOWN EXPRESS"
+                    }
+                ]
+            },
+            "RapidOCR (PP-OCRv4)": {
+                "macro_cer": 0.0173,
+                "macro_wer": 0.141,
+                "exact_match_count": 8,
+                "exact_match_rate": 0.5333,
+                "mean_latency_ms": 1089.08,
+                "median_latency_ms": 922.87,
+                "samples": [
+                    {
+                        "sample_id": "print_01",
+                        "file_name": "phototest.tif",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 1629.73,
+                        "hypothesis_excerpt": "This is a lot of 12 point text to test the ocr code and see "
+                    },
+                    {
+                        "sample_id": "print_02",
+                        "file_name": "eurotext.tif",
+                        "cer": 0.0315,
+                        "wer": 0.1818,
+                        "exact_match": false,
+                        "latency_ms": 2206.06,
+                        "hypothesis_excerpt": "The (quick)[brown] (fox} jumps! Over the $43,456.78 <1azy> #"
+                    },
+                    {
+                        "sample_id": "print_03",
+                        "file_name": "scanned_receipt.png",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 1569.8,
+                        "hypothesis_excerpt": "COFFEE SHOP 1 ESPRESSO $3.50 1 CROISSANT $4.00 TOTAL $7.50 T"
+                    },
+                    {
+                        "sample_id": "print_04",
+                        "file_name": "code_snippet_print.png",
+                        "cer": 0.0364,
+                        "wer": 0.1667,
+                        "exact_match": false,
+                        "latency_ms": 940.48,
+                        "hypothesis_excerpt": "def calculate_metrics(ref, pred): return cer(ret pred)"
+                    },
+                    {
+                        "sample_id": "print_05",
+                        "file_name": "book_page_scan.png",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 1100.65,
+                        "hypothesis_excerpt": "Chapter 1: The Foundations of Optical Character Recognition "
+                    },
+                    {
+                        "sample_id": "print_06",
+                        "file_name": "table_document.png",
+                        "cer": 0.0156,
+                        "wer": 0.1667,
+                        "exact_match": false,
+                        "latency_ms": 922.87,
+                        "hypothesis_excerpt": "Ite m Qty Price Total Sensor 2 $15.00 $30.00 Lens 1 $45.00 $"
+                    },
+                    {
+                        "sample_id": "print_07",
+                        "file_name": "invoice_sample.png",
+                        "cer": 0.0154,
+                        "wer": 0.1,
+                        "exact_match": false,
+                        "latency_ms": 916.57,
+                        "hypothesis_excerpt": "INVOICE #1042 BILL TO. ROUTEWISE AI DATE: 2026-10-09 STATUS:"
+                    },
+                    {
+                        "sample_id": "scene_01",
+                        "file_name": "street_sign_stop.png",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 331.88,
+                        "hypothesis_excerpt": "STOP"
+                    },
+                    {
+                        "sample_id": "scene_02",
+                        "file_name": "speed_limit_sign.png",
+                        "cer": 0.0714,
+                        "wer": 0.6667,
+                        "exact_match": false,
+                        "latency_ms": 540.38,
+                        "hypothesis_excerpt": "SPEED LIMIT50"
+                    },
+                    {
+                        "sample_id": "scene_03",
+                        "file_name": "storefront_open.png",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 598.77,
+                        "hypothesis_excerpt": "OPEN 24 HOURS"
+                    },
+                    {
+                        "sample_id": "scene_04",
+                        "file_name": "digital_monitor_display.png",
+                        "cer": 0.0323,
+                        "wer": 0.3333,
+                        "exact_match": false,
+                        "latency_ms": 2034.62,
+                        "hypothesis_excerpt": "Syste m Status Online Frame Rate: 30 FPS Resolution: 1920x10"
+                    },
+                    {
+                        "sample_id": "scene_05",
+                        "file_name": "projected_slide.png",
+                        "cer": 0.0577,
+                        "wer": 0.5,
+                        "exact_match": false,
+                        "latency_ms": 1151.78,
+                        "hypothesis_excerpt": "Al Glasses Project Vision & Audio Pipeline Ove rview"
+                    },
+                    {
+                        "sample_id": "scene_06",
+                        "file_name": "warning_placard.png",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 639.2,
+                        "hypothesis_excerpt": "CAUTION HIGH VOLTAGE"
+                    },
+                    {
+                        "sample_id": "scene_07",
+                        "file_name": "airport_gate_display.png",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 914.21,
+                        "hypothesis_excerpt": "GATE B12 FLIGHT 408 TO TOKYO BOARDING"
+                    },
+                    {
+                        "sample_id": "scene_08",
+                        "file_name": "bus_destination_sign.png",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 839.25,
+                        "hypothesis_excerpt": "72 DOWNTOWN EXPRESS"
+                    }
+                ]
+            },
+            "NotebookOCRPipeline": {
+                "macro_cer": 0.0173,
+                "macro_wer": 0.141,
+                "exact_match_count": 8,
+                "exact_match_rate": 0.5333,
+                "mean_latency_ms": 1215.39,
+                "median_latency_ms": 1132.61,
+                "samples": [
+                    {
+                        "sample_id": "print_01",
+                        "file_name": "phototest.tif",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 2410.33,
+                        "hypothesis_excerpt": "This is a lot of 12 point text to test the ocr code and see "
+                    },
+                    {
+                        "sample_id": "print_02",
+                        "file_name": "eurotext.tif",
+                        "cer": 0.0315,
+                        "wer": 0.1818,
+                        "exact_match": false,
+                        "latency_ms": 2215.46,
+                        "hypothesis_excerpt": "The (quick)[brown] (fox} jumps! Over the $43,456.78 <1azy> #"
+                    },
+                    {
+                        "sample_id": "print_03",
+                        "file_name": "scanned_receipt.png",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 1423.73,
+                        "hypothesis_excerpt": "COFFEE SHOP  1 ESPRESSO $3.50  1 CROISSANT $4.00  TOTAL $7.5"
+                    },
+                    {
+                        "sample_id": "print_04",
+                        "file_name": "code_snippet_print.png",
+                        "cer": 0.0364,
+                        "wer": 0.1667,
+                        "exact_match": false,
+                        "latency_ms": 1132.61,
+                        "hypothesis_excerpt": "def calculate_metrics(ref, pred):  return cer(ret pred)"
+                    },
+                    {
+                        "sample_id": "print_05",
+                        "file_name": "book_page_scan.png",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 1203.31,
+                        "hypothesis_excerpt": "Chapter 1: The Foundations of Optical Character Recognition "
+                    },
+                    {
+                        "sample_id": "print_06",
+                        "file_name": "table_document.png",
+                        "cer": 0.0156,
+                        "wer": 0.1667,
+                        "exact_match": false,
+                        "latency_ms": 1014.87,
+                        "hypothesis_excerpt": "Ite m Qty Price Total  Sensor 2 $15.00 $30.00  Lens 1 $45.00"
+                    },
+                    {
+                        "sample_id": "print_07",
+                        "file_name": "invoice_sample.png",
+                        "cer": 0.0154,
+                        "wer": 0.1,
+                        "exact_match": false,
+                        "latency_ms": 931.65,
+                        "hypothesis_excerpt": "INVOICE #1042  BILL TO. ROUTEWISE AI  DATE: 2026-10-09  STAT"
+                    },
+                    {
+                        "sample_id": "scene_01",
+                        "file_name": "street_sign_stop.png",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 731.0,
+                        "hypothesis_excerpt": "STOP"
+                    },
+                    {
+                        "sample_id": "scene_02",
+                        "file_name": "speed_limit_sign.png",
+                        "cer": 0.0714,
+                        "wer": 0.6667,
+                        "exact_match": false,
+                        "latency_ms": 669.93,
+                        "hypothesis_excerpt": "SPEED LIMIT50"
+                    },
+                    {
+                        "sample_id": "scene_03",
+                        "file_name": "storefront_open.png",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 436.42,
+                        "hypothesis_excerpt": "OPEN 24 HOURS"
+                    },
+                    {
+                        "sample_id": "scene_04",
+                        "file_name": "digital_monitor_display.png",
+                        "cer": 0.0323,
+                        "wer": 0.3333,
+                        "exact_match": false,
+                        "latency_ms": 1491.23,
+                        "hypothesis_excerpt": "Syste m Status Online  Frame Rate: 30 FPS  Resolution: 1920x"
+                    },
+                    {
+                        "sample_id": "scene_05",
+                        "file_name": "projected_slide.png",
+                        "cer": 0.0577,
+                        "wer": 0.5,
+                        "exact_match": false,
+                        "latency_ms": 1346.68,
+                        "hypothesis_excerpt": "Al Glasses Project Vision & Audio Pipeline Ove rview"
+                    },
+                    {
+                        "sample_id": "scene_06",
+                        "file_name": "warning_placard.png",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 772.31,
+                        "hypothesis_excerpt": "CAUTION HIGH VOLTAGE"
+                    },
+                    {
+                        "sample_id": "scene_07",
+                        "file_name": "airport_gate_display.png",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 1769.72,
+                        "hypothesis_excerpt": "GATE B12  FLIGHT 408 TO TOKYO  BOARDING"
+                    },
+                    {
+                        "sample_id": "scene_08",
+                        "file_name": "bus_destination_sign.png",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 681.6,
+                        "hypothesis_excerpt": "72 DOWNTOWN EXPRESS"
+                    }
+                ]
+            }
+        },
+        "handwriting": {
+            "Tesseract (PSM 3)": {
+                "macro_cer": 0.0382,
+                "macro_wer": 0.2981,
+                "exact_match_count": 0,
+                "exact_match_rate": 0.0,
+                "mean_latency_ms": 121.85,
+                "median_latency_ms": 93.97,
+                "samples": [
+                    {
+                        "sample_id": "hw_01",
+                        "file_name": "gw_manuscript_line1.png",
+                        "cer": 0.0233,
+                        "wer": 0.2857,
+                        "exact_match": false,
+                        "latency_ms": 422.95,
+                        "hypothesis_excerpt": "Ordersof the Day Headquarters Valley Forge"
+                    },
+                    {
+                        "sample_id": "hw_02",
+                        "file_name": "gw_manuscript_line2.png",
+                        "cer": 0.0833,
+                        "wer": 0.375,
+                        "exact_match": false,
+                        "latency_ms": 95.27,
+                        "hypothesis_excerpt": "The Commander in Chief directs thataloficers"
+                    },
+                    {
+                        "sample_id": "hw_03",
+                        "file_name": "bentham_note_line1.png",
+                        "cer": 0.0208,
+                        "wer": 0.3333,
+                        "exact_match": false,
+                        "latency_ms": 85.02,
+                        "hypothesis_excerpt": "Principlesof Legislation and Judicial Procedure"
+                    },
+                    {
+                        "sample_id": "hw_04",
+                        "file_name": "bentham_note_line2.png",
+                        "cer": 0.0426,
+                        "wer": 0.4286,
+                        "exact_match": false,
+                        "latency_ms": 85.51,
+                        "hypothesis_excerpt": "(Observations upon the utilityof public records"
+                    },
+                    {
+                        "sample_id": "hw_05",
+                        "file_name": "historic_letter_01.png",
+                        "cer": 0.0192,
+                        "wer": 0.1111,
+                        "exact_match": false,
+                        "latency_ms": 94.14,
+                        "hypothesis_excerpt": "My Dear Friend | received your kind letter yesterday"
+                    },
+                    {
+                        "sample_id": "hw_06",
+                        "file_name": "historic_letter_02.png",
+                        "cer": 0.037,
+                        "wer": 0.3077,
+                        "exact_match": false,
+                        "latency_ms": 104.93,
+                        "hypothesis_excerpt": "We hope tosee you in town before the endof the month"
+                    },
+                    {
+                        "sample_id": "hw_07",
+                        "file_name": "modern_hw_note_01.png",
+                        "cer": 0.0196,
+                        "wer": 0.2,
+                        "exact_match": false,
+                        "latency_ms": 93.49,
+                        "hypothesis_excerpt": "Remember to buy milk eggsand fresh bread on Friday"
+                    },
+                    {
+                        "sample_id": "hw_08",
+                        "file_name": "modern_hw_note_02.png",
+                        "cer": 0.0444,
+                        "wer": 0.2222,
+                        "exact_match": false,
+                        "latency_ms": 93.2,
+                        "hypothesis_excerpt": "Meeting with research team atpm in room 402"
+                    },
+                    {
+                        "sample_id": "hw_09",
+                        "file_name": "modern_hw_recipe.png",
+                        "cer": 0.0204,
+                        "wer": 0.0909,
+                        "exact_match": false,
+                        "latency_ms": 105.57,
+                        "hypothesis_excerpt": "Flour 2 cups Sugar 1 cup Butter 100g Bake at 180"
+                    },
+                    {
+                        "sample_id": "hw_10",
+                        "file_name": "modern_hw_memo.png",
+                        "cer": 0.0476,
+                        "wer": 0.5,
+                        "exact_match": false,
+                        "latency_ms": 95.01,
+                        "hypothesis_excerpt": "Call doctor for annualcheckupappointment"
+                    },
+                    {
+                        "sample_id": "hw_11",
+                        "file_name": "modern_hw_form.png",
+                        "cer": 0.0638,
+                        "wer": 0.5,
+                        "exact_match": false,
+                        "latency_ms": 93.8,
+                        "hypothesis_excerpt": "Name: John Doe City Mumbai PostalCode: 400037,"
+                    },
+                    {
+                        "sample_id": "hw_12",
+                        "file_name": "modern_hw_todo.png",
+                        "cer": 0.0357,
+                        "wer": 0.2222,
+                        "exact_match": false,
+                        "latency_ms": 93.29,
+                        "hypothesis_excerpt": "1. Review pull request 2 Update documentation 3, Deploy"
+                    }
+                ]
+            },
+            "RapidOCR (PP-OCRv4)": {
+                "macro_cer": 0.0243,
+                "macro_wer": 0.2295,
+                "exact_match_count": 5,
+                "exact_match_rate": 0.4167,
+                "mean_latency_ms": 1183.1,
+                "median_latency_ms": 1201.55,
+                "samples": [
+                    {
+                        "sample_id": "hw_01",
+                        "file_name": "gw_manuscript_line1.png",
+                        "cer": 0.0465,
+                        "wer": 0.5714,
+                        "exact_match": false,
+                        "latency_ms": 861.2,
+                        "hypothesis_excerpt": "Ordersof theDay Headquarters Valley Forge"
+                    },
+                    {
+                        "sample_id": "hw_02",
+                        "file_name": "gw_manuscript_line2.png",
+                        "cer": 0.0625,
+                        "wer": 0.375,
+                        "exact_match": false,
+                        "latency_ms": 1446.29,
+                        "hypothesis_excerpt": "The Commander in Chief directs thatalloffice rs"
+                    },
+                    {
+                        "sample_id": "hw_03",
+                        "file_name": "bentham_note_line1.png",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 1403.46,
+                        "hypothesis_excerpt": "Principles of Legislation and Judicial Procedure"
+                    },
+                    {
+                        "sample_id": "hw_04",
+                        "file_name": "bentham_note_line2.png",
+                        "cer": 0.0213,
+                        "wer": 0.2857,
+                        "exact_match": false,
+                        "latency_ms": 939.34,
+                        "hypothesis_excerpt": "Obse rvations upon the utility of public records"
+                    },
+                    {
+                        "sample_id": "hw_05",
+                        "file_name": "historic_letter_01.png",
+                        "cer": 0.0385,
+                        "wer": 0.4444,
+                        "exact_match": false,
+                        "latency_ms": 1408.96,
+                        "hypothesis_excerpt": "My Dear Frie nd I received your kind letter yeste rday"
+                    },
+                    {
+                        "sample_id": "hw_06",
+                        "file_name": "historic_letter_02.png",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 1240.33,
+                        "hypothesis_excerpt": "We hope to see you in town before the end of the month"
+                    },
+                    {
+                        "sample_id": "hw_07",
+                        "file_name": "modern_hw_note_01.png",
+                        "cer": 0.0392,
+                        "wer": 0.3,
+                        "exact_match": false,
+                        "latency_ms": 1181.3,
+                        "hypothesis_excerpt": "Re me mber to buy milk eggs and fresh bread on Friday"
+                    },
+                    {
+                        "sample_id": "hw_08",
+                        "file_name": "modern_hw_note_02.png",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 1344.62,
+                        "hypothesis_excerpt": "Meeting with research team at 3pm in room 402"
+                    },
+                    {
+                        "sample_id": "hw_09",
+                        "file_name": "modern_hw_recipe.png",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 1203.63,
+                        "hypothesis_excerpt": "Flour 2 cups Sugar 1 cup Butter 100g Bake at 180C"
+                    },
+                    {
+                        "sample_id": "hw_10",
+                        "file_name": "modern_hw_memo.png",
+                        "cer": 0.0476,
+                        "wer": 0.3333,
+                        "exact_match": false,
+                        "latency_ms": 908.42,
+                        "hypothesis_excerpt": "Call doctor for annual checkupappointme nt"
+                    },
+                    {
+                        "sample_id": "hw_11",
+                        "file_name": "modern_hw_form.png",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 1199.47,
+                        "hypothesis_excerpt": "Name: John Doe City: Mumbai Postal Code: 400037"
+                    },
+                    {
+                        "sample_id": "hw_12",
+                        "file_name": "modern_hw_todo.png",
+                        "cer": 0.0357,
+                        "wer": 0.4444,
+                        "exact_match": false,
+                        "latency_ms": 1060.25,
+                        "hypothesis_excerpt": "1. Review pull request 2. Update docume ntation 3. De ploy"
+                    }
+                ]
+            },
+            "NotebookOCRPipeline": {
+                "macro_cer": 0.0196,
+                "macro_wer": 0.1821,
+                "exact_match_count": 6,
+                "exact_match_rate": 0.5,
+                "mean_latency_ms": 1227.53,
+                "median_latency_ms": 1359.24,
+                "samples": [
+                    {
+                        "sample_id": "hw_01",
+                        "file_name": "gw_manuscript_line1.png",
+                        "cer": 0.0465,
+                        "wer": 0.5714,
+                        "exact_match": false,
+                        "latency_ms": 1517.04,
+                        "hypothesis_excerpt": "Ordersof theDay Headquarters Valley Forge"
+                    },
+                    {
+                        "sample_id": "hw_02",
+                        "file_name": "gw_manuscript_line2.png",
+                        "cer": 0.0417,
+                        "wer": 0.25,
+                        "exact_match": false,
+                        "latency_ms": 1605.72,
+                        "hypothesis_excerpt": "The Commander in Chief directs that alloffice rs"
+                    },
+                    {
+                        "sample_id": "hw_03",
+                        "file_name": "bentham_note_line1.png",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 1020.57,
+                        "hypothesis_excerpt": "Principles of Legislation and Judicial Procedure"
+                    },
+                    {
+                        "sample_id": "hw_04",
+                        "file_name": "bentham_note_line2.png",
+                        "cer": 0.0213,
+                        "wer": 0.2857,
+                        "exact_match": false,
+                        "latency_ms": 1440.9,
+                        "hypothesis_excerpt": "Obse rvations upon the utility of public records"
+                    },
+                    {
+                        "sample_id": "hw_05",
+                        "file_name": "historic_letter_01.png",
+                        "cer": 0.0385,
+                        "wer": 0.4444,
+                        "exact_match": false,
+                        "latency_ms": 1486.85,
+                        "hypothesis_excerpt": "My Dear Frie nd I received your kind letter yeste rday"
+                    },
+                    {
+                        "sample_id": "hw_06",
+                        "file_name": "historic_letter_02.png",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 1329.69,
+                        "hypothesis_excerpt": "We hope to see you in town before the end of the month"
+                    },
+                    {
+                        "sample_id": "hw_07",
+                        "file_name": "modern_hw_note_01.png",
+                        "cer": 0.0392,
+                        "wer": 0.3,
+                        "exact_match": false,
+                        "latency_ms": 643.43,
+                        "hypothesis_excerpt": "Re me mber to buy milk eggs and fresh bread on Friday"
+                    },
+                    {
+                        "sample_id": "hw_08",
+                        "file_name": "modern_hw_note_02.png",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 1058.09,
+                        "hypothesis_excerpt": "Meeting with research team at 3pm in room 402"
+                    },
+                    {
+                        "sample_id": "hw_09",
+                        "file_name": "modern_hw_recipe.png",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 1443.88,
+                        "hypothesis_excerpt": "Flour 2 cups Sugar 1 cup Butter 100g Bake at 180C"
+                    },
+                    {
+                        "sample_id": "hw_10",
+                        "file_name": "modern_hw_memo.png",
+                        "cer": 0.0476,
+                        "wer": 0.3333,
+                        "exact_match": false,
+                        "latency_ms": 1032.73,
+                        "hypothesis_excerpt": "Call doctor for annual checkupappointme nt"
+                    },
+                    {
+                        "sample_id": "hw_11",
+                        "file_name": "modern_hw_form.png",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 762.69,
+                        "hypothesis_excerpt": "Name: John Doe City: Mumbai Postal Code: 400037"
+                    },
+                    {
+                        "sample_id": "hw_12",
+                        "file_name": "modern_hw_todo.png",
+                        "cer": 0.0,
+                        "wer": 0.0,
+                        "exact_match": true,
+                        "latency_ms": 1388.79,
+                        "hypothesis_excerpt": "1. Review pull request 2. Update documentation 3. Deploy"
+                    }
+                ]
+            }
+        }
+    }
+}
