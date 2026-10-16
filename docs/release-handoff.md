@@ -15,14 +15,14 @@
 - **Configured Remote (`origin`):** `https://github.com/Dipankar2105/AI_Glasses`
 - **Active Branch:** `main`
 - **Upstream Tracking:** `origin/main`
-- **Verified Software Checkpoint:** [`b680ae7`](file:///c:/Users/Routewise/AI_Glasses) (`fix(ocr-closure): enforce dense notebook unvalidated status, guarantee stale cache invalidation on error, and add cloud failure tests`)
+- **Verified Software Checkpoint:** `a6aed19` (following OCR closure checkpoint `b680ae7`)
 - **Working Tree Integrity:** Clean (preserved untracked continuation prompt `AI_Glasses_Antigravity_OCR_Continuation_Prompts.md` and historical benchmark artifacts).
 
 ### 1.2 Embedded Firmware Repository
 - **Local Path:** `C:\Users\Routewise\xiaozhi-esp32`
 - **Configured Remote (`origin`):** `https://github.com/78/xiaozhi-esp32.git`
 - **Active Branch:** `main`
-- **Local Verified Checkpoint:** [`b622ca3`](file:///C:/Users/Routewise/xiaozhi-esp32) (`feat(board): add Seeed Studio XIAO ESP32-S3 Sense board definition with OV3660 camera and PDM mic`)
+- **Local Verified Checkpoint:** `b622ca3` (`feat(board): add Seeed Studio XIAO ESP32-S3 Sense board definition with OV3660 camera and PDM mic`)
 - **Upstream Divergence State:** Remote `origin/main` has advanced to `6cb0153` (20 new upstream commits). Local board implementation commit `b622ca3` is preserved cleanly without destructive rebasing or force-pushing.
 
 ---
@@ -96,11 +96,11 @@ All performance benchmarks met or exceeded release criteria:
 - **Preserved Historical Benchmarks:** Historical artifacts (`phase4c20-candidate-notebook-ocr.json`, `phase4c6-whiteboard-ocr.json`) remain strictly untouched.
 
 ### 4.3 Benchmark Script & Artifact Locations
-- **Reproducibility Audit Runner:** [`tests/scripts/reproduce_ocr_benchmarks.py`](file:///c:/Users/Routewise/AI_Glasses/tests/scripts/reproduce_ocr_benchmarks.py)
-- **Reproducibility Audit Artifact:** [`tests/results/phase4c21-reproducibility-audit.json`](file:///c:/Users/Routewise/AI_Glasses/tests/results/phase4c21-reproducibility-audit.json)
-- **Candidate Benchmark History:** [`tests/results/phase4c20-candidate-notebook-ocr.json`](file:///c:/Users/Routewise/AI_Glasses/tests/results/phase4c20-candidate-notebook-ocr.json)
-- **Performance Reliability Benchmark:** [`tests/results/phase11-performance-reliability.json`](file:///c:/Users/Routewise/AI_Glasses/tests/results/phase11-performance-reliability.json)
-- **Full Validation Runner:** [`run_full_validation.py`](file:///c:/Users/Routewise/AI_Glasses/run_full_validation.py)
+- **Reproducibility Audit Runner:** [`tests/scripts/reproduce_ocr_benchmarks.py`](../tests/scripts/reproduce_ocr_benchmarks.py)
+- **Reproducibility Audit Artifact:** [`tests/results/phase4c21-reproducibility-audit.json`](../tests/results/phase4c21-reproducibility-audit.json)
+- **Candidate Benchmark History:** [`tests/results/phase4c20-candidate-notebook-ocr.json`](../tests/results/phase4c20-candidate-notebook-ocr.json)
+- **Performance Reliability Benchmark:** [`tests/results/phase11-performance-reliability.json`](../tests/results/phase11-performance-reliability.json)
+- **Full Validation Runner:** [`run_full_validation.py`](../run_full_validation.py)
 
 ---
 
@@ -155,7 +155,7 @@ When the physical **Seeed Studio XIAO ESP32-S3 Sense** development board is rece
    - **Camera HAL (`Esp32Camera`):** Trigger single-frame capture; verify 1024x768 JPEG stream arrives at backend without packet corruption.
    - **Microphone HAL (PDM):** Verify 16 kHz 16-bit PCM stream capture; confirm VAD and intent recognition respond to spoken voice queries.
    - **Speaker / Audio Sink:** Confirm TTS `BP2` audio response packets are decoded and played through the I2S speaker interface.
-   - **Documentation:** Record hardware telemetry and test results in `docs/HARDWARE-VALIDATION-PLAN.md`.
+   - **Documentation:** Record hardware telemetry and test results in [HARDWARE-VALIDATION-PLAN.md](HARDWARE-VALIDATION-PLAN.md).
 
 ---
 
@@ -177,7 +177,7 @@ When authorized external API credentials become available:
   ```
 - [ ] Run test request with a non-sensitive test image.
 - [ ] Verify that API keys are neither logged to disk nor returned in HTTP responses.
-- [ ] Update cloud status in `docs/ocr-pipeline-final.md` from `NOT RUN` to `LIVE VALIDATED`.
+- [ ] Update cloud status in [ocr-pipeline-final.md](ocr-pipeline-final.md) from `NOT RUN` to `LIVE VALIDATED`.
 
 ---
 
